@@ -4,8 +4,8 @@
   "description": "starter template for my webpack projects",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.production.config.js",
-    "dev": "webpack-dev-server --config webpack.dev.config.js --hot",
+    "build": "webpack --config webpack/webpack.production.config.js",
+    "dev": "webpack-dev-server --config webpack/webpack.dev.config.js --hot",
     "lint": "eslint ."
   },
   "author": "Abogalambo",
