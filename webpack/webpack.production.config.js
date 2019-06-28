@@ -40,8 +40,7 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: [ '@babel/env' ],
-						plugins: []
+						presets: [ '@babel/preset-env', "@babel/preset-react" ]
 					}
 				}
 			}
@@ -54,6 +53,7 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'Home',
+			template: "./src/templates/home.html",
 			filename: 'home.html',
 			chunks: ['home', 'vendors~home']
 		})
