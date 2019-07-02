@@ -13,6 +13,7 @@
 		"browser": true
 	},
 	"rules": {
+		"eol-last": ["error", "always"]
 	},
 	"settings": {
     "react": {
