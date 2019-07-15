@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Counter = ({ count, onIncrementClick, onDecrementClick, }) => (
+const Counter = ({ count, onIncrementClick, onDecrementClick }) => (
   <div>
     <button onClick={onDecrementClick}> ⌄ </button>
     <span> { count } </span>
