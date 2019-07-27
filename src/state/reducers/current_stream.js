@@ -1,3 +1,14 @@
+const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
+
+const updateItemAtIndex = (array, itemIndex, updateItemCallback) => {
+  return array.map((item, index) => {
+    if (index !== itemIndex) return item
+
+    const updatedItem = updateItemCallback(item)
+    return updatedItem
+  })
+}
+
 const currentStream = (state = null, action) => {
   const { type, payload } = action
   switch (type) {
@@ -18,7 +29,7 @@ const currentStream = (state = null, action) => {
     }
 
     case 'SET_STREAM_TITLE': {
-      return Object.assign({}, state, {
+      return updateObject(state, {
         title: payload.title
       })
     }
@@ -26,8 +37,8 @@ const currentStream = (state = null, action) => {
     case 'NEXT_SEGMENT': {
       const { segments, currentSegment } = state
       if((segments.length - 1) > currentSegment.index){
-        return Object.assign({}, state, {
-          currentSegment: Object.assign({}, currentSegment, {
+        return updateObject(state, {
+          currentSegment: updateObject(currentSegment, {
             index: currentSegment.index + 1
           })
         })
@@ -39,8 +50,8 @@ const currentStream = (state = null, action) => {
     case 'PREVIOUS_SEGMENT': {
       const { currentSegment } = state
       if(currentSegment.index > 0){
-        return Object.assign({}, state, {
-          currentSegment: Object.assign({}, currentSegment, {
+        return updateObject(state, {
+          currentSegment: updateObject(currentSegment, {
             index: currentSegment.index - 1
           })
         })
@@ -53,13 +64,13 @@ const currentStream = (state = null, action) => {
       const { segments, currentSegment } = state
       const targetIndex = Math.min(segments.length, currentSegment.index + 1)
 
-      return Object.assign({}, state, {
+      return updateObject(state, {
         segments: [
           ...segments.slice(0, targetIndex),
           {},
           ...segments.slice(targetIndex),
         ],
-        currentSegment: Object.assign({}, currentSegment, {
+        currentSegment: updateObject(currentSegment, {
           index: targetIndex
         })
       })
@@ -69,12 +80,12 @@ const currentStream = (state = null, action) => {
       const { segments, currentSegment } = state
       const { index } = currentSegment
 
-      return Object.assign({}, state, {
+      return updateObject(state, {
         segments: [
           ...segments.slice(0, index),
           ...segments.slice(index + 1),
         ],
-        currentSegment: Object.assign({}, currentSegment, {
+        currentSegment: updateObject(currentSegment, {
           index: Math.max(0, index - 1)
         })
       })
@@ -84,15 +95,11 @@ const currentStream = (state = null, action) => {
       const { segments, currentSegment } = state
       const currentIndex = currentSegment.index
 
-      return Object.assign({}, state, {
-        segments: segments.map((segment, index) => {
-          if(index == currentIndex) {
-            return Object.assign({}, segment, {
-              text: payload.text
-            })
-          }else{
-            return segment
-          }
+      return updateObject(state, {
+        segments: updateItemAtIndex(segments, currentIndex, (segment) => {
+          return updateObject(segment, {
+            text: payload.text
+          })
         })
       })
     }
