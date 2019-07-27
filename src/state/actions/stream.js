@@ -22,8 +22,3 @@ export const addSegment = () => ({
 export const removeSegment = () => ({
   type: 'REMOVE_SEGMENT'
 })
-
-export const setSegmentText = (text) => ({
-  type: 'SET_SEGMENT_TEXT',
-  payload: { text }
-})

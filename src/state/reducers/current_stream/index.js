@@ -1,3 +1,5 @@
+import segmentReducer from '../segment'
+
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
 
 const updateItemAtIndex = (array, itemIndex, updateItemCallback) => {
@@ -101,9 +103,7 @@ const currentStream = (state = null, action) => {
 
       return updateObject(state, {
         segments: updateItemAtIndex(segments, currentIndex, (segment) => {
-          return updateObject(segment, {
-            text: payload.text
-          })
+          return segmentReducer(segment, action)
         })
       })
     }

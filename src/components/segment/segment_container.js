@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import {
   setSegmentText
-} from '../../state/actions/stream'
+} from '../../state/actions/segment'
 import SegmentComponent from './segment_component'
 
 const mapDispatchToProps = (dispatch, ownProps) => (
