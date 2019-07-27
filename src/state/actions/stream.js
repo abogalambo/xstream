@@ -1,0 +1,29 @@
+export const newStream = () => ({
+  type: 'NEW_STREAM'
+})
+
+export const setStreamTitle = (title) => ({
+  type: 'SET_STREAM_TITLE',
+  payload: { title }
+})
+
+export const nextSegment = () => ({
+  type: 'NEXT_SEGMENT'
+})
+
+export const previousSegment = () => ({
+  type: 'PREVIOUS_SEGMENT'
+})
+
+export const addSegment = () => ({
+  type: 'ADD_SEGMENT'
+})
+
+export const removeSegment = () => ({
+  type: 'REMOVE_SEGMENT'
+})
+
+export const setSegmentText = (text) => ({
+  type: 'SET_SEGMENT_TEXT',
+  payload: { text }
+})

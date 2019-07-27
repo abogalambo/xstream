@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import count from './count'
+import currentStream from './current_stream'
 
 export default combineReducers({
-  count
+  currentStream
 })
