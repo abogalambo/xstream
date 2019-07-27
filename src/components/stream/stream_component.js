@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Cover from '../cover'
+import Segment from '../segment'
 
 const Stream = ({
   title,
@@ -13,7 +14,9 @@ const Stream = ({
   onPreviousSegmentClick
 }) => {
   const { index } = currentSegment
+  const previousSegment = segments[index - 1]
   const segment = segments[index]
+  const nextSegment = segments[index + 1]
 
   return (
     <div>
@@ -30,11 +33,22 @@ const Stream = ({
       }
 
       {
-        segments[index] && (
-          <div> { segment.text } </div>
+        previousSegment && (
+          <Segment key={`segment_${index - 1}`} {...previousSegment} previous />
         )
       }
 
+      {
+        segment && (
+          <Segment key={`segment_${index}`} {...segment} current />
+        )
+      }
+
+      {
+        nextSegment && (
+          <Segment key={`segment_${index + 1}`} {...nextSegment} next />
+        )
+      }
     </div>
   )
 }
