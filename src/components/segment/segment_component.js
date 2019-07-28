@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import TextInput from '../ui/text_input'
 import styles from './segment.css'
 
 const Segment = ({
@@ -19,11 +20,13 @@ const Segment = ({
         [styles.next]: next
       }
     )}>
-      { current ? (
-        <input type="text" value={text || ''} onChange={onTextChange} />
-      ) : (
-        <span> {text} </span>
-      )}
+      <TextInput
+        value={text || ''}
+        onChange={onTextChange}
+        maxChars={200}
+        prompt="Write Something .."
+        disabled={!current}
+      />
     </div>
   )
 }

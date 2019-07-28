@@ -1,0 +1,10 @@
+.cover {
+  background-color: orange;
+  position: absolute;
+  width: 100%;
+  height: 95%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+}

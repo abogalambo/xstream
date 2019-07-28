@@ -1,0 +1,13 @@
+.textInput {
+  outline: none;
+  resize: none;
+}
+
+.textDisplay {
+  background: transparent;
+  border: none;
+  width: 80%;
+  font-size: 2em;
+  text-align: center;
+  padding: 20px;
+}

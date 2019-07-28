@@ -1,9 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import TextInput from '../ui/text_input'
+import styles from './cover.css'
 
 const Cover = ({ title, onTitleChange }) => (
-  <div>
-    <input type='text' value={title} onChange={onTitleChange} />
+  <div className={styles.cover}>
+    <TextInput
+      value={title}
+      onChange={onTitleChange}
+      maxChars={40}
+      prompt="Add Title .."
+    />
   </div>
 )
 

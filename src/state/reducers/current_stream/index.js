@@ -18,7 +18,7 @@ const currentStream = (state = null, action) => {
     case 'NEW_STREAM': {
       if(state == null){
         return {
-          title: "New Stream",
+          title: "",
           segments: [],
           mode: 'edit',
           currentSegment: {
