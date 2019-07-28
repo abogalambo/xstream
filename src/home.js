@@ -6,7 +6,10 @@ import { createStore } from 'redux'
 import reducer from './state/reducers'
 import App from './components/app'
 
-const store = createStore(reducer)
+const store = createStore(
+  reducer, /* preloadedState, */
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 render(
   <Provider store={store}>

@@ -12,7 +12,7 @@ const TextInput = ({ value, onChange, maxChars, prompt, autoFocus, disabled }) =
     placeholder={prompt}
     autoFocus={autoFocus}
     disabled={disabled}
-  />  
+  />
 )
 
 TextInput.propTypes = {

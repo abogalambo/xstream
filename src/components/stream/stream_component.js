@@ -25,8 +25,8 @@ const Stream = ({
         <span> Current Index: { currentSegment.index } </span>
         <button onClick={onAddSegmentClick}> + </button>
         <button onClick={onRemoveSegmentClick}> - </button>
-        <button onClick={onNextSegmentClick}> {">"} </button>
         <button onClick={onPreviousSegmentClick}> {"<"} </button>
+        <button onClick={onNextSegmentClick}> {">"} </button>
       </div>
 
       {
