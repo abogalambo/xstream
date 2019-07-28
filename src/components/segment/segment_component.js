@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import styles from './segment.css'
 
 const Segment = ({
   text,
@@ -8,13 +10,15 @@ const Segment = ({
   next,
   onTextChange
 }) => {
-  const classNames = []
-  current && classNames.push('current')
-  previous && classNames.push('previous')
-  next && classNames.push('next')
-
   return (
-    <div className={classNames}>
+    <div className={classnames(
+      styles.segment,
+      {
+        [styles.current]: current,
+        [styles.previous]: previous,
+        [styles.next]: next
+      }
+    )}>
       { current ? (
         <input type="text" value={text || ''} onChange={onTextChange} />
       ) : (

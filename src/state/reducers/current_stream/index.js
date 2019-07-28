@@ -65,11 +65,12 @@ const currentStream = (state = null, action) => {
     case 'ADD_SEGMENT': {
       const { segments, currentSegment } = state
       const targetIndex = currentSegment.index + 1
+      const { timestamp } = payload
 
       return updateObject(state, {
         segments: [
           ...segments.slice(0, targetIndex),
-          {},
+          { timestamp },
           ...segments.slice(targetIndex),
         ],
         currentSegment: updateObject(currentSegment, {

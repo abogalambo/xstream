@@ -13,7 +13,5 @@
 }
 
 .app {
-  background-color: lightblue;
-  height: inherit;
-  text-align: center;
+  height: 100%;
 }

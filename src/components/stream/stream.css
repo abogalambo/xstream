@@ -1,0 +1,11 @@
+.stream {
+  position: relative;
+  background-color: lightblue;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.controls {
+  width: 100%
+}

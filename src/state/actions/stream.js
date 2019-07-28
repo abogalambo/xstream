@@ -16,7 +16,10 @@ export const previousSegment = () => ({
 })
 
 export const addSegment = () => ({
-  type: 'ADD_SEGMENT'
+  type: 'ADD_SEGMENT',
+  payload: {
+    timestamp: (new Date).getTime()
+  }
 })
 
 export const removeSegment = () => ({

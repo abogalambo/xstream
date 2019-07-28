@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Cover from '../cover'
 import Segment from '../segment'
+import styles from './stream.css'
 
 const Stream = ({
   title,
@@ -19,12 +20,14 @@ const Stream = ({
   const nextSegment = segments[index + 1]
 
   return (
-    <div>
-      <span> Current Index: { currentSegment.index } </span>
-      <button onClick={onAddSegmentClick}> + </button>
-      <button onClick={onRemoveSegmentClick}> - </button>
-      <button onClick={onNextSegmentClick}> {">"} </button>
-      <button onClick={onPreviousSegmentClick}> {"<"} </button>
+    <div className={styles.stream}>
+      <div className={styles.controls}>
+        <span> Current Index: { currentSegment.index } </span>
+        <button onClick={onAddSegmentClick}> + </button>
+        <button onClick={onRemoveSegmentClick}> - </button>
+        <button onClick={onNextSegmentClick}> {">"} </button>
+        <button onClick={onPreviousSegmentClick}> {"<"} </button>
+      </div>
 
       {
         (index == -1) && (
@@ -34,19 +37,31 @@ const Stream = ({
 
       {
         previousSegment && (
-          <Segment key={`segment_${index - 1}`} {...previousSegment} previous />
+          <Segment
+            key={`segment_${previousSegment.timestamp}`}
+            {...previousSegment}
+            previous
+          />
         )
       }
 
       {
         segment && (
-          <Segment key={`segment_${index}`} {...segment} current />
+          <Segment
+            key={`segment_${segment.timestamp}`}
+            {...segment}
+            current
+          />
         )
       }
 
       {
         nextSegment && (
-          <Segment key={`segment_${index + 1}`} {...nextSegment} next />
+          <Segment
+            key={`segment_${nextSegment.timestamp}`}
+            {...nextSegment}
+            next
+          />
         )
       }
     </div>
