@@ -6,7 +6,7 @@ import {
   removeSegment,
   nextSegment as nextSegmentAction,
   previousSegment as previousSegmentAction
-} from '../../state/actions/stream'
+} from '../../../state/actions/stream'
 import Cover from '../cover'
 import Segment from '../segment'
 import styles from './stream.css'

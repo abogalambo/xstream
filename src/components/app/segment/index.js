@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux';
 import classnames from 'classnames'
-import { setSegmentText } from '../../state/actions/segment'
-import TextInput from '../ui/text_input'
+import { setSegmentText } from '../../../state/actions/segment'
+import TextInput from '../../lib/text_input'
 import styles from './segment.css'
 
 const Segment = ({

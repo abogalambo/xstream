@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextInput from '../ui/text_input'
+import TextInput from '../../lib/text_input'
 import styles from './cover.css'
 
 const Cover = ({ title, onTitleChange }) => (

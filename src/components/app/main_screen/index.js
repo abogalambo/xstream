@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { newStream } from '../../state/actions/stream'
+import { newStream } from '../../../state/actions/stream'
 import Stream from '../stream'
 
 const MainScreen = () => {
