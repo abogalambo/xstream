@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import { newStream } from '../../state/actions/stream'
 import Stream from '../stream'
@@ -17,7 +16,5 @@ const MainScreen = () => {
     )
   )
 }
-
-MainScreen.propTypes = {}
 
 export default MainScreen

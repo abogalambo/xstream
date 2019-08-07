@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setStreamTitle,
@@ -12,8 +11,7 @@ import Cover from '../cover'
 import Segment from '../segment'
 import styles from './stream.css'
 
-const Stream = ({
-}) => {
+const Stream = () => {
   const currentStream = useSelector(state => state.currentStream);
   const { title, segments, currentSegment } = currentStream
 
@@ -77,7 +75,5 @@ const Stream = ({
     </div>
   )
 }
-
-Stream.propTypes = {}
 
 export default Stream
