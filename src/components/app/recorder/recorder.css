@@ -1,0 +1,20 @@
+.recorder {
+  width: 20px;
+  height: 20px;
+}
+
+.stopped {
+  background-color: snow;
+}
+
+.recording {
+  background-color: red
+}
+
+.playing{
+  background-color: purple;
+}
+
+.initial {
+  background-color: indigo;
+}
