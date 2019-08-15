@@ -1,4 +1,5 @@
 import segmentReducer from '../segment'
+import currentSegmentReducer from '../current_segment'
 
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
 
@@ -21,9 +22,7 @@ const currentStream = (state = null, action) => {
           title: "",
           segments: [],
           mode: 'edit',
-          currentSegment: {
-            index: -1 // displaying cover
-          }
+          currentSegment: currentSegmentReducer(null, action)
         }
       }else{
         return state
@@ -40,9 +39,7 @@ const currentStream = (state = null, action) => {
       const { segments, currentSegment } = state
       if((segments.length - 1) > currentSegment.index){
         return updateObject(state, {
-          currentSegment: updateObject(currentSegment, {
-            index: currentSegment.index + 1
-          })
+          currentSegment: currentSegmentReducer(currentSegment, action)
         })
       }else{
         return state
@@ -53,9 +50,7 @@ const currentStream = (state = null, action) => {
       const { currentSegment } = state
       if(currentSegment.index >= 0){
         return updateObject(state, {
-          currentSegment: updateObject(currentSegment, {
-            index: currentSegment.index - 1
-          })
+          currentSegment: currentSegmentReducer(currentSegment, action)
         })
       }else{
         return state
@@ -73,9 +68,7 @@ const currentStream = (state = null, action) => {
           { timestamp },
           ...segments.slice(targetIndex),
         ],
-        currentSegment: updateObject(currentSegment, {
-          index: targetIndex
-        })
+        currentSegment: currentSegmentReducer(currentSegment, action)
       })
     }
 
@@ -89,9 +82,7 @@ const currentStream = (state = null, action) => {
             ...segments.slice(0, index),
             ...segments.slice(index + 1),
           ],
-          currentSegment: updateObject(currentSegment, {
-            index: Math.max(-1, index - 1)
-          })
+          currentSegment: currentSegmentReducer(currentSegment, action)
         })
       }else{
         return state
