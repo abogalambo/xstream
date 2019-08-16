@@ -7,12 +7,9 @@ export const setStreamTitle = (title) => ({
   payload: { title }
 })
 
-export const nextSegment = () => ({
-  type: 'NEXT_SEGMENT'
-})
-
-export const previousSegment = () => ({
-  type: 'PREVIOUS_SEGMENT'
+export const goToSegment = (index) => ({
+  type: 'GO_TO_SEGMENT',
+  payload: { index }
 })
 
 export const addSegment = () => ({

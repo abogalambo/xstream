@@ -12,6 +12,8 @@ const updateItemAtIndex = (array, itemIndex, updateItemCallback) => {
   })
 }
 
+const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
+
 const currentStream = (state = null, action) => {
   const { type, payload } = action
   switch (type) {
@@ -35,20 +37,11 @@ const currentStream = (state = null, action) => {
       })
     }
 
-    case 'NEXT_SEGMENT': {
+    case 'GO_TO_SEGMENT': {
       const { segments, currentSegment } = state
-      if((segments.length - 1) > currentSegment.index){
-        return updateObject(state, {
-          currentSegment: currentSegmentReducer(currentSegment, action)
-        })
-      }else{
-        return state
-      }
-    }
+      const targetIndex = payload.index
 
-    case 'PREVIOUS_SEGMENT': {
-      const { currentSegment } = state
-      if(currentSegment.index >= 0){
+      if(indexWithinBounds(targetIndex, segments)){
         return updateObject(state, {
           currentSegment: currentSegmentReducer(currentSegment, action)
         })

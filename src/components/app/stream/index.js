@@ -4,8 +4,7 @@ import {
   setStreamTitle,
   addSegment,
   removeSegment,
-  nextSegment as nextSegmentAction,
-  previousSegment as previousSegmentAction
+  goToSegment,
 } from '../../../state/actions/stream'
 import Cover from '../cover'
 import Segment from '../segment'
@@ -14,15 +13,15 @@ import styles from './stream.css'
 const Stream = () => {
   const currentStream = useSelector(state => state.currentStream);
   const { title, segments, currentSegment } = currentStream
+  const { index } = currentSegment
 
   const dispatch = useDispatch();
   const onTitleChange = (event) => dispatch(setStreamTitle(event.target.value))
   const onAddSegmentClick = () => dispatch(addSegment())
   const onRemoveSegmentClick = () => dispatch(removeSegment())
-  const onNextSegmentClick = () => dispatch(nextSegmentAction())
-  const onPreviousSegmentClick = () => dispatch(previousSegmentAction())
+  const onNextSegmentClick = () => dispatch(goToSegment(index + 1))
+  const onPreviousSegmentClick = () => dispatch(goToSegment(index - 1))
 
-  const { index } = currentSegment
   const previousSegment = segments[index - 1]
   const segment = segments[index]
   const nextSegment = segments[index + 1]

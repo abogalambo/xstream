@@ -16,20 +16,10 @@ const currentSegment = (state = null, action) => {
       return initialState
     }
 
-    case 'NEXT_SEGMENT': {
+    case 'GO_TO_SEGMENT': {
       if(canNavigate(state)) {
         return updateObject(initialState, {
-          index: state.index + 1
-        })
-      }else{
-        return state
-      }
-    }
-
-    case 'PREVIOUS_SEGMENT': {
-      if(canNavigate(state)) {
-        return updateObject(initialState, {
-          index: state.index - 1
+          index: payload.index
         })
       }else{
         return state
