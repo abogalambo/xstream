@@ -10,6 +10,20 @@ const segmentReducer = (state, action) => {
       })
     }
 
+    case 'STOP_RECORDING': {
+      return updateObject(state, {
+        audio: {
+          url: payload.audioUrl
+        }
+      })
+    }
+
+    case 'REMOVE_RECORDING': {
+      const {audio, ...newState} = state;
+
+      return newState
+    }
+
     default:
       return state
   }

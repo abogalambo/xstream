@@ -1,25 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import classnames from 'classnames'
 import {
   startRecording as startRecordingAction,
   stopRecording as stopRecordingAction,
-  playRecording as playRecordingAction,
   removeRecording as removeRecordingAction
 } from '../../../state/actions/recorder'
-import classnames from 'classnames'
 import styles from './recorder.css'
+import RecordingService from '../../../lib/recorder'
 
 const Recorder = () => {
   const { recording, recordingStartedAt, index } = useSelector(state => state.currentStream.currentSegment)
   const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
-  const initial = !recording && !recordingStartedAt
-  const stopped = !recording && recordingStartedAt
+  const initial = !recording && !recordingStartedAt && !audioUrl
+  const stopped = !recording && audioUrl
+  const [recorder] = useState(new RecordingService())
 
   const dispatch = useDispatch();
-  const startRecording = () => dispatch(startRecordingAction())
-  const stopRecording = () => dispatch(stopRecordingAction())
-  const playRecording = () => dispatch(playRecordingAction())
-  const removeRecording = () => dispatch(removeRecordingAction())
+  const startRecording = () => dispatch(startRecordingAction(recorder))
+  const stopRecording = () => dispatch(stopRecordingAction(recorder))
+  const removeRecording = () => dispatch(removeRecordingAction(recorder))
 
   return (
     <div className={classnames(
@@ -31,19 +31,24 @@ const Recorder = () => {
       }
     )}>
       {initial && (
-        <button onClick={startRecording} />
+        <button onClick={startRecording}>Record Something!</button>
       )}
 
       {recording && (
-        <button onClick={stopRecording} />
+        <button onClick={stopRecording}>Stop Recording!</button>
       )}
 
-      {stopped && audioUrl && (
-        <button onClick={playRecording} />
+      {audioUrl && (
+        <audio
+          controls
+          src={audioUrl}>
+              Your browser does not support the
+              <code>audio</code> element.
+        </audio>
       )}
 
-      {stopped && (
-        <button onClick={removeRecording} />
+      {audioUrl && (
+        <button onClick={removeRecording}>Remove Recording!</button>
       )}
 
     </div>
@@ -51,45 +56,3 @@ const Recorder = () => {
 }
 
 export default Recorder
-
-/*
-notes:
-only render it for the current segment
-while recording you can't navigate to next / previous segment
-At first let's try to save audio related data to the component state
-don't forget cleanup on unmount
-stop recording after 30 seconds
-count down when recording
-
-Play state:
-- show that it is playing
-- show elapsed time
-
-props:
-
-- all times
-startRecording: func
-stopRecording: func
-deleteRecording: func
------
-playRecording: func
-
-- initially:
-recording: false
-startTime: null
------
-playing: false
-
-- Start recording:
-recording: true
-startTime: some value
------
-playing: false
-
-- Stop recroding (or 30 seconds pass)
-recording: false
-startTime: some value
-recordingUrl: true
------
-playing: false
-*/

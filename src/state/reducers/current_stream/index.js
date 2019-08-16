@@ -94,11 +94,15 @@ const currentStream = (state = null, action) => {
     }
 
     case 'START_RECORDING':
-    case 'STOP_RECORDING':
-    case 'REMOVE_RECORDING': {
-      const { currentSegment } = state
+    case 'REMOVE_RECORDING':
+    case 'STOP_RECORDING': {
+      const { segments, currentSegment } = state
+      const currentIndex = currentSegment.index
 
       return updateObject(state, {
+        segments: updateItemAtIndex(segments, currentIndex, (segment) => {
+          return segmentReducer(segment, action)
+        }),
         currentSegment: currentSegmentReducer(currentSegment, action)
       })
     }
