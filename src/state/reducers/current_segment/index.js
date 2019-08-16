@@ -8,7 +8,7 @@ const initialState = {
 const canNavigate = (state) => !state.recording
 
 const currentSegment = (state = null, action) => {
-  const { type } = action
+  const { type, payload } = action
 
   switch (type) {
 
@@ -45,6 +45,26 @@ const currentSegment = (state = null, action) => {
     case 'REMOVE_SEGMENT': {
       return updateObject(initialState, {
         index: Math.max(-1, state.index - 1)
+      })
+    }
+
+    case 'START_RECORDING': {
+      return updateObject(state, {
+        recording: true,
+        recordingStartedAt: payload.timestamp
+      })
+    }
+
+    case 'STOP_RECORDING': {
+      return updateObject(state, {
+        recording: false
+      })
+    }
+
+    case 'REMOVE_RECORDING': {
+      return updateObject(state, {
+        recording: false,
+        recordingStartedAt: null
       })
     }
 

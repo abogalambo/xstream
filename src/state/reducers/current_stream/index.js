@@ -100,6 +100,16 @@ const currentStream = (state = null, action) => {
       })
     }
 
+    case 'START_RECORDING':
+    case 'STOP_RECORDING':
+    case 'REMOVE_RECORDING': {
+      const { currentSegment } = state
+
+      return updateObject(state, {
+        currentSegment: currentSegmentReducer(currentSegment, action)
+      })
+    }
+
     default:
       return state
   }
