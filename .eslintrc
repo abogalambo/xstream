@@ -1,8 +1,8 @@
 {
 	"extends": [
-		"eslint:recommended",
-    	"plugin:react/recommended"
-    ],
+	  "eslint:recommended",
+  	"plugin:react/recommended"
+  ],
 	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaVersion": 6,
@@ -10,10 +10,12 @@
 	},
 	"env": {
 		"node": true,
-		"browser": true
+		"browser": true,
+		"es6": true
 	},
 	"rules": {
-		"eol-last": ["error", "always"]
+		"eol-last": ["error", "always"],
+		"no-unused-vars": ["error", { "ignoreRestSiblings": true }]
 	},
 	"settings": {
     "react": {
