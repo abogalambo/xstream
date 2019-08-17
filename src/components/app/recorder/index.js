@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import {
@@ -23,6 +23,13 @@ const Recorder = () => {
     maxDuration: 30000
   }))
 
+  const [ blah, setBlah ] = useState(true);
+  const triggerRender = () => setBlah(!blah);
+  useEffect(() => {
+    const id = setInterval(triggerRender, 500);
+    return () => clearInterval(id);
+  });
+
   return (
     <div className={classnames(
       styles.recorder,
@@ -38,6 +45,10 @@ const Recorder = () => {
 
       {recording && (
         <button onClick={()=>recorder.stopRecording()}>Stop Recording!</button>
+      )}
+
+      {recording && (
+        <span>00:{ `${Math.ceil(remainingTime(recordingStartedAt, 30000) / 1000)}`.padStart(2, '0') }</span>
       )}
 
       {audioUrl && (
@@ -56,5 +67,8 @@ const Recorder = () => {
     </div>
   )
 }
+
+const elapsedTime = (startTime) => startTime ? (new Date().getTime() - startTime) : 0
+const remainingTime = (startTime, timeLimit) => Math.max(timeLimit - elapsedTime(startTime), 0)
 
 export default Recorder
