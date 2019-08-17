@@ -1,11 +1,10 @@
 class Recorder {
   constructor({onStart, onStop, onReset, maxDuration}) {
-    this.constraints = { audio: true }
-    this._chunks = []
     this.onStart = onStart
     this.onStop = onStop
     this.onReset = onReset
     this.maxDuration = maxDuration + 500 // add a 500 milliseconds margin
+    this._chunks = []
   }
 
   startRecording() {
@@ -16,14 +15,14 @@ class Recorder {
 
   stopRecording() {
     clearTimeout(this._timeoutID)
-    return this.mediaRecorderPromise.then((mediaRecorder) => {
-      mediaRecorder.stop()
-    })
+    if(this._mediaRecorder){
+      this._mediaRecorder.stop()
+    }
   }
 
   reset() {
     this._chunks = []
-    this._audioURL = undefined
+    this._audioURL = null
     this.onReset && this.onReset()
   }
 
@@ -38,35 +37,36 @@ class Recorder {
   }
 
   get userMediaPromise() {
-    this._userMediaPromise = this._userMediaPromise || navigator.mediaDevices.getUserMedia(this.constraints)
-
-    return this._userMediaPromise
+    return navigator.mediaDevices.getUserMedia(Recorder.mediaConstraints)
   }
 
   get mediaRecorderPromise() {
-    this._mediaRecorderPromise =
-      this._mediaRecorderPromise ||
-      this.userMediaPromise.then((stream) => {
-        const mediaRecorder = new MediaRecorder(stream);
+    return this.userMediaPromise.then((stream) => {
+      const mediaRecorder = new MediaRecorder(stream);
 
-        mediaRecorder.ondataavailable = (e) => this._chunks.push(e.data);
+      mediaRecorder.ondataavailable = (e) => this._chunks.push(e.data);
 
-        mediaRecorder.onstart = () => {
-          this._setTimer()
-          this.onStart && this.onStart()
-        }
+      mediaRecorder.onstart = () => {
+        this._setTimer()
+        this.onStart && this.onStart()
+      }
 
-        mediaRecorder.onstop = () => {
-          const blob = new Blob(this._chunks, { 'type' : 'audio/ogg; codecs=opus' });
-          this._audioURL = URL.createObjectURL(blob);
-          this.onStop && this.onStop()
-        }
+      mediaRecorder.onstop = () => {
+        stream.getAudioTracks()[0].stop()
+        const blob = new Blob(this._chunks, Recorder.blobOptions);
+        this._audioURL = URL.createObjectURL(blob);
+        this._mediaRecorder = null
+        this.onStop && this.onStop()
+      }
 
-        return Promise.resolve(mediaRecorder)
-      })
+      this._mediaRecorder = mediaRecorder
 
-    return this._mediaRecorderPromise
+      return Promise.resolve(mediaRecorder)
+    })
   }
 }
+
+Recorder.mediaConstraints = { audio: true }
+Recorder.blobOptions = { 'type' : 'audio/ogg; codecs=opus' }
 
 export default Recorder
