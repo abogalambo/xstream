@@ -14,12 +14,13 @@ const Recorder = () => {
   const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
   const initial = !recording && !recordingStartedAt && !audioUrl
   const stopped = !recording && audioUrl
-  const [recorder] = useState(new RecordingService())
 
   const dispatch = useDispatch();
-  const startRecording = () => dispatch(startRecordingAction(recorder))
-  const stopRecording = () => dispatch(stopRecordingAction(recorder))
-  const removeRecording = () => dispatch(removeRecordingAction(recorder))
+  const [recorder] = useState(new RecordingService({
+    onStart: () => dispatch(startRecordingAction(recorder)),
+    onStop: () => dispatch(stopRecordingAction(recorder)),
+    onReset: () => dispatch(removeRecordingAction(recorder))
+  }))
 
   return (
     <div className={classnames(
@@ -31,11 +32,11 @@ const Recorder = () => {
       }
     )}>
       {initial && (
-        <button onClick={startRecording}>Record Something!</button>
+        <button onClick={()=>recorder.startRecording()}>Record Something!</button>
       )}
 
       {recording && (
-        <button onClick={stopRecording}>Stop Recording!</button>
+        <button onClick={()=>recorder.stopRecording()}>Stop Recording!</button>
       )}
 
       {audioUrl && (
@@ -48,7 +49,7 @@ const Recorder = () => {
       )}
 
       {audioUrl && (
-        <button onClick={removeRecording}>Remove Recording!</button>
+        <button onClick={()=>recorder.reset()}>Remove Recording!</button>
       )}
 
     </div>

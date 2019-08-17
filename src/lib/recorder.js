@@ -1,7 +1,10 @@
 class Recorder {
-  constructor() {
+  constructor({onStart, onStop, onReset}) {
     this.constraints = { audio: true }
     this._chunks = []
+    this.onStart = onStart
+    this.onStop = onStop
+    this.onReset = onReset
   }
 
   startRecording() {
@@ -11,22 +14,22 @@ class Recorder {
   }
 
   stopRecording() {
+    clearTimeout(this._timeoutID)
     return this.mediaRecorderPromise.then((mediaRecorder) => {
       mediaRecorder.stop()
     })
   }
 
-  onStart(callback) {
-    this.onStartCallback = callback
-  }
-
-  onStop(callback) {
-    this.onStopCallback = callback
-  }
-
   reset() {
     this._chunks = []
     this._audioURL = undefined
+    this.onReset && this.onReset()
+  }
+
+  _setTimer() {
+    this._timeoutID = setTimeout(() => {
+      this.stopRecording()
+    }, 5000);
   }
 
   get audioUrl() {
@@ -48,13 +51,14 @@ class Recorder {
         mediaRecorder.ondataavailable = (e) => this._chunks.push(e.data);
 
         mediaRecorder.onstart = () => {
-          this.onStartCallback && this.onStartCallback()
+          this._setTimer()
+          this.onStart && this.onStart()
         }
 
         mediaRecorder.onstop = () => {
           const blob = new Blob(this._chunks, { 'type' : 'audio/ogg; codecs=opus' });
           this._audioURL = URL.createObjectURL(blob);
-          this.onStopCallback && this.onStopCallback()
+          this.onStop && this.onStop()
         }
 
         return Promise.resolve(mediaRecorder)

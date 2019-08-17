@@ -1,37 +1,24 @@
-export const startRecording = (recorder) => {
-  return (dispatch) => {
-    recorder.onStart(() => {
-      dispatch({
-        type: 'START_RECORDING',
-        payload: {
-          timestamp: (new Date).getTime()
-        }
-      })
-    })
-    recorder.startRecording()
+export const startRecording = () => {
+  return {
+    type: 'START_RECORDING',
+    payload: {
+      timestamp: (new Date).getTime()
+    }
   }
 }
 
 export const stopRecording = (recorder) => {
-  return (dispatch) => {
-    recorder.onStop(() => {
-      dispatch({
-        type: 'STOP_RECORDING',
-        payload: {
-          audioUrl: recorder.audioUrl
-        }
-      })
-    })
-    recorder.stopRecording()
+  return {
+    type: 'STOP_RECORDING',
+    payload: {
+      audioUrl: recorder.audioUrl
+    }
   }
 }
 
 export const removeRecording = (recorder) => {
-  return (dispatch) => {
-    recorder.reset()
-    dispatch({
-      type: 'REMOVE_RECORDING'
-    })
+  return {
+    type: 'REMOVE_RECORDING'
   }
 }
 
