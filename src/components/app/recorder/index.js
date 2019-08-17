@@ -19,7 +19,8 @@ const Recorder = () => {
   const [recorder] = useState(new RecordingService({
     onStart: () => dispatch(startRecordingAction(recorder)),
     onStop: () => dispatch(stopRecordingAction(recorder)),
-    onReset: () => dispatch(removeRecordingAction(recorder))
+    onReset: () => dispatch(removeRecordingAction(recorder)),
+    maxDuration: 30000
   }))
 
   return (
