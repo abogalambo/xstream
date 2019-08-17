@@ -7,16 +7,16 @@ export const startRecording = () => {
   }
 }
 
-export const stopRecording = (recorder) => {
+export const stopRecording = (audioUrl) => {
   return {
     type: 'STOP_RECORDING',
     payload: {
-      audioUrl: recorder.audioUrl
+      audioUrl: audioUrl
     }
   }
 }
 
-export const removeRecording = (recorder) => {
+export const removeRecording = () => {
   return {
     type: 'REMOVE_RECORDING'
   }
