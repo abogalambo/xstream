@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import classnames from 'classnames'
 import { setSegmentText } from '../../../state/actions/segment'
 import TextInput from '../../lib/text_input'
-import Recorder from '../recorder'
 import styles from './segment.css'
 
 const Segment = ({
@@ -27,9 +26,6 @@ const Segment = ({
         [styles.next]: next
       }
     )}>
-      {current && (
-        <Recorder />
-      )}
       <TextInput
         value={text || ''}
         onChange={onTextChange}
