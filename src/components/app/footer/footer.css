@@ -1,4 +1,96 @@
+button {
+  background-color: unset;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Footer */
+
 .footer {
+  background: rgba(253, 126, 20, 1);
+  /* padding-left: 100px;
+  padding-right: 100px; */
   position: relative;
+}
+
+.footer::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  width: 100%;
+  height: 100%;
+  color: rgba(242, 242, 242, 1);
+}
+
+/* Index */
+.index {
+  justify-self: start;
+  align-self: center;
+}
+
+.index span {
+  padding-left: 10px;
+  padding-right: 10px;
+  user-select: none;
+}
+
+/* Player */
+
+.player {
+  width: 300px;
+  height: 100%;
+  place-self: center;
+  display: inline-flex;
+  justify-content: space-between;
+  padding-left: 100px;
+}
+
+.player path {
+  fill: rgba(242, 242, 242, 0.8);
+}
+
+.playerMain {
+  position: relative;
+}
+
+.playerMain_operator {
+  position: absolute;
+  font-size: 1.6em;
+}
+
+.square, .dot {
+  transform: translate(-35px, 17px);
+}
+
+.play {
+  
+}
+
+.player button:hover .playerMain_operator path {
+  fill: #f01d16;
+}
+
+.player button:hover .playerMain_skip path {
+  fill: rgba(242, 242, 242, 1);
+}
+
+.playerMain svg {
+  transition: width 0.2s ease-in;
+  transition: height 0.2s ease-in;
+}
+
+.player button {
+  width: 100%;
+  height: 100%;
 }

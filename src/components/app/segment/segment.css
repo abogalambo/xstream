@@ -1,20 +1,8 @@
 .segment {
-  position: absolute;
   width: 100%;
+  margin: auto;
   height: 100%;
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   justify-content: center;
-}
-
-.current{
-  left: 0;
-}
-
-.previous{
-  left: -100%;
-}
-
-.next{
-  left: 100%;
+  align-items: center;
 }
