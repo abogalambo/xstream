@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+
+.app {
+  height: 100%;
+  min-width: 1000px;
+  background: #f2f2f2;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
 :global(html) {
   height: 100%;
 }
@@ -10,8 +19,4 @@
 :global(#root) {
   height: 100%;
   overflow-x: hidden;
-}
-
-.app {
-  height: 100%;
 }
