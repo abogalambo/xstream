@@ -1,0 +1,12 @@
+circle {
+  fill: transparent;
+}
+
+.background {
+  stroke: rgba(242, 242, 242, 0.8);
+  fill: rgba(242, 242, 242, 0.2);
+}
+
+.meter {
+  stroke: rgba(156, 80, 13, 1);
+}
