@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './circle_meter.css';
 
 const CircleMeter = ({percentage}) => {
@@ -36,6 +37,10 @@ const CircleMeter = ({percentage}) => {
         strokeDashoffset={progressStr}/>
   </svg>
   )
+}
+
+CircleMeter.propTypes = {
+  percentage: PropTypes.number.isRequired
 }
 
 export default CircleMeter;
