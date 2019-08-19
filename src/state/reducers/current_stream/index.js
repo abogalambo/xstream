@@ -96,6 +96,8 @@ const currentStream = (state = null, action) => {
       })
     }
 
+    case 'START_PLAYING':
+    case 'STOP_PLAYING':
     case 'START_RECORDING':
     case 'REMOVE_RECORDING':
     case 'STOP_RECORDING': {

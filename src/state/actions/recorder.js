@@ -22,6 +22,10 @@ export const removeRecording = () => {
   }
 }
 
-export const playRecording = () => ({
-  type: 'PLAY_RECORDING'
+export const startPlaying = () => ({
+  type: 'START_PLAYING'
+})
+
+export const stopPlaying = () => ({
+  type: 'STOP_PLAYING'
 })

@@ -2,6 +2,7 @@ const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newV
 const initialState = {
   index: -1, // displaying cover
   recording: false,
+  playing: false,
   recordingStartedAt: null
 }
 
@@ -47,9 +48,22 @@ const currentSegment = (state = null, action) => {
 
     case 'STOP_RECORDING': {
       return updateObject(state, {
-        recording: false
+        recording: false,
+        recordingStartedAt: null
       })
     }
+
+    case 'START_PLAYING': {
+      return updateObject(state, {
+        playing: true
+      })
+    }
+
+    case 'STOP_PLAYING': {
+      return updateObject(state, {
+        playing: false
+      })
+    }    
 
     case 'REMOVE_RECORDING': {
       return updateObject(state, {
