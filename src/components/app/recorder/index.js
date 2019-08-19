@@ -8,11 +8,13 @@ import {
 } from '../../../state/actions/recorder'
 import styles from './recorder.css'
 import RecordingService from '../../../lib/recorder'
+import Player from '../player'
+import CircleMeter from '../../lib/circle_meter'
 
 const Recorder = () => {
   const { recording, recordingStartedAt, index } = useSelector(state => state.currentStream.currentSegment)
   const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
-  const initial = !recording && !recordingStartedAt && !audioUrl
+  const initial = !recording && !audioUrl
   const stopped = !recording && audioUrl
 
   const dispatch = useDispatch();
@@ -25,8 +27,9 @@ const Recorder = () => {
 
   const [ blah, setBlah ] = useState(true);
   const triggerRender = () => setBlah(!blah);
+
   useEffect(() => {
-    const id = setInterval(triggerRender, 500);
+    const id = setInterval(triggerRender, 200);
     return () => clearInterval(id);
   });
 
@@ -48,27 +51,20 @@ const Recorder = () => {
       )}
 
       {recording && (
-        <span>00:{ `${Math.ceil(remainingTime(recordingStartedAt, 30000) / 1000)}`.padStart(2, '0') }</span>
+        <CircleMeter percentage={100 * elapsedTime(recordingStartedAt) / 30000} />
       )}
 
       {audioUrl && (
-        <audio
-          controls
-          src={audioUrl}>
-              Your browser does not support the
-              <code>audio</code> element.
-        </audio>
+        <Player />
       )}
 
       {audioUrl && (
         <button onClick={()=>recorder.reset()}>Remove Recording!</button>
       )}
-
     </div>
   )
 }
 
 const elapsedTime = (startTime) => startTime ? (new Date().getTime() - startTime) : 0
-const remainingTime = (startTime, timeLimit) => Math.max(timeLimit - elapsedTime(startTime), 0)
 
 export default Recorder
