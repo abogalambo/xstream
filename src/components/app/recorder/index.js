@@ -4,7 +4,8 @@ import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSquare,
-  faMicrophone
+  faMicrophone,
+  faMinusCircle
 } from '@fortawesome/free-solid-svg-icons'
 import {
   startRecording as startRecordingAction,
@@ -38,9 +39,11 @@ const Recorder = () => {
 
   if(audioUrl) {
     return (
-      <div>
+      <div className={styles.playerContainer}>
         <Player />
-        <button onClick={()=>recorder.reset()}>Remove Recording!</button>
+        <div className={styles.removeButton} onClick={()=>recorder.reset()}>
+          <FontAwesomeIcon icon={faMinusCircle} />
+        </div>
       </div>
     )
   } else {
