@@ -1,20 +1,25 @@
-.recorder {
-  width: 20px;
-  height: 20px;
+.playerMain {
+  position: relative;
 }
 
-.stopped {
-  background-color: snow;
+.playerMain_operator {
+  position: absolute;
+  font-size: 1.6em;
 }
 
-.recording {
-  background-color: red
+.square {
+  transform: translate(-35px, 18px);
 }
 
-.playing{
-  background-color: purple;
+.mic {
+  transform: translate(-33px, 18px);
 }
 
-.initial {
-  background-color: indigo;
+button:hover .playerMain_operator path {
+  fill: #f01d16;
+}
+
+.playerMain svg {
+  transition: width 0.2s ease-in;
+  transition: height 0.2s ease-in;
 }

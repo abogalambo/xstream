@@ -1,2 +1,25 @@
-.player {
+.playerMain {
+  position: relative;
+}
+
+.playerMain_operator {
+  position: absolute;
+  font-size: 1.6em;
+}
+
+.square {
+  transform: translate(-35px, 18px);
+}
+
+.play {
+  transform: translate(-33px, 18px);
+}
+
+button:hover .playerMain_operator path {
+  fill: #f01d16;
+}
+
+.playerMain svg {
+  transition: width 0.2s ease-in;
+  transition: height 0.2s ease-in;
 }

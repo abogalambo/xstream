@@ -31,6 +31,10 @@ const Footer = () => {
             size={'2x'}
             icon={faStepBackward}/>
         </button>
+
+        { segment && (
+          <Recorder key={`recorder_${segment.timestamp}`} />
+        )}
         
         <button onClick={onNextSegmentClick}>
           <FontAwesomeIcon className={styles.playerMain_skip}
@@ -50,10 +54,6 @@ const Footer = () => {
             icon={faPlus}/>
         </button>
       </div>
-
-      { segment && (
-        <Recorder key={`recorder_${segment.timestamp}`} />
-      )}
       <div className={styles.index}>
         <span>
           { currentSegment.index > -1 && (

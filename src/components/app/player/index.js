@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSquare,
+  faPlay
+} from '@fortawesome/free-solid-svg-icons'
 import {
   startPlaying as startPlayingAction,
   stopPlaying as stopPlayingAction
@@ -20,20 +25,22 @@ const Player = () => {
     setPlayer(getPlayer(dispatch, audioUrl || ''))
   }, [audioUrl]);
 
+  const onClick = playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying())
+  const icon = playing ? faSquare : faPlay
   return (
-    <div className={classnames(styles.player)}>
-      {!playing && (
-        <button onClick={()=>player.startPlaying()}>Play</button>
-      )}
-
-      {playing && (
-        <button onClick={()=>player.stopPlaying()}>Stop</button>
-      )}
-
+    <button onClick={onClick} className={styles.playerMain}>
+      <CircleMeter percentage={player.percentage} />
+      <FontAwesomeIcon
+        className={classnames(
+          styles.playerMain_operator,
+            {
+              [styles.square]: playing,
+              [styles.play]: !playing
+            }
+          )}
+        icon={icon} />
       <audio src={audioUrl}></audio>
-
-      <CircleMeter percentage={ player.percentage } />
-    </div>
+    </button>
   )
 }
 

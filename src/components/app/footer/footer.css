@@ -73,10 +73,6 @@ button {
   transform: translate(-35px, 17px);
 }
 
-.play {
-  
-}
-
 .player button:hover .playerMain_operator path {
   fill: #f01d16;
 }
