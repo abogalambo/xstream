@@ -2,7 +2,6 @@ class Player {
   constructor({onStart, onStop}) {
     this.onStart = onStart
     this.onStop = onStop
-    this.timestamp = (new Date()).getTime()
   }
 
   startPlaying() {
