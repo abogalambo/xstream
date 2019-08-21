@@ -26,7 +26,9 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.player}>
-        <button onClick={onPreviousSegmentClick}>
+        <button 
+          disabled={index == -1}
+          onClick={onPreviousSegmentClick}>
           <FontAwesomeIcon className={styles.playerMain_skip}
             size={'2x'}
             icon={faStepBackward}/>
@@ -36,7 +38,9 @@ const Footer = () => {
           <Recorder key={`recorder_${segment.timestamp}`} />
         )}
         
-        <button onClick={onNextSegmentClick}>
+        <button
+          disabled={index == segments.length - 1}
+          onClick={onNextSegmentClick}>
           <FontAwesomeIcon className={styles.playerMain_skip}
             size={'2x'}
             icon={faStepForward}/>
@@ -50,7 +54,7 @@ const Footer = () => {
         )}
 
         <span>
-          { currentSegment.index > -1 && (
+          { segment && (
             `${currentSegment.index + 1} / ${segments.length}`
           )}
         </span>

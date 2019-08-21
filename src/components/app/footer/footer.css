@@ -83,11 +83,15 @@ button {
   transform: translate(-35px, 17px);
 }
 
-.footer button:hover .playerMain_operator path {
+.footer button:disabled path {
+  opacity: 0.5;
+}
+
+.footer button:hover:enabled .playerMain_operator path {
   fill: #f01d16;
 }
 
-.player button:hover .playerMain_skip path {
+.player button:hover:enabled .playerMain_skip path {
   fill: rgba(242, 242, 242, 1);
 }
 
