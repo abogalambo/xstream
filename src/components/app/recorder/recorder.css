@@ -28,6 +28,11 @@ button:hover .playerMain_operator path {
   position: relative;
 }
 
+.playerContainer button {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
 .removeButton {
   position: absolute;
   cursor: pointer;

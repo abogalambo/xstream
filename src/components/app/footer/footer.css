@@ -9,8 +9,6 @@ button {
 
 .footer {
   background: rgba(253, 126, 20, 1);
-  /* padding-left: 100px;
-  padding-right: 100px; */
   position: relative;
 }
 
@@ -26,8 +24,7 @@ button {
 }
 
 .footer {
-  display: grid;
-  grid-template-columns: 1fr 100px;
+  grid-template-columns: 3fr 20%;
   width: 100%;
   height: 100%;
   color: rgba(242, 242, 242, 1);
@@ -35,28 +32,41 @@ button {
 
 /* Index */
 .index {
-  justify-self: start;
-  align-self: center;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0%, -50%);
+  display: flex;
+  flex-direction: row;
 }
 
 .index span {
-  padding-left: 10px;
-  padding-right: 10px;
   user-select: none;
+  padding: 20px;
+  min-width: 50px;
+  text-align: center;
 }
 
-/* Player */
-
+.index button {
+  width: 25px;
+  padding: 0;
+}
+  
 .player {
-  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 200px;
   height: 100%;
-  place-self: center;
+
   display: inline-flex;
   justify-content: space-between;
-  padding-left: 100px;
 }
 
-.player path {
+.footer path {
   fill: rgba(242, 242, 242, 0.8);
 }
 
@@ -73,7 +83,7 @@ button {
   transform: translate(-35px, 17px);
 }
 
-.player button:hover .playerMain_operator path {
+.footer button:hover .playerMain_operator path {
   fill: #f01d16;
 }
 
@@ -84,9 +94,4 @@ button {
 .playerMain svg {
   transition: width 0.2s ease-in;
   transition: height 0.2s ease-in;
-}
-
-.player button {
-  width: 100%;
-  height: 100%;
 }

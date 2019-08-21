@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStepForward, faStepBackward, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faStepForward, faStepBackward, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import {
   addSegment,
   removeSegment,
@@ -41,25 +41,23 @@ const Footer = () => {
             size={'2x'}
             icon={faStepForward}/>
         </button>
-
-        <button onClick={onRemoveSegmentClick}>
-          <FontAwesomeIcon className={styles.playerMain_skip}
-            size={'2x'}
-            icon={faMinus}/>
-        </button>
-
-        <button onClick={onAddSegmentClick}>
-          <FontAwesomeIcon className={styles.playerMain_skip}
-            size={'2x'}
-            icon={faPlus}/>
-        </button>
       </div>
       <div className={styles.index}>
+        { segment && (
+          <button onClick={onRemoveSegmentClick}>
+            <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
+          </button>
+        )}
+
         <span>
           { currentSegment.index > -1 && (
             `${currentSegment.index + 1} / ${segments.length}`
           )}
         </span>
+
+        <button onClick={onAddSegmentClick}>
+          <FontAwesomeIcon size={'2x'} icon={faPlusCircle} />
+        </button>
       </div>
     </div>
   )
