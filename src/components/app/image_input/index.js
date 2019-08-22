@@ -2,7 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faImage
+  faImage,
+  faMinusCircle
 } from '@fortawesome/free-solid-svg-icons'
 import {
   addImage as addImageAction,
@@ -18,7 +19,15 @@ const ImageInput = ({src, caption}) => {
 
   if(src) {
     return (
-      <ImageDisplay src={src} />
+      <div className={styles.imageContainer}>
+        <ImageDisplay src={src} />
+        <FontAwesomeIcon
+          className={styles.removeButton}
+          onClick={removeImage}
+          icon={faMinusCircle}
+          size="2x"
+        />
+      </div>
     )
   }else{
     const randomId = new Date().getTime()
