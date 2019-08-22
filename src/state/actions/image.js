@@ -1,8 +1,19 @@
-export const addImage = (src) => {
-  return {
-    type: 'ADD_IMAGE',
-    payload: { src }
-  }
+export const addImage = (e) => {
+  return dispatch => {
+    const file = e.target.files[0]
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      dispatch({
+        type: 'ADD_IMAGE',
+        payload: { src: reader.result }
+      })
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }  
 }
 
 export const removeImage = () => {
