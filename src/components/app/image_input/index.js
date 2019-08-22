@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faImage
@@ -9,6 +8,7 @@ import {
   addImage as addImageAction,
   removeImage as removeImageAction
 } from '../../../state/actions/image'
+import ImageDisplay from '../../lib/image_display'
 import styles from './image_input.css'
 
 const ImageInput = ({src, caption}) => {
@@ -18,15 +18,13 @@ const ImageInput = ({src, caption}) => {
 
   if(src) {
     return (
-      <div className={styles.limitHeight}>
-        <img className={classnames(styles.image)} src={src} />
-      </div>
+      <ImageDisplay src={src} />
     )
   }else{
     const randomId = new Date().getTime()
     return (
       <div className={styles.imageInput}>
-        <label for={randomId}>
+        <label htmlFor={randomId}>
           <FontAwesomeIcon size="5x" icon={faImage} />
         </label>
         <input id={randomId} type="file" value="" onChange={addImage} />
