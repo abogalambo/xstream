@@ -2,3 +2,25 @@
   max-width: 90%;
   max-height: 90%;
 }
+
+.imageInput input{
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.imageInput label {
+  cursor: pointer;
+}
+
+.imageInput label path {
+  opacity: 0.2;
+}
+
+.imageInput label:hover path {
+  color: #fd7e14;
+  opacity: 1;
+}
