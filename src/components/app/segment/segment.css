@@ -23,8 +23,3 @@
 .collapsed {
   flex: 0;
 }
-
-.segment img {
-  max-width: 98%;
-  max-height: 98%;
-}
