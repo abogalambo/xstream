@@ -51,7 +51,8 @@ const Segment = ({
 }
 
 Segment.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
+  image: PropTypes.object
 }
 
 export default Segment
