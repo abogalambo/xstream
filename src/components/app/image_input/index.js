@@ -1,6 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import classnames from 'classnames'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faImage
+} from '@fortawesome/free-solid-svg-icons'
 import {
   addImage as addImageAction,
   removeImage as removeImageAction
@@ -19,8 +23,14 @@ const ImageInput = ({src, caption}) => {
       </div>
     )
   }else{
+    const randomId = new Date().getTime()
     return (
-      <input type="file" value="" onChange={addImage} />
+      <div className={styles.imageInput}>
+        <label for={randomId}>
+          <FontAwesomeIcon size="5x" icon={faImage} />
+        </label>
+        <input id={randomId} type="file" value="" onChange={addImage} />
+      </div>
     )
   }
 }
