@@ -26,7 +26,7 @@ const ImageInput = ({src, caption}) => {
           className={styles.removeButton}
           onClick={removeImage}
           icon={faMinusCircle}
-          size="2x"
+          size="sm"
         />
       </div>
     )
