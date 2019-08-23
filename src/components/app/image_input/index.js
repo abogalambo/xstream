@@ -37,7 +37,12 @@ const ImageInput = ({src, caption}) => {
         <label htmlFor={randomId}>
           <FontAwesomeIcon size="5x" icon={faImage} />
         </label>
-        <input id={randomId} type="file" value="" onChange={addImage} />
+        <input
+          accept="image/*"
+          id={randomId}
+          type="file"
+          value=""
+          onChange={addImage} />
       </div>
     )
   }
