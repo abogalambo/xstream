@@ -19,3 +19,14 @@
   color: #fd7e14;
   opacity: 1;
 }
+
+.imageContainer {
+  position: relative;
+}
+
+.removeButton {
+  position: absolute;
+  cursor: pointer;
+  top: -23px;
+  right: -27px;
+}

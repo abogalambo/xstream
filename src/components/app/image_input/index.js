@@ -1,8 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faImage
+  faImage,
+  faMinusCircle
 } from '@fortawesome/free-solid-svg-icons'
 import {
   addImage as addImageAction,
@@ -18,7 +20,15 @@ const ImageInput = ({src, caption}) => {
 
   if(src) {
     return (
-      <ImageDisplay src={src} />
+      <div className={styles.imageContainer}>
+        <ImageDisplay src={src} />
+        <FontAwesomeIcon
+          className={styles.removeButton}
+          onClick={removeImage}
+          icon={faMinusCircle}
+          size="2x"
+        />
+      </div>
     )
   }else{
     const randomId = new Date().getTime()
@@ -27,10 +37,20 @@ const ImageInput = ({src, caption}) => {
         <label htmlFor={randomId}>
           <FontAwesomeIcon size="5x" icon={faImage} />
         </label>
-        <input id={randomId} type="file" value="" onChange={addImage} />
+        <input
+          accept="image/*"
+          id={randomId}
+          type="file"
+          value=""
+          onChange={addImage} />
       </div>
     )
   }
+}
+
+ImageInput.propTypes = {
+  src: PropTypes.string,
+  caption: PropTypes.string
 }
 
 export default ImageInput
