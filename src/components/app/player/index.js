@@ -10,6 +10,9 @@ import {
   startPlaying as startPlayingAction,
   stopPlaying as stopPlayingAction
 } from '../../../state/actions/recorder'
+import {
+  segmentEnded as segmentEndedAction
+} from '../../../state/actions/segment'
 import styles from './player.css'
 import PlayingService from '../../../lib/player'
 import CircleMeter from '../../lib/circle_meter'
@@ -22,7 +25,7 @@ const Player = () => {
   const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl || ''))
 
   useEffect(() => {
-    setPlayer(getPlayer(dispatch, audioUrl || ''))
+    setPlayer(getPlayer(dispatch, audioUrl))
   }, [audioUrl]);
 
   const onClick = audioUrl && (playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying()))
@@ -37,7 +40,7 @@ const Player = () => {
         }
       )}
     >
-      <CircleMeter percentage={player.percentage} />
+      <CircleMeter percentage={audioUrl ? player.percentage : 0} />
       <FontAwesomeIcon
         className={classnames(
           styles.playerMain_operator,
@@ -52,10 +55,13 @@ const Player = () => {
   )
 }
 
-const getPlayer = (dispatch) => {
+const getPlayer = (dispatch, audioUrl) => {
+  if(!audioUrl) return
+
   return new PlayingService({
     onStart: () => dispatch(startPlayingAction()),
-    onStop: () => dispatch(stopPlayingAction())
+    onStop: () => dispatch(stopPlayingAction()),
+    onEnded: () => dispatch(segmentEndedAction()),
   })
 }
 

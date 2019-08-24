@@ -1,7 +1,8 @@
 class Player {
-  constructor({onStart, onStop}) {
+  constructor({onStart, onStop, onEnded}) {
     this.onStart = onStart
     this.onStop = onStop
+    this.onEnded = onEnded
   }
 
   startPlaying() {
@@ -26,6 +27,7 @@ class Player {
     
     audio.onplay = () => this.onStart()
     audio.onpause = () => this.onStop()
+    audio.onended = () => this.onEnded()
 
     this._audioElement = audio
 

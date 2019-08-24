@@ -51,6 +51,19 @@ const currentStream = (state = null, action) => {
       }
     }
 
+    case 'SEGMENT_ENDED': {
+      const { segments, currentSegment, mode } = state
+      const { index } = currentSegment
+
+      if(mode == 'compose') return state
+
+      if(!indexWithinBounds(index + 1, segments)) return state
+      
+      return updateObject(state, {
+        currentSegment: currentSegmentReducer(currentSegment, action)
+      })
+    }
+
     case 'GO_TO_SEGMENT': {
       const { segments, currentSegment } = state
       const targetIndex = payload.index

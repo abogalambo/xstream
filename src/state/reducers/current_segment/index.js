@@ -17,6 +17,12 @@ const currentSegment = (state = null, action) => {
       return initialState
     }
 
+    case 'SEGMENT_ENDED': {
+      return updateObject(initialState, {
+        index: state.index + 1
+      })
+    }    
+
     case 'GO_TO_SEGMENT': {
       if(canNavigate(state)) {
         return updateObject(initialState, {
