@@ -8,12 +8,15 @@ import {
   goToSegment,
 } from '../../../state/actions/stream'
 import AudioInput from '../audio_input'
+import Player from '../player'
 import styles from './footer.css'
 
 const Footer = () => {
   const currentStream = useSelector(state => state.currentStream);
-  const { segments, currentSegment } = currentStream
+  const { segments, currentSegment, mode } = currentStream
   const { index } = currentSegment
+
+  const composeMode = mode == "compose"
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -35,7 +38,11 @@ const Footer = () => {
         </button>
 
         { segment && (
-          <AudioInput key={`recorder_${segment.timestamp}`} />
+          composeMode ? (
+            <AudioInput key={`recorder_${segment.timestamp}`} />
+          ) : (
+            <Player key={`player_${segment.timestamp}`} />
+          )
         )}
 
         <button
@@ -46,23 +53,26 @@ const Footer = () => {
             icon={faStepForward}/>
         </button>
       </div>
-      <div className={styles.index}>
-        { segment && (
-          <button onClick={onRemoveSegmentClick}>
-            <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
-          </button>
-        )}
 
-        <span>
+      {composeMode && (
+        <div className={styles.index}>
           { segment && (
-            `${currentSegment.index + 1} / ${segments.length}`
+            <button onClick={onRemoveSegmentClick}>
+              <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
+            </button>
           )}
-        </span>
 
-        <button onClick={onAddSegmentClick}>
-          <FontAwesomeIcon size={'2x'} icon={faPlusCircle} />
-        </button>
-      </div>
+          <span>
+            { segment && (
+              `${currentSegment.index + 1} / ${segments.length}`
+            )}
+          </span>
+
+          <button onClick={onAddSegmentClick}>
+            <FontAwesomeIcon size={'2x'} icon={faPlusCircle} />
+          </button>
+        </div>
+      )}
     </div>
   )
 }

@@ -23,3 +23,7 @@ button:hover .playerMain_operator path {
   transition: width 0.2s ease-in;
   transition: height 0.2s ease-in;
 }
+
+.buttonDisabled {
+  opacity: 0.5;
+}

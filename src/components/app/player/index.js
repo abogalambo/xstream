@@ -25,10 +25,18 @@ const Player = () => {
     setPlayer(getPlayer(dispatch, audioUrl || ''))
   }, [audioUrl]);
 
-  const onClick = playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying())
+  const onClick = audioUrl && (playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying()))
   const icon = playing ? faSquare : faPlay
   return (
-    <button onClick={onClick} className={styles.playerMain}>
+    <button
+      onClick={onClick}
+      className={classnames(
+        styles.playerMain,
+        {
+          [styles.buttonDisabled]: !audioUrl
+        }
+      )}
+    >
       <CircleMeter percentage={player.percentage} />
       <FontAwesomeIcon
         className={classnames(
