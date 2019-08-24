@@ -18,20 +18,20 @@ const segmentReducer = (state, action) => {
       return newState
     }
 
-    case 'ADD_IMAGE_CAPTION': {
-      return updateObject(state, {
-        image: updateObject(state.image || {}, {
-          caption: payload.caption
+    case 'SET_IMAGE_CAPTION': {
+      if(payload.caption){
+        return updateObject(state, {
+          image: updateObject(state.image || {}, {
+            caption: payload.caption
+          })
         })
-      })
-    }
+      }else{
+        const {caption, ...newImage} = (state.image || {});
 
-    case 'REMOVE_IMAGE_CAPTION': {
-      const {caption, ...newImage} = (state.image || {});
-
-      return updateObject(state, {
-        image: newImage
-      })
+        return updateObject(state, {
+          image: newImage
+        })
+      }
     }
 
     case 'SET_SEGMENT_TEXT': {

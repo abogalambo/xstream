@@ -8,7 +8,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {
   addImage as addImageAction,
-  removeImage as removeImageAction
+  removeImage as removeImageAction,
+  setImageCaption as setImageCaptionAction
 } from '../../../state/actions/image'
 import ImageDisplay from '../../lib/image_display'
 import styles from './image_input.css'
@@ -17,11 +18,17 @@ const ImageInput = ({src, caption}) => {
   const dispatch = useDispatch();
   const addImage = (e) => { dispatch(addImageAction(e)) }
   const removeImage = () => { dispatch(removeImageAction()) }
+  const setImageCaption = (caption) => { dispatch(setImageCaptionAction(caption)) }
 
   if(src) {
     return (
       <div className={styles.imageContainer}>
-        <ImageDisplay src={src} />
+        <ImageDisplay
+          src={src}
+          caption={caption}
+          editable={true}
+          onEdit={setImageCaption}
+        />
         <FontAwesomeIcon
           className={styles.removeButton}
           onClick={removeImage}

@@ -87,8 +87,7 @@ const currentStream = (state = null, action) => {
 
     case 'ADD_IMAGE':
     case 'REMOVE_IMAGE':
-    case 'ADD_IMAGE_CAPTION':
-    case 'REMOVE_IMAGE_CAPTION':
+    case 'SET_IMAGE_CAPTION':
     case 'SET_SEGMENT_TEXT': {
       const { segments, currentSegment } = state
       const currentIndex = currentSegment.index
