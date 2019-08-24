@@ -7,7 +7,7 @@ import styles from './stream.css'
 
 const Stream = () => {
   const currentStream = useSelector(state => state.currentStream);
-  const { segments, currentSegment } = currentStream
+  const { segments, currentSegment, mode } = currentStream
   const { index } = currentSegment
   const segment = segments[index]
 
@@ -21,7 +21,7 @@ const Stream = () => {
         <Segment
           key={`segment_${segment.timestamp}`}
           {...segment}
-          current
+          mode={mode}
         />
       )}
 
