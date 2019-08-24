@@ -5,4 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadein 0.8s;
+}
+
+@keyframes fadein {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: default;
+  }
 }
