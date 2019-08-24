@@ -22,15 +22,9 @@ export const removeImage = () => {
   }
 }
 
-export const addImageCaption = (caption) => {
+export const setImageCaption = (caption) => {
   return {
-    type: 'ADD_IMAGE_CAPTION',
+    type: 'SET_IMAGE_CAPTION',
     payload: { caption }
-  }
-}
-
-export const removeImageCaption = () => {
-  return {
-    type: 'REMOVE_IMAGE_CAPTION'
   }
 }
