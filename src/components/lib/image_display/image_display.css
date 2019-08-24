@@ -1,4 +1,19 @@
-.imageDisplay {
+.imageDisplay > img {
   max-height: 500px;
+  max-width: 100%;
   border-radius: 10px;
+}
+
+.caption {
+  width: 100%;
+}
+
+.caption > textarea{
+  outline: none;
+  resize: none;
+  background: transparent;
+  border: none;
+  width: 100%;
+  font-size: 1.2em;
+  text-align: center;
 }
