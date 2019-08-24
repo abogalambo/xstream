@@ -17,8 +17,9 @@ import styles from './player.css'
 import PlayingService from '../../../lib/player'
 import CircleMeter from '../../lib/circle_meter'
 
-const Player = () => {
-  const { playing, index } = useSelector(state => state.currentStream.currentSegment)
+const Player = ({autoplay}) => {
+  const { currentSegment, mode } = useSelector(state => state.currentStream)
+  const { playing, index } = currentSegment
   const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
 
   const dispatch = useDispatch();
@@ -26,6 +27,12 @@ const Player = () => {
 
   useEffect(() => {
     setPlayer(getPlayer(dispatch, audioUrl))
+  }, [audioUrl]);
+
+  useEffect(() => {
+    if(autoplay && audioUrl) {
+      player.startPlaying()
+    }
   }, [audioUrl]);
 
   const onClick = audioUrl && (playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying()))

@@ -41,7 +41,7 @@ const Footer = () => {
           composeMode ? (
             <AudioInput key={`recorder_${segment.timestamp}`} />
           ) : (
-            <Player key={`player_${segment.timestamp}`} />
+            <Player autoplay key={`player_${segment.timestamp}`} />
           )
         )}
 
