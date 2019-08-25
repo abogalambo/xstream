@@ -54,25 +54,26 @@ const Footer = () => {
         </button>
       </div>
 
-      {composeMode && (
-        <div className={styles.index}>
+      
+      <div className={styles.index}>
+        { segment && composeMode && (
+          <button onClick={onRemoveSegmentClick}>
+            <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
+          </button>
+        )}
+
+        <span>
           { segment && (
-            <button onClick={onRemoveSegmentClick}>
-              <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
-            </button>
+            `${currentSegment.index + 1} / ${segments.length}`
           )}
+        </span>
 
-          <span>
-            { segment && (
-              `${currentSegment.index + 1} / ${segments.length}`
-            )}
-          </span>
-
+        { composeMode && (
           <button onClick={onAddSegmentClick}>
             <FontAwesomeIcon size={'2x'} icon={faPlusCircle} />
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
