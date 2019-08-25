@@ -12,12 +12,12 @@ import {
   stopRecording as stopRecordingAction,
   removeRecording as removeRecordingAction
 } from '../../../state/actions/recorder'
-import styles from './recorder.css'
+import styles from './audio_input.css'
 import RecordingService from '../../../lib/recorder'
 import Player from '../player'
 import CircleMeter from '../../lib/circle_meter'
 
-const Recorder = () => {
+const AudioInput = () => {
   const { recording, recordingStartedAt, index } = useSelector(state => state.currentStream.currentSegment)
   const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
 
@@ -69,4 +69,4 @@ const Recorder = () => {
 
 const elapsedTime = (startTime) => startTime ? (new Date().getTime() - startTime) : 0
 
-export default Recorder
+export default AudioInput
