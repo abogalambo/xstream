@@ -7,7 +7,7 @@ import {
   removeSegment,
   goToSegment,
 } from '../../../state/actions/stream'
-import Recorder from '../recorder'
+import AudioInput from '../audio_input'
 import styles from './footer.css'
 
 const Footer = () => {
@@ -26,7 +26,7 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.player}>
-        <button 
+        <button
           disabled={index == -1}
           onClick={onPreviousSegmentClick}>
           <FontAwesomeIcon className={styles.playerMain_skip}
@@ -35,9 +35,9 @@ const Footer = () => {
         </button>
 
         { segment && (
-          <Recorder key={`recorder_${segment.timestamp}`} />
+          <AudioInput key={`recorder_${segment.timestamp}`} />
         )}
-        
+
         <button
           disabled={index == segments.length - 1}
           onClick={onNextSegmentClick}>
