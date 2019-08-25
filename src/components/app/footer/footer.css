@@ -9,7 +9,8 @@ button {
 
 .footer {
   background: rgba(253, 126, 20, 1);
-  position: relative;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer::before {
@@ -26,7 +27,7 @@ button {
 .footer {
   grid-template-columns: 3fr 20%;
   width: 100%;
-  height: 100%;
+  height: 90px;
   color: rgba(242, 242, 242, 1);
 }
 
