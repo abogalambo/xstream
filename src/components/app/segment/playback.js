@@ -52,7 +52,8 @@ const Playback = ({ text, image, audio }) => {
 
 Playback.propTypes = {
   text: PropTypes.string,
-  image: PropTypes.object
+  image: PropTypes.object,
+  audio: PropTypes.object
 }
 
 export default Playback

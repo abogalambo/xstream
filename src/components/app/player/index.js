@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,7 +19,7 @@ import PlayingService from '../../../lib/player'
 import CircleMeter from '../../lib/circle_meter'
 
 const Player = ({autoplay}) => {
-  const { currentSegment, mode } = useSelector(state => state.currentStream)
+  const { currentSegment } = useSelector(state => state.currentStream)
   const { playing, index } = currentSegment
   const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
 
@@ -70,6 +71,10 @@ const getPlayer = (dispatch, audioUrl) => {
     onStop: () => dispatch(stopPlayingAction()),
     onEnded: () => dispatch(segmentEndedAction()),
   })
+}
+
+Player.propTypes = {
+  autoplay: PropTypes.bool
 }
 
 export default Player
