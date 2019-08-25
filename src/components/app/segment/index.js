@@ -6,11 +6,12 @@ import SegmentPlayback from './playback'
 const Segment = ({
   text,
   image,
+  audio,
   mode
 }) => {
   if(mode == "playback") {
     return (
-      <SegmentPlayback {...{text, image}} />
+      <SegmentPlayback {...{text, image, audio}} />
     )
   } else {
     return (
@@ -22,7 +23,8 @@ const Segment = ({
 Segment.propTypes = {
   text: PropTypes.string,
   image: PropTypes.object,
-  mode: PropTypes.string
+  mode: PropTypes.string,
+  noAudio: PropTypes.bool
 }
 
 export default Segment
