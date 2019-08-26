@@ -10,16 +10,20 @@ import {
   goToSegment,
 } from '../../../state/actions/stream'
 import { setStreamTitle } from '../../../state/actions/stream'
+import {
+  segmentsSelector,
+  coverDataSelector
+} from '../../../state/selectors/current_stream'
 import TextInput from '../../lib/text_input'
 import styles from './cover.css'
 
 const Cover = () => {
-  const currentStream = useSelector(state => state.currentStream);
-  const { title, segments } = currentStream
-  const dispatch = useDispatch()
+  const { title } = useSelector(coverDataSelector)
+  const hasSegments = useSelector(segmentsSelector).length
 
+  const dispatch = useDispatch()
   const onTitleChange = (event) => dispatch(setStreamTitle(event.target.value))
-  const hasSegments = segments.length > 0
+
   const icon = hasSegments ? faPlay : faPlus
   const action = hasSegments ? goToSegment(0) : addSegment()
   const onClick = () => dispatch(action)

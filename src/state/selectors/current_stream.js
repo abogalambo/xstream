@@ -17,3 +17,7 @@ export const currentSegmentDataSelector = (state) => {
   const segments = segmentsSelector(state)
   return segments[index]
 }
+
+export const coverDataSelector = (state) => ({
+  title: (currentStreamSelector(state) || {}).title
+})
