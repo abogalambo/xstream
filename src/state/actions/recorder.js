@@ -11,7 +11,8 @@ export const stopRecording = (audioUrl) => {
   return {
     type: 'STOP_RECORDING',
     payload: {
-      audioUrl: audioUrl
+      audioUrl: audioUrl,
+      timestamp: (new Date).getTime()
     }
   }
 }

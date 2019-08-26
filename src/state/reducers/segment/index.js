@@ -1,6 +1,6 @@
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
 
-const segmentReducer = (state, action) => {
+const segmentReducer = (state, action, currentStream) => {
   const { type, payload } = action
   switch (type) {
 
@@ -41,9 +41,11 @@ const segmentReducer = (state, action) => {
     }
 
     case 'STOP_RECORDING': {
+      const { recordingStartedAt } = currentStream.currentSegment
       return updateObject(state, {
         audio: {
-          url: payload.audioUrl
+          url: payload.audioUrl,
+          duration: payload.timestamp - recordingStartedAt
         }
       })
     }

@@ -136,7 +136,7 @@ const currentStream = (state = null, action) => {
 
       return updateObject(state, {
         segments: updateItemAtIndex(segments, currentIndex, (segment) => {
-          return segmentReducer(segment, action)
+          return segmentReducer(segment, action, state)
         }),
         currentSegment: currentSegmentReducer(currentSegment, action)
       })
