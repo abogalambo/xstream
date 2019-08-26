@@ -1,19 +1,21 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import {
+  showCoverSelector,
+  currentSegmentDataSelector
+} from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Segment from '../segment'
 import Footer from '../footer'
 import styles from './stream.css'
 
 const Stream = () => {
-  const currentStream = useSelector(state => state.currentStream);
-  const { segments, currentSegment } = currentStream
-  const { index } = currentSegment
-  const segment = segments[index]
+  const showCover = useSelector(showCoverSelector)
+  const segment = useSelector(currentSegmentDataSelector)
 
   return (
     <div className={styles.stream}>
-      {!segment && (
+      {showCover && (
         <Cover />
       )}
 
