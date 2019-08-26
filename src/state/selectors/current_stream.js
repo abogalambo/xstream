@@ -21,3 +21,19 @@ export const currentSegmentDataSelector = (state) => {
 export const coverDataSelector = (state) => ({
   title: (currentStreamSelector(state) || {}).title
 })
+
+export const canNavigateSelector = (state) => (
+  !isRecordingSelector(state)
+)
+
+export const canPreviousSelector = (state) => (
+  canNavigateSelector(state) &&
+  indexSelector(state) > -1
+)
+
+export const canNextSelector = (state) => (
+  canNavigateSelector(state) &&
+  indexSelector(state) < (segmentsSelector(state).length - 1)
+)
+
+export const canEditStreamSelector = (state) => (!isRecordingSelector(state))
