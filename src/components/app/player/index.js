@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faSquare,
+  faPause,
   faPlay
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -26,7 +26,7 @@ const Player = () => {
   }, [audioUrl]);
 
   const onClick = playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying())
-  const icon = playing ? faSquare : faPlay
+  const icon = playing ? faPause : faPlay
   return (
     <button onClick={onClick} className={styles.playerMain}>
       <CircleMeter percentage={player.percentage} />
