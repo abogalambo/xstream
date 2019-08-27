@@ -1,8 +1,7 @@
 class Recorder {
-  constructor({onStart, onStop, onReset, maxDuration}) {
+  constructor({onStart, onStop, maxDuration}) {
     this.onStart = onStart
     this.onStop = onStop
-    this.onReset = onReset
     this.maxDuration = maxDuration + 500 // add a 500 milliseconds margin
     this._chunks = []
   }
@@ -23,7 +22,6 @@ class Recorder {
   reset() {
     this._chunks = []
     this._audioURL = null
-    this.onReset && this.onReset()
   }
 
   _setTimer() {

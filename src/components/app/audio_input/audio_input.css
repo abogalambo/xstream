@@ -23,21 +23,3 @@ button:hover .playerMain_operator path {
   transition: width 0.2s ease-in;
   transition: height 0.2s ease-in;
 }
-
-.playerContainer {
-  position: relative;
-}
-
-.playerContainer button {
-  top: 50%;
-  transform: translate(0, -50%);
-}
-
-.removeButton {
-  position: absolute;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  top: 10px;
-  left: 55px;
-}
