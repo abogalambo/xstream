@@ -10,13 +10,17 @@ import {
   startPlaying as startPlayingAction,
   stopPlaying as stopPlayingAction
 } from '../../../state/actions/recorder'
+import {
+  isPlayingSelector,
+  audioDataSelector
+} from '../../../state/selectors/current_stream'
 import styles from './player.css'
 import PlayingService from '../../../lib/player'
 import CircleMeter from '../../lib/circle_meter'
 
 const Player = () => {
-  const { playing, index } = useSelector(state => state.currentStream.currentSegment)
-  const audioUrl = useSelector(state => (state.currentStream.segments[index].audio || {}).url)
+  const isPlaying = useSelector(isPlayingSelector)
+  const audioUrl = useSelector(audioDataSelector).url
 
   const dispatch = useDispatch();
   const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl || ''))
@@ -25,20 +29,29 @@ const Player = () => {
     setPlayer(getPlayer(dispatch, audioUrl || ''))
   }, [audioUrl]);
 
-  const onClick = playing ? (()=>player.stopPlaying()) : (()=>player.startPlaying())
-  const icon = playing ? faPause : faPlay
+  const [ blah, setBlah ] = useState(true);
+  const triggerRender = () => setBlah(!blah);
+
+  useEffect(() => {
+    const id = setInterval(triggerRender, 200);
+    return () => clearInterval(id);
+  });
+
   return (
-    <button onClick={onClick} className={styles.playerMain}>
+    <button
+      onClick={getOnClick(isPlaying, player)}
+      className={styles.playerMain}
+    >
       <CircleMeter percentage={player.percentage} />
       <FontAwesomeIcon
         className={classnames(
           styles.playerMain_operator,
             {
-              [styles.square]: playing,
-              [styles.play]: !playing
+              [styles.square]: isPlaying,
+              [styles.play]: !isPlaying
             }
           )}
-        icon={icon} />
+        icon={getIcon(isPlaying)} />
       <audio src={audioUrl}></audio>
     </button>
   )
@@ -50,5 +63,11 @@ const getPlayer = (dispatch) => {
     onStop: () => dispatch(stopPlayingAction())
   })
 }
+
+const getOnClick = (isPlaying, player) => (
+  isPlaying ? () => player.stopPlaying() : () => player.startPlaying()
+)
+
+const getIcon = (isPlaying) => isPlaying ? faPause : faPlay
 
 export default Player
