@@ -1,21 +1,31 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStepForward, faStepBackward, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faStepForward,
+  faStepBackward,
+  faPlusCircle,
+  faMinusCircle
+} from '@fortawesome/free-solid-svg-icons'
 import {
   addSegment,
   removeSegment,
   goToSegment,
 } from '../../../state/actions/stream'
 import {
+  removeRecording
+} from '../../../state/actions/recorder'
+import {
   canPreviousSelector,
   canNextSelector,
   indexSelector,
   currentSegmentDataSelector,
   canEditStreamSelector,
-  segmentsSelector
+  segmentsSelector,
+  canRecordSelector
 } from '../../../state/selectors/current_stream'
 import AudioInput from '../audio_input'
+import Player from '../player'
 import styles from './footer.css'
 
 const Footer = () => {
@@ -25,12 +35,14 @@ const Footer = () => {
   const segment = useSelector(currentSegmentDataSelector)
   const canEditStream = useSelector(canEditStreamSelector)
   const segments = useSelector(segmentsSelector)
+  const canRecord = useSelector(canRecordSelector)
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
   const onRemoveSegmentClick = () => dispatch(removeSegment())
   const onNextSegmentClick = () => dispatch(goToSegment(index + 1))
   const onPreviousSegmentClick = () => dispatch(goToSegment(index - 1))
+  const onRemoveRecordingClick = () => dispatch(removeRecording())
 
   return (
     <div className={styles.footer}>
@@ -41,7 +53,16 @@ const Footer = () => {
             icon={faStepBackward}/>
         </button>
 
-        <AudioInput key={`recorder_${segment.timestamp}`} />
+        {canRecord ? (
+          <AudioInput key={`recorder_${segment.timestamp}`} />
+        ) : (
+          <div className={styles.playerContainer}>
+            <Player key={`recorder_${segment.timestamp}`} />
+            <div className={styles.removeButton} onClick={onRemoveRecordingClick}>
+              <FontAwesomeIcon icon={faMinusCircle} />
+            </div>
+          </div>
+        )}
 
         <button disabled={!canNext} onClick={onNextSegmentClick}>
           <FontAwesomeIcon className={styles.playerMain_skip}

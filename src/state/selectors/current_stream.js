@@ -37,3 +37,7 @@ export const canNextSelector = (state) => (
 )
 
 export const canEditStreamSelector = (state) => (!isRecordingSelector(state))
+
+export const audioDataSelector = (state) => currentSegmentDataSelector(state).audio
+
+export const canRecordSelector = (state) => !audioDataSelector(state)
