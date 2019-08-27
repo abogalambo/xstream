@@ -10,12 +10,15 @@ import {
   startRecording as startRecordingAction,
   stopRecording as stopRecordingAction
 } from '../../../state/actions/recorder'
+import {
+  currentSegmentSelector
+} from '../../../state/selectors/current_stream'
 import styles from './audio_input.css'
 import RecordingService from '../../../lib/recorder'
 import CircleMeter from '../../lib/circle_meter'
 
 const AudioInput = () => {
-  const { recording, recordingStartedAt } = useSelector(state => state.currentStream.currentSegment)
+  const { recording, recordingStartedAt } = useSelector(currentSegmentSelector)
 
   const dispatch = useDispatch();
   const [recorder] = useState(new RecordingService({
