@@ -16,6 +16,7 @@ import {
 } from '../../../state/selectors/current_stream'
 import styles from './player.css'
 import AudioPlayer from '../../../lib/audio_player'
+import VisualPlayer from '../../../lib/visual_player'
 import CircleMeter from '../../lib/circle_meter'
 
 const Player = () => {
@@ -23,10 +24,10 @@ const Player = () => {
   const audioUrl = (useSelector(audioDataSelector) || {}).url
 
   const dispatch = useDispatch();
-  const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl || ''))
+  const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl))
 
   useEffect(() => {
-    setPlayer(audioUrl && getPlayer(dispatch, audioUrl || ''))
+    setPlayer(getPlayer(dispatch, audioUrl))
   }, []);
 
   const [ blah, setBlah ] = useState(true);
@@ -52,13 +53,16 @@ const Player = () => {
             }
           )}
         icon={getIcon(isPlaying)} />
-      <audio src={audioUrl}></audio>
+      {audioUrl && (
+        <audio src={audioUrl}></audio>
+      )}
     </button>
   )
 }
 
-const getPlayer = (dispatch) => {
-  return new AudioPlayer({
+const getPlayer = (dispatch, audioUrl) => {
+  const playerType = audioUrl ? AudioPlayer : VisualPlayer
+  return new playerType({
     onStart: () => dispatch(startPlayingAction()),
     onStop: () => dispatch(stopPlayingAction())
   })
