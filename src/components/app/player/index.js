@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPause,
   faPlay
@@ -15,19 +15,19 @@ import {
   audioDataSelector
 } from '../../../state/selectors/current_stream'
 import styles from './player.css'
-import PlayingService from '../../../lib/player'
+import AudioPlayer from '../../../lib/audio_player'
 import CircleMeter from '../../lib/circle_meter'
 
 const Player = () => {
   const isPlaying = useSelector(isPlayingSelector)
-  const audioUrl = useSelector(audioDataSelector).url
+  const audioUrl = (useSelector(audioDataSelector) || {}).url
 
   const dispatch = useDispatch();
   const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl || ''))
 
   useEffect(() => {
-    setPlayer(getPlayer(dispatch, audioUrl || ''))
-  }, [audioUrl]);
+    setPlayer(audioUrl && getPlayer(dispatch, audioUrl || ''))
+  }, []);
 
   const [ blah, setBlah ] = useState(true);
   const triggerRender = () => setBlah(!blah);
@@ -58,7 +58,7 @@ const Player = () => {
 }
 
 const getPlayer = (dispatch) => {
-  return new PlayingService({
+  return new AudioPlayer({
     onStart: () => dispatch(startPlayingAction()),
     onStop: () => dispatch(stopPlayingAction())
   })

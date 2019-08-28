@@ -1,4 +1,4 @@
-class Player {
+class AudioPlayer {
   constructor({onStart, onStop}) {
     this.onStart = onStart
     this.onStop = onStop
@@ -33,4 +33,4 @@ class Player {
   }
 }
 
-export default Player
+export default AudioPlayer
