@@ -1,4 +1,9 @@
 .playerMain {
+  width: 70px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -7,12 +12,8 @@
   font-size: 1.6em;
 }
 
-.square {
-  transform: translate(-35px, 18px);
-}
-
 .play {
-  transform: translate(-33px, 18px);
+  transform: translateX(2px);
 }
 
 button:hover .playerMain_operator path {

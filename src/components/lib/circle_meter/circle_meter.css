@@ -1,6 +1,24 @@
-circle {
-  fill: transparent;
+.wrapper {
+  transform: rotate(-90deg);
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
 }
+
+.wrapper svg {
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+circle {
+  stroke-width: 1;
+}
+
+circle:not(:root){
+    transform-origin: 0px 0px;
+  }
 
 .background {
   stroke: rgba(242, 242, 242, 0.8);
@@ -8,5 +26,7 @@ circle {
 }
 
 .meter {
-  stroke: rgba(156, 80, 13, 1);
+  fill: transparent;
+  stroke: #b53d00;
+  stroke-linecap: round;
 }
