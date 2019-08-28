@@ -2,7 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import {
   showCoverSelector,
-  currentSegmentDataSelector
+  currentSegmentDataSelector,
+  isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Segment from '../segment'
@@ -11,6 +12,7 @@ import styles from './stream.css'
 
 const Stream = () => {
   const showCover = useSelector(showCoverSelector)
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
 
   return (
@@ -23,7 +25,7 @@ const Stream = () => {
         <Segment
           key={`segment_${segment.timestamp}`}
           {...segment}
-          current
+          isPlaybackMode={isPlaybackMode}
         />
       )}
 
