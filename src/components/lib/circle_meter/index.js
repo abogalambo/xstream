@@ -6,7 +6,6 @@ const CircleMeter = ({percentage}) => {
   const r = 9;
   const c = 2 * Math.PI * r ;
   const progress = ((100 - percentage) / 100) * c;
-  const progressStr = progress.toString();
 
   return (
     <div className={styles.wrapper}>
@@ -21,7 +20,7 @@ const CircleMeter = ({percentage}) => {
           cy={"50%"}
           r={r}
           strokeDasharray={c.toString()}
-          strokeDashoffset={progressStr}/>
+          strokeDashoffset={progress.toString()}/>
     </svg>
   </div>
   )
