@@ -13,6 +13,7 @@ const updateItemAtIndex = (array, itemIndex, updateItemCallback) => {
 }
 
 const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
+const canToggleMode = (state) => !state.currentSegment.recording
 
 const currentStream = (state = null, action) => {
   const { type, payload } = action
@@ -23,7 +24,8 @@ const currentStream = (state = null, action) => {
         return {
           title: "",
           segments: [],
-          mode: 'edit',
+          mode: 'compose',
+          canEdit: true,
           currentSegment: currentSegmentReducer(null, action)
         }
       }else{
@@ -35,6 +37,18 @@ const currentStream = (state = null, action) => {
       return updateObject(state, {
         title: payload.title
       })
+    }
+
+    case 'TOGGLE_MODE': {
+      if(canToggleMode(state)){
+        const { mode } = state
+        const newMode = (mode == "compose") ? "playback" : "compose"
+        return updateObject(state, {
+          mode: newMode
+        })
+      }else{
+        return state
+      }
     }
 
     case 'GO_TO_SEGMENT': {

@@ -12,6 +12,8 @@ export const isRecordingSelector = (state) => currentSegmentSelector(state).reco
 
 export const isPlayingSelector = (state) => currentSegmentSelector(state).playing
 
+export const isPlaybackModeSelector = (state) => (currentStreamSelector(state).mode == 'playback')
+
 export const currentSegmentDataSelector = (state) => {
   const index = indexSelector(state)
   const segments = segmentsSelector(state)

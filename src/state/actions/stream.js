@@ -22,3 +22,7 @@ export const addSegment = () => ({
 export const removeSegment = () => ({
   type: 'REMOVE_SEGMENT'
 })
+
+export const toggleMode = () => ({
+  type: 'TOGGLE_MODE'
+})
