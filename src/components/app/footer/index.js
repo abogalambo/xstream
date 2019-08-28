@@ -22,7 +22,8 @@ import {
   currentSegmentDataSelector,
   canEditStreamSelector,
   segmentsSelector,
-  canRecordSelector
+  canRecordSelector,
+  isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import AudioInput from '../audio_input'
 import Player from '../player'
@@ -36,6 +37,7 @@ const Footer = () => {
   const canEditStream = useSelector(canEditStreamSelector)
   const segments = useSelector(segmentsSelector)
   const canRecord = useSelector(canRecordSelector)
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -53,14 +55,16 @@ const Footer = () => {
             icon={faStepBackward}/>
         </button>
 
-        {canRecord ? (
+        {canRecord && !isPlaybackMode ? (
           <AudioInput key={`recorder_${segment.timestamp}`} />
         ) : (
           <div className={styles.playerContainer}>
-            <Player key={`recorder_${segment.timestamp}`} />
-            <div className={styles.removeButton} onClick={onRemoveRecordingClick}>
-              <FontAwesomeIcon icon={faMinusCircle} />
-            </div>
+            <Player key={`player_${segment.timestamp}`} />
+            {!isPlaybackMode && (
+              <div className={styles.removeButton} onClick={onRemoveRecordingClick}>
+                <FontAwesomeIcon icon={faMinusCircle} />
+              </div>
+            )}
           </div>
         )}
 
@@ -72,17 +76,21 @@ const Footer = () => {
       </div>
 
       <div className={styles.index}>
-        <button onClick={onRemoveSegmentClick} disabled={!canEditStream}>
-          <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
-        </button>
+        {!isPlaybackMode && (
+          <button onClick={onRemoveSegmentClick} disabled={!canEditStream}>
+            <FontAwesomeIcon size={'2x'} icon={faMinusCircle} />
+          </button>
+        )}
 
         <span>
           {`${index + 1} / ${segments.length}`}
         </span>
 
-        <button onClick={onAddSegmentClick} disabled={!canEditStream}>
-          <FontAwesomeIcon size={'2x'} icon={faPlusCircle} />
-        </button>
+        {!isPlaybackMode && (
+          <button onClick={onAddSegmentClick} disabled={!canEditStream}>
+            <FontAwesomeIcon size={'2x'} icon={faPlusCircle} />
+          </button>
+        )}
       </div>
     </div>
   )
