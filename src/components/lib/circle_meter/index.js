@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './circle_meter.css';
 
 const CircleMeter = ({percentage}) => {
-  const r = 9;
-  const c = 2 * Math.PI * r ;
-  const progress = ((100 - percentage) / 100) * c;
+  const radius = 9;
+  const circumference = 2 * Math.PI * radius ;
+  const progress = ((100 - percentage) / 100) * circumference;
 
   return (
     <div className={styles.wrapper}>
@@ -14,13 +14,13 @@ const CircleMeter = ({percentage}) => {
         <circle className={styles.background}
           cx={"50%"}
           cy={"50%"}
-          r={r.toString()} />
+          r={radius} />
         <circle className={styles.meter}
           cx={"50%"}
           cy={"50%"}
-          r={r}
-          strokeDasharray={c.toString()}
-          strokeDashoffset={progress.toString()}/>
+          r={radius}
+          strokeDasharray={circumference}
+          strokeDashoffset={progress}/>
     </svg>
   </div>
   )
