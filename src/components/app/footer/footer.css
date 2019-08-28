@@ -11,6 +11,7 @@ button {
   background: rgba(253, 126, 20, 1);
   position: absolute;
   bottom: 0;
+  overflow: hidden;
 }
 
 .footer::before {
@@ -53,7 +54,7 @@ button {
   width: 25px;
   padding: 0;
 }
-  
+
 .player {
   position: absolute;
   top: 50%;
@@ -88,10 +89,6 @@ button {
   opacity: 0.5;
 }
 
-.footer button:hover:enabled .playerMain_operator path {
-  fill: #f01d16;
-}
-
 .player button:hover:enabled .playerMain_skip path {
   fill: rgba(242, 242, 242, 1);
 }
@@ -116,5 +113,5 @@ button {
   width: 20px;
   height: 20px;
   top: 10px;
-  left: 55px;
+  left: 70px;
 }

@@ -1,18 +1,15 @@
 .playerMain {
+  width: 70px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
 .playerMain_operator {
   position: absolute;
   font-size: 1.6em;
-}
-
-.square {
-  transform: translate(-35px, 18px);
-}
-
-.mic {
-  transform: translate(-33px, 18px);
 }
 
 button:hover .playerMain_operator path {
