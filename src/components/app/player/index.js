@@ -12,7 +12,8 @@ import {
 } from '../../../state/actions/recorder'
 import {
   isPlayingSelector,
-  audioDataSelector
+  audioDataSelector,
+  isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import styles from './player.css'
 import AudioPlayer from '../../../lib/audio_player'
@@ -22,12 +23,13 @@ import CircleMeter from '../../lib/circle_meter'
 const Player = () => {
   const isPlaying = useSelector(isPlayingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
   const dispatch = useDispatch();
-  const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl))
+  const [player] = useState(getPlayer(dispatch, audioUrl))
 
   useEffect(() => {
-    setPlayer(getPlayer(dispatch, audioUrl))
+    isPlaybackMode && player.startPlaying()
   }, []);
 
   const [ blah, setBlah ] = useState(true);
