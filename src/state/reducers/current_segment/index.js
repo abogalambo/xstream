@@ -27,6 +27,12 @@ const currentSegment = (state = null, action, currentStream) => {
       }
     }
 
+    case 'SEGMENT_ENDED': {
+      return updateObject(initialState, {
+        index: state.index + 1
+      })
+    }
+
     case 'ADD_SEGMENT': {
       return updateObject(initialState, {
         index: state.index + 1

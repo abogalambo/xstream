@@ -65,6 +65,19 @@ const currentStream = (state = null, action) => {
       }
     }
 
+    case 'SEGMENT_ENDED': {
+      const { segments, currentSegment, mode } = state
+      const targetIndex = currentSegment.index + 1
+
+      if(mode == 'playback' && indexWithinBounds(targetIndex, segments)){
+        return updateObject(state, {
+          currentSegment: currentSegmentReducer(currentSegment, action)
+        })
+      }else{
+        return state
+      }
+    }
+
     case 'ADD_SEGMENT': {
       const { segments, currentSegment } = state
       const { index, recording } = currentSegment
