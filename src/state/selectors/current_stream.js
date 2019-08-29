@@ -28,6 +28,10 @@ export const canNavigateSelector = (state) => (
   !isRecordingSelector(state)
 )
 
+export const canToggleModeSelector = (state) => (
+  !isRecordingSelector(state)
+)
+
 export const canPreviousSelector = (state) => (
   canNavigateSelector(state) &&
   indexSelector(state) > -1

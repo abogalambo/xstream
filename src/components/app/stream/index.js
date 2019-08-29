@@ -1,9 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPenSquare,
+  faEye
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  toggleMode as toggleModeAction
+} from '../../../state/actions/stream'
 import {
   showCoverSelector,
   currentSegmentDataSelector,
-  isPlaybackModeSelector
+  isPlaybackModeSelector,
+  canToggleModeSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Segment from '../segment'
@@ -13,7 +22,10 @@ import styles from './stream.css'
 const Stream = () => {
   const showCover = useSelector(showCoverSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const canToggleMode = useSelector(canToggleModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
+  const dispatch = useDispatch()
+  const toggleMode = () => dispatch(toggleModeAction())
 
   return (
     <div className={styles.stream}>
@@ -28,6 +40,17 @@ const Stream = () => {
           isPlaybackMode={isPlaybackMode}
         />
       )}
+
+      <button
+        className={styles.modeSwitch}
+        onClick={toggleMode}
+        disabled={!canToggleMode}
+      >
+        <FontAwesomeIcon
+          size={'2x'}
+          icon={isPlaybackMode ? faPenSquare : faEye}
+        />
+      </button>
 
       {segment && (
         <Footer />
