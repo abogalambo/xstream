@@ -8,7 +8,7 @@ const initialState = {
 
 const canNavigate = (state) => !state.recording
 
-const currentSegment = (state = null, action) => {
+const currentSegment = (state = null, action, currentStream) => {
   const { type, payload } = action
 
   switch (type) {
@@ -70,6 +70,15 @@ const currentSegment = (state = null, action) => {
         recording: false,
         recordingStartedAt: null
       })
+    }
+
+    case 'TOGGLE_MODE': {
+      const { mode } = currentStream
+      if(mode == 'compose') {
+        return initialState
+      } else {
+        return state
+      }
     }
 
     default:

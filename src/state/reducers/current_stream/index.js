@@ -41,10 +41,11 @@ const currentStream = (state = null, action) => {
 
     case 'TOGGLE_MODE': {
       if(canToggleMode(state)){
-        const { mode } = state
+        const { mode, currentSegment } = state
         const newMode = (mode == "compose") ? "playback" : "compose"
         return updateObject(state, {
-          mode: newMode
+          mode: newMode,
+          currentSegment: currentSegmentReducer(currentSegment, action, state)
         })
       }else{
         return state
