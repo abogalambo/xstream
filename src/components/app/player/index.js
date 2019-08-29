@@ -33,6 +33,7 @@ const Player = () => {
 
   useEffect(() => {
     isPlaybackMode && player.startPlaying()
+    return () => player.cleanup();
   }, []);
 
   const [ blah, setBlah ] = useState(true);

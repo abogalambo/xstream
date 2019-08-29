@@ -29,6 +29,10 @@ class VisualPlayer {
     if(this.timeOffset == this.duration) this.onEnd()
   }
 
+  cleanup() {
+    this.timeoutID && clearTimeout(this.timeoutID)
+  }
+
   get _elapsedTime() {
     if(this.playingStartedAt){
       return (new Date().getTime()) - this.playingStartedAt

@@ -13,6 +13,8 @@ class AudioPlayer {
     this._audio.pause()
   }
 
+  cleanup() {}
+
   get percentage() {
     if(!this._audioElement) return 0
     if(this._audio.ended) return 100
