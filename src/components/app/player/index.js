@@ -16,6 +16,7 @@ import {
 import {
   isPlayingSelector,
   audioDataSelector,
+  segmentDurationSelector,
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import styles from './player.css'
@@ -27,9 +28,10 @@ const Player = () => {
   const isPlaying = useSelector(isPlayingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const segmentDuration = useSelector(segmentDurationSelector)
 
   const dispatch = useDispatch();
-  const [player] = useState(getPlayer(dispatch, audioUrl))
+  const [player] = useState(getPlayer(dispatch, audioUrl, segmentDuration))
 
   useEffect(() => {
     isPlaybackMode && player.startPlaying()
@@ -66,12 +68,13 @@ const Player = () => {
   )
 }
 
-const getPlayer = (dispatch, audioUrl) => {
+const getPlayer = (dispatch, audioUrl, duration) => {
   const playerType = audioUrl ? AudioPlayer : VisualPlayer
   return new playerType({
     onStart: () => dispatch(startPlayingAction()),
     onStop: () => dispatch(stopPlayingAction()),
-    onEnd: () => dispatch(segmentEndedAction())
+    onEnd: () => dispatch(segmentEndedAction()),
+    duration
   })
 }
 

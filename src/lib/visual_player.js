@@ -1,9 +1,9 @@
 class VisualPlayer {
-  constructor({onStart, onStop, onEnd}) {
+  constructor({onStart, onStop, onEnd, duration}) {
     this.onStart = onStart
     this.onStop = onStop
     this.onEnd = onEnd
-    this.duration = 5000 // Later to be made dynamic
+    this.duration = duration
     this.timeOffset = 0
     this.playingStartedAt = null
     this.timeoutID = null
