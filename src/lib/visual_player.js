@@ -1,7 +1,8 @@
 class VisualPlayer {
-  constructor({onStart, onStop}) {
+  constructor({onStart, onStop, onEnd}) {
     this.onStart = onStart
     this.onStop = onStop
+    this.onEnd = onEnd
     this.duration = 5000 // Later to be made dynamic
     this.timeOffset = 0
     this.playingStartedAt = null
@@ -25,6 +26,7 @@ class VisualPlayer {
     this.timeOffset = Math.min(currentTime - this.playingStartedAt, this.duration)
     this.playingStartedAt = null
     this.onStop()
+    if(this.timeOffset == this.duration) this.onEnd()
   }
 
   get _elapsedTime() {

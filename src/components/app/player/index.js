@@ -11,6 +11,9 @@ import {
   stopPlaying as stopPlayingAction
 } from '../../../state/actions/recorder'
 import {
+  segmentEnded as segmentEndedAction
+} from '../../../state/actions/stream'
+import {
   isPlayingSelector,
   audioDataSelector,
   isPlaybackModeSelector
@@ -66,7 +69,8 @@ const getPlayer = (dispatch, audioUrl) => {
   const playerType = audioUrl ? AudioPlayer : VisualPlayer
   return new playerType({
     onStart: () => dispatch(startPlayingAction()),
-    onStop: () => dispatch(stopPlayingAction())
+    onStop: () => dispatch(stopPlayingAction()),
+    onEnd: () => dispatch(segmentEndedAction())
   })
 }
 
