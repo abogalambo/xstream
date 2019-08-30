@@ -106,7 +106,7 @@ const currentStream = (state = null, action) => {
             ...segments.slice(0, index),
             ...segments.slice(index + 1),
           ],
-          currentSegment: currentSegmentReducer(currentSegment, action)
+          currentSegment: currentSegmentReducer(currentSegment, action, state)
         })
       }else{
         return state

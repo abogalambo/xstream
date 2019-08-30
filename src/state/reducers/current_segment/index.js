@@ -40,8 +40,9 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'REMOVE_SEGMENT': {
+      const { segments } = currentStream
       return updateObject(initialState, {
-        index: Math.max(-1, state.index - 1)
+        index: Math.min(segments.length - 2, state.index)
       })
     }
 
