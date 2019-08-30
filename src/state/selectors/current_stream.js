@@ -28,6 +28,10 @@ export const canNavigateSelector = (state) => (
   !isRecordingSelector(state)
 )
 
+export const canToggleModeSelector = (state) => (
+  !isRecordingSelector(state)
+)
+
 export const canPreviousSelector = (state) => (
   canNavigateSelector(state) &&
   indexSelector(state) > -1
@@ -43,3 +47,19 @@ export const canEditStreamSelector = (state) => (!isRecordingSelector(state))
 export const audioDataSelector = (state) => currentSegmentDataSelector(state).audio
 
 export const canRecordSelector = (state) => !audioDataSelector(state)
+
+export const segmentDurationSelector = (state) => {
+  const segment = currentSegmentDataSelector(state)
+  const { audio, text, image } = segment
+  return (
+    (audio && audio.duration) ||
+    (text && timeForText(text, 1000)) ||
+    (image && timeForText(image.caption, 0) + 2000) ||
+    1000
+  )
+}
+
+const timeForText = (text = '', minimum) => {
+  const millisecondsPerCharacter = 60
+  return Math.max(millisecondsPerCharacter * text.length, minimum)
+}

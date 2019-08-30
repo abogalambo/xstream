@@ -1,7 +1,8 @@
-class Player {
-  constructor({onStart, onStop}) {
+class AudioPlayer {
+  constructor({onStart, onStop, onEnd}) {
     this.onStart = onStart
     this.onStop = onStop
+    this.onEnd = onEnd
   }
 
   startPlaying() {
@@ -11,6 +12,8 @@ class Player {
   stopPlaying() {
     this._audio.pause()
   }
+
+  cleanup() {}
 
   get percentage() {
     if(!this._audioElement) return 0
@@ -26,6 +29,7 @@ class Player {
     
     audio.onplay = () => this.onStart()
     audio.onpause = () => this.onStop()
+    audio.onended = () => this.onEnd()
 
     this._audioElement = audio
 
@@ -33,4 +37,4 @@ class Player {
   }
 }
 
-export default Player
+export default AudioPlayer

@@ -23,6 +23,10 @@ export const removeSegment = () => ({
   type: 'REMOVE_SEGMENT'
 })
 
+export const segmentEnded = () => ({
+  type: 'SEGMENT_ENDED'
+})
+
 export const toggleMode = () => ({
   type: 'TOGGLE_MODE'
 })

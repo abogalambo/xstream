@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPause,
   faPlay
@@ -11,23 +11,32 @@ import {
   stopPlaying as stopPlayingAction
 } from '../../../state/actions/recorder'
 import {
+  segmentEnded as segmentEndedAction
+} from '../../../state/actions/stream'
+import {
   isPlayingSelector,
-  audioDataSelector
+  audioDataSelector,
+  segmentDurationSelector,
+  isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import styles from './player.css'
-import PlayingService from '../../../lib/player'
+import AudioPlayer from '../../../lib/audio_player'
+import VisualPlayer from '../../../lib/visual_player'
 import CircleMeter from '../../lib/circle_meter'
 
 const Player = () => {
   const isPlaying = useSelector(isPlayingSelector)
-  const audioUrl = useSelector(audioDataSelector).url
+  const audioUrl = (useSelector(audioDataSelector) || {}).url
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const segmentDuration = useSelector(segmentDurationSelector)
 
   const dispatch = useDispatch();
-  const [player, setPlayer] = useState(getPlayer(dispatch, audioUrl || ''))
+  const [player] = useState(getPlayer(dispatch, audioUrl, segmentDuration))
 
   useEffect(() => {
-    setPlayer(getPlayer(dispatch, audioUrl || ''))
-  }, [audioUrl]);
+    isPlaybackMode && player.startPlaying()
+    return () => player.cleanup();
+  }, []);
 
   const [ blah, setBlah ] = useState(true);
   const triggerRender = () => setBlah(!blah);
@@ -52,15 +61,20 @@ const Player = () => {
             }
           )}
         icon={getIcon(isPlaying)} />
-      <audio src={audioUrl}></audio>
+      {audioUrl && (
+        <audio src={audioUrl}></audio>
+      )}
     </button>
   )
 }
 
-const getPlayer = (dispatch) => {
-  return new PlayingService({
+const getPlayer = (dispatch, audioUrl, duration) => {
+  const playerType = audioUrl ? AudioPlayer : VisualPlayer
+  return new playerType({
     onStart: () => dispatch(startPlayingAction()),
-    onStop: () => dispatch(stopPlayingAction())
+    onStop: () => dispatch(stopPlayingAction()),
+    onEnd: () => dispatch(segmentEndedAction()),
+    duration
   })
 }
 

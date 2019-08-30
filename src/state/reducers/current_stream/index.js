@@ -41,10 +41,11 @@ const currentStream = (state = null, action) => {
 
     case 'TOGGLE_MODE': {
       if(canToggleMode(state)){
-        const { mode } = state
+        const { mode, currentSegment } = state
         const newMode = (mode == "compose") ? "playback" : "compose"
         return updateObject(state, {
-          mode: newMode
+          mode: newMode,
+          currentSegment: currentSegmentReducer(currentSegment, action, state)
         })
       }else{
         return state
@@ -56,6 +57,19 @@ const currentStream = (state = null, action) => {
       const targetIndex = payload.index
 
       if(indexWithinBounds(targetIndex, segments)){
+        return updateObject(state, {
+          currentSegment: currentSegmentReducer(currentSegment, action)
+        })
+      }else{
+        return state
+      }
+    }
+
+    case 'SEGMENT_ENDED': {
+      const { segments, currentSegment, mode } = state
+      const targetIndex = currentSegment.index + 1
+
+      if(mode == 'playback' && indexWithinBounds(targetIndex, segments)){
         return updateObject(state, {
           currentSegment: currentSegmentReducer(currentSegment, action)
         })
