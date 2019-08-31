@@ -5,15 +5,31 @@
 }
 
 .modeSwitch {
+  background: var(--secondardyColor);
+  width: 40px;
+  height: 40px;
   position: absolute;
   top: 20px;
   left: 20px;
   cursor: pointer;
-  border: 1px solid;
   border-radius: 3px;
-  height: 40px;
-  width: 40px;
+  box-shadow:  var(--oneDp);
+  transition: var(--transition);
 }
+
+.modeSwitch path {
+  fill: var(--onBackground_dim);
+  transition: var(--transition);
+}
+
+.modeSwitch:hover path {
+  fill: var(--onBackground);
+}
+
+.modeSwitch:hover {
+  box-shadow: var(--oneDp_hover);
+}
+
 
 .modeSwitch:disabled {
   opacity: 0.5;

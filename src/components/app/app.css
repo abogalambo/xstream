@@ -9,8 +9,12 @@
   --onPrimary_dim: rgba(242, 242, 242, 0.8);
   --onPrimary_dimmer: rgba(242, 242, 242, 0.2);
   --onPrimary_disable: rgba(242, 242, 242, 0.2);
+  --secondardyColor: rgba(128, 203, 196, 1);
+  --secondardyColor_dark: rgba(79, 154, 148, 1);
+  --secondardyColor_light: rgba(178, 254, 247, 1);
   --backgroundColor: rgba(242, 242, 242, 1);
   --onBackground: rgba(33, 33, 33, 1);
+  --onBackground_dim: rgba(33, 33, 33, 0.8);
   --grey: rgba(141, 141, 141, 1);
   --transition: all 0.2s ease;
   --oneDp: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
@@ -29,6 +33,9 @@
       0px 4px 5px 0px rgba(0, 0, 0, 0.14),
       0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
+
+::selection {
+  background: var(--primaryColor_light);
 }
 
 .app {
