@@ -1,10 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
 
+:root {
+  --fontFamily: 'Nanum Gothic', sans-serif !important;
+  --primaryColor: rgba(253, 126, 20, 1);
+  --primaryColor_dark: rgba(181, 61, 0, 1);
+  --primaryColor_light: rgba(255, 174, 75, 1);
+  --onPrimary: rgba(242, 242, 242, 1);
+  --onPrimary_dim: rgba(242, 242, 242, 0.8);
+   --onPrimary_dimmer: rgba(242, 242, 242, 0.2);
+  --onPrimary_disable: rgba(242, 242, 242, 0.2);
+  --backgroundColor: rgba(242, 242, 242, 1);
+  --onBackground: rgba(33, 33, 33, 1);
+}
+
 .app {
   height: 100%;
   min-width: 1000px;
-  background: #f2f2f2;
-  font-family: 'Nanum Gothic', sans-serif;
+  background: var(--backgroundColor);
+  font-family: var(--fontFamily);
+  color: var(--onBackground);
 }
 
 :global(html) {

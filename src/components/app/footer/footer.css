@@ -8,7 +8,7 @@ button {
 /* Footer */
 
 .footer {
-  background: rgba(253, 126, 20, 1);
+  background: var(--primaryColor);
   position: absolute;
   bottom: 0;
   overflow: hidden;
@@ -29,7 +29,7 @@ button {
   grid-template-columns: 3fr 20%;
   width: 100%;
   height: 90px;
-  color: rgba(242, 242, 242, 1);
+  color: var(--onPrimary);
 }
 
 /* Index */
@@ -60,16 +60,14 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
   width: 200px;
   height: 100%;
-
   display: inline-flex;
   justify-content: space-between;
 }
 
 .footer path {
-  fill: rgba(242, 242, 242, 0.8);
+  fill: var(--onPrimary_dim);
 }
 
 .playerMain {
@@ -90,7 +88,7 @@ button {
 }
 
 .player button:hover:enabled .playerMain_skip path {
-  fill: rgba(242, 242, 242, 1);
+  fill: var(--onPrimary);
 }
 
 .playerMain svg {

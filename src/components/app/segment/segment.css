@@ -53,5 +53,5 @@
 }
 
 .removeButton:hover path {
-  fill: rgba(253, 126, 20, 1);
+  fill: var(--primaryColor);
 }

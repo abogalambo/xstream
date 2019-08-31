@@ -21,12 +21,12 @@ circle:not(:root){
   }
 
 .background {
-  stroke: rgba(242, 242, 242, 0.8);
-  fill: rgba(242, 242, 242, 0.2);
+  stroke: var(--onPrimary_dim);
+  fill: var(--onPrimary_dimmer);
 }
 
 .meter {
   fill: transparent;
-  stroke: #b53d00;
+  stroke: var(--primaryColor_dark);
   stroke-linecap: round;
 }

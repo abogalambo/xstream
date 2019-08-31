@@ -11,4 +11,5 @@
   font-size: 2em;
   text-align: center;
   padding: 20px;
+  color: var(--onBackground);
 }

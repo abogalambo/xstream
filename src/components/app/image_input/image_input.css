@@ -16,6 +16,6 @@
 }
 
 .imageInput label:hover path {
-  color: rgba(253, 126, 20, 1);
+  color: var(--primaryColor);
   opacity: 1;
 }
