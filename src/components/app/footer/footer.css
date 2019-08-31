@@ -70,15 +70,6 @@ button {
   fill: var(--onPrimary_dim);
 }
 
-.playerMain {
-  position: relative;
-}
-
-.playerMain_operator {
-  position: absolute;
-  font-size: 1.6em;
-}
-
 .square, .dot {
   transform: translate(-35px, 17px);
 }
