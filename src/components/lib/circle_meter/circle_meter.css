@@ -16,17 +16,17 @@ circle {
   stroke-width: 1;
 }
 
-circle:not(:root){
-    transform-origin: 0px 0px;
-  }
+circle:not(:root) {
+  transform-origin: 0px 0px;
+}
 
 .background {
-  stroke: var(--onPrimary_dim);
-  fill: var(--onPrimary_dimmer);
+  stroke: var(--secondaryColor);
+  fill: var(--secondaryColor);
 }
 
 .meter {
   fill: transparent;
-  stroke: var(--primaryColor_dark);
+  stroke: var(--secondaryColor_dark);
   stroke-linecap: round;
 }

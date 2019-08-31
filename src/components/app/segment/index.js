@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { setSegmentText } from '../../../state/actions/segment'
 import {
   removeImage as removeImageAction,
@@ -63,8 +63,8 @@ const Segment = ({
                <FontAwesomeIcon
                 className={styles.removeButton}
                 onClick={removeImage}
-                icon={faMinusCircle}
-                size="sm"
+                icon={faTimes}
+                size="lg"
               />
             )}
             </div>

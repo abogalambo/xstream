@@ -51,19 +51,21 @@ const Player = () => {
       onClick={getOnClick(isPlaying, player)}
       className={styles.playerMain}
     >
-      <CircleMeter percentage={player.percentage} />
-      <FontAwesomeIcon
-        className={classnames(
-          styles.playerMain_operator,
-            {
-              [styles.square]: isPlaying,
-              [styles.play]: !isPlaying
-            }
-          )}
-        icon={getIcon(isPlaying)} />
-      {audioUrl && (
-        <audio src={audioUrl}></audio>
-      )}
+       <div className={styles.circleShadow}>
+        <CircleMeter percentage={player.percentage} />
+        <FontAwesomeIcon
+          className={classnames(
+            styles.playerMain_operator,
+              {
+                [styles.square]: isPlaying,
+                [styles.play]: !isPlaying
+              }
+            )}
+          icon={getIcon(isPlaying)} />
+        {audioUrl && (
+          <audio src={audioUrl}></audio>
+        )}
+      </div>
     </button>
   )
 }

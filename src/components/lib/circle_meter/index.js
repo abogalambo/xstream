@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './circle_meter.css';
 
 const CircleMeter = ({percentage}) => {
-  const radius = 9;
+  const radius = 9.5;
   const circumference = 2 * Math.PI * radius ;
   const progress = ((100 - percentage) / 100) * circumference;
 
