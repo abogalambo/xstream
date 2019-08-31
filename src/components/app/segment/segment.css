@@ -48,8 +48,8 @@
 }
 
 .removeButton path {
-  fill: rgba(253, 126, 20, 0.4);
-  transition: fill 0.4s ease;
+  fill: var(--primaryColor_light);
+  transition: var(--transition);
 }
 
 .removeButton:hover path {

@@ -16,11 +16,22 @@
   transform: translateX(2px);
 }
 
-button:hover .playerMain_operator path {
-  fill: #f01d16;
+button circle:first-child,
+.playerMain .playerMain_operator,
+.playerMain .playerMain_operator path {
+  transition: var(--transition);
 }
 
-.playerMain svg {
-  transition: width 0.2s ease-in;
-  transition: height 0.2s ease-in;
+button:hover circle:first-child {
+  stroke: var(--onPrimary);
+}
+
+button:hover
+
+.playerMain:hover .playerMain_operator {
+  font-size: 1.9em;
+}
+
+.playerMain .playerMain_operator path {
+  fill: var(--onPrimary);
 }

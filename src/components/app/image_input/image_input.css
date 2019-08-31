@@ -12,10 +12,10 @@
 }
 
 .imageInput label path {
-  opacity: 0.2;
+  color: var(--grey);
+  transition: var(--transition);
 }
 
 .imageInput label:hover path {
   color: var(--primaryColor);
-  opacity: 1;
 }

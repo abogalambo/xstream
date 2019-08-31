@@ -6,7 +6,6 @@ button {
 }
 
 /* Footer */
-
 .footer {
   background: var(--primaryColor);
   position: absolute;
@@ -32,6 +31,10 @@ button {
   color: var(--onPrimary);
 }
 
+.footer path {
+  fill: var(--onPrimary_dim);
+}
+
 /* Index */
 .index {
   padding: 20px;
@@ -55,6 +58,16 @@ button {
   padding: 0;
 }
 
+.index button path {
+  fill: var(--onPrimary_dim);
+  transition: var(--transition);
+}
+
+.index button:hover path {
+  fill: var(--onPrimary);
+}
+
+/*Player*/
 .player {
   position: absolute;
   top: 50%;
@@ -64,10 +77,6 @@ button {
   height: 100%;
   display: inline-flex;
   justify-content: space-between;
-}
-
-.footer path {
-  fill: var(--onPrimary_dim);
 }
 
 .square, .dot {
@@ -82,9 +91,9 @@ button {
   fill: var(--onPrimary);
 }
 
-.playerMain svg {
-  transition: width 0.2s ease-in;
-  transition: height 0.2s ease-in;
+.player button:hover:enabled .playerMain_skip path,
+.removeButton path {
+  transition: var(--transition);
 }
 
 .playerContainer {
@@ -103,4 +112,8 @@ button {
   height: 20px;
   top: 10px;
   left: 70px;
+}
+
+.removeButton:hover path {
+  fill: var(--onPrimary);
 }
