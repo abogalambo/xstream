@@ -6,30 +6,25 @@ button {
 }
 
 /* Footer */
-
 .footer {
-  background: rgba(253, 126, 20, 1);
+  background: var(--primaryColor);
   position: absolute;
   bottom: 0;
   overflow: hidden;
-}
-
-.footer::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.12),
+  0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+  0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 .footer {
   grid-template-columns: 3fr 20%;
   width: 100%;
   height: 90px;
-  color: rgba(242, 242, 242, 1);
+  color: var(--onPrimary);
+}
+
+.footer path {
+  fill: var(--onPrimary_dim);
 }
 
 /* Index */
@@ -55,30 +50,25 @@ button {
   padding: 0;
 }
 
+.index button path {
+  fill: var(--onPrimary_dim);
+  transition: var(--transition);
+}
+
+.index button:hover path {
+  fill: var(--onPrimary);
+}
+
+/*Player*/
 .player {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
   width: 200px;
   height: 100%;
-
   display: inline-flex;
   justify-content: space-between;
-}
-
-.footer path {
-  fill: rgba(242, 242, 242, 0.8);
-}
-
-.playerMain {
-  position: relative;
-}
-
-.playerMain_operator {
-  position: absolute;
-  font-size: 1.6em;
 }
 
 .square, .dot {
@@ -86,16 +76,16 @@ button {
 }
 
 .footer button:disabled path {
-  opacity: 0.5;
+  fill: var(--onPrimary_disable);
 }
 
 .player button:hover:enabled .playerMain_skip path {
-  fill: rgba(242, 242, 242, 1);
+  fill: var(--onPrimary);
 }
 
-.playerMain svg {
-  transition: width 0.2s ease-in;
-  transition: height 0.2s ease-in;
+.player button:hover:enabled .playerMain_skip path,
+.removeButton path {
+  transition: var(--transition);
 }
 
 .playerContainer {
@@ -114,4 +104,8 @@ button {
   height: 20px;
   top: 10px;
   left: 70px;
+}
+
+.removeButton:hover path {
+  fill: var(--onPrimary);
 }

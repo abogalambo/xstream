@@ -34,22 +34,24 @@ const AudioInput = () => {
     const id = setInterval(triggerRender, 200);
     return () => clearInterval(id);
   });
-  
+
   const percentage = recording ? 100 * elapsedTime(recordingStartedAt) / 30000 : 0
   const onClick = recording ? (()=>recorder.stopRecording()) : (()=>recorder.startRecording())
   const icon = recording ? faSquare : faMicrophone
   return (
     <button onClick={onClick} className={styles.playerMain}>
-      <CircleMeter percentage={percentage} />
-      <FontAwesomeIcon
-        className={classnames(
-          styles.playerMain_operator,
-            {
-              [styles.square]: recording,
-              [styles.mic]: !recording
-            }
-          )}
-        icon={icon} />
+      <div className={styles.circleShadow}>
+        <CircleMeter percentage={percentage} />
+        <FontAwesomeIcon
+          className={classnames(
+            styles.playerMain_operator,
+              {
+                [styles.square]: recording,
+                [styles.mic]: !recording
+              }
+            )}
+          icon={icon} />
+      </div>
     </button>
   )
 }

@@ -41,17 +41,20 @@
 }
 
 .removeButton {
+  background: var(--onBackground_dimmer);
+  padding: 3px 5px;
+  border-radius: var(--roundCorner);
   position: absolute;
   cursor: pointer;
-  top: -23px;
-  right: -27px;
+  top: 8px;
+  right: 8px;
 }
 
 .removeButton path {
-  fill: rgba(253, 126, 20, 0.4);
-  transition: fill 0.4s ease;
+  fill: var(--primaryColor);
+  transition: var(--transition);
 }
 
 .removeButton:hover path {
-  fill: rgba(253, 126, 20, 1);
+  fill: var(--primaryColor_light);
 }

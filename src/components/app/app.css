@@ -1,10 +1,51 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
 
+:root {
+  --fontFamily: 'Nanum Gothic', sans-serif !important;
+  --primaryColor: #ef6c00;
+  --primaryColor_dark: #b53d00;
+  --primaryColor_light: #ff9d3f;
+  --onPrimary: rgba(242, 242, 242, 1);
+  --onPrimary_dim: rgba(242, 242, 242, 0.8);
+  --onPrimary_dimmer: rgba(242, 242, 242, 0.2);
+  --onPrimary_disable: rgba(242, 242, 242, 0.4);
+  --secondaryColor: #30d0cb;
+  --secondaryColor_dark: #009e9a;
+  --secondardyColor_light: #73fffe;
+  --backgroundColor: rgba(242, 242, 242, 1);
+  --onBackground: rgba(33, 33, 33, 1);
+  --onBackground_dim: rgba(33, 33, 33, 0.8);
+  --onBackground_dimmer: rgba(33, 33, 33, 0.4);
+  --grey: rgba(141, 141, 141, 1);
+  --roundCorner: 3px;
+  --transition: all 0.2s ease;
+  --oneDp: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+      0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  --oneDp_hover: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.04),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.02);
+  --twoDp: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+      0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  --threeDp: 0px 1px 8px 0px rgba(0, 0, 0, 0.2),
+      0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+      0px 3px 3px -2px rgba(0, 0, 0, 0.12);
+ --fourDp: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+::selection {
+  background: var(--primaryColor_light);
+}
+
 .app {
   height: 100%;
   min-width: 1000px;
-  background: #f2f2f2;
-  font-family: 'Nanum Gothic', sans-serif;
+  background: var(--backgroundColor);
+  font-family: var(--fontFamily);
+  color: var(--onBackground);
 }
 
 :global(html) {

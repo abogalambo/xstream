@@ -10,10 +10,28 @@
 }
 
 .cover > button {
-  border: 2px solid;
+  background: var(--secondaryColor);
   border-radius: 50%;
   height: 70px;
   width: 70px;
+  box-shadow: var(--fourDp);
+}
+
+::placeholder {
+  color: var(--grey);
+}
+
+.fa-play {
+  transform: translateX(3px);
+}
+
+button path {
+  fill: var(--onBackground_dim);
+  transition: var(--transition);
+}
+
+button:hover path {
+  fill: var(--onBackground);
 }
 
 @keyframes fadein {

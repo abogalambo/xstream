@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPenSquare,
+  faPen,
   faEye
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -48,7 +48,7 @@ const Stream = () => {
       >
         <FontAwesomeIcon
           size={'2x'}
-          icon={isPlaybackMode ? faPenSquare : faEye}
+          icon={isPlaybackMode ? faPen : faEye}
         />
       </button>
 
