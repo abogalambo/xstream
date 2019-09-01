@@ -33,16 +33,13 @@ class VisualPlayer {
     this.timeoutID && clearTimeout(this.timeoutID)
   }
 
-  get _elapsedTime() {
-    if(this.playingStartedAt){
-      return (new Date().getTime()) - this.playingStartedAt
-    }else{
-      return this.timeOffset
+  get status() {
+    return {
+      startedAt: this.playingStartedAt,
+      isInProgress: !!this.playingStartedAt,
+      offset: this.timeOffset,
+      duration: this.duration
     }
-  }
-
-  get percentage() {
-    return Math.ceil(100 * this._elapsedTime / this.duration)
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,21 +27,17 @@ const AudioInput = () => {
     maxDuration: 30000
   }))
 
-  const [ blah, setBlah ] = useState(true);
-  const triggerRender = () => setBlah(!blah);
-
-  useEffect(() => {
-    const id = setInterval(triggerRender, 200);
-    return () => clearInterval(id);
-  });
-
-  const percentage = recording ? 100 * elapsedTime(recordingStartedAt) / 30000 : 0
   const onClick = recording ? (()=>recorder.stopRecording()) : (()=>recorder.startRecording())
   const icon = recording ? faSquare : faMicrophone
   return (
     <button onClick={onClick} className={styles.playerMain}>
       <div className={styles.circleShadow}>
-        <CircleMeter percentage={percentage} />
+        <CircleMeter
+          startedAt={recordingStartedAt}
+          isInProgress={recording}
+          offset={0}
+          duration={30000}
+        />
         <FontAwesomeIcon
           className={classnames(
             styles.playerMain_operator,
@@ -55,7 +51,5 @@ const AudioInput = () => {
     </button>
   )
 }
-
-const elapsedTime = (startTime) => startTime ? (new Date().getTime() - startTime) : 0
 
 export default AudioInput
