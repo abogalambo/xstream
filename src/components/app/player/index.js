@@ -38,21 +38,13 @@ const Player = () => {
     return () => player.cleanup();
   }, []);
 
-  const [ blah, setBlah ] = useState(true);
-  const triggerRender = () => setBlah(!blah);
-
-  useEffect(() => {
-    const id = setInterval(triggerRender, 200);
-    return () => clearInterval(id);
-  });
-
   return (
     <button
       onClick={getOnClick(isPlaying, player)}
       className={styles.playerMain}
     >
-       <div className={styles.circleShadow}>
-        <CircleMeter percentage={player.percentage} />
+      <div className={styles.circleShadow}>
+        <CircleMeter { ...player.status } />
         <FontAwesomeIcon
           className={classnames(
             styles.playerMain_operator,
