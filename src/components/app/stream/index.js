@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,13 +6,15 @@ import {
   faEye
 } from '@fortawesome/free-solid-svg-icons'
 import {
-  toggleMode as toggleModeAction
+  toggleMode as toggleModeAction,
+  goToSegment as goToSegmentAction
 } from '../../../state/actions/stream'
 import {
   showCoverSelector,
   currentSegmentDataSelector,
   isPlaybackModeSelector,
-  canToggleModeSelector
+  canToggleModeSelector,
+  indexSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Segment from '../segment'
@@ -26,6 +28,22 @@ const Stream = () => {
   const segment = useSelector(currentSegmentDataSelector)
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
+
+  const index = useSelector(indexSelector)
+  const indexRef = useRef()
+  indexRef.current = index
+  const goToSegment = (e) => {
+    if(e.keyCode === 39) {
+      dispatch(goToSegmentAction(indexRef.current + 1))
+    }else if(e.keyCode === 37) {
+      dispatch(goToSegmentAction(indexRef.current - 1))
+    }
+  }
+
+  useEffect( () => {
+    document.addEventListener('keydown', goToSegment)
+    return () => document.removeEventListener('keydown', goToSegment)
+  }, [])
 
   return (
     <div className={styles.stream}>
