@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,6 +15,7 @@ import {
 } from '../../../state/actions/stream'
 import {
   isPlayingSelector,
+  isTypingSelector,
   audioDataSelector,
   segmentDurationSelector,
   isPlaybackModeSelector
@@ -26,21 +27,37 @@ import CircleMeter from '../../lib/circle_meter'
 
 const Player = () => {
   const isPlaying = useSelector(isPlayingSelector)
+  const isTyping = useSelector(isTypingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
   const segmentDuration = useSelector(segmentDurationSelector)
 
+  const isTypingRef = useRef(null)
+  isTypingRef.current = isTyping
+
   const dispatch = useDispatch();
   const [player] = useState(getPlayer(dispatch, audioUrl, segmentDuration))
+
+  const togglePlaying = () => player.togglePlaying()
+  const handleKeyDown = (e) => {
+    if(e.keyCode === 32 && !isTypingRef.current){
+      player.togglePlaying()
+    }
+  }
 
   useEffect(() => {
     isPlaybackMode && player.startPlaying()
     return () => player.cleanup();
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, []);
+
   return (
     <button
-      onClick={() => (player.togglePlaying())}
+      onClick={togglePlaying}
       className={styles.playerMain}
     >
       <div className={styles.circleShadow}>
