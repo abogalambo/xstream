@@ -5,6 +5,14 @@ class AudioPlayer {
     this.onEnd = onEnd
   }
 
+  togglePlaying() {
+    if(this._audioElement && !this._audio.paused){
+      this.stopPlaying()
+    }else{
+      this.startPlaying()
+    }
+  }
+
   startPlaying() {
     this._audio.play()
   }
@@ -38,13 +46,6 @@ class AudioPlayer {
       offset: this._audio.currentTime * 1000,
       duration: this._audio.duration * 1000
     }
-  }
-
-  get percentage() {
-    if(!this._audioElement) return 0
-    if(this._audio.ended) return 100
-
-    return Math.ceil(100 * this._audio.currentTime / Math.min(30000, this._audio.duration))
   }
 
   get _audio() {
