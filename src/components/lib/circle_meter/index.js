@@ -10,7 +10,7 @@ const CircleMeter = ({startedAt, isInProgress, offset, duration}) => {
   const circumference = 2 * Math.PI * radius ;
   const progress = ((100 - percentage) / 100) * circumference;
 
-  const [ blah, setBlah ] = useState(null)
+  const [, setBlah ] = useState(null)
   const triggerRender = () => setBlah(new Date().getTime())
 
   useEffect(() => {

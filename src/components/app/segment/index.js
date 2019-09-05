@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { setSegmentText } from '../../../state/actions/segment'
 import {
+  startTyping as startTypingAction,
+  stopTyping as stopTypingAction
+} from '../../../state/actions/stream'
+import {
   removeImage as removeImageAction,
   setImageCaption as setImageCaptionAction
 } from '../../../state/actions/image'
@@ -23,6 +27,8 @@ const Segment = ({
   const onTextChange = (event) => dispatch(setSegmentText(event.target.value))
   const removeImage = () => dispatch(removeImageAction())
   const setImageCaption = (caption) => dispatch(setImageCaptionAction(caption))
+  const startTyping = () => dispatch(startTypingAction())
+  const stopTyping = () => dispatch(stopTypingAction())
 
   const textCollapsed = (isPlaybackMode && !text) || image
   const imageCollapsed = (isPlaybackMode && !image) || text
@@ -39,6 +45,8 @@ const Segment = ({
           <TextInput
             value={text || ''}
             onChange={onTextChange}
+            onFocus={startTyping}
+            onBlur={stopTyping}
             maxChars={200}
             prompt="Write Something .."
             readOnly={isPlaybackMode}

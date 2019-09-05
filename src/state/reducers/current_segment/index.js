@@ -3,10 +3,11 @@ const initialState = {
   index: -1, // displaying cover
   recording: false,
   playing: false,
+  typing: false,
   recordingStartedAt: null
 }
 
-const canNavigate = (state) => !state.recording
+const canNavigate = (state) => (!state.recording && !state.typing)
 
 const currentSegment = (state = null, action, currentStream) => {
   const { type, payload } = action
@@ -70,7 +71,19 @@ const currentSegment = (state = null, action, currentStream) => {
       return updateObject(state, {
         playing: false
       })
-    }    
+    }
+
+    case 'START_TYPING': {
+      return updateObject(state, {
+        typing: true
+      })
+    }
+
+    case 'STOP_TYPING': {
+      return updateObject(state, {
+        typing: false
+      })
+    }
 
     case 'REMOVE_RECORDING': {
       return updateObject(state, {
