@@ -30,3 +30,11 @@ export const segmentEnded = () => ({
 export const toggleMode = () => ({
   type: 'TOGGLE_MODE'
 })
+
+export const startTyping = () => ({
+  type: 'START_TYPING'
+})
+
+export const stopTyping = () => ({
+  type: 'STOP_TYPING'
+})

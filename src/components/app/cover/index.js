@@ -8,6 +8,8 @@ import {
 import {
   addSegment,
   goToSegment,
+  startTyping as startTypingAction,
+  stopTyping as stopTypingAction,
 } from '../../../state/actions/stream'
 import { setStreamTitle } from '../../../state/actions/stream'
 import {
@@ -25,6 +27,8 @@ const Cover = () => {
 
   const dispatch = useDispatch()
   const onTitleChange = (event) => dispatch(setStreamTitle(event.target.value))
+  const startTyping = () => dispatch(startTypingAction())
+  const stopTyping = () => dispatch(stopTypingAction())
 
   const icon = (hasSegments || isPlaybackMode) ? faPlay : faPlus
   const action = (hasSegments || isPlaybackMode) ? goToSegment(0) : addSegment()
@@ -36,6 +40,8 @@ const Cover = () => {
         readOnly={isPlaybackMode}
         value={title}
         onChange={onTitleChange}
+        onFocus={startTyping}
+        onBlur={stopTyping}
         maxChars={40}
         prompt="Add Title .."
       />
