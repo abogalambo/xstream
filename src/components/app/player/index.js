@@ -40,7 +40,7 @@ const Player = () => {
 
   return (
     <button
-      onClick={getOnClick(isPlaying, player)}
+      onClick={() => (player.togglePlaying())}
       className={styles.playerMain}
     >
       <div className={styles.circleShadow}>
@@ -71,10 +71,6 @@ const getPlayer = (dispatch, audioUrl, duration) => {
     duration
   })
 }
-
-const getOnClick = (isPlaying, player) => (
-  isPlaying ? () => player.stopPlaying() : () => player.startPlaying()
-)
 
 const getIcon = (isPlaying) => isPlaying ? faPause : faPlay
 

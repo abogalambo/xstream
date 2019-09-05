@@ -9,6 +9,14 @@ class VisualPlayer {
     this.timeoutID = null
   }
 
+  togglePlaying() {
+    if(this.playingStartedAt){
+      this.stopPlaying()
+    }else{
+      this.startPlaying()
+    }
+  }
+
   startPlaying() {
     if(this.playingStartedAt) return
     const currentTime = new Date().getTime()
