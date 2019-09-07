@@ -1,15 +1,10 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons'
-import {
-  addImage as addImageAction,
-} from '../../../state/actions/image'
 import styles from './image_input.css'
 
-const ImageInput = () => {
-  const dispatch = useDispatch();
-  const addImage = (e) => { dispatch(addImageAction(e)) }
+const ImageInput = ({onChange}) => {
   const randomId = new Date().getTime()
 
   return (
@@ -22,9 +17,13 @@ const ImageInput = () => {
         id={randomId}
         type="file"
         value=""
-        onChange={addImage} />
+        onChange={onChange} />
     </div>
   )
+}
+
+ImageInput.propTypes = {
+  onChange: PropTypes.func.isRequired
 }
 
 export default ImageInput
