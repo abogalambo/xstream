@@ -22,9 +22,9 @@ export const currentSegmentDataSelector = (state) => {
   return segments[index]
 }
 
-export const coverDataSelector = (state) => ({
-  title: (currentStreamSelector(state) || {}).title
-})
+export const coverDataSelector = (state) => (
+  (({title, cover}) => ({title, cover}))(currentStreamSelector(state) || {})
+)
 
 export const canNavigateSelector = (state) => (
   !isRecordingSelector(state)

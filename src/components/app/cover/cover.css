@@ -7,6 +7,25 @@
   justify-content: center;
   align-items: center;
   animation: fadein 0.8s;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.titleConainer {
+  width: 650px;
+  height: 100px;
+  background: rgba(255,255,255,0.6);
+  border-radius: var(--roundCorner);
+  position: relative;
+  margin: 20px;
+}
+
+.titleConainer > *:first-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .playButton {

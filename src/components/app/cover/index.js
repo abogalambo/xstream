@@ -24,7 +24,7 @@ import ImageInput from '../../lib/image_input'
 import styles from './cover.css'
 
 const Cover = () => {
-  const { title } = useSelector(coverDataSelector)
+  const { title, cover: coverImage } = useSelector(coverDataSelector)
   const hasSegments = useSelector(segmentsSelector).length
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
@@ -38,17 +38,26 @@ const Cover = () => {
   const action = (hasSegments || isPlaybackMode) ? goToSegment(0) : addSegment()
   const onClick = () => dispatch(action)
 
+  const coverStyle = (coverImage && coverImage.src) ? {
+    backgroundImage: `url(${coverImage.src})`
+  } : {}
+
   return (
-    <div className={styles.cover}>
-      <TextInput
-        readOnly={isPlaybackMode}
-        value={title}
-        onChange={onTitleChange}
-        onFocus={startTyping}
-        onBlur={stopTyping}
-        maxChars={40}
-        prompt="Add Title .."
-      />
+    <div
+      className={styles.cover}
+      style={coverStyle}
+    >
+      <div className={styles.titleConainer}>
+        <TextInput
+          readOnly={isPlaybackMode}
+          value={title}
+          onChange={onTitleChange}
+          onFocus={startTyping}
+          onBlur={stopTyping}
+          maxChars={40}
+          prompt="Add Title .."
+        />
+      </div>
 
       <button 
         onClick={onClick}
