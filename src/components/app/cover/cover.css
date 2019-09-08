@@ -9,12 +9,18 @@
   animation: fadein 0.8s;
 }
 
-.cover > button {
+.playButton {
   background: var(--secondaryColor);
   border-radius: 50%;
   height: 70px;
   width: 70px;
   box-shadow: var(--fourDp);
+}
+
+.addImage {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 ::placeholder {

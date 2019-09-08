@@ -18,6 +18,7 @@ import {
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import TextInput from '../../lib/text_input'
+import ImageInput from '../../lib/image_input'
 import styles from './cover.css'
 
 const Cover = () => {
@@ -46,12 +47,24 @@ const Cover = () => {
         prompt="Add Title .."
       />
 
-      <button onClick={onClick}>
+      <button 
+        onClick={onClick}
+        className={styles.playButton}
+      >
         <FontAwesomeIcon
           size={'3x'}
           icon={icon}
         />
       </button>
+
+      {!isPlaybackMode && (
+        <div className={styles.addImage}>
+          <ImageInput
+            onChange={() => {}}
+            buttonDisplay
+          />
+        </div>
+      )}
     </div>
   )
 }
