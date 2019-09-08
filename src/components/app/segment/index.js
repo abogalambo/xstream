@@ -10,11 +10,12 @@ import {
   stopTyping as stopTypingAction
 } from '../../../state/actions/stream'
 import {
+  addImage as addImageAction,
   removeImage as removeImageAction,
   setImageCaption as setImageCaptionAction
 } from '../../../state/actions/image'
 import TextInput from '../../lib/text_input'
-import ImageInput from '../image_input'
+import ImageInput from '../../lib/image_input'
 import ImageDisplay from '../../lib/image_display'
 import styles from './segment.css'
 import config from '../../../../config'
@@ -26,6 +27,7 @@ const Segment = ({
 }) => {
   const dispatch = useDispatch();
   const onTextChange = (event) => dispatch(setSegmentText(event.target.value))
+  const addImage = (e) => dispatch(addImageAction(e))
   const removeImage = () => dispatch(removeImageAction())
   const setImageCaption = (caption) => dispatch(setImageCaptionAction(caption))
   const startTyping = () => dispatch(startTypingAction())
@@ -78,7 +80,7 @@ const Segment = ({
             )}
             </div>
           ) : (
-            <ImageInput {...image} />
+            <ImageInput onChange={addImage} />
           )
         )}
       </div>

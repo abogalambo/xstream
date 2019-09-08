@@ -1,3 +1,5 @@
+import { addImageActionCreator } from './utils'
+
 export const newStream = () => ({
   type: 'NEW_STREAM'
 })
@@ -5,6 +7,12 @@ export const newStream = () => ({
 export const setStreamTitle = (title) => ({
   type: 'SET_STREAM_TITLE',
   payload: { title }
+})
+
+export const addCoverImage = addImageActionCreator('ADD_COVER_IMAGE')
+
+export const removeCoverImage = () => ({
+  type: 'REMOVE_COVER_IMAGE'
 })
 
 export const goToSegment = (index) => ({

@@ -1,30 +1,31 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons'
-import {
-  addImage as addImageAction,
-} from '../../../state/actions/image'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import styles from './image_input.css'
 
-const ImageInput = () => {
-  const dispatch = useDispatch();
-  const addImage = (e) => { dispatch(addImageAction(e)) }
+const ImageInput = ({onChange, buttonDisplay}) => {
   const randomId = new Date().getTime()
+  const iconSize = buttonDisplay ? '2x' : '5x'
 
   return (
     <div className={styles.imageInput}>
       <label htmlFor={randomId}>
-        <FontAwesomeIcon size="5x" icon={faImage} />
+        <FontAwesomeIcon size={iconSize} icon={faCamera} />
       </label>
       <input
         accept="image/*"
         id={randomId}
         type="file"
         value=""
-        onChange={addImage} />
+        onChange={onChange} />
     </div>
   )
+}
+
+ImageInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  buttonDisplay: PropTypes.bool
 }
 
 export default ImageInput

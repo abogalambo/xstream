@@ -1,20 +1,6 @@
-export const addImage = (e) => {
-  return dispatch => {
-    const file = e.target.files[0]
-    const reader = new FileReader();
+import { addImageActionCreator } from './utils'
 
-    reader.addEventListener("load", () => {
-      dispatch({
-        type: 'ADD_IMAGE',
-        payload: { src: reader.result }
-      })
-    }, false);
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }  
-}
+export const addImage = addImageActionCreator('ADD_IMAGE')
 
 export const removeImage = () => {
   return {

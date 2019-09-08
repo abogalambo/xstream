@@ -7,15 +7,71 @@
   justify-content: center;
   align-items: center;
   animation: fadein 0.8s;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.cover > button {
+.titleConainer {
+  width: 650px;
+  height: 100px;
+  background: rgba(255,255,255,0.6);
+  border-radius: var(--roundCorner);
+  position: relative;
+  margin: 20px;
+}
+
+.titleConainer > *:first-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.playButton {
   background: var(--secondaryColor);
   border-radius: 50%;
   height: 70px;
   width: 70px;
   box-shadow: var(--fourDp);
 }
+
+.addRemoveImage {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/*from here: copied from stream.css modeSwitch with modifications
+TODO: extract to a button component (without position related rules)*/
+
+.removeImage {
+  background: var(--secondaryColor);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  border-radius: var(--roundCorner);
+  box-shadow:  var(--oneDp);
+  transition: var(--transition);
+}
+
+.removeImage path {
+  fill: var(--onBackground_dim);
+  transition: var(--transition);
+}
+
+.removeImage:hover path {
+  fill: var(--onBackground);
+}
+
+.removeImage:hover {
+  box-shadow: var(--oneDp_hover);
+}
+
+/*Until here: copied from stream.css modeSwitch*/
 
 ::placeholder {
   color: var(--grey);

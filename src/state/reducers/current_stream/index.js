@@ -23,6 +23,7 @@ const currentStream = (state = null, action) => {
       if(state == null){
         return {
           title: "",
+          cover: null,
           segments: [],
           mode: 'compose',
           canEdit: true,
@@ -36,6 +37,20 @@ const currentStream = (state = null, action) => {
     case 'SET_STREAM_TITLE': {
       return updateObject(state, {
         title: payload.title
+      })
+    }
+
+    case 'ADD_COVER_IMAGE': {
+      return updateObject(state, {
+        cover: {
+          src: payload.src
+        }
+      })
+    }
+
+    case 'REMOVE_COVER_IMAGE': {
+      return updateObject(state, {
+        cover: null
       })
     }
 
