@@ -8,6 +8,8 @@ import {
 import {
   addSegment,
   goToSegment,
+  addCoverImage as addCoverImageAction,
+  removeCoverImage as removeCoverImageAction,
   startTyping as startTypingAction,
   stopTyping as stopTypingAction,
 } from '../../../state/actions/stream'
@@ -30,6 +32,7 @@ const Cover = () => {
   const onTitleChange = (event) => dispatch(setStreamTitle(event.target.value))
   const startTyping = () => dispatch(startTypingAction())
   const stopTyping = () => dispatch(stopTypingAction())
+  const addCoverImage = (e) => dispatch(addCoverImageAction(e))
 
   const icon = (hasSegments || isPlaybackMode) ? faPlay : faPlus
   const action = (hasSegments || isPlaybackMode) ? goToSegment(0) : addSegment()
@@ -60,7 +63,7 @@ const Cover = () => {
       {!isPlaybackMode && (
         <div className={styles.addImage}>
           <ImageInput
-            onChange={() => {}}
+            onChange={addCoverImage}
             buttonDisplay
           />
         </div>
