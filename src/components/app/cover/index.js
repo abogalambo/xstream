@@ -23,6 +23,7 @@ import {
 import TextInput from '../../lib/text_input'
 import ImageInput from '../../lib/image_input'
 import styles from './cover.css'
+import config from '../../../../config'
 
 const Cover = () => {
   const { title, cover: coverImage } = useSelector(coverDataSelector)
@@ -57,7 +58,7 @@ const Cover = () => {
           onChange={onTitleChange}
           onFocus={startTyping}
           onBlur={stopTyping}
-          maxChars={40}
+          maxChars={config.stream.titleMaxLength}
           prompt="Add Title .."
         />
       </div>

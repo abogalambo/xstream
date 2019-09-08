@@ -18,6 +18,7 @@ import TextInput from '../../lib/text_input'
 import ImageInput from '../../lib/image_input'
 import ImageDisplay from '../../lib/image_display'
 import styles from './segment.css'
+import config from '../../../../config'
 
 const Segment = ({
   text,
@@ -49,7 +50,7 @@ const Segment = ({
             onChange={onTextChange}
             onFocus={startTyping}
             onBlur={stopTyping}
-            maxChars={200}
+            maxChars={config.stream.text.maxLength}
             prompt="Write Something .."
             readOnly={isPlaybackMode}
           />

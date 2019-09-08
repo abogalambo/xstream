@@ -16,15 +16,17 @@ import {
 import styles from './audio_input.css'
 import RecordingService from '../../../lib/recorder'
 import CircleMeter from '../../lib/circle_meter'
+import config from '../../../../config'
 
 const AudioInput = () => {
   const { recording, recordingStartedAt } = useSelector(currentSegmentSelector)
+  const { maxDuration } = config.stream.audio
 
   const dispatch = useDispatch();
   const [recorder] = useState(new RecordingService({
     onStart: () => dispatch(startRecordingAction()),
     onStop: () => dispatch(stopRecordingAction(recorder.audioUrl)),
-    maxDuration: 30000
+    maxDuration
   }))
 
   const onClick = recording ? (()=>recorder.stopRecording()) : (()=>recorder.startRecording())
@@ -36,7 +38,7 @@ const AudioInput = () => {
           startedAt={recordingStartedAt}
           isInProgress={recording}
           offset={0}
-          duration={30000}
+          duration={maxDuration}
         />
         <FontAwesomeIcon
           className={classnames(
