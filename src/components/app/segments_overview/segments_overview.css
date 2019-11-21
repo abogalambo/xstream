@@ -2,4 +2,13 @@
   width: 100%;
   height: 100%;
   background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.addSegmentButton {
+  margin: 10px;
+  height: 50px;
+  background-color: var(--primaryColor_light);
 }
