@@ -2,8 +2,6 @@
   width: 100%;
   margin: auto;
   height: calc(100% - 90px);
-  position: absolute;
-  top: 0;
   display: flex;
   animation: fadein 0.8s;
 }
