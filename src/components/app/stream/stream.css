@@ -10,7 +10,7 @@
   height: 40px;
   position: absolute;
   top: 20px;
-  left: 20px;
+  right: 20px;
   cursor: pointer;
   border-radius: var(--roundCorner);
   box-shadow:  var(--oneDp);
