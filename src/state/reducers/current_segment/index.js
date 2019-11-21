@@ -41,6 +41,12 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'REMOVE_SEGMENT': {
+      const { index } = payload
+
+      if(index > state.index){
+        return state
+      }
+
       const { segments } = currentStream
       return updateObject(initialState, {
         index: Math.min(segments.length - 2, state.index)

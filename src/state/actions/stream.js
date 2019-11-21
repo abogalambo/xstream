@@ -27,8 +27,9 @@ export const addSegment = () => ({
   }
 })
 
-export const removeSegment = () => ({
-  type: 'REMOVE_SEGMENT'
+export const removeSegment = (index) => ({
+  type: 'REMOVE_SEGMENT',
+  payload: { index }
 })
 
 export const segmentEnded = () => ({

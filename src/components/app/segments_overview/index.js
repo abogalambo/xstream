@@ -32,8 +32,8 @@ const SegmentsOverview = () => {
             <SegmentOverview
               key={`segment_overview_${segment.timestamp}`}
               segment={segment}
-              index={index}
               onSegmentClick={() => dispatch(goToSegment(index))}
+              onRemoveSegmentClick={() => dispatch(removeSegment(index))}
             />
           ))}
 
