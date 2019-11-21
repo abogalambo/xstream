@@ -33,6 +33,7 @@ const SegmentsOverview = () => {
               key={`segment_overview_${segment.timestamp}`}
               segment={segment}
               index={index}
+              onSegmentClick={() => dispatch(goToSegment(index))}
             />
           ))}
 

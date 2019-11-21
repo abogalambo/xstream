@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({segment, index}) => {
+const SegmentOverview = ({segment, index, onSegmentClick, onRemoveSegmentClick}) => {
   return (
-    <div className={styles.segmentOverview}>
+    <div
+      className={styles.segmentOverview}
+      onClick={onSegmentClick}
+    >
       { segment.text }
       { segment.image && (
         <img src={segment.image.src} />
