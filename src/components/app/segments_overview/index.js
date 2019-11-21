@@ -14,6 +14,7 @@ import {
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 
+import SegmentOverview from '../segment_overview'
 import styles from './segments_overview.css'
 
 const SegmentsOverview = () => {
@@ -26,15 +27,25 @@ const SegmentsOverview = () => {
   return (
     <div className={styles.segmentsOverview}>
       {!isPlaybackMode && (
-        <button
-          onClick={onAddSegmentClick}
-          className={styles.addSegmentButton}
-        >
-          <FontAwesomeIcon
-            size={'2x'}
-            icon={faPlus}
-          />
-        </button>
+        <>
+          {segments.map((segment, index) => (
+            <SegmentOverview
+              key={`segment_overview_${segment.timestamp}`}
+              segment={segment}
+              index={index}
+            />
+          ))}
+
+          <button
+            onClick={onAddSegmentClick}
+            className={styles.addSegmentButton}
+          >
+            <FontAwesomeIcon
+              size={'2x'}
+              icon={faPlus}
+            />
+          </button>
+        </>
       )}
     </div>
   )
