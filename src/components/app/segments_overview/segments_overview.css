@@ -10,7 +10,7 @@
 
 .addSegmentButton {
   margin: 10px;
-  height: 50px;
+  min-height: 50px;
   background-color: var(--primaryColor_light);
   border-radius: var(--roundCorner);
   box-shadow: var(--oneDp);
