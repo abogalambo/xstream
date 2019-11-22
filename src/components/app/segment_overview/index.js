@@ -1,13 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({segment, onSegmentClick, onRemoveSegmentClick}) => {
+const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick}) => {
   return (
     <div
-      className={styles.segmentOverview}
+      className={classnames(
+        styles.segmentOverview,
+        { [styles.selected]: isSelected }
+      )}
       onClick={onSegmentClick}
     >
       { segment.text }
@@ -34,7 +39,8 @@ const SegmentOverview = ({segment, onSegmentClick, onRemoveSegmentClick}) => {
 SegmentOverview.propTypes = {
   segment: PropTypes.object.isRequired,
   onSegmentClick: PropTypes.func.isRequired,
-  onRemoveSegmentClick: PropTypes.func.isRequired
+  onRemoveSegmentClick: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool
 }
 
 export default SegmentOverview

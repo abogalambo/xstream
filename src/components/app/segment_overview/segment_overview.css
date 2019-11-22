@@ -12,9 +12,14 @@
   cursor: pointer;
 }
 
+.selected {
+  border: 1.5px solid var(--primaryColor_light);
+}
+
 .segmentOverview > img {
   max-height: 110px;
-  max-width: 150px;
+  max-width: 110px;
+  border-radius: var(--roundCorner);
 }
 
 .audioIcon {

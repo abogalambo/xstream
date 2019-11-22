@@ -11,6 +11,7 @@ import {
 
 import {
   segmentsSelector,
+  indexSelector,
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 
@@ -19,6 +20,7 @@ import styles from './segments_overview.css'
 
 const SegmentsOverview = () => {
   const segments = useSelector(segmentsSelector)
+  const currentIndex = useSelector(indexSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const SegmentsOverview = () => {
             <SegmentOverview
               key={`segment_overview_${segment.timestamp}`}
               segment={segment}
+              isSelected={index == currentIndex}
               onSegmentClick={() => dispatch(goToSegment(index))}
               onRemoveSegmentClick={() => dispatch(removeSegment(index))}
             />
