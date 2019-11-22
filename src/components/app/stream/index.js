@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 import {
   faPen,
   faEye
@@ -17,6 +18,7 @@ import {
   indexSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
+import SegmentsOverview from '../segments_overview'
 import Segment from '../segment'
 import Footer from '../footer'
 import styles from './stream.css'
@@ -52,11 +54,23 @@ const Stream = () => {
       )}
 
       {segment && (
-        <Segment
-          key={`segment_${segment.timestamp}`}
-          {...segment}
-          isPlaybackMode={isPlaybackMode}
-        />
+        <div className={classnames(
+          styles.segmentOverviewContainer,
+          { [styles.segmentOverviewContainerPlayback]: isPlaybackMode }
+        )}>
+          <SegmentsOverview />
+        </div>
+      )}
+
+      {segment && (
+        <div className={classnames( styles.segmentContainer, { [styles.segmentContainerPlayback]: isPlaybackMode })}>
+          <Segment
+            key={`segment_${segment.timestamp}`}
+            {...segment}
+            isPlaybackMode={isPlaybackMode}
+          />
+          <Footer />
+        </div>
       )}
 
       <button
@@ -69,10 +83,6 @@ const Stream = () => {
           icon={isPlaybackMode ? faPen : faEye}
         />
       </button>
-
-      {segment && (
-        <Footer />
-      )}
     </div>
   )
 }

@@ -44,8 +44,6 @@ export const canNextSelector = (state) => (
   indexSelector(state) < (segmentsSelector(state).length - 1)
 )
 
-export const canEditStreamSelector = (state) => (!isRecordingSelector(state))
-
 export const audioDataSelector = (state) => currentSegmentDataSelector(state).audio
 
 export const canRecordSelector = (state) => !audioDataSelector(state)

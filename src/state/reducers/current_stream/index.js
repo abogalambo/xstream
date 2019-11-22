@@ -113,7 +113,7 @@ const currentStream = (state = null, action) => {
 
     case 'REMOVE_SEGMENT': {
       const { segments, currentSegment } = state
-      const { index } = currentSegment
+      const { index } = payload
 
       if(segments[index]) {
         return updateObject(state, {

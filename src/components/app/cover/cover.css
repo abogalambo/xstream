@@ -39,7 +39,7 @@
 .addRemoveImage {
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px;
 }
 
 /*from here: copied from stream.css modeSwitch with modifications
@@ -51,7 +51,7 @@ TODO: extract to a button component (without position related rules)*/
   height: 40px;
   position: absolute;
   top: 0px;
-  right: 0px;
+  left: 0px;
   cursor: pointer;
   border-radius: var(--roundCorner);
   box-shadow:  var(--oneDp);

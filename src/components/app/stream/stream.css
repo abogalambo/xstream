@@ -4,13 +4,37 @@
   position: relative;
 }
 
+.segmentOverviewContainer {
+  transition: var(--transition);
+  width: 200px;
+  height: 100%;
+  top: 0;
+}
+
+.segmentOverviewContainerPlayback {
+  width: 0;
+}
+
+.segmentContainer {
+  transition: var(--transition);
+  width: calc(100% - 200px);
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.segmentContainerPlayback {
+  width: 100%;
+}
+
 .modeSwitch {
   background: var(--secondaryColor);
   width: 40px;
   height: 40px;
   position: absolute;
   top: 20px;
-  left: 20px;
+  right: 20px;
   cursor: pointer;
   border-radius: var(--roundCorner);
   box-shadow:  var(--oneDp);
@@ -29,7 +53,6 @@
 .modeSwitch:hover {
   box-shadow: var(--oneDp_hover);
 }
-
 
 .modeSwitch:disabled {
   opacity: 0.5;

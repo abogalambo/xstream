@@ -1,0 +1,17 @@
+.segmentsOverview {
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondaryColor_light);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-y: scroll;
+}
+
+.addSegmentButton {
+  margin: 10px;
+  min-height: 50px;
+  background-color: var(--primaryColor_light);
+  border-radius: var(--roundCorner);
+  box-shadow: var(--oneDp);
+}
