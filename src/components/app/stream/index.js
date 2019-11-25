@@ -18,6 +18,7 @@ import {
   indexSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
+import Autosave from '../autosave'
 import SegmentsOverview from '../segments_overview'
 import Segment from '../segment'
 import Footer from '../footer'
@@ -49,6 +50,8 @@ const Stream = () => {
 
   return (
     <div className={styles.stream}>
+      <Autosave />
+
       {showCover && (
         <Cover />
       )}

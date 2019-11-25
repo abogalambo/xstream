@@ -1,8 +1,7 @@
 const initialState = {
   lastUpdateAt: null,
   lastRequestTriggeredAt: null,
-  lastRequestStatus: null, // 'success' | 'failure' | 'pending',
-  timeoutId: null
+  lastRequestStatus: null // 'success' | 'failure' | 'pending'
 }
 
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
