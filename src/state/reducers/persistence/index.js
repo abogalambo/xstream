@@ -23,6 +23,26 @@ const persistenceReducer = (state = initialState, action) => {
     case 'REMOVE_COVER_IMAGE': {
       return updateObject(state, {lastUpdateAt: payload.timestamp})
     }
+
+    case 'SAVE_STREAM_PENDING': {
+      return updateObject(state, {
+        lastRequestTriggeredAt: payload.timestamp,
+        lastRequestStatus: 'pending'
+      })
+    }
+
+    case 'SAVE_STREAM_FULFILLED': {
+      return updateObject(state, {
+        lastRequestStatus: 'success'
+      })
+    }
+
+    case 'SAVE_STREAM_REJECTED': {
+      return updateObject(state, {
+        lastRequestStatus: 'failure'
+      })
+    }
+
     default:
       return state
   }

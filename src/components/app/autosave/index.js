@@ -19,7 +19,7 @@ const Autosave = () => {
             console.log('dispatch update server instantly')
             saveStream()
           }else{
-            delay = config.stream.autosaveInterval - (currentTime - lastRequestStatus)
+            const delay = config.stream.autosaveInterval - (currentTime - lastRequestStatus)
             console.log(`dispatch update server in ${delay} millis`)
           }
         }
