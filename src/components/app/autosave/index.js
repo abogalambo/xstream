@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {
+  saveStream as saveStreamAction
+} from '../../../state/actions/autosave'
 import config from '../../../../config'
 
 const Autosave = () => {
   const { lastUpdateAt, lastRequestTriggeredAt, lastRequestStatus } = useSelector((state) => state.persistence)
+  const dispatch = useDispatch()
+  const saveStream = () => dispatch(saveStreamAction())
   
   useEffect(() => {
     if(lastUpdateAt != null) {
@@ -12,6 +17,7 @@ const Autosave = () => {
           const currentTime = (new Date).getTime()
           if(lastRequestTriggeredAt < currentTime - config.stream.autosaveInterval) { // last update request was more than 5 seconds ago
             console.log('dispatch update server instantly')
+            saveStream()
           }else{
             delay = config.stream.autosaveInterval - (currentTime - lastRequestStatus)
             console.log(`dispatch update server in ${delay} millis`)
