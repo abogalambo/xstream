@@ -1,26 +1,24 @@
-export const startRecording = () => {
-  return {
-    type: 'START_RECORDING',
-    payload: {
-      timestamp: (new Date).getTime()
-    }
+export const startRecording = () => ({
+  type: 'START_RECORDING',
+  payload: {
+    timestamp: (new Date).getTime()
   }
-}
+})
 
-export const stopRecording = (audioUrl) => {
-  return {
-    type: 'STOP_RECORDING',
-    payload: {
-      audioUrl: audioUrl
-    }
+export const stopRecording = (audioUrl) => ({
+  type: 'STOP_RECORDING',
+  payload: {
+    audioUrl,
+    timestamp: (new Date).getTime()
   }
-}
+})
 
-export const removeRecording = () => {
-  return {
-    type: 'REMOVE_RECORDING'
+export const removeRecording = () => ({
+  type: 'REMOVE_RECORDING',
+  payload: {
+    timestamp: (new Date).getTime()
   }
-}
+})
 
 export const startPlaying = () => ({
   type: 'START_PLAYING'
