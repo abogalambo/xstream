@@ -59,6 +59,11 @@ export const segmentDurationSelector = (state) => {
   )
 }
 
+export const autosaveParamsSelector = (state) => {
+  const { title, cover, segments } = currentStreamSelector(state)
+  return { title, cover, segments }
+}
+
 const timeForText = (text = '', minimum) => {
   const millisecondsPerCharacter = 60
   return Math.max(millisecondsPerCharacter * text.length, minimum)

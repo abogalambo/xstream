@@ -1,14 +1,27 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  saveStream as saveStreamAction
+  saveStream as saveStreamAction,
+  saveStreamLater as saveStreamLaterAction
 } from '../../../state/actions/autosave'
+import {
+  autosaveParamsSelector
+} from '../../../state/selectors/current_stream'
 import config from '../../../../config'
 
 const Autosave = () => {
-  const { lastUpdateAt, lastRequestTriggeredAt, lastRequestStatus } = useSelector((state) => state.persistence)
+  const {
+    lastUpdateAt,
+    lastRequestTriggeredAt,
+    lastRequestStatus,
+    isTimeoutSet
+  } = useSelector((state) => state.persistence)
+
+  const autosaveParams = useSelector(autosaveParamsSelector)
+
   const dispatch = useDispatch()
-  const saveStream = () => dispatch(saveStreamAction())
+  const saveStream = () => dispatch(saveStreamAction(autosaveParams))
+  const saveStreamLater = (delay) => dispatch(saveStreamLaterAction(delay))
   
   useEffect(() => {
     if(lastUpdateAt != null) {
@@ -16,16 +29,17 @@ const Autosave = () => {
         if(lastRequestStatus != 'pending') { // if there is an update request pending, wait for it then this code will trigger again because it depends on lastRequestStatus
           const currentTime = (new Date).getTime()
           if(lastRequestTriggeredAt < currentTime - config.stream.autosaveInterval) { // last update request was more than 5 seconds ago
-            console.log('dispatch update server instantly')
             saveStream()
           }else{
-            const delay = config.stream.autosaveInterval - (currentTime - lastRequestStatus)
-            console.log(`dispatch update server in ${delay} millis`)
+            if(!isTimeoutSet) {
+              const delay = config.stream.autosaveInterval - (currentTime - lastRequestTriggeredAt)
+              saveStreamLater(delay)
+            }
           }
         }
       }
     }
-  }, [lastUpdateAt, lastRequestStatus]);
+  }, [lastUpdateAt, lastRequestStatus, isTimeoutSet]);
 
   return (
     ''

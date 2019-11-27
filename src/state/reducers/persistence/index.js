@@ -1,7 +1,8 @@
 const initialState = {
   lastUpdateAt: null,
   lastRequestTriggeredAt: null,
-  lastRequestStatus: null // 'success' | 'failure' | 'pending'
+  lastRequestStatus: null, // 'success' | 'failure' | 'pending'
+  isTimeoutSet: false
 }
 
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
@@ -40,6 +41,19 @@ const persistenceReducer = (state = initialState, action) => {
     case 'SAVE_STREAM_REJECTED': {
       return updateObject(state, {
         lastRequestStatus: 'failure'
+      })
+    }
+
+    case 'SAVE_STREAM_LATER_PENDING': {
+      return updateObject(state, {
+        isTimeoutSet: true
+      })
+    }
+
+    case 'SAVE_STREAM_LATER_REJECTED':
+    case 'SAVE_STREAM_LATER_FULFILLED': {
+      return updateObject(state, {
+        isTimeoutSet: false
       })
     }
 
