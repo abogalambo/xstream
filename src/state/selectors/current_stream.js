@@ -60,8 +60,8 @@ export const segmentDurationSelector = (state) => {
 }
 
 export const autosaveParamsSelector = (state) => {
-  const { title, cover, segments } = currentStreamSelector(state)
-  return { title, cover, segments }
+  const { id, title, cover, segments } = currentStreamSelector(state)
+  return { id, title, cover, segments }
 }
 
 const timeForText = (text = '', minimum) => {

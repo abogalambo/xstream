@@ -1,13 +1,12 @@
+import RemoteStream from '../../lib/remote_stream'
+
 export const saveStream = (streamData) => {
   const timestamp = (new Date).getTime()
   return {
     type: 'SAVE_STREAM',
     payload: {
       data: { timestamp },
-      promise: fetch('https://jsonplaceholder.typicode.com/todos/1', {
-        method: 'POST',
-        body: JSON.stringify(streamData)
-      }).then(response => response.json())
+      promise: new RemoteStream(streamData).save().then(remoteStream => remoteStream.stream)
     }
   }
 }

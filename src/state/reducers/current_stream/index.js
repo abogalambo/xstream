@@ -22,6 +22,7 @@ const currentStream = (state = null, action) => {
     case 'NEW_STREAM': {
       if(state == null){
         return {
+          id: null,
           title: "",
           cover: null,
           segments: [],
@@ -158,6 +159,14 @@ const currentStream = (state = null, action) => {
         }),
         currentSegment: currentSegmentReducer(currentSegment, action)
       })
+    }
+
+    case 'SAVE_STREAM_FULFILLED': {
+      if(state.id == null && payload.id) {
+        return updateObject(state, { id: payload.id })
+      } else {
+        return state
+      }
     }
 
     default:
