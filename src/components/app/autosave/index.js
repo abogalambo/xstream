@@ -8,6 +8,7 @@ import {
   autosaveParamsSelector
 } from '../../../state/selectors/current_stream'
 import config from '../../../../config'
+import styles from './autosave.css'
 
 const Autosave = () => {
   const {
@@ -42,7 +43,23 @@ const Autosave = () => {
   }, [lastUpdateAt, lastRequestStatus, isTimeoutSet]);
 
   return (
-    ''
+    <div className={styles.autosave}>
+      {lastRequestStatus == 'failure' && (
+        <span>⚠️error</span>
+      )}
+
+      {lastRequestStatus == 'pending' && (
+        <span>⏳Saving...</span>
+      )}
+
+      {(lastRequestStatus == 'success') && (lastRequestTriggeredAt > lastUpdateAt) && (
+        <span>✅Saved</span>
+      )}
+
+      {(lastRequestStatus == 'success') && (lastRequestTriggeredAt < lastUpdateAt) && (
+        <span>🔄Unsaved Changes</span>
+      )}
+    </div>
   )
 }
 
