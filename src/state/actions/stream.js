@@ -3,7 +3,7 @@ import RemoteStream from '../../lib/remote_stream'
 
 export const fetchStream = (id) => ({
   type: 'FETCH_STREAM',
-  payload: new RemoteStream({id}).fetch()
+  payload: new RemoteStream({id}).fetch().then((remoteStream) => remoteStream.stream)
 })
 
 export const newStream = () => ({

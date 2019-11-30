@@ -22,7 +22,8 @@ class RemoteStream {
   fetch() {
     return this.docRef.get().then((doc) => {
       if (doc.exists) {
-        return doc.data()
+        this.stream = { ...this.stream, ...doc.data() }
+        return this
       } else {
         return Promise.reject(doc)
       }
