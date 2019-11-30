@@ -20,6 +20,17 @@ class RemoteStream {
   }
 
   fetch() {
+    return this.docRef.get().then((doc) => {
+      if (doc.exists) {
+        return doc.data()
+      } else {
+        return Promise.reject(doc)
+      }
+    })
+  }
+
+  get docRef() {
+    return this.collection.doc(this.stream.id)
   }
 
   get collection() {

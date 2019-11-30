@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { newStream } from '../../../state/actions/stream'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from "react-router-dom"
+import { newStream, fetchStream } from '../../../state/actions/stream'
 import Stream from '../stream'
 
 const StreamLoader = () => {
-  const currentStream = useSelector(state => state.currentStream);
-  const dispatch = useDispatch();
+  const currentStream = useSelector(state => state.currentStream)
+  let { id } = useParams()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if(currentStream == null){
-      dispatch(newStream())
+      if(id){
+        dispatch(fetchStream(id))
+      } else {
+        dispatch(newStream())
+      }
     }
-  }, [])
+  }, [id])
 
   return currentStream && (
     <Stream />

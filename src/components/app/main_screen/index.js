@@ -18,6 +18,9 @@ const MainScreen = () => {
         <Route path="/streams/new">
           <StreamLoader />
         </Route>
+        <Route path="/streams/:id/edit">
+          <StreamLoader />
+        </Route>
       </Switch>
     </Router>
   )
