@@ -57,23 +57,25 @@ const Stream = () => {
       )}
 
       {segment && (
-        <div className={classnames(
-          styles.segmentOverviewContainer,
-          { [styles.segmentOverviewContainerPlayback]: isPlaybackMode }
-        )}>
-          <SegmentsOverview />
-        </div>
-      )}
+        <>
+          <div className={classnames(
+            styles.segmentsOverviewContainer,
+            { [styles.segmentsOverviewContainer_playback]: isPlaybackMode }
+          )}>
+            <SegmentsOverview />
+          </div>
 
-      {segment && (
-        <div className={classnames( styles.segmentContainer, { [styles.segmentContainerPlayback]: isPlaybackMode })}>
-          <Segment
-            key={`segment_${segment.timestamp}`}
-            {...segment}
-            isPlaybackMode={isPlaybackMode}
-          />
-          <Footer />
-        </div>
+          <div className={styles.mainSection}>
+            <div className={classnames( styles.segmentContainer, { [styles.segmentContainerPlayback]: isPlaybackMode })}>
+              <Segment
+                key={`segment_${segment.timestamp}`}
+                {...segment}
+                isPlaybackMode={isPlaybackMode}
+              />
+              <Footer />
+            </div>
+          </div>
+        </>
       )}
 
       <button
