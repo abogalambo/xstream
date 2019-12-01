@@ -11,13 +11,13 @@
 }
 
 /*Segements Overview */
-.segmentsOverviewContainer {
+.overviewPanelContainer {
   transition: var(--transition);
   width: 200px;
   height: 100%;
 }
 
-.segmentsOverviewContainer_playback {
+.overviewPanelContainer_playback {
   width: 0;
 }
 

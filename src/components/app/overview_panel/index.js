@@ -16,9 +16,9 @@ import {
 } from '../../../state/selectors/current_stream'
 
 import SegmentOverview from '../segment_overview'
-import styles from './segments_overview.css'
+import styles from './overview_panel.css'
 
-const SegmentsOverview = () => {
+const OverviewPanel = () => {
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
@@ -27,7 +27,7 @@ const SegmentsOverview = () => {
   const onAddSegmentClick = () => dispatch(addSegment())
 
   return (
-    <div className={styles.segmentsOverview}>
+    <div className={styles.overviewPanel}>
       {!isPlaybackMode && (
         <>
           {segments.map((segment, index) => (
@@ -55,4 +55,4 @@ const SegmentsOverview = () => {
   )
 }
 
-export default SegmentsOverview
+export default OverviewPanel

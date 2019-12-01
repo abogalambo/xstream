@@ -19,7 +19,7 @@ import {
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Autosave from '../autosave'
-import SegmentsOverview from '../segments_overview'
+import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Footer from '../footer'
 import styles from './stream.css'
@@ -59,10 +59,10 @@ const Stream = () => {
       {segment && (
         <>
           <div className={classnames(
-            styles.segmentsOverviewContainer,
-            { [styles.segmentsOverviewContainer_playback]: isPlaybackMode }
+            styles.overviewPanelContainer,
+            { [styles.overviewPanelContainer_playback]: isPlaybackMode }
           )}>
-            <SegmentsOverview />
+            <OverviewPanel />
           </div>
 
           <div className={styles.mainSection}>
