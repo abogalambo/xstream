@@ -37,7 +37,10 @@ const Segment = ({
   const imageCollapsed = (isPlaybackMode && !image) || text
 
   return (
-    <div className={styles.segment}>
+    <div className={classnames(
+      styles.segment,
+      { [styles.segmentBoundaries]: !isPlaybackMode }
+    )}>
       <div className={classnames(
         styles.mediaInput,
         {

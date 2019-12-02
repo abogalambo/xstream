@@ -1,10 +1,14 @@
 .segment {
-  width: 800px;
-  height: 450px;
-  border: 1px solid lightgray;
   margin: 0 auto;
   display: flex;
   animation: fadein 0.8s;
+}
+
+.segmentBoundaries {
+  width: 800px;
+  height: 450px;
+  border: 1px solid lightgray;
+  border-radius: var(--roundCorner);
 }
 
 .segmentDivider {
@@ -59,6 +63,7 @@
 
 .imageContainer {
   position: relative;
+  width: 100%;
 }
 
 .removeButton {
