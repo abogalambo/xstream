@@ -39,7 +39,10 @@ const Segment = ({
   return (
     <div className={classnames(
       styles.segment,
-      { [styles.segmentBoundaries]: !isPlaybackMode }
+      {
+        [styles.segment_compose]: !isPlaybackMode,
+        [styles.segment_playback]: isPlaybackMode
+       }
     )}>
       <div className={classnames(
         styles.mediaInput,
@@ -86,7 +89,7 @@ const Segment = ({
                 className={styles.removeButton}
                 onClick={removeImage}
                 icon={faTimes}
-                size="lg"
+                size="1x"
               />
             )}
             </div>

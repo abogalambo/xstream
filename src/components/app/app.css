@@ -15,6 +15,7 @@
   --onBgColor_light: #bfbfbf;
   --onBgColor_dark: #5e5e5e;
   --footerHeight: 90px;
+  --captionHeight: 100px;
   --onPrimary_dim: rgba(242, 242, 242, 0.8);
   --onPrimary_dimmer: rgba(242, 242, 242, 0.2);
   --onPrimary_disable: rgba(242, 242, 242, 0.4);

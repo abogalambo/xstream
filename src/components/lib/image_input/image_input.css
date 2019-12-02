@@ -1,3 +1,9 @@
+.imageInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .imageInput input{
   width: 0.1px;
   height: 0.1px;
@@ -9,13 +15,25 @@
 
 .imageInput label {
   cursor: pointer;
-}
-
-.imageInput label path {
-  color: var(--grey);
   transition: var(--transition);
 }
 
-.imageInput label:hover path {
-  color: var(--primaryColor);
+.imageInput span {
+  font-size: 24px;
+  color: var(--onBgColor);
+  margin-left: 10px;
+}
+
+.imageInputIcon {
+  font-size: 1.7em;
+}
+
+.imageInputIcon path {
+  color: var(--onBgColor);
+  transition: var(--transition);
+}
+
+.imageInput label:hover path,
+.imageInput label:hover  span{
+  color: black;
 }
