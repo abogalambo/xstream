@@ -1,15 +1,38 @@
 .segment {
-  width: 100%;
-  margin: auto;
-  height: calc(100% - var(--footerHeight));
+  width: 800px;
+  height: 450px;
+  border: 1px solid lightgray;
+  margin: 0 auto;
   display: flex;
   animation: fadein 0.8s;
+}
+
+.segmentDivider {
+  width: 1px;
+  height: 100%;
+  background: var(--onBgColor_light);
+  position: relative;
+}
+
+.segmentDivider_collapse {
+  display: none;
+}
+
+.segmentDivider::after {
+  content: 'or';
+  display: block;
+  background: var(--bgColor);
+  position: absolute;
+  padding: 20px 0;
+  top: calc(50% - 20px - 12px);
+  left: calc(50% - 10.8px);
+  color: var(--onBgColor);
+  font-size: 24px;
 }
 
 .mediaInput {
   height: 100%;
   width: 100%;
-  border-right: 1px solid lightgray;
   display: flex;
   align-items: center;
   justify-content: center;

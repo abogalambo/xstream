@@ -51,11 +51,19 @@ const Segment = ({
             onFocus={startTyping}
             onBlur={stopTyping}
             maxChars={config.stream.text.maxLength}
-            prompt="Write Something .."
+            prompt="Write something..."
             readOnly={isPlaybackMode}
           />
         )}
       </div>
+      { (!textCollapsed || !imageCollapsed) && (
+        <div className={classnames(
+          styles.segmentDivider,
+          {
+            [styles.segmentDivider_collapse]: textCollapsed || imageCollapsed
+          }
+        )}></div>
+      )}
       <div className={classnames(
         styles.mediaInput,
         {
