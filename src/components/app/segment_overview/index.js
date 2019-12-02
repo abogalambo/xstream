@@ -15,7 +15,7 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
       )}
       onClick={onSegmentClick}
     >
-      { segment.text }
+      <p className={styles.segmentOverviewText}>{ segment.text }</p>
       { segment.image && (
         <img src={segment.image.src} />
       )}

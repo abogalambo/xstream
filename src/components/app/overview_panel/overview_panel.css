@@ -2,7 +2,7 @@
   box-sizing: border-box;
   width: 200px;
   height: 100%;
-  padding: 40px 40px 0 40px;
+  padding-top: 40px;
   background-color: var(--secondaryColor_light);
 }
 

@@ -15,6 +15,7 @@
   transition-property: width, height;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
+  padding: 5px 20px;
 }
 
 .segmentOverview:first-child {
@@ -24,6 +25,18 @@
 .selected {
   width: 130px;
   height: 95px;
+}
+
+.segmentOverviewText {
+  text-align: center;
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: 8px;
+  color: var(--onBgColor);
+  line-height: 9px;
+  hyphens: auto;
 }
 
 .segmentOverview > img {
