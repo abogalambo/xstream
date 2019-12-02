@@ -1,8 +1,10 @@
 .segmentOverview {
-  margin: 10px;
+  box-sizing: border-box;
+  margin: 20px;
   margin-bottom: 0px;
-  background-color: var(--backgroundColor);
-  min-height: 120px;
+  background-color: var(--bgColor);
+  width: 100px;
+  min-height: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,10 +12,18 @@
   box-shadow: var(--oneDp);
   position: relative;
   cursor: pointer;
+  transition-property: width, height;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.segmentOverview:first-child {
+  margin-top: 0;
 }
 
 .selected {
-  border: 1.5px solid var(--primaryColor_light);
+  width: 130px;
+  height: 95px;
 }
 
 .segmentOverview > img {
@@ -32,4 +42,8 @@
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.removeSegmentIcon path {
+  fill: var(--onSecondary);
 }

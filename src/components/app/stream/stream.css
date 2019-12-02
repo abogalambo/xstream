@@ -10,7 +10,7 @@
   height: 100%;
 }
 
-/*Segements Overview */
+/*OverviewPanel Section */
 .overviewPanelContainer {
   transition: var(--transition);
   width: 200px;
@@ -21,7 +21,7 @@
   width: 0;
 }
 
-/* Segment */
+/* Segment Section */
 .segmentContainer {
   transition: var(--transition);
   height: calc(100% - var(--footerHeight));

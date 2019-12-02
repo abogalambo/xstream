@@ -29,27 +29,30 @@ const OverviewPanel = () => {
   return (
     <div className={styles.overviewPanel}>
       {!isPlaybackMode && (
-        <>
-          {segments.map((segment, index) => (
-            <SegmentOverview
-              key={`segment_overview_${segment.timestamp}`}
-              segment={segment}
-              isSelected={index == currentIndex}
-              onSegmentClick={() => dispatch(goToSegment(index))}
-              onRemoveSegmentClick={() => dispatch(removeSegment(index))}
-            />
-          ))}
+        <div className={styles.overviewPanel_wrapper}>
+          <div className={styles.overviewPanel_segements}>
+            {segments.map((segment, index) => (
+              <SegmentOverview
+                key={`overview_panel_${segment.timestamp}`}
+                segment={segment}
+                isSelected={index == currentIndex}
+                onSegmentClick={() => dispatch(goToSegment(index))}
+                onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+              />
+            ))}
+          </div>
+
+          <div className={styles.overviewPanel_divider}></div>
 
           <button
             onClick={onAddSegmentClick}
-            className={styles.addSegmentButton}
+            className={styles.overviewPanel_addButton}
           >
             <FontAwesomeIcon
-              size={'2x'}
               icon={faPlus}
             />
           </button>
-        </>
+        </div>
       )}
     </div>
   )
