@@ -66,7 +66,7 @@ const Stream = () => {
           </div>
 
           <div className={styles.mainSection}>
-            <div className={classnames( styles.segmentContainer, { [styles.segmentContainerPlayback]: isPlaybackMode })}>
+            <div className={classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
               <Segment
                 key={`segment_${segment.timestamp}`}
                 {...segment}
