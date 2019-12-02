@@ -72,8 +72,8 @@ const Stream = () => {
                 {...segment}
                 isPlaybackMode={isPlaybackMode}
               />
+             </div>
               <Footer />
-            </div>
           </div>
         </>
       )}
