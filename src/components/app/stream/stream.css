@@ -22,8 +22,10 @@
 
 /* Segment Section */
 .segmentContainer {
+  box-sizing: border-box;
   transition: var(--transition);
-  height: calc(100% - var(--footerHeight));
+  height: calc(100% - var(--footerHeight) - 50px);
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
