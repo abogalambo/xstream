@@ -4,7 +4,7 @@
   margin-bottom: 0px;
   background-color: var(--bgColor);
   width: 100px;
-  min-height: 75px;
+  height: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@
   transition-property: width, height;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
-  padding: 5px 20px;
+  padding: 8px 15px;
 }
 
 .segmentOverview:first-child {
@@ -40,8 +40,11 @@
 }
 
 .segmentOverview > img {
-  max-height: 110px;
-  max-width: 110px;
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: var(--roundCorner);
+  margin: 0 auto;
   border-radius: var(--roundCorner);
 }
 

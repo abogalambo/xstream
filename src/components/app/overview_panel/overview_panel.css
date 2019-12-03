@@ -10,7 +10,9 @@
   height: 55%;
 }
 
+/*container*/
 .overviewPanel_segements {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
