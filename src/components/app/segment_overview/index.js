@@ -22,7 +22,6 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
       { segment.audio && (
         <FontAwesomeIcon
           className={styles.audioIcon}
-          size={'1x'}
           icon={faVolumeUp}
         />
       )}

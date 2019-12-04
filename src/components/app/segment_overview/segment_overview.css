@@ -6,12 +6,13 @@
   width: 100px;
   height: 75px;
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   border-radius: var(--roundCorner);
-  box-shadow: var(--oneDp);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.14),0 4px 5px 0 rgba(0,0,0,.12),0 1px 10px 0 rgba(0,0,0,.2);
   position: relative;
-  cursor: pointer;
+  cursor: grab;
   transition-property: width, height;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
@@ -22,9 +23,23 @@
   margin-top: 0;
 }
 
+.segmentOverview:hover,
+.segmentOverview:active {
+  background: white;
+}
+
+.segmentOverview:hover .audioIcon,
+.segmentOverview:active .audioIcon {
+   left: 55px;
+}
+
 .selected {
   width: 130px;
   height: 95px;
+}
+
+.selected .audioIcon {
+  left: 55px;
 }
 
 .segmentOverviewText {
@@ -32,6 +47,7 @@
   display: -webkit-inline-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  user-select: none;
   overflow: hidden;
   font-size: 8px;
   color: var(--onBgColor);
@@ -50,16 +66,25 @@
 
 .audioIcon {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  font-size: 0.7em;
+  color: var(--onBgColor_light);
+  bottom: 8px;
+  left: 45px;
+  transition-property: left;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
 .removeSegmentIcon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 8px;
+  color: var(--onSecondary);
+  cursor: pointer;
 }
 
-.removeSegmentIcon path {
-  fill: var(--onSecondary);
+.removeSegmentIcon:focus,
+.removeSegmentIcon:hover,
+.removeSegmentIcon:active {
+  color: black;
 }
