@@ -21,12 +21,12 @@ circle:not(:root) {
 }
 
 .background {
-  stroke: var(--secondaryColor);
-  fill: var(--secondaryColor);
+  stroke: var(--primaryColor);
+  fill: var(--primaryColor);
 }
 
 .meter {
   fill: transparent;
-  stroke: var(--secondaryColor_dark);
+  stroke: var(--primaryColor_dark);
   stroke-linecap: round;
 }
