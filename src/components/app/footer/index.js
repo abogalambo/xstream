@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faStepForward,
   faStepBackward,
-  faMinusCircle
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 import {
   goToSegment,
@@ -55,7 +55,7 @@ const Footer = () => {
             <Player key={`player_${segment.timestamp}`} />
             {!isPlaybackMode && (
               <div className={styles.removeButton} onClick={onRemoveRecordingClick}>
-                <FontAwesomeIcon icon={faMinusCircle} />
+                <FontAwesomeIcon icon={faTrash} />
               </div>
             )}
           </div>

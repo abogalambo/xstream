@@ -7,10 +7,11 @@ button {
 
 /* Footer */
 .footer {
+  box-sizing: border-box;
   position: relative;
   text-align: center;
   width: 100%;
-  height: 90px;
+  height: var(--footerHeight);
   color: var(--onPrimary);
 }
 
@@ -50,7 +51,7 @@ button {
 
 /*Player*/
 .player {
-  width: 200px;
+  width: 400px;
   height: 100%;
   display: inline-flex;
   justify-content: space-between;
@@ -61,11 +62,11 @@ button {
 }
 
 .footer button:disabled path {
-  fill: var(--onPrimary_disable);
+  fill: var(--onBgColor_light);
 }
 
 .player button:hover:enabled .playerMain_skip path {
-  fill: var(--onPrimary);
+  fill: var(--onBgColor_dark);
 }
 
 .player button:hover:enabled .playerMain_skip path,
@@ -82,13 +83,14 @@ button {
   transform: translate(0, -50%);
 }
 
+/*Remove button */
 .removeButton {
   position: absolute;
   cursor: pointer;
   width: 20px;
   height: 20px;
-  top: 10px;
-  left: 70px;
+  top: 15px;
+  left: 75px;
 }
 
 .removeButton:hover path {

@@ -10,12 +10,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: var(--fourDp);
+  box-shadow: var(--FAB);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .playerMain_operator {
   position: absolute;
-  font-size: 1.6em;
+  font-size: 2em;
 }
 
 .playerMain,
@@ -25,12 +26,18 @@
   transition: var(--transition);
 }
 
-.playerMain:hover {
-  width: 72px;
+.playerMain:focus .circleShadow,
+.playerMain:hover .circleShadow {
+  box-shadow: var(--FAB_hover);
 }
 
-.playerMain:hover .playerMain_operator {
-  font-size: 2em;
+.playerMain:active .circleShadow {
+  box-shadow: var(--twoDp);
+}
+
+.playerMain:active circle:first-child {
+  stroke: var(--primaryColor_light);
+  fill: var(--primaryColor_light);
 }
 
 .playerMain .playerMain_operator path {
