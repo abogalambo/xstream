@@ -40,8 +40,7 @@ const Segment = ({
     <div className={classnames(
       styles.segment,
       {
-        [styles.segment_compose]: !isPlaybackMode,
-        [styles.segment_playback]: isPlaybackMode
+        [styles.segment_compose]: !isPlaybackMode
        }
     )}>
       <div className={classnames(
@@ -64,9 +63,9 @@ const Segment = ({
       </div>
       { (!textCollapsed || !imageCollapsed) && (
         <div className={classnames(
-          styles.segmentDivider,
+          styles.segment_composeDivider,
           {
-            [styles.segmentDivider_collapse]: textCollapsed || imageCollapsed
+            [styles.segment_composeDivider_collapse]: textCollapsed || imageCollapsed
           }
         )}></div>
       )}
@@ -79,19 +78,24 @@ const Segment = ({
         { !imageCollapsed && (
           isPlaybackMode || image ? (
             <div className={styles.imageContainer}>
-              <ImageDisplay
-                {...image}
-                editable={!isPlaybackMode}
-                onEdit={setImageCaption}
-              />
-             { !isPlaybackMode && (
-               <FontAwesomeIcon
-                className={styles.removeButton}
-                onClick={removeImage}
-                icon={faTimes}
-                size="1x"
-              />
-            )}
+              <div className={classnames(styles.imageWrapper,
+              { [styles.imageWrapper_border]: !isPlaybackMode})}>
+                <ImageDisplay
+                  {...image}
+                  editable={!isPlaybackMode}
+                  onEdit={setImageCaption}
+                />
+               { !isPlaybackMode && (
+                  <button className={styles.removeButton}>
+                    <FontAwesomeIcon
+                      className={styles.removeButton_icon}
+                      onClick={removeImage}
+                      icon={faTimes}
+                      size="1x"
+                    />
+                  </button>
+                )}
+              </div>
             </div>
           ) : (
             <ImageInput onChange={addImage} />

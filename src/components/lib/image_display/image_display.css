@@ -1,24 +1,28 @@
 .imageDisplay {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  /* max-width: 100%;
+  max-height: 500px; */
 }
 
 .imageDisplay > img {
   display: block;
-  max-height: calc(100% - var(--captionHeight));
+  max-height: calc(100% - 100px);
   max-width: 100%;
-  margin: 0 auto;
   border-radius: var(--roundCorner);
   box-shadow: var(--twoDp);
+  margin: 0;
 }
 
 .caption {
+  display: inline-block;
   width: 400px;
   height: var(--captionHeight);
-  margin: 10px auto 0 auto;
+  max-height: 100px;
+  margin: 0 auto;
   color: var(--onBackground);
 }
 
@@ -31,7 +35,9 @@ textarea::placeholder {
   transition-timing-function: var(--transition-timing-function);
 }
 
-textarea:hover::placeholder {
+textarea:focus::placeholder,
+textarea:hover::placeholder,
+textarea:active::placeholder {
   color: black;
 }
 
@@ -45,4 +51,5 @@ textarea:hover::placeholder {
   font-size: 16px;
   text-align: center;
   color: var(--onBgColor);
+  padding-top: 15px;
 }

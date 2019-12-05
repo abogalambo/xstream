@@ -4,28 +4,23 @@
   display: flex;
   animation: fadein 0.8s;
   padding: 0px;
-}
-
-.segment_playback {
   width: 100%;
   height: 100%;
 }
 
 .segment_compose {
-  width: 750px;
-  height: 450px;
   border: 1px solid lightgray;
   border-radius: var(--roundCorner);
 }
 
-.segmentDivider {
+.segment_composeDivider {
   width: 1px;
   height: 100%;
   background: var(--onBgColor_light);
   position: relative;
 }
 
-.segmentDivider_collapse {
+.segment_composeDivider_collapse {
   display: none;
 }
 
@@ -41,6 +36,7 @@
   font-size: 24px;
 }
 
+/* Media Input Section */
 .mediaInput {
   height: 100%;
   width: 100%;
@@ -68,32 +64,40 @@
   }
 }
 
+/*Image Section*/
 .imageContainer {
-  box-sizing: border-box;
-  position: relative;
   width: 100%;
   height: 100%;
+  padding: 40px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 50px 80px 20px 80px;
+}
+
+.imageWrapper {
+  height: 100%;
+  position: relative;
+  padding: 10px;
+}
+
+.imageWrapper_border {
+  border: 1px dotted var(--primaryColor);
 }
 
 .removeButton {
-  background: var(--onBackground_dimmer);
+  background: rgba(0, 0, 0, 0.2);
   padding: 3px 5px;
   border-radius: var(--roundCorner);
   position: absolute;
   cursor: pointer;
-  top: 8px;
-  right: 8px;
+  top: 20px;
+  right: 20px;
 }
 
-.removeButton path {
-  fill: var(--primaryColor);
-  transition: var(--transition);
-}
-
+.removeButton  path,
 .removeButton:hover path {
+  fill: var(--primaryColor);
+}
+
+.removeButton:active path {
   fill: var(--primaryColor_light);
 }
