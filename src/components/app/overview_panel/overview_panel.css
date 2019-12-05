@@ -8,7 +8,7 @@
 }
 
 .overviewPanel_wrapper {
-  height: 500px;
+  height: 95%;
 }
 
 /*container*/
@@ -18,7 +18,7 @@
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  max-height: calc(500px - 36px - 19.55px); /*divider + addBtn*/
+  max-height: calc(95% - 36px - 19.55px); /*divider + addBtn*/
 }
 
 .overviewPanel_divider {
