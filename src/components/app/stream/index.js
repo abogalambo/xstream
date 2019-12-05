@@ -22,6 +22,7 @@ import Autosave from '../autosave'
 import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Footer from '../footer'
+import ToggleButton from '../../lib/toggle_button'
 import styles from './stream.css'
 
 const Stream = () => {
@@ -42,6 +43,19 @@ const Stream = () => {
       dispatch(goToSegmentAction(indexRef.current - 1))
     }
   }
+
+  const contents = [
+    {
+      value: 'compose',
+      text:'',
+      icon: <FontAwesomeIcon icon={faPen}/>,
+    },
+    {
+      value: 'playback',
+      text:'',
+      icon: <FontAwesomeIcon icon={faEye}/>,
+    }
+  ]
 
   useEffect( () => {
     document.addEventListener('keydown', goToSegment)
@@ -78,16 +92,12 @@ const Stream = () => {
         </>
       )}
 
-      <button
-        className={styles.modeSwitch}
-        onClick={toggleMode}
+      <ToggleButton
+        contents={contents}
+        onToggle={toggleMode}
+        checkedValue={isPlaybackMode ? 'playback' : 'compose'}
         disabled={!canToggleMode}
-      >
-        <FontAwesomeIcon
-          size={'2x'}
-          icon={isPlaybackMode ? faPen : faEye}
-        />
-      </button>
+      />
     </div>
   )
 }
