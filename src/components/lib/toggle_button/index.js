@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styles from './toggle_button.css'
+import classnames from 'classnames';
 
 const ToggleButton = ({ contents, onToggle, checkedValue, disabled }) => {
 
@@ -7,6 +9,10 @@ const ToggleButton = ({ contents, onToggle, checkedValue, disabled }) => {
     const { text, icon, value } = content;
     return (
       <label
+        className={classnames(
+          styles.toggleBtn,
+          { [styles.toggleBtn_active]: value == checkedValue }
+        )}
         key={index + 1}>
           <input
             autoComplete="off"
@@ -23,6 +29,7 @@ const ToggleButton = ({ contents, onToggle, checkedValue, disabled }) => {
 
   return (
     <div
+      className={styles.toggleBtnContainer}
       onChange={onToggle}
       data-toggle="buttons">
       {toggleBtns}
