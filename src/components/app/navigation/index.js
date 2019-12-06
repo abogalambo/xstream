@@ -23,9 +23,9 @@ import {
 } from '../../../state/selectors/current_stream'
 import AudioInput from '../audio_input'
 import Player from '../player'
-import styles from './footer.css'
+import styles from './navigation.css'
 
-const Footer = () => {
+const Navigation = () => {
   const canPrevious = useSelector(canPreviousSelector)
   const canNext = useSelector(canNextSelector)
   const index = useSelector(indexSelector)
@@ -40,7 +40,7 @@ const Footer = () => {
   const onRemoveRecordingClick = () => dispatch(removeRecording())
 
   return (
-    <div className={styles.footer}>
+    <div className={styles.navigation}>
       <div className={styles.player}>
         <button onClick={onPreviousSegmentClick} disabled={!canPrevious}>
           <FontAwesomeIcon className={styles.playerMain_skip}
@@ -77,4 +77,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Navigation

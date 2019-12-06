@@ -5,17 +5,17 @@ button {
   cursor: pointer;
 }
 
-/* Footer */
-.footer {
+/* Navigation */
+.navigation {
   box-sizing: border-box;
   position: relative;
   text-align: center;
   width: 100%;
-  height: var(--footerHeight);
+  height: var(--navigationHeight);
   color: var(--onPrimary);
 }
 
-.footer path {
+.navigation path {
   fill: var(--onBgColor_dark);
 }
 
@@ -61,7 +61,7 @@ button {
   transform: translate(-35px, 17px);
 }
 
-.footer button:disabled path {
+.navigation button:disabled path {
   fill: var(--onBgColor_light);
 }
 

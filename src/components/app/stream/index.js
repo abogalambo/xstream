@@ -21,7 +21,7 @@ import Cover from '../cover'
 import Autosave from '../autosave'
 import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
-import Footer from '../footer'
+import Navigation from '../navigation'
 import ToggleButton from '../../lib/toggle_button'
 import styles from './stream.css'
 
@@ -86,8 +86,8 @@ const Stream = () => {
                 {...segment}
                 isPlaybackMode={isPlaybackMode}
               />
-             </div>
-              <Footer />
+            </div>
+            <Navigation />
           </div>
         </>
       )}
