@@ -28,12 +28,23 @@
   transform: translate(-50%, -50%);
 }
 
-.playButton {
-  background: var(--secondaryColor);
+.FAB {
+  background: var(--primaryColor);
   border-radius: 50%;
   height: 70px;
   width: 70px;
-  box-shadow: var(--fourDp);
+  box-shadow: var(--FAB);
+  transition: background var(--FAB_transition);
+}
+
+.FAB:focus,
+.FAB:hover {
+  box-shadow: var(--FAB_hover);
+}
+
+.FAB:active {
+  box-shadow: var(--twoDp);
+  background: var(--primaryColor_light);
 }
 
 .addRemoveImage {
@@ -73,21 +84,12 @@ TODO: extract to a button component (without position related rules)*/
 
 /*Until here: copied from stream.css modeSwitch*/
 
-::placeholder {
-  color: var(--grey);
+.FAB_iconPlay {
+  transform: translate(3.1px, 0.5px);;
 }
 
-.fa-play {
-  transform: translateX(3px);
-}
-
-button path {
-  fill: var(--onBackground_dim);
-  transition: var(--transition);
-}
-
-button:hover path {
-  fill: var(--onBackground);
+.FAB_icon {
+  color: black;
 }
 
 @keyframes fadein {

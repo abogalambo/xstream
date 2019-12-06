@@ -22,6 +22,7 @@ import {
 } from '../../../state/selectors/current_stream'
 import TextInput from '../../lib/text_input'
 import ImageInput from '../../lib/image_input'
+import classnames from 'classnames';
 import styles from './cover.css'
 import config from '../../../../config'
 
@@ -59,15 +60,19 @@ const Cover = () => {
           onFocus={startTyping}
           onBlur={stopTyping}
           maxChars={config.stream.titleMaxLength}
-          prompt="Add Title .."
+          prompt="Add Title..."
         />
       </div>
 
-      <button 
+      <button
         onClick={onClick}
-        className={styles.playButton}
+        className={styles.FAB}
       >
         <FontAwesomeIcon
+          className={classnames(
+            styles.FAB_icon,
+            { [styles.FAB_iconPlay]: icon == faPlay}
+          )}
           size={'3x'}
           icon={icon}
         />
