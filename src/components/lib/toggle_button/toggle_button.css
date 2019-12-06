@@ -15,6 +15,7 @@
 
 .toggleBtn {
   background: var(--bgColor);
+  color: var(--onBgColor);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,13 +23,14 @@
   flex-grow: 1;
   cursor: pointer;
   border-radius: var(--roundCorner);
-  transition-property: background;
+  transition-property: background, color;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
 }
 
 .toggleBtn_active {
   background: var(--onBgColor_light);
+  color: black;
 }
 
 .toggleBtn:not(:last-child) {
@@ -44,4 +46,5 @@
 
 .toggleBtn:not(.toggleBtn_active):hover {
   background: rgba(191, 191, 191, 0.5);
+  color: black;
 }
