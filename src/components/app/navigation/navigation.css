@@ -1,22 +1,59 @@
-button {
+/*Stream Nav*/
+.streamNav {
+  width: 400px;
+  height: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.streamNav button {
   background-color: unset;
   border: none;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Navigation */
-.navigation {
-  box-sizing: border-box;
+.playerContainer {
   position: relative;
-  text-align: center;
-  width: 100%;
-  height: var(--navigationHeight);
+}
+
+.playerContainer button {
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+/*Player*/
+.square, .dot {
+  transform: translate(-35px, 17px);
+}
+
+button:disabled .skipIcon{
+  color: var(--onBgColor_light);
+}
+
+.skipIcon,
+.removeButton {
+  transition: var(--transition);
+}
+
+/*Remove button */
+.removeButton {
+  position: absolute;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  top: 15px;
+  left: 75px;
+}
+
+button:enabled:hover .skipIcon,
+.removeButton_icon:hover {
   color: var(--onPrimary);
 }
 
-.navigation path {
-  fill: var(--onBgColor_dark);
+.skipIcon,
+.removeButton_icon  {
+  color: var(--onBgColor_dark);
 }
 
 /* Index */
@@ -33,66 +70,4 @@ button {
   padding: 20px;
   min-width: 50px;
   text-align: center;
-}
-
-.index button {
-  width: 25px;
-  padding: 0;
-}
-
-.index button path {
-  fill: var(--onPrimary_dim);
-  transition: var(--transition);
-}
-
-.index button:hover path {
-  fill: var(--onPrimary);
-}
-
-/*Player*/
-.player {
-  width: 400px;
-  height: 100%;
-  display: inline-flex;
-  justify-content: space-between;
-}
-
-.square, .dot {
-  transform: translate(-35px, 17px);
-}
-
-.navigation button:disabled path {
-  fill: var(--onBgColor_light);
-}
-
-.player button:hover:enabled .playerMain_skip path {
-  fill: var(--onBgColor_dark);
-}
-
-.player button:hover:enabled .playerMain_skip path,
-.removeButton path {
-  transition: var(--transition);
-}
-
-.playerContainer {
-  position: relative;
-}
-
-.playerContainer button {
-  top: 50%;
-  transform: translate(0, -50%);
-}
-
-/*Remove button */
-.removeButton {
-  position: absolute;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  top: 15px;
-  left: 75px;
-}
-
-.removeButton:hover path {
-  fill: var(--onPrimary);
 }

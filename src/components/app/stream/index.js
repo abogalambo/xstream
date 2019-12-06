@@ -87,7 +87,9 @@ const Stream = () => {
                 isPlaybackMode={isPlaybackMode}
               />
             </div>
-            <Navigation />
+            <div className={styles.footerContainer}>
+              <Navigation />
+            </div>
           </div>
         </>
       )}

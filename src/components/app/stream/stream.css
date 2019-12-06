@@ -24,7 +24,7 @@
 .segmentContainer {
   width: var(--segmentContainer_width);
   transition: var(--transition);
-  height: calc(100% - var(--footerHeight) - 80px);
+  height: calc(100% - var(--navigationHeight) - 80px);
   margin: 80px auto 0 auto;
   display: flex;
   justify-content: center;
@@ -33,6 +33,16 @@
 
 .segmentContainer_playback {
   width: 100%;
+}
+
+/*Footer Section */
+.footerContainer {
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: var(--navigationHeight);
+  color: var(--onPrimary);
 }
 
 /*Toggle Btn Container*/

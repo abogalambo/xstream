@@ -40,10 +40,10 @@ const Navigation = () => {
   const onRemoveRecordingClick = () => dispatch(removeRecording())
 
   return (
-    <div className={styles.navigation}>
-      <div className={styles.player}>
+    <>
+      <div className={styles.streamNav}>
         <button onClick={onPreviousSegmentClick} disabled={!canPrevious}>
-          <FontAwesomeIcon className={styles.playerMain_skip}
+          <FontAwesomeIcon className={styles.skipIcon}
             size={'2x'}
             icon={faStepBackward}/>
         </button>
@@ -55,14 +55,15 @@ const Navigation = () => {
             <Player key={`player_${segment.timestamp}`} />
             {!isPlaybackMode && (
               <div className={styles.removeButton} onClick={onRemoveRecordingClick}>
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon className={styles.removeButton_icon}
+                  icon={faTrash} />
               </div>
             )}
           </div>
         )}
 
         <button disabled={!canNext} onClick={onNextSegmentClick}>
-          <FontAwesomeIcon className={styles.playerMain_skip}
+          <FontAwesomeIcon className={styles.skipIcon}
             size={'2x'}
             icon={faStepForward}/>
         </button>
@@ -73,7 +74,7 @@ const Navigation = () => {
           {`${index + 1} / ${segments.length}`}
         </span>
       </div>
-    </div>
+    </>
   )
 }
 
