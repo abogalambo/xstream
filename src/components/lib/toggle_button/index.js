@@ -29,7 +29,7 @@ const ToggleButton = ({ contents, onToggle, checkedValue, disabled }) => {
 
   return (
     <div
-      className={styles.toggleBtnContainer}
+      className={styles.toggleBtnGroup}
       onChange={onToggle}
       data-toggle="buttons">
       {toggleBtns}

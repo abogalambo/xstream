@@ -1,12 +1,8 @@
-.toggleBtnContainer {
-  margin-top: 30px;
-  margin-right: 30px;
+.toggleBtnGroup {
   display: inline-flex;
   justify-content: center;
-  align-items: stretch;
-  align-content: stretch;
   width: 95px;
-  height: 35px;
+  height: 40px;
   border-radius: var(--roundCorner);
   box-shadow: var(--oneDp);
 }
@@ -18,12 +14,13 @@
 }
 
 .toggleBtn {
-  background: transparent;
+  background: var(--bgColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.3em;
-  text-align: center;
   flex-grow: 1;
   cursor: pointer;
-  padding: 7px;
   border-radius: var(--roundCorner);
   transition-property: background;
   transition-duration: 0.3s;

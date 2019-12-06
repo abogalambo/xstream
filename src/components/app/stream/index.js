@@ -92,12 +92,14 @@ const Stream = () => {
         </>
       )}
 
-      <ToggleButton
-        contents={contents}
-        onToggle={toggleMode}
-        checkedValue={isPlaybackMode ? 'playback' : 'compose'}
-        disabled={!canToggleMode}
-      />
+      <div className={styles.toggleBtnContainer}>
+        <ToggleButton
+          contents={contents}
+          onToggle={toggleMode}
+          checkedValue={isPlaybackMode ? 'playback' : 'compose'}
+          disabled={!canToggleMode}
+        />
+      </div>
     </div>
   )
 }

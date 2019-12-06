@@ -24,8 +24,8 @@
 .segmentContainer {
   width: var(--segmentContainer_width);
   transition: var(--transition);
-  height: calc(100% - var(--footerHeight) - 50px);
-  margin: 50px auto 0 auto;
+  height: calc(100% - var(--footerHeight) - 80px);
+  margin: 80px auto 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,33 +35,12 @@
   width: 100%;
 }
 
-/* Edit / Preview */
-.modeSwitch {
-  background: var(--secondaryColor);
-  width: 40px;
-  height: 40px;
+/*Toggle Btn Container*/
+.toggleBtnContainer {
   position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: 1200px;
   top: 20px;
-  right: 20px;
-  cursor: pointer;
-  border-radius: var(--roundCorner);
-  box-shadow:  0 0 2px 0 rgba(0,0,0,.14),0 2px 2px 0 rgba(0,0,0,.12),0 1px 3px 0 rgba(0,0,0,.2);
-  transition: var(--transition);
-}
-
-.modeSwitch path {
-  fill: var(--onBackground_dim);
-  transition: var(--transition);
-}
-
-.modeSwitch:hover path {
-  fill: var(--onBackground);
-}
-
-.modeSwitch:hover {
-  box-shadow: var(--oneDp_hover);
-}
-
-.modeSwitch:disabled {
-  opacity: 0.5;
+  left: calc((50% - 600px) + 87px);;
 }
