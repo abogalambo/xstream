@@ -3,11 +3,15 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTimes,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons'
 import { setSegmentText } from '../../../state/actions/segment'
 import {
   startTyping as startTypingAction,
-  stopTyping as stopTypingAction
+  stopTyping as stopTypingAction,
+  removeSegment as removeSegmentAction
 } from '../../../state/actions/stream'
 import {
   addImage as addImageAction,
@@ -23,7 +27,8 @@ import config from '../../../../config'
 const Segment = ({
   text,
   image,
-  isPlaybackMode
+  isPlaybackMode,
+  index
 }) => {
   const dispatch = useDispatch();
   const onTextChange = (event) => dispatch(setSegmentText(event.target.value))
@@ -32,6 +37,7 @@ const Segment = ({
   const setImageCaption = (caption) => dispatch(setImageCaptionAction(caption))
   const startTyping = () => dispatch(startTypingAction())
   const stopTyping = () => dispatch(stopTypingAction())
+  const removeSegment = () => dispatch(removeSegmentAction(index))
 
   const textCollapsed = (isPlaybackMode && !text) || image
   const imageCollapsed = (isPlaybackMode && !image) || text
@@ -41,8 +47,14 @@ const Segment = ({
       styles.segment,
       {
         [styles.segment_compose]: !isPlaybackMode
-       }
+      }
     )}>
+      <button
+        className={styles.removeSegmentBtn}
+        onClick={removeSegment}>
+        <FontAwesomeIcon className={styles.removeSegmentBtn_icon}
+          icon={faTrash}/>
+      </button>
       <div className={classnames(
         styles.mediaInput,
         {
@@ -109,7 +121,8 @@ const Segment = ({
 Segment.propTypes = {
   text: PropTypes.string,
   image: PropTypes.object,
-  isPlaybackMode: PropTypes.bool
+  isPlaybackMode: PropTypes.bool,
+  index: PropTypes.number
 }
 
 export default Segment
