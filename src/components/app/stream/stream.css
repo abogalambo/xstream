@@ -49,7 +49,7 @@
   border-radius: var(--roundCorner);
   border: 1px solid var(--onBgColor_medium);
   padding: 0 15px;
-  height: 36px;
+  height: 40px;
   transition-property: border-color;
   user-select: none;
   position: absolute;
@@ -90,5 +90,5 @@
   justify-content: flex-end;
   width: 1200px;
   top: 20px;
-  left: calc((50% - 600px) + 87px);;
+  right: 20px;
 }
