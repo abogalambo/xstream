@@ -92,12 +92,16 @@ const Stream = () => {
             </div>
             <div className={styles.footerContainer}>
               <Navigation />
-              <button className={styles.addSegmentBtn}
-                onClick={onAddSegmentClick}>
-                <FontAwesomeIcon className={styles.addSegmentBtn_icon}
-                  icon={faPlus} />
-                Add Segment
-              </button>
+              {!isPlaybackMode && (
+                <button
+                  className={styles.addSegmentBtn}
+                  onClick={onAddSegmentClick}>
+                  <FontAwesomeIcon
+                    className={styles.addSegmentBtn_icon}
+                    icon={faPlus} />
+                  Add Segment
+                </button>
+              )}
             </div>
           </div>
         </>
