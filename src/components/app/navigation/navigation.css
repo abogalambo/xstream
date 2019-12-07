@@ -3,26 +3,35 @@
   width: 300px;
   height: 100%;
   display: inline-flex;
+  align-items: center;
   justify-content: space-between;
-}
-
-.streamNav button {
-  background-color: unset;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 .playerContainer {
   position: relative;
+  width: 150px;
+  height: 90px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.playerContainer button {
-  top: 50%;
-  transform: translate(0, -50%);
+.playerContainer_entrance{
+  border: 1.5px solid #bfbfbf;
+  border-radius: 80px;
+  animation: enterance 0.3s cubic-bezier(.4,0,.2,1);
 }
 
-/*Player*/
+@keyframes enterance {
+  0% {
+    width: 100px;
+  }
+  100% {
+    width: 150px;
+  }
+}
+
+/*Audio Input*/
 .square, .dot {
   transform: translate(-35px, 17px);
 }
@@ -38,12 +47,11 @@ button:disabled .skipIcon{
 
 /*Remove button */
 .removeButton {
-  position: absolute;
   cursor: pointer;
-  width: 20px;
-  height: 20px;
-  top: 15px;
-  left: 75px;
+}
+
+.removeButton_icon  {
+  font-size: 2em;
 }
 
 button:enabled:hover .skipIcon,

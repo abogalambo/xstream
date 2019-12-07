@@ -23,6 +23,7 @@ import {
 } from '../../../state/selectors/current_stream'
 import AudioInput from '../audio_input'
 import Player from '../player'
+import classnames from 'classnames'
 import styles from './navigation.css'
 
 const Navigation = () => {
@@ -51,13 +52,16 @@ const Navigation = () => {
         {canRecord && !isPlaybackMode ? (
           <AudioInput key={`recorder_${segment.timestamp}`} />
         ) : (
-          <div className={styles.playerContainer}>
+          <div className={classnames(
+            styles.playerContainer,
+            {[styles.playerContainer_entrance]: !isPlaybackMode} 
+          )}>
             <Player key={`player_${segment.timestamp}`} />
             {!isPlaybackMode && (
-              <div className={styles.removeButton} onClick={onRemoveRecordingClick}>
+              <button className={styles.removeButton} onClick={onRemoveRecordingClick}>
                 <FontAwesomeIcon className={styles.removeButton_icon}
                   icon={faTrash} />
-              </div>
+              </button>
             )}
           </div>
         )}
