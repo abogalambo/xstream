@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import {
   faPen,
-  faEye
+  faEye,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 import {
   toggleMode as toggleModeAction,
-  goToSegment as goToSegmentAction
+  goToSegment as goToSegmentAction,
+  addSegment
 } from '../../../state/actions/stream'
 import {
   showCoverSelector,
@@ -32,6 +34,7 @@ const Stream = () => {
   const segment = useSelector(currentSegmentDataSelector)
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
+  const onAddSegmentClick = () => dispatch(addSegment())
 
   const index = useSelector(indexSelector)
   const indexRef = useRef()
@@ -89,6 +92,12 @@ const Stream = () => {
             </div>
             <div className={styles.footerContainer}>
               <Navigation />
+              <button className={styles.addSegmentBtn}
+                onClick={onAddSegmentClick}>
+                <FontAwesomeIcon className={styles.addSegmentBtn_icon}
+                  icon={faPlus} />
+                Add Segment
+              </button>
             </div>
           </div>
         </>

@@ -45,6 +45,44 @@
   color: var(--onPrimary);
 }
 
+.addSegmentBtn {
+  border-radius: var(--roundCorner);
+  border: 1px solid var(--onBgColor_medium);
+  padding: 0 15px;
+  height: 36px;
+  transition-property: border-color;
+  user-select: none;
+  position: absolute;
+  top: calc(50% - 18px);
+  right: 20px;
+}
+
+.addSegmentBtn,
+.addSegmentBtn_icon {
+  font-family: inherit;
+  font-size: 1em;
+  color: #7f7f7f;
+  transition-property: color;
+  transition-duration: var(--transition-duraction);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.addSegmentBtn_icon {
+  margin-right: 8px;
+}
+
+.addSegmentBtn:hover,
+.addSegmentBtn:hover .addSegmentBtn_icon,
+.addSegmentBtn:active .addSegmentBtn_icon,
+.addSegmentBtn:active {
+  color: black;
+}
+
+.addSegmentBtn:hover,
+.addSegmentBtn:active {
+  border-color: black;
+}
+
 /*Toggle Btn Container*/
 .toggleBtnContainer {
   position: absolute;

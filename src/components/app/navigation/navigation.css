@@ -59,15 +59,12 @@ button:enabled:hover .skipIcon,
 /* Index */
 .index {
   position: absolute;
-  top: 5px;
-  right: 30px;
-  display: flex;
-  flex-direction: row;
+  top: calc(50% - 8px);
+  left: 30px;
 }
 
 .index span {
   user-select: none;
-  padding: 20px;
-  min-width: 50px;
-  text-align: center;
+  font-size: 1em;
+  color: var(--onBgColor);
 }
