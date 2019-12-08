@@ -5,9 +5,9 @@ import MainScreen from "./main_screen";
 class App extends Component {
   render() {
     return (
-      <div className={styles.app}>
-        <MainScreen />
-      </div>
+      <>
+        <MainScreen className={styles.app} />
+      </>
     );
   }
 }
