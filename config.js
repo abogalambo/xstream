@@ -11,7 +11,8 @@ const config = {
     text: {
       maxLength: 200
     },
-    autosaveInterval: 5000
+    autosaveInterval: 5000,
+    snackbarDuration: 3000
   }
 }
 

@@ -67,10 +67,13 @@ const Stream = () => {
 
   return (
     <div className={styles.stream}>
-      <Autosave />
+
 
       {showCover && (
-        <Cover />
+        <>
+          <Cover />
+          <Autosave />
+        </>
       )}
 
       {segment && (
@@ -83,6 +86,7 @@ const Stream = () => {
           </div>
 
           <div className={styles.mainSection}>
+            <Autosave />
             <div className={classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
               <Segment
                 index={index}

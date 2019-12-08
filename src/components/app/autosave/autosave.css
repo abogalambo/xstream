@@ -1,6 +1,8 @@
 .autosave {
+  width: 100px;
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  top: 10px;
+  left: calc(50% - 50px);
   font-size: 15px;
+  color: var(--secondaryColor_light);
 }
