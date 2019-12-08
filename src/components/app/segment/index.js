@@ -49,12 +49,14 @@ const Segment = ({
         [styles.segment_compose]: !isPlaybackMode
       }
     )}>
-      <button
+      {!isPlaybackMode && (
+        <button
         className={styles.removeSegmentBtn}
         onClick={removeSegment}>
-        <FontAwesomeIcon className={styles.removeSegmentBtn_icon}
-          icon={faTrash}/>
-      </button>
+          <FontAwesomeIcon className={styles.removeSegmentBtn_icon}
+            icon={faTrash}/>
+        </button>
+      )}
       <div className={classnames(
         styles.mediaInput,
         {
