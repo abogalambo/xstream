@@ -8,3 +8,8 @@
   line-height: normal;
   color: var(--secondaryColor_light);
 }
+
+.autosave_error {
+  margin-right: 5px;
+  color: #c70808;
+}

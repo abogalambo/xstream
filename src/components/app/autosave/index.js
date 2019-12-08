@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import {
   saveStream as saveStreamAction,
   saveStreamLater as saveStreamLaterAction
@@ -67,7 +69,10 @@ const Autosave = () => {
   return isActive && status && (
     <>
       {status == 'failure' && (
-        <span className={styles.autosave}>Error while saving</span>
+        <span className={styles.autosave}>
+          <FontAwesomeIcon className={styles.autosave_error}
+          icon={faExclamationCircle} />
+          Error while saving</span>
       )}
 
       {status == 'pending' && (
