@@ -9,14 +9,15 @@ module.exports = {
 	output: {
 		filename: '[name].bundle.js'	,
 		path: path.resolve(__dirname, '../dist'),
-		publicPath: ''
+		publicPath: '/'
 	},
 	mode: 'development',
 	devServer: {
 		contentBase: path.resolve(__dirname, '../dist'),
 		index: 'index.html',
 		host: '0.0.0.0',
-		port: 3000
+		port: 3000,
+    historyApiFallback: true
 	},
 	module: {
 		rules: [
@@ -30,7 +31,7 @@ module.exports = {
 				test: /\.css$/,
 				use: [
 					'style-loader',
-					{ 
+					{
 						loader: 'css-loader',
 						options: {
 							modules: true,
@@ -55,7 +56,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			title: 'Home',
 			template: "./src/templates/home.html",
-			filename: 'home.html',
+			filename: 'index.html',
 			chunks: ['home']
 		})
 	]
