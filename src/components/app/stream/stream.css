@@ -86,10 +86,10 @@
 
 /*Toggle Btn Container*/
 .toggleBtnContainer {
-  position: absolute;
+  position: relative;
   display: flex;
-  justify-content: flex-end;
-  width: 1200px;
+  width: 95px;
+  height: 40px;
   top: 20px;
   right: 20px;
 }

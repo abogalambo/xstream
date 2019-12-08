@@ -1,8 +1,6 @@
 .toggleBtnGroup {
   display: inline-flex;
-  justify-content: center;
-  width: 95px;
-  height: 40px;
+  width: 100%;
   border-radius: var(--roundCorner);
   box-shadow: var(--oneDp);
 }
