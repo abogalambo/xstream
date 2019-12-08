@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -38,7 +38,12 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const onNextSegmentClick = () => dispatch(goToSegment(index + 1))
   const onPreviousSegmentClick = () => dispatch(goToSegment(index - 1))
-  const onRemoveRecordingClick = () => dispatch(removeRecording())
+  const onRemoveRecordingClick = () => {
+    setHadRecording(true)
+    dispatch(removeRecording())
+  }
+
+  const [ hadRecording, setHadRecording ] = useState(false)
 
   return (
     <>
@@ -49,22 +54,27 @@ const Navigation = () => {
             icon={faStepBackward}/>
         </button>
 
-        {canRecord && !isPlaybackMode ? (
-          <AudioInput key={`recorder_${segment.timestamp}`} />
-        ) : (
-          <div className={classnames(
-            styles.playerContainer,
-            {[styles.playerContainer_entrance]: !isPlaybackMode} 
-          )}>
-            <Player key={`player_${segment.timestamp}`} />
-            {!isPlaybackMode && (
-              <button className={styles.removeButton} onClick={onRemoveRecordingClick}>
-                <FontAwesomeIcon className={styles.removeButton_icon}
-                  icon={faTrash} />
-              </button>
-            )}
-          </div>
-        )}
+        <div className={classnames(
+          styles.playerContainer,
+          {
+            [styles.playerContainer_entrance]: !canRecord && !isPlaybackMode,
+            [styles.playerContainer_departure]: canRecord && !isPlaybackMode && hadRecording
+          }
+        )}>
+          {canRecord && !isPlaybackMode ? (
+            <AudioInput key={`recorder_${segment.timestamp}`} />
+          ) : (
+            <>
+              <Player key={`player_${segment.timestamp}`} />
+              {!isPlaybackMode && (
+                <button className={styles.removeButton} onClick={onRemoveRecordingClick}>
+                  <FontAwesomeIcon className={styles.removeButton_icon}
+                    icon={faTrash} />
+                </button>
+              )}
+            </>
+          )}
+        </div>
 
         <button disabled={!canNext} onClick={onNextSegmentClick}>
           <FontAwesomeIcon className={styles.skipIcon}

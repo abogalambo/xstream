@@ -9,7 +9,6 @@
 
 .playerContainer {
   position: relative;
-  width: 150px;
   height: 90px;
   display: flex;
   justify-content: space-around;
@@ -18,6 +17,7 @@
 
 .playerContainer_entrance{
   border: 1.5px solid #bfbfbf;
+  width: 150px;
   border-radius: 80px;
   animation: enterance 0.3s cubic-bezier(.4,0,.2,1);
 }
@@ -25,11 +25,32 @@
 @keyframes enterance {
   0% {
     width: 100px;
+    border: 1.5px solid rgba(191, 191, 191, 0);
   }
   100% {
     width: 150px;
+    border: 1.5px solid rgba(191, 191, 191, 1);
   }
 }
+
+.playerContainer_departure{
+  border-radius: 80px;
+  width: 70px;
+  animation: departure 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes departure {
+  0% {
+    width: 150px;
+    border: 1.5px solid rgba(191, 191, 191, 1);
+  }
+  100% {
+    width: 70px;
+    height: 70px;
+    border: 1.5px solid rgba(191, 191, 191, 0);
+  }
+}
+
 
 /*Audio Input*/
 .square, .dot {
