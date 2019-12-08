@@ -7,7 +7,10 @@ export const addImageActionCreator = (type) => (
       reader.addEventListener("load", () => {
         dispatch({
           type,
-          payload: { src: reader.result }
+          payload: {
+            src: reader.result,
+            timestamp: (new Date).getTime()
+          }
         })
       }, false);
 

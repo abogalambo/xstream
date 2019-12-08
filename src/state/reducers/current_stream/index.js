@@ -15,6 +15,15 @@ const updateItemAtIndex = (array, itemIndex, updateItemCallback) => {
 const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 const canToggleMode = (state) => !state.currentSegment.recording
 
+const initialState = {
+  id: null,
+  title: "",
+  cover: null,
+  segments: [],
+  mode: 'compose',
+  canEdit: true
+}
+
 const currentStream = (state = null, action) => {
   const { type, payload } = action
   switch (type) {
@@ -22,15 +31,19 @@ const currentStream = (state = null, action) => {
     case 'NEW_STREAM': {
       if(state == null){
         return {
-          title: "",
-          cover: null,
-          segments: [],
-          mode: 'compose',
-          canEdit: true,
+          ...initialState,
           currentSegment: currentSegmentReducer(null, action)
         }
       }else{
         return state
+      }
+    }
+
+    case 'FETCH_STREAM_FULFILLED': {
+      return {
+        ...initialState,
+        ...payload,
+        currentSegment: currentSegmentReducer(null, action)
       }
     }
 
@@ -158,6 +171,14 @@ const currentStream = (state = null, action) => {
         }),
         currentSegment: currentSegmentReducer(currentSegment, action)
       })
+    }
+
+    case 'SAVE_STREAM_FULFILLED': {
+      if(state.id == null && payload.id) {
+        return updateObject(state, { id: payload.id })
+      } else {
+        return state
+      }
     }
 
     default:

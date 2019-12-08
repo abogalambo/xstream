@@ -1,19 +1,28 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { newStream } from '../../../state/actions/stream'
-import Stream from '../stream'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import StreamLoader from '../stream_loader'
 
 const MainScreen = () => {
-  const currentStream = useSelector(state => state.currentStream);
-  const dispatch = useDispatch();
-  const onNewStreamClick = () => dispatch(newStream())
-
   return (
-    currentStream ? (
-      <Stream />
-    ) : (
-      <button onClick={onNewStreamClick}> Add New Stream </button>
-    )
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Link to="/streams/new"> Add New Stream </Link>
+        </Route>
+        <Route path="/streams/new">
+          <StreamLoader />
+        </Route>
+        <Route path="/streams/:id/edit">
+          <StreamLoader />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
