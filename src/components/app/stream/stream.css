@@ -23,17 +23,13 @@
 
 /* Segment Section */
 .segmentContainer {
-  width: var(--segmentContainer_width);
+  width: 85%;
   transition: var(--transition);
   height: calc(100% - var(--navigationHeight) - 80px);
   margin: 80px auto 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.segmentContainer_playback {
-  width: 100%;
 }
 
 /*Footer Section */
