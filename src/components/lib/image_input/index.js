@@ -5,7 +5,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import styles from './image_input.css'
 import classnames from 'classnames'
 
-const ImageInput = ({onChange, buttonDisplay}) => {
+const ImageInput = ({onChange, buttonDisplay, text}) => {
   const randomId = new Date().getTime()
 
   return (
@@ -17,7 +17,9 @@ const ImageInput = ({onChange, buttonDisplay}) => {
             { [styles.imageInputIcon_button]: buttonDisplay }
           )}
           icon={faCamera} />
-        <span>Add image</span>
+        {text && (
+          <span>{text}</span>
+        )}
       </label>
       <input
         accept="image/*"
@@ -31,7 +33,8 @@ const ImageInput = ({onChange, buttonDisplay}) => {
 
 ImageInput.propTypes = {
   onChange: PropTypes.func.isRequired,
-  buttonDisplay: PropTypes.bool
+  buttonDisplay: PropTypes.bool,
+  text: PropTypes.string
 }
 
 export default ImageInput
