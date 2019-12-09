@@ -86,6 +86,7 @@ const Cover = () => {
               onClick={removeCoverImage}
             >
               <FontAwesomeIcon
+                className={styles.removeImage_icon}
                 size={'2x'}
                 icon={faTimes}
               />

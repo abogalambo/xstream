@@ -57,7 +57,7 @@
 TODO: extract to a button component (without position related rules)*/
 
 .removeImage {
-  background: var(--secondaryColor);
+  background: rgba(0, 0, 0, 0.2);
   width: 40px;
   height: 40px;
   position: absolute;
@@ -65,21 +65,17 @@ TODO: extract to a button component (without position related rules)*/
   left: 0px;
   cursor: pointer;
   border-radius: var(--roundCorner);
-  box-shadow:  var(--oneDp);
-  transition: var(--transition);
 }
 
-.removeImage path {
-  fill: var(--onBackground_dim);
-  transition: var(--transition);
+.removeImage_icon {
+  color: var(--primaryColor);
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
-.removeImage:hover path {
-  fill: var(--onBackground);
-}
-
-.removeImage:hover {
-  box-shadow: var(--oneDp_hover);
+.removeImage:active .removeImage_icon {
+  color: var(--primaryColor_light);
 }
 
 /*Until here: copied from stream.css modeSwitch*/
