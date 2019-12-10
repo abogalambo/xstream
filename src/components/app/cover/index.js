@@ -95,6 +95,7 @@ const Cover = () => {
             <ImageInput
               onChange={addCoverImage}
               buttonDisplay
+              text={'Add cover image'}
             />
           )}
         </div>
