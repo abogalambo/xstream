@@ -25,7 +25,7 @@
   display: none;
 }
 
-.segmentDivider::after {
+.segment_composeDivider::after {
   content: 'or';
   display: block;
   background: var(--bgColor);
