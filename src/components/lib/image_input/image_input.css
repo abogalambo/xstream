@@ -1,7 +1,5 @@
 .imageInput {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  cursor: pointer;
 }
 
 .imageInput input{
@@ -13,27 +11,40 @@
   z-index: -1;
 }
 
-.imageInput label {
-  cursor: pointer;
-  transition: var(--transition);
-}
-
 .imageInput span {
-  font-size: 24px;
-  color: var(--onBgColor);
-  margin-left: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
 .imageInputIcon {
   font-size: 1.7em;
+  cursor: pointer;
 }
 
-.imageInputIcon path {
+.imageInputIcon {
   color: var(--onBgColor);
-  transition: var(--transition);
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
-.imageInput label:hover path,
-.imageInput label:hover  span{
+.imageInput:hover .imageInputIcon,
+.imageInput:hover span{
   color: black;
+}
+
+/* Standard */
+.standard span {
+  font-size: 24px;
+  color: var(--onBgColor);
+}
+
+/* cover */
+.cover span {
+  font-size: 20px;
+  vertical-align: 3px;
+  color: var(--onBgColor);
 }

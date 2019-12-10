@@ -114,7 +114,8 @@ const Segment = ({
           ) : (
             <ImageInput
             onChange={addImage}
-            text='Add Image' />
+            text='Add Image'
+            className={'standard'} />
           )
         )}
       </div>

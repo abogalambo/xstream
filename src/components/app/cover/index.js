@@ -96,6 +96,7 @@ const Cover = () => {
               onChange={addCoverImage}
               buttonDisplay
               text={'Add cover image'}
+              className={'cover'}
             />
           )}
         </div>
