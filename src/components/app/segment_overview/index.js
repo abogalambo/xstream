@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTimes,
+  faVolumeUp
+} from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
 const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick}) => {
@@ -28,7 +31,6 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
       <FontAwesomeIcon
         className={styles.removeSegmentIcon}
         onClick={onRemoveSegmentClick}
-        size={'1x'}
         icon={faTimes}
       />
     </div>

@@ -78,12 +78,12 @@
 .removeSegmentIcon {
   position: absolute;
   top: 5px;
-  right: 8px;
-  color: var(--onSecondary);
+  left: 6px;
+  font-size: 1em;
+  color: var(--onBgColor_medium);
   cursor: pointer;
 }
 
-.removeSegmentIcon:focus,
 .removeSegmentIcon:hover,
 .removeSegmentIcon:active {
   color: black;
