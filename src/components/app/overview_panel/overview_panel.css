@@ -28,7 +28,7 @@
   margin: 20px auto 15px auto;
 }
 
-.overviewPanel_addButton  {
+.overviewPanel_addBtn  {
   display: block;
   padding: 3px 8px;
   margin: 0 auto;
@@ -38,12 +38,8 @@
   text-align: center;
 }
 
-
-.overviewPanel_addButton path {
-  fill: black;
-}
-
-.overviewPanel_addButton svg {
+.overviewPanel_addBtnIcon {
+  color: black;
   font-size: 1.2em;
   display: inline-block;
 }

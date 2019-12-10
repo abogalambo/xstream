@@ -46,9 +46,9 @@ const OverviewPanel = () => {
 
           <button
             onClick={onAddSegmentClick}
-            className={styles.overviewPanel_addButton}
+            className={styles.overviewPanel_addBtn}
           >
-            <FontAwesomeIcon
+            <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
               icon={faPlus}
             />
           </button>

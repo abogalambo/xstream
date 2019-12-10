@@ -10,25 +10,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--fourDp);
+  box-shadow: var(--FAB);
 }
 
 .playerMain_operator {
   position: absolute;
   font-size: 2em;
-}
-
-.playerMain,
-.playerMain circle:first-child,
-.playerMain .playerMain_operator,
-.playerMain .playerMain_operator path {
-  transition: var(--transition);
+  color: var(--onPrimary);
 }
 
 .play {
   transform: translateX(2px);
-}
-
-.playerMain .playerMain_operator path {
-  fill: var(--onPrimary);
 }

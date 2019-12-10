@@ -109,11 +109,10 @@
   right: 20px;
 }
 
-.removeButton  path,
-.removeButton:hover path {
-  fill: var(--primaryColor);
+.removeButton_icon {
+  color: var(--primaryColor);
 }
 
-.removeButton:active path {
-  fill: var(--primaryColor_light);
+.removeButton:active .removeButton_icon {
+  color: var(--primaryColor_light);
 }

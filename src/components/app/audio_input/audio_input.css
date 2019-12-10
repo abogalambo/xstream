@@ -40,6 +40,6 @@
   fill: var(--primaryColor_light);
 }
 
-.playerMain .playerMain_operator path {
-  fill: var(--onPrimary);
+.playerMain .playerMain_operator {
+  color: var(--onPrimary);
 }
