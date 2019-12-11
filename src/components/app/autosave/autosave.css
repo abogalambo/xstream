@@ -1,6 +1,15 @@
 .autosave {
+  width: 200px;
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  top: 10px;
+  left: calc(50% - 100px);
+  text-align: center;
   font-size: 15px;
+  line-height: normal;
+  color: var(--secondaryColor_light);
+}
+
+.autosave_error {
+  margin-right: 5px;
+  color: #c70808;
 }

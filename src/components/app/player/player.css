@@ -10,33 +10,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--fourDp);
+  box-shadow: var(--FAB);
 }
 
 .playerMain_operator {
   position: absolute;
-  font-size: 1.6em;
-}
-
-.playerMain,
-.playerMain circle:first-child,
-.playerMain .playerMain_operator,
-.playerMain .playerMain_operator path {
-  transition: var(--transition);
+  font-size: 2em;
+  color: var(--onPrimary);
 }
 
 .play {
   transform: translateX(2px);
-}
-
-.playerMain:hover {
-  width: 72px;
-}
-
-.playerMain:hover .playerMain_operator {
-  font-size: 2em;
-}
-
-.playerMain .playerMain_operator path {
-  fill: var(--onPrimary);
 }

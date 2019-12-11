@@ -1,0 +1,99 @@
+/*Stream Nav*/
+.streamNav {
+  width: 300px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.playerContainer {
+  position: relative;
+  height: 90px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.playerContainer_entrance{
+  border: 1.5px solid #bfbfbf;
+  width: 150px;
+  border-radius: 80px;
+  animation: enterance 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes enterance {
+  0% {
+    width: 100px;
+    border: 1.5px solid rgba(191, 191, 191, 0);
+  }
+  100% {
+    width: 150px;
+    border: 1.5px solid rgba(191, 191, 191, 1);
+  }
+}
+
+.playerContainer_departure{
+  border-radius: 80px;
+  width: 70px;
+  animation: departure 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes departure {
+  0% {
+    width: 150px;
+    border: 1.5px solid rgba(191, 191, 191, 1);
+  }
+  100% {
+    width: 70px;
+    height: 70px;
+    border: 1.5px solid rgba(191, 191, 191, 0);
+  }
+}
+
+
+/*Audio Input*/
+.square, .dot {
+  transform: translate(-35px, 17px);
+}
+
+button:disabled .skipIcon{
+  color: var(--onBgColor_light);
+}
+
+.skipIcon,
+.removeButton {
+  transition: var(--transition);
+}
+
+/*Remove button */
+.removeButton {
+  cursor: pointer;
+}
+
+.removeButton_icon  {
+  font-size: 2em;
+}
+
+button:enabled:hover .skipIcon,
+.removeButton_icon:hover {
+  color: var(--onPrimary);
+}
+
+.skipIcon,
+.removeButton_icon  {
+  color: var(--onBgColor_dark);
+}
+
+/* Index */
+.index {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: 30px;
+}
+
+.index span {
+  user-select: none;
+  font-size: 1em;
+  color: var(--onBgColor);
+}

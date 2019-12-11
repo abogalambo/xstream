@@ -28,12 +28,23 @@
   transform: translate(-50%, -50%);
 }
 
-.playButton {
-  background: var(--secondaryColor);
+.FAB {
+  background: var(--primaryColor);
   border-radius: 50%;
   height: 70px;
   width: 70px;
-  box-shadow: var(--fourDp);
+  box-shadow: var(--FAB);
+  transition: background var(--FAB_transition);
+}
+
+.FAB:focus,
+.FAB:hover {
+  box-shadow: var(--FAB_hover);
+}
+
+.FAB:active {
+  box-shadow: var(--twoDp);
+  background: var(--primaryColor_light);
 }
 
 .addRemoveImage {
@@ -46,7 +57,7 @@
 TODO: extract to a button component (without position related rules)*/
 
 .removeImage {
-  background: var(--secondaryColor);
+  background: rgba(0, 0, 0, 0.2);
   width: 40px;
   height: 40px;
   position: absolute;
@@ -54,40 +65,27 @@ TODO: extract to a button component (without position related rules)*/
   left: 0px;
   cursor: pointer;
   border-radius: var(--roundCorner);
-  box-shadow:  var(--oneDp);
-  transition: var(--transition);
 }
 
-.removeImage path {
-  fill: var(--onBackground_dim);
-  transition: var(--transition);
+.removeImage_icon {
+  color: var(--primaryColor);
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
-.removeImage:hover path {
-  fill: var(--onBackground);
-}
-
-.removeImage:hover {
-  box-shadow: var(--oneDp_hover);
+.removeImage:active .removeImage_icon {
+  color: var(--primaryColor_light);
 }
 
 /*Until here: copied from stream.css modeSwitch*/
 
-::placeholder {
-  color: var(--grey);
+.FAB_iconPlay {
+  transform: translate(3.1px, 0.5px);;
 }
 
-.fa-play {
-  transform: translateX(3px);
-}
-
-button path {
-  fill: var(--onBackground_dim);
-  transition: var(--transition);
-}
-
-button:hover path {
-  fill: var(--onBackground);
+.FAB_icon {
+  color: black;
 }
 
 @keyframes fadein {

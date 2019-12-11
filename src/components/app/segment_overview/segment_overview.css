@@ -1,35 +1,90 @@
 .segmentOverview {
-  margin: 10px;
+  box-sizing: border-box;
+  margin: 20px;
   margin-bottom: 0px;
-  background-color: var(--backgroundColor);
-  min-height: 120px;
+  background-color: var(--bgColor);
+  width: 100px;
+  height: 75px;
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   border-radius: var(--roundCorner);
-  box-shadow: var(--oneDp);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.14),0 4px 5px 0 rgba(0,0,0,.12),0 1px 10px 0 rgba(0,0,0,.2);
   position: relative;
-  cursor: pointer;
+  cursor: grab;
+  transition-property: width, height;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  padding: 8px 15px;
+}
+
+.segmentOverview:first-child {
+  margin-top: 0;
+}
+
+.segmentOverview:hover,
+.segmentOverview:active {
+  background: white;
+}
+
+.segmentOverview:hover .audioIcon,
+.segmentOverview:active .audioIcon {
+   left: 55px;
 }
 
 .selected {
-  border: 1.5px solid var(--primaryColor_light);
+  width: 130px;
+  height: 95px;
+}
+
+.selected .audioIcon {
+  left: 55px;
+}
+
+.segmentOverviewText {
+  text-align: center;
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  user-select: none;
+  overflow: hidden;
+  font-size: 8px;
+  color: var(--onBgColor);
+  line-height: 9px;
+  hyphens: auto;
 }
 
 .segmentOverview > img {
-  max-height: 110px;
-  max-width: 110px;
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: var(--roundCorner);
+  margin: 0 auto;
   border-radius: var(--roundCorner);
 }
 
 .audioIcon {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  font-size: 0.7em;
+  color: var(--onBgColor_light);
+  bottom: 8px;
+  left: 45px;
+  transition-property: left;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
 .removeSegmentIcon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  left: 6px;
+  font-size: 1em;
+  color: var(--onBgColor_medium);
+  cursor: pointer;
+}
+
+.removeSegmentIcon:hover,
+.removeSegmentIcon:active {
+  color: black;
 }

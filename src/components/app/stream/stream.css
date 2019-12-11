@@ -1,59 +1,91 @@
 .stream {
   width: 100%;
   height: 100%;
-  position: relative;
+  display: flex;
 }
 
-.segmentOverviewContainer {
+.mainSection {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/*OverviewPanel Section */
+.overviewPanelContainer {
   transition: var(--transition);
   width: 200px;
   height: 100%;
-  top: 0;
 }
 
-.segmentOverviewContainerPlayback {
+.overviewPanelContainer_playback {
   width: 0;
 }
 
+/* Segment Section */
 .segmentContainer {
+  width: 85%;
   transition: var(--transition);
-  width: calc(100% - 200px);
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
+  height: calc(100% - var(--navigationHeight) - 80px);
+  margin: 80px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.segmentContainerPlayback {
+/*Footer Section */
+.footerContainer {
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
   width: 100%;
+  height: var(--navigationHeight);
+  color: var(--onPrimary);
 }
 
-.modeSwitch {
-  background: var(--secondaryColor);
-  width: 40px;
+.addSegmentBtn {
+  border-radius: var(--roundCorner);
+  border: 1px solid var(--onBgColor_medium);
+  padding: 0 15px;
   height: 40px;
+  transition-property: border-color;
+  user-select: none;
   position: absolute;
+  top: calc(50% - 18px);
+  right: 20px;
+}
+
+.addSegmentBtn,
+.addSegmentBtn_icon {
+  font-family: inherit;
+  font-size: 1em;
+  color: #7f7f7f;
+  transition-property: color;
+  transition-duration: var(--transition-duraction);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.addSegmentBtn_icon {
+  margin-right: 8px;
+}
+
+.addSegmentBtn:hover,
+.addSegmentBtn:hover .addSegmentBtn_icon,
+.addSegmentBtn:active .addSegmentBtn_icon,
+.addSegmentBtn:active {
+  color: black;
+}
+
+.addSegmentBtn:hover,
+.addSegmentBtn:active {
+  border-color: black;
+}
+
+/*Toggle Btn Container*/
+.toggleBtnContainer {
+  position: absolute;
+  display: flex;
+  width: 95px;
+  height: 40px;
   top: 20px;
   right: 20px;
-  cursor: pointer;
-  border-radius: var(--roundCorner);
-  box-shadow:  var(--oneDp);
-  transition: var(--transition);
-}
-
-.modeSwitch path {
-  fill: var(--onBackground_dim);
-  transition: var(--transition);
-}
-
-.modeSwitch:hover path {
-  fill: var(--onBackground);
-}
-
-.modeSwitch:hover {
-  box-shadow: var(--oneDp_hover);
-}
-
-.modeSwitch:disabled {
-  opacity: 0.5;
 }

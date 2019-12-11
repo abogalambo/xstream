@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import {
   saveStream as saveStreamAction,
   saveStreamLater as saveStreamLaterAction
@@ -23,7 +25,16 @@ const Autosave = () => {
   const dispatch = useDispatch()
   const saveStream = () => dispatch(saveStreamAction(autosaveParams))
   const saveStreamLater = (delay) => dispatch(saveStreamLaterAction(delay))
-  
+
+  const status = (
+    (lastRequestStatus == 'failure' && 'failure') ||
+    (lastRequestStatus == 'pending' && 'pending') ||
+    ((lastRequestStatus == 'success') && (lastRequestTriggeredAt > lastUpdateAt) && 'saved')
+  )
+
+  const [isActive, setIsActive] = useState(false)
+  const [activeTimer, setActiveTimer] = useState()
+
   useEffect(() => {
     if(lastUpdateAt != null) {
       if(lastRequestTriggeredAt < lastUpdateAt) { // user made an update after last server update
@@ -42,25 +53,37 @@ const Autosave = () => {
     }
   }, [lastUpdateAt, lastRequestStatus, isTimeoutSet]);
 
-  return (
-    <div className={styles.autosave}>
-      {lastRequestStatus == 'failure' && (
-        <span>⚠️error</span>
+  useEffect(() => {
+    if (status) {
+      setIsActive(true)
+      if (activeTimer) {
+        clearTimeout(setActiveTimer)
+      }
+      const timerId = setTimeout(() => {
+        setIsActive(false)
+      }, config.stream.snackbarDuration);
+      setActiveTimer(timerId)
+    }
+  }, [status]);
+
+  return isActive && status && (
+    <>
+      {status == 'failure' && (
+        <span className={styles.autosave}>
+          <FontAwesomeIcon className={styles.autosave_error}
+          icon={faExclamationCircle} />
+          Error while saving</span>
       )}
 
-      {lastRequestStatus == 'pending' && (
-        <span>⏳Saving...</span>
+      {status == 'pending' && (
+        <span className={styles.autosave}>Autosaving...</span>
       )}
 
-      {(lastRequestStatus == 'success') && (lastRequestTriggeredAt > lastUpdateAt) && (
-        <span>✅Saved</span>
+      {status == 'saved' && (
+        <span className={styles.autosave}>All saved!</span>
       )}
-
-      {(lastRequestStatus == 'success') && (lastRequestTriggeredAt < lastUpdateAt) && (
-        <span>🔄Unsaved Changes</span>
-      )}
-    </div>
-  )
+    </>
+  ) || null
 }
 
 export default Autosave

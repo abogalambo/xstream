@@ -1,3 +1,7 @@
+.imageInput {
+  cursor: pointer;
+}
+
 .imageInput input{
   width: 0.1px;
   height: 0.1px;
@@ -7,15 +11,40 @@
   z-index: -1;
 }
 
-.imageInput label {
+.imageInput span {
+  padding-left: 10px;
+  cursor: pointer;
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.imageInputIcon {
+  font-size: 1.7em;
   cursor: pointer;
 }
 
-.imageInput label path {
-  color: var(--grey);
-  transition: var(--transition);
+.imageInputIcon {
+  color: var(--onBgColor);
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
-.imageInput label:hover path {
-  color: var(--primaryColor);
+.imageInput:hover .imageInputIcon,
+.imageInput:hover span{
+  color: black;
+}
+
+/* Standard */
+.standard span {
+  font-size: 24px;
+  color: var(--onBgColor);
+}
+
+/* cover */
+.cover span {
+  font-size: 20px;
+  vertical-align: 3px;
+  color: var(--onBgColor);
 }

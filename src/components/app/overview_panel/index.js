@@ -16,9 +16,9 @@ import {
 } from '../../../state/selectors/current_stream'
 
 import SegmentOverview from '../segment_overview'
-import styles from './segments_overview.css'
+import styles from './overview_panel.css'
 
-const SegmentsOverview = () => {
+const OverviewPanel = () => {
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
@@ -27,32 +27,35 @@ const SegmentsOverview = () => {
   const onAddSegmentClick = () => dispatch(addSegment())
 
   return (
-    <div className={styles.segmentsOverview}>
+    <div className={styles.overviewPanel}>
       {!isPlaybackMode && (
-        <>
-          {segments.map((segment, index) => (
-            <SegmentOverview
-              key={`segment_overview_${segment.timestamp}`}
-              segment={segment}
-              isSelected={index == currentIndex}
-              onSegmentClick={() => dispatch(goToSegment(index))}
-              onRemoveSegmentClick={() => dispatch(removeSegment(index))}
-            />
-          ))}
+        <div className={styles.overviewPanel_wrapper}>
+          <div className={styles.overviewPanel_segements}>
+            {segments.map((segment, index) => (
+              <SegmentOverview
+                key={`overview_panel_${segment.timestamp}`}
+                segment={segment}
+                isSelected={index == currentIndex}
+                onSegmentClick={() => dispatch(goToSegment(index))}
+                onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+              />
+            ))}
+          </div>
+
+          <div className={styles.overviewPanel_divider}></div>
 
           <button
             onClick={onAddSegmentClick}
-            className={styles.addSegmentButton}
+            className={styles.overviewPanel_addBtn}
           >
-            <FontAwesomeIcon
-              size={'2x'}
+            <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
               icon={faPlus}
             />
           </button>
-        </>
+        </div>
       )}
     </div>
   )
 }
 
-export default SegmentsOverview
+export default OverviewPanel

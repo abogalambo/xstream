@@ -1,0 +1,48 @@
+.toggleBtnGroup {
+  display: inline-flex;
+  width: 100%;
+  border-radius: var(--roundCorner);
+  box-shadow: var(--oneDp);
+}
+
+.toggleBtn [type="radio"] {
+  clip: rect(0,0,0,0);
+  pointer-events: none;
+  position: absolute;
+}
+
+.toggleBtn {
+  background: var(--bgColor);
+  color: var(--onBgColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  flex-grow: 1;
+  cursor: pointer;
+  border-radius: var(--roundCorner);
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.toggleBtn_active {
+  background: var(--onBgColor_light);
+  color: black;
+}
+
+.toggleBtn:not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.toggleBtn:last-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+
+.toggleBtn:not(.toggleBtn_active):hover {
+  background: rgba(191, 191, 191, 0.5);
+  color: black;
+}
