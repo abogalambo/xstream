@@ -32,3 +32,4 @@ export const addImageActionCreator = (type) => (
     }
   }
 )
+

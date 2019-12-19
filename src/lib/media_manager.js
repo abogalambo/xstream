@@ -17,10 +17,10 @@ class MediaManager {
     const { type, size } = file
     const metadata = { type, size }
     const ref = this._mediaStore.child(key)
-    const promise = ref.put(file, metadata).then(_snapshot => ref.getDownloadURL())
+    const promise = ref.put(file, metadata).then(() => ref.getDownloadURL())
 
     this._cache[key] = promise
-    return promise    
+    return promise
   }
 
   read(key) {
