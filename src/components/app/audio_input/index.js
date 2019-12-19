@@ -11,7 +11,8 @@ import {
   stopRecording as stopRecordingAction
 } from '../../../state/actions/recorder'
 import {
-  currentSegmentSelector
+  currentSegmentSelector,
+  segmentAudioUploadKeySelector
 } from '../../../state/selectors/current_stream'
 import styles from './audio_input.css'
 import RecordingService from '../../../lib/recorder'
@@ -20,12 +21,13 @@ import config from '../../../../config'
 
 const AudioInput = () => {
   const { recording, recordingStartedAt } = useSelector(currentSegmentSelector)
+  const audioUploadKey = useSelector(segmentAudioUploadKeySelector)
   const { maxDuration } = config.stream.audio
 
   const dispatch = useDispatch();
   const [recorder] = useState(new RecordingService({
     onStart: () => dispatch(startRecordingAction()),
-    onStop: () => dispatch(stopRecordingAction(recorder.audioUrl)),
+    onStop: () => dispatch(stopRecordingAction(recorder.audioUrl, audioUploadKey, recorder.blob)),
     maxDuration
   }))
 

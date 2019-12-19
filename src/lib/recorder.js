@@ -34,6 +34,10 @@ class Recorder {
     return this._audioURL
   }
 
+  get blob() {
+    return this._blob
+  }
+
   get userMediaPromise() {
     return navigator.mediaDevices.getUserMedia(Recorder.mediaConstraints)
   }
@@ -51,8 +55,8 @@ class Recorder {
 
       mediaRecorder.onstop = () => {
         stream.getAudioTracks()[0].stop()
-        const blob = new Blob(this._chunks, Recorder.blobOptions);
-        this._audioURL = URL.createObjectURL(blob);
+        this._blob = new Blob(this._chunks, Recorder.blobOptions)
+        this._audioURL = URL.createObjectURL(this._blob);
         this._mediaRecorder = null
         this.onStop && this.onStop()
       }
