@@ -5,9 +5,12 @@ const segmentReducer = (state, action) => {
   switch (type) {
 
     case 'ADD_IMAGE': {
+      const { src, mediaKey } = payload
       return updateObject(state, {
         image: {
-          src: payload.src
+          src,
+          mediaKey,
+          isPersisted: false
         }
       })
     }
@@ -41,9 +44,11 @@ const segmentReducer = (state, action) => {
     }
 
     case 'STOP_RECORDING': {
+      const { audioUrl, mediaKey } = payload
       return updateObject(state, {
         audio: {
-          url: payload.audioUrl
+          url: audioUrl,
+          mediaKey
         }
       })
     }
@@ -52,6 +57,30 @@ const segmentReducer = (state, action) => {
       const {audio, ...newState} = state;
 
       return newState
+    }
+
+    case 'ASSET_UPLOADED': {
+      const { uploadKey } = payload
+      const {audio, image} = state
+      if(audio && audio.mediaKey == uploadKey) {
+        return {
+          ...state,
+          audio: {
+            ...audio,
+            isPersisted: true
+          }
+        }
+      } else if(image && image.mediaKey == uploadKey) {
+        return {
+          ...state,
+          image: {
+            ...image,
+            isPersisted: true
+          }
+        }
+      } else {
+        return state
+      }
     }
 
     default:

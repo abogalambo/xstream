@@ -59,12 +59,51 @@ export const segmentDurationSelector = (state) => {
   )
 }
 
+const mediaResourceForServer = (media) => {
+  const { isPersisted, url, src, ...rest } = media
+  return rest
+}
+
 export const autosaveParamsSelector = (state) => {
   const { id, title, cover, segments } = currentStreamSelector(state)
-  return { id, title, cover, segments }
+  const remoteCover = (cover && cover.isPersisted) ? mediaResourceForServer(cover) : null
+
+  const remoteSegments = segments.map((segment) => {
+    const {image, audio, ...rest} = segment
+    const remoteSegment = rest
+
+    if(image && image.isPersisted) {
+      remoteSegment.image = mediaResourceForServer(image)
+    }
+
+    if(audio && audio.isPersisted) {
+      remoteSegment.audio = mediaResourceForServer(audio)
+    }
+
+    return remoteSegment
+  })
+
+  return { id, title, cover: remoteCover, segments: remoteSegments }
 }
 
 const timeForText = (text = '', minimum) => {
   const millisecondsPerCharacter = 60
   return Math.max(millisecondsPerCharacter * text.length, minimum)
+}
+
+export const segmentImageUploadKeySelector = (state) => {
+  const streamId = state.currentStream.id
+  const segmentId = currentSegmentDataSelector(state).timestamp
+  return `stream_${streamId}/segment_${segmentId}/image`
+}
+
+export const segmentAudioUploadKeySelector = (state) => {
+  const streamId = state.currentStream.id
+  const segmentId = currentSegmentDataSelector(state).timestamp
+  return `stream_${streamId}/segment_${segmentId}/audio`
+}
+
+export const coverImageUploadKeySelector = (state) => {
+  const streamId = state.currentStream.id
+  return `stream_${streamId}/cover_image`
 }
