@@ -54,9 +54,12 @@ const currentStream = (state = null, action) => {
     }
 
     case 'ADD_COVER_IMAGE': {
+      const { src, mediaKey } = payload
       return updateObject(state, {
         cover: {
-          src: payload.src
+          src,
+          mediaKey,
+          isPersisted: false
         }
       })
     }

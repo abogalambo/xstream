@@ -5,9 +5,12 @@ const segmentReducer = (state, action) => {
   switch (type) {
 
     case 'ADD_IMAGE': {
+      const { src, mediaKey } = payload
       return updateObject(state, {
         image: {
-          src: payload.src
+          src,
+          mediaKey,
+          isPersisted: false
         }
       })
     }

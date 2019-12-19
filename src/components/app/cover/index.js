@@ -18,7 +18,8 @@ import { setStreamTitle } from '../../../state/actions/stream'
 import {
   segmentsSelector,
   coverDataSelector,
-  isPlaybackModeSelector
+  isPlaybackModeSelector,
+  coverImageUploadKeySelector
 } from '../../../state/selectors/current_stream'
 import TextInput from '../../lib/text_input'
 import ImageInput from '../../lib/image_input'
@@ -30,12 +31,13 @@ const Cover = () => {
   const { title, cover: coverImage } = useSelector(coverDataSelector)
   const hasSegments = useSelector(segmentsSelector).length
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const imageUploadKey = useSelector(coverImageUploadKeySelector)
 
   const dispatch = useDispatch()
   const onTitleChange = (event) => dispatch(setStreamTitle(event.target.value))
   const startTyping = () => dispatch(startTypingAction())
   const stopTyping = () => dispatch(stopTypingAction())
-  const addCoverImage = (e) => dispatch(addCoverImageAction(e))
+  const addCoverImage = (e) => dispatch(addCoverImageAction(e, imageUploadKey))
   const removeCoverImage = () => dispatch(removeCoverImageAction())
 
   const icon = (hasSegments || isPlaybackMode) ? faPlay : faPlus

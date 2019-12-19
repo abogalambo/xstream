@@ -68,3 +68,14 @@ const timeForText = (text = '', minimum) => {
   const millisecondsPerCharacter = 60
   return Math.max(millisecondsPerCharacter * text.length, minimum)
 }
+
+export const segmentImageUploadKeySelector = (state) => {
+  const streamId = state.currentStream.id
+  const segmentId = currentSegmentDataSelector(state).timestamp
+  return `stream_${streamId}/segment_${segmentId}/image`
+}
+
+export const coverImageUploadKeySelector = (state) => {
+  const streamId = state.currentStream.id
+  return `stream_${streamId}/cover_image`
+}

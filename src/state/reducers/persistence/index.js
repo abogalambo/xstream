@@ -10,7 +10,6 @@ const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newV
 const persistenceReducer = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
-    case 'ADD_IMAGE':
     case 'ADD_SEGMENT':
     case 'REMOVE_SEGMENT':
     case 'REMOVE_IMAGE':
@@ -20,7 +19,6 @@ const persistenceReducer = (state = initialState, action) => {
     case 'REMOVE_RECORDING':
     case 'NEW_STREAM':
     case 'SET_STREAM_TITLE':
-    case 'ADD_COVER_IMAGE':
     case 'REMOVE_COVER_IMAGE': {
       return updateObject(state, {lastUpdateAt: payload.timestamp})
     }

@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faTimes,
   faTrash
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  segmentImageUploadKeySelector
+} from '../../../state/selectors/current_stream'
 import { setSegmentText } from '../../../state/actions/segment'
 import {
   startTyping as startTypingAction,
@@ -30,9 +33,10 @@ const Segment = ({
   isPlaybackMode,
   index
 }) => {
+  const imageUploadKey = useSelector(segmentImageUploadKeySelector)
   const dispatch = useDispatch();
   const onTextChange = (event) => dispatch(setSegmentText(event.target.value))
-  const addImage = (e) => dispatch(addImageAction(e))
+  const addImage = (e) => dispatch(addImageAction(e, imageUploadKey))
   const removeImage = () => dispatch(removeImageAction())
   const setImageCaption = (caption) => dispatch(setImageCaptionAction(caption))
   const startTyping = () => dispatch(startTypingAction())
