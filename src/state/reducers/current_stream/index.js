@@ -12,6 +12,19 @@ const updateItemAtIndex = (array, itemIndex, updateItemCallback) => {
   })
 }
 
+const updateSegmentWithMediaKey = (segments, mediaKey, updateSegmentCallback) => {
+  return segments.map((segment) => {
+    const { audio, image } = segment
+
+    if ((audio && audio.mediaKey == mediaKey) ||
+        (image && image.mediaKey == mediaKey)) {
+      return updateSegmentCallback(segment)
+    }
+
+    return segment
+  })
+}
+
 const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 const canToggleMode = (state) => !state.currentSegment.recording
 
@@ -141,6 +154,27 @@ const currentStream = (state = null, action) => {
         })
       }else{
         return state
+      }
+    }
+
+    case 'ASSET_UPLOADED': {
+      const { uploadKey } = payload
+      const { segments, cover } = state
+      if(cover && uploadKey == cover.mediaKey) {
+        return {
+          ...state,
+          cover: {
+            ...cover,
+            isPersisted: true
+          }
+        }
+      } else {
+        return {
+          ...state,
+          segments: updateSegmentWithMediaKey(segments, uploadKey, (segment) => {
+            return segmentReducer(segment, action)
+          })
+        }
       }
     }
 

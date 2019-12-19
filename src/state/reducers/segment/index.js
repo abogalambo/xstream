@@ -57,6 +57,30 @@ const segmentReducer = (state, action) => {
       return newState
     }
 
+    case 'ASSET_UPLOADED': {
+      const { uploadKey } = payload
+      const {audio, image} = state
+      if(audio && audio.mediaKey == uploadKey) {
+        return {
+          ...state,
+          audio: {
+            ...audio,
+            isPersisted: true
+          }
+        }
+      } else if(image && image.mediaKey == uploadKey) {
+        return {
+          ...state,
+          image: {
+            ...image,
+            isPersisted: true
+          }
+        }
+      } else {
+        return state
+      }
+    }
+
     default:
       return state
   }
