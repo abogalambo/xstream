@@ -17,23 +17,33 @@ class MediaManager {
     const { type, size } = file
     const metadata = { type, size }
     const ref = this._mediaStore.child(key)
-    const promise = ref.put(file, metadata).then(() => ref.getDownloadURL())
+    const uploadPromise = ref.put(file, metadata)
+    const urlPromise = uploadPromise.then(() => ref.getDownloadURL())
 
-    this._cache[key] = promise
-    return promise
+    uploadPromise.then(() => {
+      this._cache[key].state = 'uploaded'
+    })
+
+    this._cache[key] = { uploadPromise, urlPromise, state: 'uploading' }
+    return urlPromise
   }
 
   read(key) {
     if(!this._cache[key]){
-      const promise = this._mediaStore.child(key).getDownloadURL()
-      this._cache[key] = promise
+      const urlPromise = this._mediaStore.child(key).getDownloadURL()
+      this._cache[key] = { urlPromise, state: 'uploaded' }
     }
 
-    return this._cache[key]
+    return this._cache[key].urlPromise
   }
 
   delete(key) {
-    this._mediaStore.child(key).delete()
+    if(this._cache[key] && this._cache[key].state == 'uploading') {
+      this._cache[key].uploadPromise.cancel()
+    } else {
+      this._mediaStore.child(key).delete()
+    }
+
     delete this._cache[key]
   }
 }
