@@ -31,6 +31,11 @@ class MediaManager {
 
     return this._cache[key]
   }
+
+  delete(key) {
+    this._mediaStore.child(key).delete()
+    delete this._cache[key]
+  }
 }
 
 export default MediaManager
