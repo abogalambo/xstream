@@ -21,6 +21,7 @@ import {
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Autosave from '../autosave'
+import MediaCleaner from '../media_cleaner'
 import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Navigation from '../navigation'
@@ -67,6 +68,7 @@ const Stream = () => {
 
   return (
     <div className={styles.stream}>
+      <MediaCleaner />
 
 
       {showCover && (
