@@ -16,10 +16,13 @@ const MainScreen = () => {
           <Link to="/streams/new"> Add New Stream </Link>
         </Route>
         <Route path="/streams/new">
-          <StreamLoader />
+          <StreamLoader page="new" />
         </Route>
         <Route path="/streams/:id/edit">
-          <StreamLoader />
+          <StreamLoader page="edit" />
+        </Route>
+        <Route path="/streams/:id">
+          <StreamLoader page="view" />
         </Route>
       </Switch>
     </Router>

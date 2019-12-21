@@ -26,7 +26,7 @@ const updateSegmentWithMediaKey = (segments, mediaKey, updateSegmentCallback) =>
 }
 
 const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
-const canToggleMode = (state) => !state.currentSegment.recording
+const canToggleMode = (state) => !state.currentSegment.recording && state.page != 'view'
 
 const initialState = {
   id: null,
@@ -34,6 +34,7 @@ const initialState = {
   cover: null,
   segments: [],
   mode: 'compose',
+  page: 'new',
   canEdit: true
 }
 
@@ -53,9 +54,12 @@ const currentStream = (state = null, action) => {
     }
 
     case 'FETCH_STREAM_FULFILLED': {
+      const {streamData, page} = payload
       return {
         ...initialState,
-        ...payload,
+        ...streamData,
+        page,
+        mode: (page == 'view') ? 'playback' : 'compose',
         currentSegment: currentSegmentReducer(null, action)
       }
     }

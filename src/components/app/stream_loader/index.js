@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
 import { newStream, fetchStream } from '../../../state/actions/stream'
 import Stream from '../stream'
 
-const StreamLoader = () => {
+const StreamLoader = ({ page }) => {
   const currentStream = useSelector(state => state.currentStream)
   let { id } = useParams()
   let history = useHistory();
@@ -14,7 +15,7 @@ const StreamLoader = () => {
   useEffect(() => {
     if(currentStream == null){
       if(id){
-        dispatch(fetchStream(id))
+        dispatch(fetchStream(id, page))
       } else {
         dispatch(newStream())
       }
@@ -32,6 +33,10 @@ const StreamLoader = () => {
   ) : (
     <div> Loading Stream </div>
   )
+}
+
+StreamLoader.propTypes = {
+  page: PropTypes.string
 }
 
 export default StreamLoader
