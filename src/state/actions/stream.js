@@ -1,9 +1,12 @@
 import { addImageActionCreator } from './utils'
 import RemoteStream from '../../lib/remote_stream'
 
-export const fetchStream = (id) => ({
+export const fetchStream = (id, page) => ({
   type: 'FETCH_STREAM',
-  payload: new RemoteStream({id}).fetch().then((remoteStream) => remoteStream.stream)
+  payload: new RemoteStream({id}).fetch().then(remoteStream => ({
+    streamData: remoteStream.stream,
+    page
+  }))
 })
 
 export const newStream = () => ({

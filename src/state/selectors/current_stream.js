@@ -30,8 +30,10 @@ export const canNavigateSelector = (state) => (
   !isRecordingSelector(state)
 )
 
+export const pageSelector = (state) => currentStreamSelector(state).page
+
 export const canToggleModeSelector = (state) => (
-  !isRecordingSelector(state)
+  !isRecordingSelector(state) && pageSelector(state) != 'view'
 )
 
 export const canPreviousSelector = (state) => (

@@ -17,7 +17,8 @@ import {
   currentSegmentDataSelector,
   isPlaybackModeSelector,
   canToggleModeSelector,
-  indexSelector
+  indexSelector,
+  pageSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Autosave from '../autosave'
@@ -33,6 +34,8 @@ const Stream = () => {
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
   const canToggleMode = useSelector(canToggleModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
+  const page = useSelector(pageSelector)
+
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -114,14 +117,16 @@ const Stream = () => {
         </>
       )}
 
-      <div className={styles.toggleBtnContainer}>
-        <ToggleButton
-          contents={contents}
-          onToggle={toggleMode}
-          checkedValue={isPlaybackMode ? 'playback' : 'compose'}
-          disabled={!canToggleMode}
-        />
-      </div>
+      {(page != 'view') && (
+        <div className={styles.toggleBtnContainer}>
+          <ToggleButton
+            contents={contents}
+            onToggle={toggleMode}
+            checkedValue={isPlaybackMode ? 'playback' : 'compose'}
+            disabled={!canToggleMode}
+          />
+        </div>
+      )}
     </div>
   )
 }
