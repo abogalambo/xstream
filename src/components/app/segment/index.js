@@ -70,6 +70,8 @@ const Segment = ({
         { !textCollapsed && (
           <TextInput
             value={text || ''}
+            minSize={8}
+            maxSize={15}
             onChange={onTextChange}
             onFocus={startTyping}
             onBlur={stopTyping}

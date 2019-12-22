@@ -58,6 +58,8 @@ const Cover = () => {
         <TextInput
           readOnly={isPlaybackMode}
           value={title}
+          minSize={5}
+          maxSize={5}
           onChange={onTitleChange}
           onFocus={startTyping}
           onBlur={stopTyping}
