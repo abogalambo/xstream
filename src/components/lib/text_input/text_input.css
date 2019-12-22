@@ -22,8 +22,17 @@
 .textDisplay {
   background: transparent;
   border: none;
-  width: 75%;
+  width: 100%;
   font-size: 24px;
   text-align: center;
   color: var(--onBgColor);
+}
+
+.editing {
+  height: 100%;
+  background: white;
+}
+
+.hidden {
+  display: none;
 }
