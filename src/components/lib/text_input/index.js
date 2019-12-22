@@ -27,7 +27,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
     onBlur && onBlur(e)
   }
 
-  const handleOnClick = (e) => {
+  const handleOnClick = () => {
     setIsEditing(true)
   }
 
