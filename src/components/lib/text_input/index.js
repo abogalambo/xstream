@@ -11,7 +11,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
 
   useEffect(() => {
     const el = textAreaRef.current
-    if(isEditing) {
+    if(isEditing && el) {
       el.focus()
       el.setSelectionRange(el.value.length, el.value.length)
     }
