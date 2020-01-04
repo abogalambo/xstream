@@ -7,7 +7,7 @@ export const startRecording = () => ({
   }
 })
 
-export const stopRecording = (audioUrl, uploadKey, blob) => {
+export const stopRecording = (audioUrl, uploadKey, blob, duration) => {
   return (dispatch) => {
     (new MediaManager).write(uploadKey, blob).then(audioUrl => {
       dispatch({
@@ -24,6 +24,7 @@ export const stopRecording = (audioUrl, uploadKey, blob) => {
       type: 'STOP_RECORDING',
       payload: {
         audioUrl,
+        duration,
         mediaKey: uploadKey
       }    
     })

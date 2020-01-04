@@ -27,7 +27,12 @@ const AudioInput = () => {
   const dispatch = useDispatch();
   const [recorder] = useState(new RecordingService({
     onStart: () => dispatch(startRecordingAction()),
-    onStop: () => dispatch(stopRecordingAction(recorder.audioUrl, audioUploadKey, recorder.blob)),
+    onStop: () => dispatch(stopRecordingAction(
+        recorder.audioUrl,
+        audioUploadKey,
+        recorder.blob,
+        recorder.duration
+    )),
     maxDuration
   }))
 

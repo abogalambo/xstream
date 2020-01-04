@@ -49,11 +49,13 @@ class Recorder {
       mediaRecorder.ondataavailable = (e) => this._chunks.push(e.data);
 
       mediaRecorder.onstart = () => {
+        this._recordingStartedAt = (new Date()).getTime()
         this._setTimer()
         this.onStart && this.onStart()
       }
 
       mediaRecorder.onstop = () => {
+        this.duration = (new Date()).getTime() - this._recordingStartedAt
         stream.getAudioTracks()[0].stop()
         this._blob = new Blob(this._chunks, Recorder.blobOptions)
         this._audioURL = URL.createObjectURL(this._blob);
