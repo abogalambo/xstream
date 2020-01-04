@@ -44,10 +44,11 @@ const segmentReducer = (state, action) => {
     }
 
     case 'STOP_RECORDING': {
-      const { audioUrl, mediaKey } = payload
+      const { audioUrl, mediaKey, duration } = payload
       return updateObject(state, {
         audio: {
           url: audioUrl,
+          duration,
           mediaKey
         }
       })

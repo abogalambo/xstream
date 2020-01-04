@@ -1,8 +1,9 @@
 class AudioPlayer {
-  constructor({onStart, onStop, onEnd}) {
+  constructor({onStart, onStop, onEnd, duration}) {
     this.onStart = onStart
     this.onStop = onStop
     this.onEnd = onEnd
+    this.duration = Math.max(duration, 1)
   }
 
   togglePlaying() {
@@ -28,15 +29,15 @@ class AudioPlayer {
       return {
         isInProgress: false,
         offset: 0,
-        duration: 1
+        duration: this.duration
       }
     }
 
     if(this._audio.ended) {
       return {
         isInProgress: false,
-        offset: 1,
-        duration: 1
+        offset: this.duration,
+        duration: this.duration
       }
     }
 
@@ -44,7 +45,7 @@ class AudioPlayer {
       startedAt: (new Date().getTime()) - (this._audio.currentTime * 1000),
       isInProgress: !this._audio.paused,
       offset: this._audio.currentTime * 1000,
-      duration: this._audio.duration * 1000
+      duration: this.duration
     }
   }
 
