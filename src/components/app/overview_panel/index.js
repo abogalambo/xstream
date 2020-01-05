@@ -12,16 +12,21 @@ import {
 import {
   segmentsSelector,
   indexSelector,
-  isPlaybackModeSelector
+  isPlaybackModeSelector,
+  coverDataSelector,
+  showCoverSelector
 } from '../../../state/selectors/current_stream'
 
 import SegmentOverview from '../segment_overview'
+import CoverOverview from '../cover_overview'
 import styles from './overview_panel.css'
 
 const OverviewPanel = () => {
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const coverData = useSelector(coverDataSelector)
+  const showCover = useSelector(showCoverSelector)
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -31,6 +36,11 @@ const OverviewPanel = () => {
       {!isPlaybackMode && (
         <div className={styles.overviewPanel_wrapper}>
           <div className={styles.overviewPanel_segements}>
+            <CoverOverview
+              coverData={coverData}
+              isSelected={showCover}
+              onCoverClick={() => dispatch(goToSegment(-1))}
+            />
             {segments.map((segment, index) => (
               <SegmentOverview
                 key={`overview_panel_${segment.timestamp}`}

@@ -73,25 +73,20 @@ const Stream = () => {
     <div className={styles.stream}>
       <MediaCleaner />
 
+      <div className={classnames(
+        styles.overviewPanelContainer,
+        { [styles.overviewPanelContainer_playback]: isPlaybackMode }
+      )}>
+        <OverviewPanel />
+      </div>
 
-      {showCover && (
-        <>
-          <Cover />
-          <Autosave />
-        </>
-      )}
+      <div className={styles.mainSection}>
+        <Autosave />
 
-      {segment && (
-        <>
-          <div className={classnames(
-            styles.overviewPanelContainer,
-            { [styles.overviewPanelContainer_playback]: isPlaybackMode }
-          )}>
-            <OverviewPanel />
-          </div>
+        {showCover && <Cover /> }
 
-          <div className={styles.mainSection}>
-            <Autosave />
+        {segment && (
+          <>
             <div className={classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
               <Segment
                 index={index}
@@ -113,9 +108,9 @@ const Stream = () => {
                 </button>
               )}
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
 
       {(page != 'view') && (
         <div className={styles.toggleBtnContainer}>
