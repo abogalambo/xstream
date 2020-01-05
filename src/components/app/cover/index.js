@@ -8,11 +8,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {
   addSegment,
-  goToSegment,
   addCoverImage as addCoverImageAction,
   removeCoverImage as removeCoverImageAction,
   startTyping as startTypingAction,
   stopTyping as stopTypingAction,
+  playStream
 } from '../../../state/actions/stream'
 import { setStreamTitle } from '../../../state/actions/stream'
 import {
@@ -41,7 +41,7 @@ const Cover = () => {
   const removeCoverImage = () => dispatch(removeCoverImageAction())
 
   const icon = (hasSegments || isPlaybackMode) ? faPlay : faPlus
-  const action = (hasSegments || isPlaybackMode) ? goToSegment(0) : addSegment()
+  const action = (hasSegments || isPlaybackMode) ? playStream() : addSegment()
   const onClick = () => dispatch(action)
 
   const hasCoverImage = coverImage && coverImage.src

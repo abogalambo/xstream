@@ -49,6 +49,8 @@ const isStreamPlayingReducer = (state, action) => {
     return true
   } else if(mode == 'playback' && type == 'GO_TO_SEGMENT' && isCover) {
     return true
+  } else if(type == 'PLAY_STREAM') {
+    return true
   } else if(type == 'STOP_PLAYING') {
     return false
   } else if(type == 'SEGMENT_ENDED' && isLastSegment) {
@@ -90,6 +92,15 @@ const currentStream = (state = null, action) => {
       return updateObject(state, {
         title: payload.title
       })
+    }
+
+    case 'PLAY_STREAM': {
+      return {
+        ...state,
+        mode: 'playback',
+        isStreamPlaying: isStreamPlayingReducer(state, action),
+        currentSegment: currentSegmentReducer(state.currentSegment, action, state)
+      }
     }
 
     case 'ADD_COVER_IMAGE': {
