@@ -33,8 +33,11 @@ class VisualPlayer {
     const currentTime = new Date().getTime()
     this.timeOffset = Math.min(currentTime - this.playingStartedAt, this.duration)
     this.playingStartedAt = null
-    this.onStop()
-    if(this.timeOffset == this.duration) this.onEnd()
+    if(this.timeOffset == this.duration) {
+      this.onEnd()
+    } else {
+      this.onStop()
+    }
   }
 
   cleanup() {
