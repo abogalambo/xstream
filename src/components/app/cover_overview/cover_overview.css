@@ -16,16 +16,13 @@
   transition-property: width, height;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
-  padding: 8px 15px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .coverOverview:first-child {
   margin-top: 0;
-}
-
-.coverOverview:hover,
-.coverOverview:active {
-  background: white;
 }
 
 .selected {
@@ -35,15 +32,12 @@
 
 .coverOverviewText {
   text-align: center;
-  display: -webkit-inline-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  user-select: none;
-  overflow: hidden;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--onBgColor);
-  line-height: 9px;
+  line-height: 15px;
   hyphens: auto;
+  width: 100%;
+  background: rgba(255,255,255,0.7);
 }
 
 .coverOverview > img {

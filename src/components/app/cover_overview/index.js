@@ -5,18 +5,21 @@ import styles from './cover_overview.css'
 
 const CoverOverview = ({coverData, isSelected, onCoverClick}) => {
   const { title, cover } = coverData
+  const hasCoverImage = cover && cover.src
+  const coverStyle = hasCoverImage ? {
+    backgroundImage: `url(${cover.src})`
+  } : {}
+
   return (
     <div
       className={classnames(
         styles.coverOverview,
         { [styles.selected]: isSelected }
       )}
+      style={coverStyle}
       onClick={onCoverClick}
     >
       <p className={styles.coverOverviewText}>{ title }</p>
-      { cover && (
-        <img src={cover.src} />
-      )}
     </div>
   )
 }
