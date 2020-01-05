@@ -41,7 +41,7 @@ const initialState = {
 const isStreamPlayingReducer = (state, action) => {
   const { mode, isStreamPlaying, currentSegment, segments } = state
   const { index } = currentSegment
-  const { type, payload } = action
+  const { type } = action
   const isLastSegment = index == segments.length - 1
   const isCover = index == -1
 
@@ -227,8 +227,7 @@ const currentStream = (state = null, action) => {
     }
 
     case 'SEGMENT_ENDED': {
-      const { segments, currentSegment, mode } = state
-      const targetIndex = currentSegment.index + 1
+      const { currentSegment } = state
 
       return updateObject(state, {
         currentSegment: currentSegmentReducer(currentSegment, action, state),
