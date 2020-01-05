@@ -1,5 +1,5 @@
-import segmentReducer from '../segment'
-import currentSegmentReducer from '../current_segment'
+import segmentReducer from './segment'
+import currentSegmentReducer from './current_segment'
 
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
 
