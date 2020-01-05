@@ -83,7 +83,7 @@ const Stream = () => {
       <div className={styles.mainSection}>
         <Autosave />
 
-        {showCover && <Cover />}
+        {showCover && <Cover /> }
 
         {segment && (
           <>

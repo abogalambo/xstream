@@ -1,0 +1,56 @@
+.coverOverview {
+  box-sizing: border-box;
+  margin: 20px;
+  margin-bottom: 0px;
+  background-color: var(--bgColor);
+  width: 100px;
+  height: 75px;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--roundCorner);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.14),0 4px 5px 0 rgba(0,0,0,.12),0 1px 10px 0 rgba(0,0,0,.2);
+  position: relative;
+  cursor: grab;
+  transition-property: width, height;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  padding: 8px 15px;
+}
+
+.coverOverview:first-child {
+  margin-top: 0;
+}
+
+.coverOverview:hover,
+.coverOverview:active {
+  background: white;
+}
+
+.selected {
+  width: 130px;
+  height: 95px;
+}
+
+.coverOverviewText {
+  text-align: center;
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  user-select: none;
+  overflow: hidden;
+  font-size: 8px;
+  color: var(--onBgColor);
+  line-height: 9px;
+  hyphens: auto;
+}
+
+.coverOverview > img {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: var(--roundCorner);
+  margin: 0 auto;
+  border-radius: var(--roundCorner);
+}
