@@ -39,12 +39,3 @@
   width: 100%;
   background: rgba(255,255,255,0.7);
 }
-
-.coverOverview > img {
-  display: block;
-  max-height: 100%;
-  max-width: 100%;
-  border-radius: var(--roundCorner);
-  margin: 0 auto;
-  border-radius: var(--roundCorner);
-}
