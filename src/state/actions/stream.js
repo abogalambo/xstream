@@ -24,6 +24,10 @@ export const setStreamTitle = (title) => ({
   }
 })
 
+export const playStream = () => ({
+  type: 'PLAY_STREAM'
+})
+
 export const addCoverImage = addImageActionCreator('ADD_COVER_IMAGE')
 
 export const removeCoverImage = () => ({

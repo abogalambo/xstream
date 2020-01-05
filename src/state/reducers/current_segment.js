@@ -20,6 +20,13 @@ const currentSegment = (state = null, action, currentStream) => {
       return initialState
     }
 
+    case 'PLAY_STREAM': {
+      return {
+        ...state,
+        index: indexWithinBounds(0, currentStream.segments) ? 0 : state.index
+      }
+    }
+
     case 'GO_TO_SEGMENT': {
       if(canNavigate(state)) {
         return updateObject(initialState, {
