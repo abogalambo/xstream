@@ -25,7 +25,7 @@ const CoverOverview = ({coverData, isSelected, onCoverClick}) => {
 }
 
 CoverOverview.propTypes = {
-  cover: PropTypes.object.isRequired,
+  coverData: PropTypes.object.isRequired,
   onCoverClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool
 }
