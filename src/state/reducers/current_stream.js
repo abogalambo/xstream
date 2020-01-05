@@ -35,7 +35,29 @@ const initialState = {
   segments: [],
   mode: 'compose',
   page: 'new',
-  canEdit: true
+  isStreamPlaying: false
+}
+
+const isStreamPlayingReducer = (state, action) => {
+  const { mode, isStreamPlaying, currentSegment, segments } = state
+  const { index } = currentSegment
+  const { type } = action
+  const isLastSegment = index == segments.length - 1
+  const isCover = index == -1
+
+  if(mode == 'playback' && type == 'START_PLAYING') {
+    return true
+  } else if(mode == 'playback' && type == 'GO_TO_SEGMENT' && isCover) {
+    return true
+  } else if(type == 'STOP_PLAYING') {
+    return false
+  } else if(type == 'SEGMENT_ENDED' && isLastSegment) {
+    return false
+  } else if(type == 'TOGGLE_MODE') {
+    return false
+  } else {
+    return isStreamPlaying
+  }
 }
 
 const currentStream = (state = null, action) => {
@@ -93,7 +115,8 @@ const currentStream = (state = null, action) => {
         const newMode = (mode == "compose") ? "playback" : "compose"
         return updateObject(state, {
           mode: newMode,
-          currentSegment: currentSegmentReducer(currentSegment, action, state)
+          currentSegment: currentSegmentReducer(currentSegment, action, state),
+          isStreamPlaying: isStreamPlayingReducer(state, action)
         })
       }else{
         return state
@@ -106,20 +129,8 @@ const currentStream = (state = null, action) => {
 
       if(indexWithinBounds(targetIndex, segments)){
         return updateObject(state, {
-          currentSegment: currentSegmentReducer(currentSegment, action)
-        })
-      }else{
-        return state
-      }
-    }
-
-    case 'SEGMENT_ENDED': {
-      const { segments, currentSegment, mode } = state
-      const targetIndex = currentSegment.index + 1
-
-      if(mode == 'playback' && indexWithinBounds(targetIndex, segments)){
-        return updateObject(state, {
-          currentSegment: currentSegmentReducer(currentSegment, action)
+          currentSegment: currentSegmentReducer(currentSegment, action),
+          isStreamPlaying: isStreamPlayingReducer(state, action)
         })
       }else{
         return state
@@ -210,7 +221,17 @@ const currentStream = (state = null, action) => {
         segments: updateItemAtIndex(segments, currentIndex, (segment) => {
           return segmentReducer(segment, action)
         }),
-        currentSegment: currentSegmentReducer(currentSegment, action)
+        currentSegment: currentSegmentReducer(currentSegment, action),
+        isStreamPlaying: isStreamPlayingReducer(state, action)
+      })
+    }
+
+    case 'SEGMENT_ENDED': {
+      const { currentSegment } = state
+
+      return updateObject(state, {
+        currentSegment: currentSegmentReducer(currentSegment, action, state),
+        isStreamPlaying: isStreamPlayingReducer(state, action)
       })
     }
 

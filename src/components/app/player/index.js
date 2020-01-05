@@ -18,7 +18,8 @@ import {
   isTypingSelector,
   audioDataSelector,
   segmentDurationSelector,
-  isPlaybackModeSelector
+  isPlaybackModeSelector,
+  isStreamPlayingSelector
 } from '../../../state/selectors/current_stream'
 import styles from './player.css'
 import AudioPlayer from '../../../lib/audio_player'
@@ -27,6 +28,7 @@ import CircleMeter from '../../lib/circle_meter'
 
 const Player = () => {
   const isPlaying = useSelector(isPlayingSelector)
+  const isStreamPlaying = useSelector(isStreamPlayingSelector)
   const isTyping = useSelector(isTypingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
@@ -46,7 +48,7 @@ const Player = () => {
   }
 
   useEffect(() => {
-    isPlaybackMode && player.startPlaying()
+    isPlaybackMode && isStreamPlaying && player.startPlaying()
     return () => player.cleanup();
   }, []);
 

@@ -8,6 +8,7 @@ const initialState = {
 }
 
 const canNavigate = (state) => (!state.recording && !state.typing)
+const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 
 const currentSegment = (state = null, action, currentStream) => {
   const { type, payload } = action
@@ -30,9 +31,19 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'SEGMENT_ENDED': {
-      return updateObject(initialState, {
-        index: state.index + 1
-      })
+      const { mode, segments } = currentStream
+      const { index } = state
+      const shouldGoToNextSegment = (mode == 'playback' && indexWithinBounds(index + 1, segments))
+
+      if(shouldGoToNextSegment) {
+        return updateObject(initialState, {
+          index: index + 1
+        })
+      } else {
+        return updateObject(state, {
+          playing: false
+        })
+      }
     }
 
     case 'ADD_SEGMENT': {

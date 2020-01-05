@@ -55,7 +55,9 @@ class AudioPlayer {
     const audio = document.getElementsByTagName('audio')[0]
     
     audio.onplay = () => this.onStart()
-    audio.onpause = () => this.onStop()
+    audio.onpause = () => {
+      !audio.ended && this.onStop()
+    }
     audio.onended = () => this.onEnd()
 
     this._audioElement = audio
