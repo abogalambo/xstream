@@ -28,7 +28,6 @@
   background: white;
 }
 
-.segmentOverview:hover .audioIcon,
 .segmentOverview:active .audioIcon {
    left: 55px;
 }
