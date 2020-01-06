@@ -52,6 +52,8 @@ const isStreamPlayingReducer = (state, action) => {
     return false
   } else if(type == 'SEGMENT_ENDED' && isLastSegment) {
     return false
+  } else if(type == 'GO_TO_SEGMENT') {
+    return false
   } else if(type == 'TOGGLE_MODE') {
     return false
   } else {
@@ -137,7 +139,8 @@ const currentStream = (state = null, action) => {
 
       if(indexWithinBounds(targetIndex, segments)){
         return updateObject(state, {
-          currentSegment: currentSegmentReducer(currentSegment, action)
+          currentSegment: currentSegmentReducer(currentSegment, action),
+          isStreamPlaying: isStreamPlayingReducer(state, action)
         })
       }else{
         return state
