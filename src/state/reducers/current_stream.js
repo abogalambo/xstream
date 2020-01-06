@@ -43,7 +43,6 @@ const isStreamPlayingReducer = (state, action) => {
   const { index } = currentSegment
   const { type } = action
   const isLastSegment = index == segments.length - 1
-  const isCover = index == -1
 
   if(mode == 'playback' && type == 'START_PLAYING') {
     return true
