@@ -47,8 +47,6 @@ const isStreamPlayingReducer = (state, action) => {
 
   if(mode == 'playback' && type == 'START_PLAYING') {
     return true
-  } else if(mode == 'playback' && type == 'GO_TO_SEGMENT' && isCover) {
-    return true
   } else if(type == 'PLAY_STREAM') {
     return true
   } else if(type == 'STOP_PLAYING') {
@@ -140,8 +138,7 @@ const currentStream = (state = null, action) => {
 
       if(indexWithinBounds(targetIndex, segments)){
         return updateObject(state, {
-          currentSegment: currentSegmentReducer(currentSegment, action),
-          isStreamPlaying: isStreamPlayingReducer(state, action)
+          currentSegment: currentSegmentReducer(currentSegment, action)
         })
       }else{
         return state
