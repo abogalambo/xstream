@@ -51,7 +51,7 @@ const currentSegment = (state = null, action, currentStream) => {
           index: index + 1
         })
       } else {
-        const playingOffset = payload.timestamp - playingStartedAt
+        const playingOffset = mode == 'playback' ? payload.timestamp - playingStartedAt : 0
         return updateObject(state, {
           playing: false,
           playingStartedAt: null,
@@ -94,8 +94,12 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'START_PLAYING': {
-      const { playingOffset } = state
+      const { playingOffset, playing } = state
       const playingStartedAt = payload.timestamp - playingOffset
+
+      if(playing) {
+        return state
+      }
 
       return updateObject(state, {
         playing: true,
@@ -105,8 +109,13 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'STOP_PLAYING': {
-      const { playingStartedAt } = state
+      const { playingStartedAt, playing } = state
       const playingOffset = payload.timestamp - playingStartedAt
+
+      if(!playing) {
+        return state
+      }
+
       return updateObject(state, {
         playing: false,
         playingStartedAt: null,

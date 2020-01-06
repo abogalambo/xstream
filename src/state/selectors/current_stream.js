@@ -141,10 +141,6 @@ export const mediaKeysSelector = (state) => {
 export const streamProgressSelector = (state) => {
   const index = indexSelector(state)
 
-  if(index == -1) {
-    return 0
-  }
-
   const streamDuration = segmentsSelector(state).reduce(
     (totalTime, segment) => totalTime + segmentDuration(segment),
     0
@@ -155,8 +151,14 @@ export const streamProgressSelector = (state) => {
     0
   )
 
-  const { playingOffset, playingStartedAt } = currentSegmentSelector(state)
-  const segmentOffset = isPlayingSelector(state) ? (new Date().getTime()) - playingStartedAt : playingOffset
+  const { playingStartedAt, playingOffset } = currentSegmentSelector(state)
 
-  return 100 * (currentDuration + segmentOffset) / streamDuration
+  return {
+    index,
+    streamDuration,
+    currentDuration,
+    playingStartedAt,
+    playingOffset,
+    isPlaying: isPlayingSelector(state)
+  }
 }
