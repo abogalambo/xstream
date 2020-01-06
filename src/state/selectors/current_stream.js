@@ -150,10 +150,13 @@ export const streamProgressSelector = (state) => {
     0
   )
 
-  const currentDuration = segmentsSelector(state).slice(0, index + 1).reduce(
+  const currentDuration = segmentsSelector(state).slice(0, index).reduce(
     (totalTime, segment) => totalTime + segmentDuration(segment),
     0
   )
 
-  return 100 * currentDuration / streamDuration
+  const { playingOffset, playingStartedAt } = currentSegmentSelector(state)
+  const segmentOffset = isPlayingSelector(state) ? (new Date().getTime()) - playingStartedAt : playingOffset
+
+  return 100 * (currentDuration + segmentOffset) / streamDuration
 }

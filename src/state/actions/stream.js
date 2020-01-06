@@ -58,7 +58,10 @@ export const removeSegment = (index) => ({
 })
 
 export const segmentEnded = () => ({
-  type: 'SEGMENT_ENDED'
+  type: 'SEGMENT_ENDED',
+  payload: {
+    timestamp: (new Date).getTime()
+  }
 })
 
 export const toggleMode = () => ({
