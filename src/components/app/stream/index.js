@@ -17,6 +17,7 @@ import {
   currentSegmentDataSelector,
   isPlaybackModeSelector,
   canToggleModeSelector,
+  streamProgressSelector,
   indexSelector,
   pageSelector
 } from '../../../state/selectors/current_stream'
@@ -27,6 +28,7 @@ import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Navigation from '../navigation'
 import ToggleButton from '../../lib/toggle_button'
+import ProgressBar from '../../lib/progress_bar'
 import styles from './stream.css'
 
 const Stream = () => {
@@ -35,6 +37,7 @@ const Stream = () => {
   const canToggleMode = useSelector(canToggleModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
   const page = useSelector(pageSelector)
+  const streamProgress = useSelector(streamProgressSelector)
 
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
@@ -110,6 +113,8 @@ const Stream = () => {
             </div>
           </>
         )}
+
+        <ProgressBar percent={streamProgress} />
       </div>
 
       {(page != 'view') && (

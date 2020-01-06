@@ -1,0 +1,21 @@
+.progressBar {
+  height: 4px;
+  width: 100%;
+  position: relative;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  height: 100%;
+}
+
+.foreground {
+  background-color: #6200ee;
+  transition: width 0.2s ease;
+}
+
+.background {
+  width: 100%;
+  background-color: #d7b7fd;
+}
