@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,6 +23,8 @@ import classnames from 'classnames'
 import styles from './overview_panel.css'
 
 const OverviewPanel = () => {
+  const [ isCollapsed, setisCollapsed] = useState(false)
+
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
@@ -35,7 +37,7 @@ const OverviewPanel = () => {
   return (
     <div className={classnames(
       styles.overviewPanelContainer,
-      { [styles.overviewPanelContainer_playback]: isPlaybackMode }
+      { [styles.overviewPanelContainer_collapsed]: isPlaybackMode || isCollapsed}
     )}>
       <div className={styles.overviewPanel}>
         {!isPlaybackMode && (
@@ -70,6 +72,11 @@ const OverviewPanel = () => {
           </div>
         )}
       </div>
+      <button
+        className={styles.overviewPanel_collapseBtn}
+        onClick={() => setisCollapsed(!isCollapsed)}
+      >  Click me
+      </button>
     </div>
   )
 }
