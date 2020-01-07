@@ -1,10 +1,14 @@
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
 const initialState = {
   index: -1, // displaying cover
-  recording: false,
-  playing: false,
   typing: false,
-  recordingStartedAt: null
+  // recording data
+  recording: false,
+  recordingStartedAt: null,
+  // playing data
+  playing: false,
+  playingStartedAt: null,
+  playingOffset: 0
 }
 
 const canNavigate = (state) => (!state.recording && !state.typing)
@@ -39,7 +43,7 @@ const currentSegment = (state = null, action, currentStream) => {
 
     case 'SEGMENT_ENDED': {
       const { mode, segments } = currentStream
-      const { index } = state
+      const { index, playingStartedAt } = state
       const shouldGoToNextSegment = (mode == 'playback' && indexWithinBounds(index + 1, segments))
 
       if(shouldGoToNextSegment) {
@@ -47,8 +51,11 @@ const currentSegment = (state = null, action, currentStream) => {
           index: index + 1
         })
       } else {
+        const playingOffset = mode == 'playback' ? payload.timestamp - playingStartedAt : 0
         return updateObject(state, {
-          playing: false
+          playing: false,
+          playingStartedAt: null,
+          playingOffset
         })
       }
     }
@@ -87,14 +94,32 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'START_PLAYING': {
+      const { playingOffset, playing } = state
+      const playingStartedAt = payload.timestamp - playingOffset
+
+      if(playing) {
+        return state
+      }
+
       return updateObject(state, {
-        playing: true
+        playing: true,
+        playingStartedAt,
+        playingOffset: 0
       })
     }
 
     case 'STOP_PLAYING': {
+      const { playingStartedAt, playing } = state
+      const playingOffset = payload.timestamp - playingStartedAt
+
+      if(!playing) {
+        return state
+      }
+
       return updateObject(state, {
-        playing: false
+        playing: false,
+        playingStartedAt: null,
+        playingOffset
       })
     }
 

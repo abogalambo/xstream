@@ -32,6 +32,10 @@
   align-items: center;
 }
 
+.segmentContainer_playback {
+  height: calc(100% - var(--navigationHeight) - 80px - var(--progressBarHeight));
+}
+
 /*Footer Section */
 .footerContainer {
   box-sizing: border-box;

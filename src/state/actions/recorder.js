@@ -39,9 +39,15 @@ export const removeRecording = () => ({
 })
 
 export const startPlaying = () => ({
-  type: 'START_PLAYING'
+  type: 'START_PLAYING',
+  payload: {
+    timestamp: (new Date).getTime()
+  }
 })
 
 export const stopPlaying = () => ({
-  type: 'STOP_PLAYING'
+  type: 'STOP_PLAYING',
+  payload: {
+    timestamp: (new Date).getTime()
+  }
 })

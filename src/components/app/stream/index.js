@@ -27,6 +27,7 @@ import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Navigation from '../navigation'
 import ToggleButton from '../../lib/toggle_button'
+import StreamProgress from '../stream_progress'
 import styles from './stream.css'
 
 const Stream = () => {
@@ -35,7 +36,7 @@ const Stream = () => {
   const canToggleMode = useSelector(canToggleModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
   const page = useSelector(pageSelector)
-
+  
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -87,7 +88,9 @@ const Stream = () => {
 
         {segment && (
           <>
-            <div className={classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
+            { isPlaybackMode && <StreamProgress /> }
+            <div className={
+              classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
               <Segment
                 index={index}
                 key={`segment_${segment.timestamp}`}

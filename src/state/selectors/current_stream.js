@@ -54,6 +54,10 @@ export const canRecordSelector = (state) => !audioDataSelector(state)
 
 export const segmentDurationSelector = (state) => {
   const segment = currentSegmentDataSelector(state)
+  return segmentDuration(segment)
+}
+
+const segmentDuration = (segment) => {
   const { audio, text, image } = segment
   return (
     (audio && audio.duration) ||
@@ -132,4 +136,29 @@ export const mediaKeysSelector = (state) => {
   })
 
   return mediaKeys
+}
+
+export const streamProgressSelector = (state) => {
+  const index = indexSelector(state)
+
+  const streamDuration = segmentsSelector(state).reduce(
+    (totalTime, segment) => totalTime + segmentDuration(segment),
+    0
+  )
+
+  const currentDuration = segmentsSelector(state).slice(0, index).reduce(
+    (totalTime, segment) => totalTime + segmentDuration(segment),
+    0
+  )
+
+  const { playingStartedAt, playingOffset } = currentSegmentSelector(state)
+
+  return {
+    index,
+    streamDuration,
+    currentDuration,
+    playingStartedAt,
+    playingOffset,
+    isPlaying: isPlayingSelector(state)
+  }
 }
