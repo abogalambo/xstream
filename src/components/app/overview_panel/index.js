@@ -80,7 +80,10 @@ const OverviewPanel = () => {
         onClick={() => setisCollapsed(!isCollapsed)}
       >
         <FontAwesomeIcon
-          className={styles.overviewPanel_collapseIcon}
+          className={classnames(
+            styles.collapseIcon,
+            { [styles.collapseIcon_collapsed] : isCollapsed }
+          )}
           icon={faChevronLeft} />
       </button>
     </div>

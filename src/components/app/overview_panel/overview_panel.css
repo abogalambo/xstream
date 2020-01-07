@@ -1,7 +1,7 @@
 /*OverviewPanel Section */
 .overviewPanelContainer {
   transition: width;
-  transition-duration: 0.2s;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
   width: 200px;
   height: 100%;
@@ -22,13 +22,19 @@
   top: calc(50% - (40px / 2));
   right: calc((40px / 2) * -1 + 3px);
   z-index: 999;
-  box-shadow: var(--twoDp);
+  box-shadow: 6px 1px 9px 1px rgba(0, 0, 0, 0.1);
 }
 
-.overviewPanel_collapseIcon {
+.collapseIcon {
   color: var(--onSecondary);
   font-size: 1em;
-  transform: translateX(-3px);
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+.collapseIcon_collapsed {
+  transform: rotate(180deg);
 }
 
 .overviewPanel {
