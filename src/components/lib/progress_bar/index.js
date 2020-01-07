@@ -1,14 +1,12 @@
 import React from 'react'
-import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import styles from './progress_bar.css'
 
 const ProgressBar = ({percent}) => {
   return (
-    <div className={styles.progressBar}>
-      <div className={classnames(styles.background, styles.bar)} />
+    <div className={styles.progressBar_track}>
       <div
-        className={classnames(styles.foreground, styles.bar)}
+        className={styles.progressBar_indicator}
         style={ { width: `${percent}%` } }
       />
     </div>

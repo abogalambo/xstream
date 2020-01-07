@@ -88,7 +88,8 @@ const Stream = () => {
 
         {segment && (
           <>
-            <div className={classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
+            <div className={
+              classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
               <Segment
                 index={index}
                 key={`segment_${segment.timestamp}`}
@@ -109,10 +110,9 @@ const Stream = () => {
                 </button>
               )}
             </div>
+            { isPlaybackMode && <StreamProgress /> }
           </>
         )}
-
-        <StreamProgress />
       </div>
 
       {(page != 'view') && (
