@@ -1,3 +1,14 @@
+/*OverviewPanel Section */
+.overviewPanelContainer {
+  transition: var(--transition);
+  width: 200px;
+  height: 100%;
+}
+
+.overviewPanelContainer_playback {
+  width: 0;
+}
+
 .overviewPanel {
   box-sizing: border-box;
   width: 100%;

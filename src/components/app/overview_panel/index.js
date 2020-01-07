@@ -19,6 +19,7 @@ import {
 
 import SegmentOverview from '../segment_overview'
 import CoverOverview from '../cover_overview'
+import classnames from 'classnames'
 import styles from './overview_panel.css'
 
 const OverviewPanel = () => {
@@ -32,38 +33,43 @@ const OverviewPanel = () => {
   const onAddSegmentClick = () => dispatch(addSegment())
 
   return (
-    <div className={styles.overviewPanel}>
-      {!isPlaybackMode && (
-        <div className={styles.overviewPanel_wrapper}>
-          <div className={styles.overviewPanel_segements}>
-            <CoverOverview
-              coverData={coverData}
-              isSelected={showCover}
-              onCoverClick={() => dispatch(goToSegment(-1))}
-            />
-            {segments.map((segment, index) => (
-              <SegmentOverview
-                key={`overview_panel_${segment.timestamp}`}
-                segment={segment}
-                isSelected={index == currentIndex}
-                onSegmentClick={() => dispatch(goToSegment(index))}
-                onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+    <div className={classnames(
+      styles.overviewPanelContainer,
+      { [styles.overviewPanelContainer_playback]: isPlaybackMode }
+    )}>
+      <div className={styles.overviewPanel}>
+        {!isPlaybackMode && (
+          <div className={styles.overviewPanel_wrapper}>
+            <div className={styles.overviewPanel_segements}>
+              <CoverOverview
+                coverData={coverData}
+                isSelected={showCover}
+                onCoverClick={() => dispatch(goToSegment(-1))}
               />
-            ))}
+              {segments.map((segment, index) => (
+                <SegmentOverview
+                  key={`overview_panel_${segment.timestamp}`}
+                  segment={segment}
+                  isSelected={index == currentIndex}
+                  onSegmentClick={() => dispatch(goToSegment(index))}
+                  onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+                />
+              ))}
+            </div>
+
+            <div className={styles.overviewPanel_divider}></div>
+
+            <button
+              onClick={onAddSegmentClick}
+              className={styles.overviewPanel_addBtn}
+            >
+              <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
+                icon={faPlus}
+              />
+            </button>
           </div>
-
-          <div className={styles.overviewPanel_divider}></div>
-
-          <button
-            onClick={onAddSegmentClick}
-            className={styles.overviewPanel_addBtn}
-          >
-            <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
-              icon={faPlus}
-            />
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }
