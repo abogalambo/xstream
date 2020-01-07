@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+  faPlus,
+  faChevronLeft
+} from '@fortawesome/free-solid-svg-icons'
 import {
   addSegment,
   removeSegment,
@@ -75,7 +78,10 @@ const OverviewPanel = () => {
       <button
         className={styles.overviewPanel_collapseBtn}
         onClick={() => setisCollapsed(!isCollapsed)}
-      >  Click me
+      >
+        <FontAwesomeIcon
+          className={styles.overviewPanel_collapseIcon}
+          icon={faChevronLeft} />
       </button>
     </div>
   )

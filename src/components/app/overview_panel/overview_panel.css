@@ -1,12 +1,34 @@
 /*OverviewPanel Section */
 .overviewPanelContainer {
-  transition: var(--transition);
+  transition: width;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
   width: 200px;
   height: 100%;
+  position: relative;
 }
 
 .overviewPanelContainer_collapsed {
-  width: 0;
+  width: 0px;
+}
+
+.overviewPanel_collapseBtn {
+  background: var(--secondaryColor_light);
+  width: calc(40px / 2);
+  height: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  position: absolute;
+  top: calc(50% - (40px / 2));
+  right: calc((40px / 2) * -1 + 3px);
+  z-index: 999;
+  box-shadow: var(--twoDp);
+}
+
+.overviewPanel_collapseIcon {
+  color: var(--onSecondary);
+  font-size: 1em;
+  transform: translateX(-3px);
 }
 
 .overviewPanel {
