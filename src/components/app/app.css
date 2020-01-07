@@ -19,8 +19,8 @@
   --navigationHeight: 110px;
   --captionHeight: 100px;
   --progressBarHeight: 4px;
-  --progressBar_trackColor: #d7b7fd;
-  --progressBar_indicatorColor: #6200ee;
+  --progressBar_trackColor: #efc0e1;
+  --progressBar_indicatorColor: #ba0076;
   --onPrimary_dim: rgba(242, 242, 242, 0.8);
   --onPrimary_dimmer: rgba(242, 242, 242, 0.2);
   --onPrimary_disable: rgba(242, 242, 242, 0.4);
