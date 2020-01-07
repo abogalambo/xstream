@@ -88,6 +88,7 @@ const Stream = () => {
 
         {segment && (
           <>
+            { isPlaybackMode && <StreamProgress /> }
             <div className={
               classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
               <Segment
@@ -110,7 +111,6 @@ const Stream = () => {
                 </button>
               )}
             </div>
-            { isPlaybackMode && <StreamProgress /> }
           </>
         )}
       </div>
