@@ -75,17 +75,19 @@ const OverviewPanel = () => {
           </div>
         )}
       </div>
-      <button
-        className={styles.overviewPanel_collapseBtn}
-        onClick={() => setisCollapsed(!isCollapsed)}
-      >
-        <FontAwesomeIcon
-          className={classnames(
-            styles.collapseIcon,
-            { [styles.collapseIcon_collapsed] : isCollapsed }
-          )}
-          icon={faChevronLeft} />
-      </button>
+      {!isPlaybackMode && (
+        <button
+          className={styles.overviewPanel_collapseBtn}
+          onClick={() => setisCollapsed(!isCollapsed)}
+        >
+          <FontAwesomeIcon
+            className={classnames(
+              styles.collapseIcon,
+              { [styles.collapseIcon_collapsed] : isCollapsed }
+            )}
+            icon={faChevronLeft} />
+        </button>
+      )}
     </div>
   )
 }
