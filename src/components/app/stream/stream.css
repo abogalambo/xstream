@@ -10,17 +10,6 @@
   height: 100%;
 }
 
-/*OverviewPanel Section */
-.overviewPanelContainer {
-  transition: var(--transition);
-  width: 200px;
-  height: 100%;
-}
-
-.overviewPanelContainer_playback {
-  width: 0;
-}
-
 /* Segment Section */
 .segmentContainer {
   width: 85%;

@@ -74,13 +74,8 @@ const Stream = () => {
     <div className={styles.stream}>
       <MediaCleaner />
 
-      <div className={classnames(
-        styles.overviewPanelContainer,
-        { [styles.overviewPanelContainer_playback]: isPlaybackMode }
-      )}>
-        <OverviewPanel />
-      </div>
-
+      <OverviewPanel />
+    
       <div className={styles.mainSection}>
         <Autosave />
 
