@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
@@ -10,12 +10,21 @@ import {
 import styles from './segment_overview.css'
 
 const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick}) => {
+  const htmlRef = useRef(null)
+
+  useEffect(() => {
+    if(isSelected){
+      htmlRef.current.scrollIntoView({behavior: "smooth", block: "center"})
+    }
+  }, [isSelected])
+
   return (
     <div
       className={classnames(
         styles.segmentOverview,
         { [styles.selected]: isSelected }
       )}
+      ref={htmlRef}
       onClick={onSegmentClick}
     >
       <p className={styles.segmentOverviewText}>{ segment.text }</p>
