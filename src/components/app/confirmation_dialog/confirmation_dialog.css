@@ -35,7 +35,7 @@
 }
 
 .footer > button {
-  color: var(--onPrimary);
+  color: var(--primaryColor);
   text-transform: uppercase;
   font-weight: 500;
   font-size: 12px;
