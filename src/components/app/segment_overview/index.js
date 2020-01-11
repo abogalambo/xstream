@@ -1,11 +1,6 @@
 import React, {useEffect, useRef} from 'react'
-import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-
-import {
-  isPlaybackModeSelector
-} from '../../../state/selectors/current_stream'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -14,9 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick}) => {
-  const isPlaybackMode = useSelector(isPlaybackModeSelector)
-
+const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick, isPlaybackMode}) => {
   const htmlRef = useRef(null)
 
   useEffect(() => {
@@ -57,7 +50,8 @@ SegmentOverview.propTypes = {
   segment: PropTypes.object.isRequired,
   onSegmentClick: PropTypes.func.isRequired,
   onRemoveSegmentClick: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool
+  isSelected: PropTypes.bool,
+  isPlaybackMode: PropTypes.bool
 }
 
 export default SegmentOverview

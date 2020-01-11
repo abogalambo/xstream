@@ -57,6 +57,7 @@ const OverviewPanel = () => {
                   isSelected={index == currentIndex}
                   onSegmentClick={() => dispatch(goToSegment(index))}
                   onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+                  isPlaybackMode={isPlaybackMode}
                 />
               ))}
             </div>
