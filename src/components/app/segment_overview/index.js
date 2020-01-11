@@ -1,6 +1,11 @@
 import React, {useEffect, useRef} from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+
+import {
+  isPlaybackModeSelector
+} from '../../../state/selectors/current_stream'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,6 +15,8 @@ import {
 import styles from './segment_overview.css'
 
 const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick}) => {
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
+
   const htmlRef = useRef(null)
 
   useEffect(() => {
@@ -37,11 +44,11 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
           icon={faVolumeUp}
         />
       )}
-      <FontAwesomeIcon
+      {!isPlaybackMode && (<FontAwesomeIcon
         className={styles.removeSegmentIcon}
         onClick={onRemoveSegmentClick}
         icon={faTimes}
-      />
+      />)}
     </div>
   )
 }

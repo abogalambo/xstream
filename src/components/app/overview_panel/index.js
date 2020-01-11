@@ -63,14 +63,14 @@ const OverviewPanel = () => {
 
             <div className={styles.overviewPanel_divider}></div>
 
-            <button
+            {!isPlaybackMode && (<button
               onClick={onAddSegmentClick}
               className={styles.overviewPanel_addBtn}
             >
               <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
                 icon={faPlus}
               />
-            </button>
+            </button>)}
           </div>
       </div>
         <button
