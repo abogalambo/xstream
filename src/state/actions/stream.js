@@ -53,6 +53,7 @@ export const removeSegment = (index) => ({
   type: 'REMOVE_SEGMENT',
   payload: {
     index,
+    isConfirmationNeeded: true,
     timestamp: (new Date).getTime()
   }
 })
