@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { confirmAction, cancelAction } from '../../../state/actions/confirmation'
+import textResources from './text_resources'
 
 const ConfirmationDialog = () => {
-  const { message, action } = useSelector((state) => state.confirmation)
+  const { action } = useSelector((state) => state.confirmation)
 
   const dispatch = useDispatch()
   const handleConfirm = () => {
@@ -11,17 +12,33 @@ const ConfirmationDialog = () => {
     dispatch(action)
   }
 
-  return action ? (
+  if(!action) {
+    return null
+  }
+
+  const {
+    prompt: defaultPrompt,
+    confirmText: defaultConfirmText,
+    cancelText: defaultCancelText
+  } = textResources.DEFAULT
+
+  const {
+    prompt = defaultPrompt,
+    confirmText = defaultConfirmText,
+    cancelText = defaultCancelText
+  } = textResources[action.type] || {}
+
+  return (
     <div>
-      <p>{message}</p>
+      <p>{prompt}</p>
       <button onClick={handleConfirm}>
-        Yes
+        {confirmText}
       </button>
       <button onClick={() => dispatch(cancelAction())}>
-        No
+        {cancelText}
       </button>
     </div>
-  ) : null
+  )
 }
 
 export default ConfirmationDialog

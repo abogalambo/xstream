@@ -1,13 +1,12 @@
 const confirmation = () => next => action => {
   let result;
 
-  const { confirm, ...restOfPayload } = (action.payload || {})
+  const { isConfirmationNeeded, ...restOfPayload } = (action.payload || {})
 
-  if(confirm) {
+  if(isConfirmationNeeded) {
     const newAction = {
       type: 'SHOW_CONFIRMATION_DIALOG',
       payload: {
-        message: confirm,
         action: {
           ...action,
           payload: restOfPayload

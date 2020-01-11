@@ -53,7 +53,7 @@ export const removeSegment = (index) => ({
   type: 'REMOVE_SEGMENT',
   payload: {
     index,
-    confirm: 'Are you sure you want to delete this segment?',
+    isConfirmationNeeded: true,
     timestamp: (new Date).getTime()
   }
 })
