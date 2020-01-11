@@ -59,6 +59,7 @@ const Player = () => {
 
   return (
     <button
+      onFocus={e => e.target.blur()}
       onClick={togglePlaying}
       className={styles.playerMain}
     >
