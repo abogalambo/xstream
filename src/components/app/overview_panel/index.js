@@ -40,10 +40,9 @@ const OverviewPanel = () => {
   return (
     <div className={classnames(
       styles.overviewPanelContainer,
-      { [styles.overviewPanelContainer_collapsed]: isPlaybackMode || isCollapsed}
+      { [styles.overviewPanelContainer_collapsed]: isCollapsed}
     )}>
       <div className={styles.overviewPanel}>
-        {!isPlaybackMode && (
           <div className={styles.overviewPanel_wrapper}>
             <div className={styles.overviewPanel_segements}>
               <CoverOverview
@@ -73,9 +72,7 @@ const OverviewPanel = () => {
               />
             </button>
           </div>
-        )}
       </div>
-      {!isPlaybackMode && (
         <button
           className={styles.overviewPanel_collapseBtn}
           onClick={() => setisCollapsed(!isCollapsed)}
@@ -87,7 +84,6 @@ const OverviewPanel = () => {
             )}
             icon={faChevronLeft} />
         </button>
-      )}
     </div>
   )
 }
