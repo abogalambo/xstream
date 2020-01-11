@@ -34,6 +34,7 @@ export const stopRecording = (audioUrl, uploadKey, blob, duration) => {
 export const removeRecording = () => ({
   type: 'REMOVE_RECORDING',
   payload: {
+    isConfirmationNeeded: true,
     timestamp: (new Date).getTime()
   }
 })
