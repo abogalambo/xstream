@@ -1,6 +1,6 @@
 const textResources = {
   REMOVE_SEGMENT: {
-    prompt: "Delete this segment?",
+    prompt: "Delete segment?",
     confirmText: "Delete"
   },
   DEFAULT: {
@@ -9,7 +9,7 @@ const textResources = {
     cancelText: "Cancel"
   },
   REMOVE_RECORDING: {
-    prompt: "Delete this audio recording?",
+    prompt: "Delete recording?",
     confirmText: "Delete"
   }
 }
