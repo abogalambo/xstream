@@ -40,10 +40,9 @@ const OverviewPanel = () => {
   return (
     <div className={classnames(
       styles.overviewPanelContainer,
-      { [styles.overviewPanelContainer_collapsed]: isPlaybackMode || isCollapsed}
+      { [styles.overviewPanelContainer_collapsed]: isCollapsed}
     )}>
       <div className={styles.overviewPanel}>
-        {!isPlaybackMode && (
           <div className={styles.overviewPanel_wrapper}>
             <div className={styles.overviewPanel_segements}>
               <CoverOverview
@@ -58,36 +57,34 @@ const OverviewPanel = () => {
                   isSelected={index == currentIndex}
                   onSegmentClick={() => dispatch(goToSegment(index))}
                   onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+                  isPlaybackMode={isPlaybackMode}
                 />
               ))}
             </div>
 
             <div className={styles.overviewPanel_divider}></div>
 
-            <button
+            {!isPlaybackMode && (<button
               onClick={onAddSegmentClick}
               className={styles.overviewPanel_addBtn}
             >
               <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
                 icon={faPlus}
               />
-            </button>
+            </button>)}
           </div>
-        )}
       </div>
-      {!isPlaybackMode && (
-        <button
-          className={styles.overviewPanel_collapseBtn}
-          onClick={() => setisCollapsed(!isCollapsed)}
-        >
-          <FontAwesomeIcon
-            className={classnames(
-              styles.collapseIcon,
-              { [styles.collapseIcon_collapsed] : isCollapsed }
-            )}
-            icon={faChevronLeft} />
-        </button>
-      )}
+      <button
+        className={styles.overviewPanel_collapseBtn}
+        onClick={() => setisCollapsed(!isCollapsed)}
+      >
+        <FontAwesomeIcon
+          className={classnames(
+            styles.collapseIcon,
+            { [styles.collapseIcon_collapsed] : isCollapsed }
+          )}
+          icon={faChevronLeft} />
+      </button>
     </div>
   )
 }

@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick}) => {
+const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick, isPlaybackMode}) => {
   const htmlRef = useRef(null)
 
   useEffect(() => {
@@ -37,11 +37,11 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
           icon={faVolumeUp}
         />
       )}
-      <FontAwesomeIcon
+      {!isPlaybackMode && (<FontAwesomeIcon
         className={styles.removeSegmentIcon}
         onClick={onRemoveSegmentClick}
         icon={faTimes}
-      />
+      />)}
     </div>
   )
 }
@@ -50,7 +50,8 @@ SegmentOverview.propTypes = {
   segment: PropTypes.object.isRequired,
   onSegmentClick: PropTypes.func.isRequired,
   onRemoveSegmentClick: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool
+  isSelected: PropTypes.bool,
+  isPlaybackMode: PropTypes.bool
 }
 
 export default SegmentOverview
