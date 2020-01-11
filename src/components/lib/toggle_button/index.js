@@ -31,6 +31,7 @@ const ToggleButton = ({ contents, onToggle, checkedValue, disabled }) => {
     <div
       className={styles.toggleBtnGroup}
       onChange={onToggle}
+      onFocus={e => e.target.blur()}
       data-toggle="buttons">
       {toggleBtns}
     </div>
