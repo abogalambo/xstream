@@ -1,15 +1,18 @@
 .autosave {
-  width: 200px;
+  background: var(--secondaryColor);
+  width: 160px;
+  padding: 5px 0px;
+  border-radius: var(--roundCorner);
   position: absolute;
   top: 10px;
   left: calc(50% - 100px);
   text-align: center;
   font-size: 15px;
   line-height: normal;
-  color: var(--secondaryColor_light);
+  color: #eaeaea;
 }
 
 .autosave_error {
   margin-right: 5px;
-  color: #c70808;
+  color: #ec5858;
 }
