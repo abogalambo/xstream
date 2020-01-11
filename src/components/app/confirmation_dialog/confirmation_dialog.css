@@ -1,0 +1,44 @@
+.scrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #232F3434;
+  z-index: 1000;
+}
+
+.container {
+  font-family: var(--fontFamily);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 280px;
+  background-color: white;
+  box-shadow: var(--FAB);
+  transform: translate(-50%, -50%);
+  border-radius: var(--roundCorner);
+}
+
+.prompt {
+  padding: 24px;
+  line-height: 20px;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.footer {
+  float: right;
+  height: 52px;
+  width: 100;
+}
+
+.footer > button {
+  color: var(--onPrimary);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  margin: 8px;
+  float: right;
+  height: 52px;
+}

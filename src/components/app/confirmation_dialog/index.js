@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { confirmAction, cancelAction } from '../../../state/actions/confirmation'
 import textResources from './text_resources'
+import styles from './confirmation_dialog.css'
 
 const ConfirmationDialog = () => {
   const { action } = useSelector((state) => state.confirmation)
@@ -29,14 +30,18 @@ const ConfirmationDialog = () => {
   } = textResources[action.type] || {}
 
   return (
-    <div>
-      <p>{prompt}</p>
-      <button onClick={handleConfirm}>
-        {confirmText}
-      </button>
-      <button onClick={() => dispatch(cancelAction())}>
-        {cancelText}
-      </button>
+    <div className={styles.scrim}>
+      <div className={styles.container}>
+        <p className={styles.prompt}>{prompt}</p>
+        <div className={styles.footer}>
+          <button onClick={handleConfirm}>
+            {confirmText}
+          </button>
+          <button onClick={() => dispatch(cancelAction())}>
+            {cancelText}
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

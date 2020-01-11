@@ -1,6 +1,6 @@
 const textResources = {
   REMOVE_SEGMENT: {
-    prompt: "Are you sure you want to delete this segment?",
+    prompt: "Delete this segment?",
     confirmText: "Delete"
   },
   DEFAULT: {
