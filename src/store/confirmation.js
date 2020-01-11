@@ -1,4 +1,4 @@
-const confirmation = store => next => action => {
+const confirmation = () => next => action => {
   let result;
 
   const { confirm, ...restOfPayload } = (action.payload || {})
