@@ -1,7 +1,9 @@
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import reducer from '../state/reducers'
-import { createStore, applyMiddleware, compose } from 'redux'
+import confirmation from './confirmation'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
@@ -9,7 +11,8 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(
       thunk,
-      promise
+      promise,
+      confirmation
     )
   )
 )
