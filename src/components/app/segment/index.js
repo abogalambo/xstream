@@ -97,25 +97,23 @@ const Segment = ({
       )}>
         { !imageCollapsed && (
           isPlaybackMode || image ? (
-            <div className={styles.imageContainer}>
-              <div className={classnames(styles.imageWrapper,
-              { [styles.imageWrapper_border]: !isPlaybackMode})}>
-                <ImageDisplay
-                  {...image}
-                  editable={!isPlaybackMode}
-                  onEdit={setImageCaption}
-                />
-               { !isPlaybackMode && (
-                  <button className={styles.removeButton}>
-                    <FontAwesomeIcon
-                      className={styles.removeButton_icon}
-                      onClick={removeImage}
-                      icon={faTimes}
-                      size="1x"
-                    />
-                  </button>
-                )}
-              </div>
+            <div className={classnames(styles.imageWrapper,
+            { [styles.imageWrapper_border]: !isPlaybackMode})}>
+              <ImageDisplay
+                {...image}
+                editable={!isPlaybackMode}
+                onEdit={setImageCaption}
+              />
+             { !isPlaybackMode && (
+                <button className={styles.removeButton}>
+                  <FontAwesomeIcon
+                    className={styles.removeButton_icon}
+                    onClick={removeImage}
+                    icon={faTimes}
+                    size="1x"
+                  />
+                </button>
+              )}
             </div>
           ) : (
             <ImageInput
