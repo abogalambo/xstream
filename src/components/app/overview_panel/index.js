@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,7 +26,7 @@ import classnames from 'classnames'
 import styles from './overview_panel.css'
 
 const OverviewPanel = () => {
-  const [ isCollapsed, setisCollapsed] = useState(false)
+  const [ isCollapsed, setisCollapsed] = useState(true)
 
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
@@ -36,6 +36,14 @@ const OverviewPanel = () => {
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
+
+  useEffect(() => {
+    if(isPlaybackMode) {
+      setisCollapsed(true)
+    } else {
+      setisCollapsed(false)
+    }
+  }, [isPlaybackMode])
 
   return (
     <div className={classnames(
