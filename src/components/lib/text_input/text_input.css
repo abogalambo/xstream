@@ -19,17 +19,18 @@
 }
 
 .textDisplay {
+  height: 34px;
   font-family: var(--fontFamily);
   background: transparent;
   border: none;
   width: 100%;
-  height: 100%;
   text-align: center;
   font-size: 24px;
   color: var(--onBgColor);
 }
 
 div.textDisplay {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 10px;
 }
 
 .imageDisplay > img {
@@ -12,7 +13,6 @@
   max-width: 100%;
   border-radius: var(--roundCorner);
   box-shadow: var(--twoDp);
-  margin: 0;
 }
 
 .caption {
@@ -22,8 +22,4 @@
   max-height: 100px;
   margin: 0 auto;
   color: var(--onBackground);
-}
-
-.caption > textarea{
-  padding-top: 15px;
 }
