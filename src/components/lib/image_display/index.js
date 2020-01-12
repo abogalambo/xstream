@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './image_display.css'
 import config from '../../../../config'
+import TextInput from '../text_input'
 
 const ImageDisplay = ({ src, caption, editable, onEdit }) => {
   const onCaptionChange = (event) => onEdit(event.target.value)
@@ -11,12 +12,14 @@ const ImageDisplay = ({ src, caption, editable, onEdit }) => {
       <img src={src} />
       { (editable || caption) && (
         <figcaption className={styles.caption}>
-          <textarea
-            value={caption}
+          <TextInput
+            readOnly={!editable}
+            value={caption || ''}
+            minSize={3}
+            maxSize={3}
             onChange={onCaptionChange}
-            maxLength={captionMaxLength}
-            placeholder={editable ? "Add Caption" : ""}
-            disabled={!editable}
+            maxChars={captionMaxLength}
+            prompt="Add a caption"
           />
         </figcaption>
       )}
