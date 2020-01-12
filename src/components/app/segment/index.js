@@ -71,7 +71,7 @@ const Segment = ({
           <TextInput
             value={text || ''}
             minSize={8}
-            maxSize={15}
+            maxSize={13}
             onChange={onTextChange}
             onFocus={startTyping}
             onBlur={stopTyping}
