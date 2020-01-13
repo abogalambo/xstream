@@ -46,26 +46,31 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
       )}
 
       {!readOnly && (
-        <textarea
-          className={classnames(
-            styles.textDisplay,
-            styles.textInput,
-            {
-              [styles.editing]: value && isEditing,
-              [styles.hidden]: hideTextArea
-            }
+        <div>
+          <textarea
+            className={classnames(
+              styles.textDisplay,
+              styles.textInput,
+              {
+                [styles.editing]: value && isEditing,
+                [styles.hidden]: hideTextArea
+              }
+            )}
+            ref={textAreaRef}
+            value={value}
+            disabled={readOnly}
+            wrap="hard"
+            style={fontStyle(value, minSize, maxSize, maxChars)}
+            onFocus={handleOnFocus}
+            onBlur={handleOnBlur}
+            maxLength={maxChars}
+            placeholder={prompt}
+            onChange={onChange}
+          />
+          {isEditing && (
+            <span>{maxChars - (value || "").length}</span>
           )}
-          ref={textAreaRef}
-          value={value}
-          disabled={readOnly}
-          wrap="hard"
-          style={fontStyle(value, minSize, maxSize, maxChars)}
-          onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
-          maxLength={maxChars}
-          placeholder={prompt}
-          onChange={onChange}
-        />
+        </div>
       )}
     </>
   )
