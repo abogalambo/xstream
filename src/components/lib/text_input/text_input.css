@@ -11,7 +11,6 @@
 .textInput {
   outline: none;
   resize: none;
-  height: 34px;
   transition: var(--transition);
 }
 
@@ -20,12 +19,21 @@
 }
 
 .textDisplay {
+  height: 34px;
+  font-family: var(--fontFamily);
   background: transparent;
   border: none;
   width: 100%;
-  font-size: 24px;
   text-align: center;
+  font-size: 24px;
   color: var(--onBgColor);
+}
+
+div.textDisplay {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .editing {

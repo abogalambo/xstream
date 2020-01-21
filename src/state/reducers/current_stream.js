@@ -40,7 +40,7 @@ const initialState = {
 
 const isStreamPlayingReducer = (state, action) => {
   const { mode, isStreamPlaying, currentSegment, segments } = state
-  const { index } = currentSegment
+  const { index, playing } = currentSegment
   const { type } = action
   const isLastSegment = index == segments.length - 1
 
@@ -55,7 +55,7 @@ const isStreamPlayingReducer = (state, action) => {
   } else if(type == 'GO_TO_SEGMENT') {
     return false
   } else if(type == 'TOGGLE_MODE') {
-    return false
+    return playing && mode == 'compose'
   } else {
     return isStreamPlaying
   }
@@ -125,7 +125,6 @@ const currentStream = (state = null, action) => {
         const newMode = (mode == "compose") ? "playback" : "compose"
         return updateObject(state, {
           mode: newMode,
-          currentSegment: currentSegmentReducer(currentSegment, action, state),
           isStreamPlaying: isStreamPlayingReducer(state, action)
         })
       }else{

@@ -142,15 +142,6 @@ const currentSegment = (state = null, action, currentStream) => {
       })
     }
 
-    case 'TOGGLE_MODE': {
-      const { mode } = currentStream
-      if(mode == 'compose') {
-        return initialState
-      } else {
-        return state
-      }
-    }
-
     default:
       return state
   }
