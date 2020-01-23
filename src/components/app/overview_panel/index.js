@@ -60,6 +60,14 @@ const OverviewPanel = () => {
     console.log(segments)
   }
 
+  const isDragging = (index) => {
+    if(draggedItem) {
+      return index == Number(draggedItem.dataset.id) ? true : false
+    } else {
+      return false
+    }
+  }
+
   useEffect(() => {
     if(isPlaybackMode) {
       setisCollapsed(true)
@@ -96,6 +104,7 @@ const OverviewPanel = () => {
                     draggable="true"
                     onDragStart={onDragStart}
                     onDragEnd={onDragEnd}
+                    isDragging={isDragging(index)}
                   />
                 ))}
               </div>

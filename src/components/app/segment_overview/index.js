@@ -18,7 +18,8 @@ const SegmentOverview = ({
   dataId,
   draggable,
   onDragStart,
-  onDragEnd
+  onDragEnd,
+  isDragging
 }) => {
   const htmlRef = useRef(null)
 
@@ -32,7 +33,9 @@ const SegmentOverview = ({
     <div
       className={classnames(
         styles.segmentOverview,
-        { [styles.selected]: isSelected }
+        { [styles.selected]: isSelected,
+          [styles.dragging]: isDragging
+        }
       )}
       ref={htmlRef}
       data-id={dataId}
@@ -69,7 +72,8 @@ SegmentOverview.propTypes = {
   dataId: PropTypes.number,
   draggable: PropTypes.string,
   onDragStart: PropTypes.func,
-  onDragEnd: PropTypes.func
+  onDragEnd: PropTypes.func,
+  isDragging: PropTypes.bool
 }
 
 export default SegmentOverview

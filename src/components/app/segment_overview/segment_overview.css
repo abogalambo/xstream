@@ -41,6 +41,10 @@
   left: 55px;
 }
 
+.dragging {
+  cursor: grabbing;
+}
+
 .segmentOverviewText {
   text-align: center;
   display: -webkit-inline-box;
