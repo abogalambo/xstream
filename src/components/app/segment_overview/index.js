@@ -9,7 +9,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick, isPlaybackMode}) => {
+const SegmentOverview = ({
+  segment,
+  isSelected,
+  onSegmentClick,
+  onRemoveSegmentClick,
+  isPlaybackMode,
+  dataId,
+  draggable,
+  onDragStart,
+  onDragEnd
+}) => {
   const htmlRef = useRef(null)
 
   useEffect(() => {
@@ -25,7 +35,11 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
         { [styles.selected]: isSelected }
       )}
       ref={htmlRef}
+      data-id={dataId}
       onClick={onSegmentClick}
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
     >
       <p className={styles.segmentOverviewText}>{ segment.text }</p>
       { segment.image && (
@@ -51,7 +65,11 @@ SegmentOverview.propTypes = {
   onSegmentClick: PropTypes.func.isRequired,
   onRemoveSegmentClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
-  isPlaybackMode: PropTypes.bool
+  isPlaybackMode: PropTypes.bool,
+  dataId: PropTypes.number,
+  draggable: PropTypes.string,
+  onDragStart: PropTypes.func,
+  onDragEnd: PropTypes.func
 }
 
 export default SegmentOverview
