@@ -61,6 +61,11 @@ const isStreamPlayingReducer = (state, action) => {
   }
 }
 
+const reorder = (array, spliceStartIndex, itemIndex) => {
+  array.splice(spliceStartIndex, 0, array.splice(itemIndex, 1)[0])
+  return array
+}
+
 const currentStream = (state = null, action) => {
   const { type, payload } = action
   switch (type) {
@@ -176,6 +181,20 @@ const currentStream = (state = null, action) => {
           ],
           currentSegment: currentSegmentReducer(currentSegment, action, state)
         })
+      }else{
+        return state
+      }
+    }
+
+    case 'REORDER_SEGMENTS': {
+      const { segments } = state
+      const { skippedOverIndex, selectedIndex } = payload
+
+      if(segments[skippedOverIndex] && segments[selectedIndex]) {
+        return {
+          ...state,
+          segments: reorder(segments, skippedOverIndex, selectedIndex)
+        }
       }else{
         return state
       }
