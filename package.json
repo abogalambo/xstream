@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack/webpack.dev.config.js",
     "dev": "webpack-dev-server --config webpack/webpack.dev.config.js --hot",
-    "lint": "eslint ."
+    "lint": "eslint ./src"
   },
   "author": "Abogalambo",
   "license": "MIT",
