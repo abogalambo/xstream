@@ -5,6 +5,10 @@
   justify-content: center;
   height: 100%;
   padding: 10px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: var(--roundCorner);
 }
 
 .imageDisplay > img {
@@ -16,10 +20,13 @@
 }
 
 .caption {
-  display: inline-block;
   width: 100%;
   height: var(--captionHeight);
-  max-height: 100px;
-  margin: 0 auto;
   color: var(--onBackground);
+}
+
+.caption_cover {
+  bottom: 0;
+  position: absolute;
+  background-color: #ffffffb3;
 }

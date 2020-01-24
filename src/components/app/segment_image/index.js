@@ -14,10 +14,11 @@ import {
   addImage as addImageAction,
   removeImage as removeImageAction,
   setImageCaption as setImageCaptionAction,
-  setImageStyle as setImageStyle
+  setImageStyle as setImageStyleAction
 } from '../../../state/actions/image'
 import ImageInput from '../../lib/image_input'
 import ImageDisplay from '../../lib/image_display'
+import ToggleButton from '../../lib/toggle_button'
 import styles from './segment_image.css'
 
 const SegmentImage = () => {
@@ -30,20 +31,34 @@ const SegmentImage = () => {
   const removeImage = () => dispatch(removeImageAction())
   const setImageCaption = (caption) => dispatch(setImageCaptionAction(caption))
 
+  const setImageStyle = (e) => {
+    dispatch(setImageStyleAction(e.target.value))
+  }
+
+  const styleToggleContent = [
+    {
+      value: 'FIT',
+      text:'Fit'
+    },
+    {
+      value: 'COVER',
+      text:'Cover'
+    }
+  ]
+
   return (
-    <div 
-      style={{backgroundColor: 'red'}}
-      className={styles.segmentImage}
-    >
-      { isPlaybackMode || image ? (
-          <div className={classnames(styles.imageWrapper,
-          { [styles.imageWrapper_border]: !isPlaybackMode})}>
-            <ImageDisplay
-              {...image}
-              editable={!isPlaybackMode}
-              onEdit={setImageCaption}
-            />
-           { !isPlaybackMode && (
+      image ? (
+        <div
+          style={image.style == 'COVER' ? {width: "100%"} : {}}
+          className={classnames(styles.imageWrapper, { [styles.imageWrapper_border]: !isPlaybackMode})}
+        >
+          <ImageDisplay
+            {...image}
+            editable={!isPlaybackMode}
+            onEdit={setImageCaption}
+          />
+          { !isPlaybackMode && (
+            <div className={styles.imageControls}>
               <button className={styles.removeButton}>
                 <FontAwesomeIcon
                   className={styles.removeButton_icon}
@@ -52,16 +67,21 @@ const SegmentImage = () => {
                   size="1x"
                 />
               </button>
-            )}
-          </div>
-        ) : (
-          <ImageInput
-          onChange={addImage}
-          text='Add Image'
-          className={'standard'} />
-        )
-      }
-    </div>
+
+              <ToggleButton
+                contents={styleToggleContent}
+                onToggle={setImageStyle}
+                checkedValue={image.style || 'FIT'}
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <ImageInput
+        onChange={addImage}
+        text='Add Image'
+        className={'standard'} />
+      )
   )
 }
 
