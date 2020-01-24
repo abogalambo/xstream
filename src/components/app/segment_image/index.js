@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faTimes
+  faTimes,
+  faExpandAlt,
+  faCompressAlt
 } from '@fortawesome/free-solid-svg-icons'
 import {
   segmentImageUploadKeySelector,
@@ -18,38 +20,28 @@ import {
 } from '../../../state/actions/image'
 import ImageInput from '../../lib/image_input'
 import ImageDisplay from '../../lib/image_display'
-import ToggleButton from '../../lib/toggle_button'
 import styles from './segment_image.css'
 
 const SegmentImage = () => {
   const imageUploadKey = useSelector(segmentImageUploadKeySelector)
   const { image } = useSelector(currentSegmentDataSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const isCoverImageStyle = image && (image.style == 'COVER')
 
   const dispatch = useDispatch();
   const addImage = (e) => dispatch(addImageAction(e, imageUploadKey))
   const removeImage = () => dispatch(removeImageAction())
   const setImageCaption = (caption) => dispatch(setImageCaptionAction(caption))
 
-  const setImageStyle = (e) => {
-    dispatch(setImageStyleAction(e.target.value))
+  const setImageStyle = () => {
+    const newStyle = isCoverImageStyle ? 'FIT' : 'COVER'
+    dispatch(setImageStyleAction(newStyle))
   }
-
-  const styleToggleContent = [
-    {
-      value: 'FIT',
-      text:'Fit'
-    },
-    {
-      value: 'COVER',
-      text:'Cover'
-    }
-  ]
 
   return (
       image ? (
         <div
-          style={image.style == 'COVER' ? {width: "100%"} : {}}
+          style={isCoverImageStyle ? {width: "100%"} : {}}
           className={classnames(styles.imageWrapper, { [styles.imageWrapper_border]: !isPlaybackMode})}
         >
           <ImageDisplay
@@ -64,15 +56,18 @@ const SegmentImage = () => {
                   className={styles.removeButton_icon}
                   onClick={removeImage}
                   icon={faTimes}
-                  size="1x"
+                  size="2x"
                 />
               </button>
 
-              <ToggleButton
-                contents={styleToggleContent}
-                onToggle={setImageStyle}
-                checkedValue={image.style || 'FIT'}
-              />
+              <button className={styles.removeButton}>
+                <FontAwesomeIcon
+                  className={styles.removeButton_icon}
+                  onClick={setImageStyle}
+                  icon={isCoverImageStyle ? faCompressAlt : faExpandAlt}
+                  size="2x"
+                />
+              </button>
             </div>
           )}
         </div>
