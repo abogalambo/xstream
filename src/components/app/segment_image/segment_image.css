@@ -1,0 +1,36 @@
+.segmentImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: flex 0.5s ease-out;
+}
+
+/*Image Section*/
+.imageWrapper {
+  height: 100%;
+  position: relative;
+}
+
+.imageWrapper_border {
+  border: 1px dotted var(--primaryColor);
+}
+
+.removeButton {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 3px 5px;
+  border-radius: var(--roundCorner);
+  position: absolute;
+  cursor: pointer;
+  top: 20px;
+  right: 20px;
+}
+
+.removeButton_icon {
+  color: var(--primaryColor);
+}
+
+.removeButton:active .removeButton_icon {
+  color: var(--primaryColor_light);
+}
