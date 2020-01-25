@@ -193,7 +193,7 @@ const currentStream = (state = null, action) => {
       if(segments[skippedOverIndex] && segments[selectedIndex]) {
         return {
           ...state,
-          segments: reorder(segments, skippedOverIndex, selectedIndex)
+          segments: reorder([...segments], skippedOverIndex, selectedIndex)
         }
       }else{
         return state
