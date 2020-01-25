@@ -51,18 +51,16 @@ const SegmentImage = () => {
           />
           { !isPlaybackMode && (
             <div className={styles.imageControls}>
-              <button className={styles.removeButton}>
+              <button>
                 <FontAwesomeIcon
-                  className={styles.removeButton_icon}
                   onClick={removeImage}
                   icon={faTimes}
                   size="2x"
                 />
               </button>
 
-              <button className={styles.removeButton}>
+              <button>
                 <FontAwesomeIcon
-                  className={styles.removeButton_icon}
                   onClick={setImageStyle}
                   icon={isCoverImageStyle ? faCompressAlt : faExpandAlt}
                   size="2x"
