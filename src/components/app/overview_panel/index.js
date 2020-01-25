@@ -101,7 +101,6 @@ const OverviewPanel = () => {
                     onSegmentClick={() => dispatch(goToSegment(index))}
                     onRemoveSegmentClick={() => dispatch(removeSegment(index))}
                     isPlaybackMode={isPlaybackMode}
-                    draggable="true"
                     onDragStart={onDragStart}
                     onDragEnd={onDragEnd}
                     isDragging={isDragging(index)}

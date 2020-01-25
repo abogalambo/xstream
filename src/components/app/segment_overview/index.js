@@ -16,7 +16,6 @@ const SegmentOverview = ({
   onRemoveSegmentClick,
   isPlaybackMode,
   dataId,
-  draggable,
   onDragStart,
   onDragEnd,
   isDragging
@@ -40,7 +39,7 @@ const SegmentOverview = ({
       ref={htmlRef}
       data-id={dataId}
       onClick={onSegmentClick}
-      draggable={draggable}
+      draggable={!isPlaybackMode}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
@@ -70,7 +69,6 @@ SegmentOverview.propTypes = {
   isSelected: PropTypes.bool,
   isPlaybackMode: PropTypes.bool,
   dataId: PropTypes.number,
-  draggable: PropTypes.string,
   onDragStart: PropTypes.func,
   onDragEnd: PropTypes.func,
   isDragging: PropTypes.bool
