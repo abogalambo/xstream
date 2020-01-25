@@ -223,7 +223,6 @@ const currentStream = (state = null, action) => {
 
     case 'ADD_IMAGE':
     case 'REMOVE_IMAGE':
-    case 'REORDER_SEGMENTS':
     case 'SET_IMAGE_CAPTION':
     case 'SET_IMAGE_STYLE':
     case 'SET_SEGMENT_TEXT': {
