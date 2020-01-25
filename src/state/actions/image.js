@@ -16,3 +16,11 @@ export const setImageCaption = (caption) => ({
     timestamp: (new Date).getTime()
   }
 })
+
+export const setImageStyle = (style) => ({
+  type: 'SET_IMAGE_STYLE',
+  payload: {
+    style,
+    timestamp: (new Date).getTime()
+  }
+})

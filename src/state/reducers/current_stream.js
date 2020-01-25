@@ -121,7 +121,7 @@ const currentStream = (state = null, action) => {
 
     case 'TOGGLE_MODE': {
       if(canToggleMode(state)){
-        const { mode, currentSegment } = state
+        const { mode } = state
         const newMode = (mode == "compose") ? "playback" : "compose"
         return updateObject(state, {
           mode: newMode,
@@ -205,6 +205,7 @@ const currentStream = (state = null, action) => {
     case 'ADD_IMAGE':
     case 'REMOVE_IMAGE':
     case 'SET_IMAGE_CAPTION':
+    case 'SET_IMAGE_STYLE':
     case 'SET_SEGMENT_TEXT': {
       const { segments, currentSegment } = state
       const currentIndex = currentSegment.index

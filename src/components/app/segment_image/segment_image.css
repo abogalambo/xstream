@@ -1,0 +1,28 @@
+.imageWrapper {
+  height: 100%;
+  position: relative;
+}
+
+.imageWrapper_border {
+  border: 1px dotted var(--primaryColor);
+}
+
+.imageControls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  margin: 10px 10px;
+  border-radius: var(--roundCorner);
+  background-color: var(--onBgColor_light);
+}
+
+.imageControls button{
+  width: 40px;
+  height: 40px;
+  color: var(--onBgColor_dark);
+}
+
+.imageControls button:active, .imageControls button:hover{
+  color: var(--onPrimary);
+}

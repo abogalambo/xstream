@@ -10,6 +10,7 @@ const segmentReducer = (state, action) => {
         image: {
           src,
           mediaKey,
+          style: 'FIT',
           isPersisted: false
         }
       })
@@ -34,6 +35,19 @@ const segmentReducer = (state, action) => {
         return updateObject(state, {
           image: newImage
         })
+      }
+    }
+
+    case 'SET_IMAGE_STYLE': {
+      const { style } = payload
+      if(!['COVER', 'FIT'].includes(style)) return state
+
+      return {
+        ...state,
+        image: {
+          ...state.image,
+          style
+        }
       }
     }
 
