@@ -12,6 +12,7 @@ const persistenceReducer = (state = initialState, action) => {
   switch (type) {
     case 'ADD_SEGMENT':
     case 'REMOVE_SEGMENT':
+    case 'REORDER_SEGMENTS':
     case 'REMOVE_IMAGE':
     case 'SET_IMAGE_CAPTION':
     case 'SET_IMAGE_STYLE':
