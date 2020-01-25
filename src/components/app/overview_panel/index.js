@@ -41,7 +41,7 @@ const OverviewPanel = () => {
   const onAddSegmentClick = () => dispatch(addSegment())
 
   const onDragStart = (e) => {
-		setDraggedItem(e.currentTarget)
+    setDraggedItem(e.currentTarget)
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData("text/html", e.currentTarget)
   }
@@ -53,7 +53,7 @@ const OverviewPanel = () => {
 
   const onDragEnd = () => {
     const skippedOverIndex = Number(skippedOverItem.dataset.id)
-		const draggedIndex = Number(draggedItem.dataset.id)
+    const draggedIndex = Number(draggedItem.dataset.id)
     dispatch(reorderSegments(skippedOverIndex, draggedIndex))
     setDraggedItem(null)
     setSkippedOverItem(null)
@@ -89,24 +89,21 @@ const OverviewPanel = () => {
                 isSelected={showCover}
                 onCoverClick={() => dispatch(goToSegment(-1))}
               />
-              <div className={styles.reorderContainer}
-                onDragOver={onDragOver}
-              >
-                {segments.map((segment, index) => (
-                  <SegmentOverview
-                    key={`overview_panel_${segment.timestamp}`}
-                    dataId={index}
-                    segment={segment}
-                    isSelected={index == currentIndex}
-                    onSegmentClick={() => dispatch(goToSegment(index))}
-                    onRemoveSegmentClick={() => dispatch(removeSegment(index))}
-                    isPlaybackMode={isPlaybackMode}
-                    onDragStart={onDragStart}
-                    onDragEnd={onDragEnd}
-                    isDragging={isDragging(index)}
-                  />
-                ))}
-              </div>
+              {segments.map((segment, index) => (
+                <SegmentOverview
+                  key={`overview_panel_${segment.timestamp}`}
+                  dataId={index}
+                  segment={segment}
+                  isSelected={index == currentIndex}
+                  onSegmentClick={() => dispatch(goToSegment(index))}
+                  onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+                  isPlaybackMode={isPlaybackMode}
+                  onDragOver={onDragOver}
+                  onDragStart={onDragStart}
+                  onDragEnd={onDragEnd}
+                  isDragging={isDragging(index)}
+                />
+              ))}
             </div>
 
             <div className={styles.overviewPanel_divider}></div>
