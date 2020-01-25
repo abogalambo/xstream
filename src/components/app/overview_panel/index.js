@@ -57,7 +57,6 @@ const OverviewPanel = () => {
     dispatch(reorderSegments(skippedOverIndex, draggedIndex))
     setDraggedItem(null)
     setSkippedOverItem(null)
-    console.log(segments)
   }
 
   const isDragging = (index) => {
