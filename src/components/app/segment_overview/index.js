@@ -9,13 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({
-  segment,
-  isSelected,
-  onSegmentClick,
-  onRemoveSegmentClick,
-  isPlaybackMode
-}) => {
+const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick, isPlaybackMode}) => {
   const htmlRef = useRef(null)
 
   useEffect(() => {
@@ -28,8 +22,7 @@ const SegmentOverview = ({
     <div
       className={classnames(
         styles.segmentOverview,
-        { [styles.selected]: isSelected
-        }
+        { [styles.selected]: isSelected }
       )}
       ref={htmlRef}
       onClick={onSegmentClick}
