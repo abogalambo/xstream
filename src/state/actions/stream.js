@@ -58,11 +58,11 @@ export const removeSegment = (index) => ({
   }
 })
 
-export const reorderSegments = (skippedOverIndex, selectedIndex) => ({
+export const reorderSegments = (oldIndex, newIndex) => ({
   type: 'REORDER_SEGMENTS',
   payload: {
-    skippedOverIndex,
-    selectedIndex,
+    oldIndex,
+    newIndex,
     timestamp: (new Date).getTime()
   }
 })

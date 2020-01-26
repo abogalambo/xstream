@@ -65,7 +65,9 @@ const OverviewPanel = () => {
     );
   });
 
-  const onSortEnd = () => dispatch(reorderSegments())
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    dispatch(reorderSegments(oldIndex, newIndex))
+  }
 
   useEffect(() => {
     if(isPlaybackMode) {
