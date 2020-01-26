@@ -53,7 +53,7 @@ const OverviewPanel = () => {
 
   const SortableSegmentList = SortableContainer(({segments}) => {
     return (
-      <div>
+      <div className={styles.sortableContainer}>
         {segments.map((segment, index) => (
           <SortableSegment
             key={`overview_panel_${segment.timestamp}`}
@@ -93,9 +93,11 @@ const OverviewPanel = () => {
                 onCoverClick={() => dispatch(goToSegment(-1))}
               />
               <SortableSegmentList
+                helperClass={styles.draggedSegment}
                 segments={segments}
                 onSortEnd={onSortEnd}
-                pressDelay={200}
+                distance={3}
+                lockAxis={'y'}
               />
             </div>
 
