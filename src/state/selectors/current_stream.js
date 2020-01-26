@@ -1,3 +1,5 @@
+import { streamDuration, segmentDuration } from '../../lib/stream_duration'
+
 export const currentStreamSelector = (state) => state.currentStream
 
 export const currentSegmentSelector = (state) => (currentStreamSelector(state) || {}).currentSegment
@@ -52,20 +54,7 @@ export const audioDataSelector = (state) => currentSegmentDataSelector(state).au
 
 export const canRecordSelector = (state) => !audioDataSelector(state)
 
-export const segmentDurationSelector = (state) => {
-  const segment = currentSegmentDataSelector(state)
-  return segmentDuration(segment)
-}
-
-const segmentDuration = (segment) => {
-  const { audio, text, image } = segment
-  return (
-    (audio && audio.duration) ||
-    (text && timeForText(text, 1000)) ||
-    (image && timeForText(image.caption, 0) + 2000) ||
-    1000
-  )
-}
+export const segmentDurationSelector = (state) => segmentDuration(currentSegmentDataSelector(state))
 
 const mediaResourceForServer = (media) => {
   const { isPersisted, url, src, ...rest } = media
@@ -92,11 +81,6 @@ export const autosaveParamsSelector = (state) => {
   })
 
   return { id, title, cover: remoteCover, segments: remoteSegments }
-}
-
-const timeForText = (text = '', minimum) => {
-  const millisecondsPerCharacter = 60
-  return Math.max(millisecondsPerCharacter * text.length, minimum)
 }
 
 export const segmentImageUploadKeySelector = (state) => {
@@ -141,24 +125,16 @@ export const mediaKeysSelector = (state) => {
 export const streamProgressSelector = (state) => {
   const index = indexSelector(state)
 
-  const streamDuration = segmentsSelector(state).reduce(
-    (totalTime, segment) => totalTime + segmentDuration(segment),
-    0
-  )
-
-  const currentDuration = segmentsSelector(state).slice(0, index).reduce(
-    (totalTime, segment) => totalTime + segmentDuration(segment),
-    0
-  )
+  const segments = segmentsSelector(state)
 
   const { playingStartedAt, playingOffset } = currentSegmentSelector(state)
 
   return {
     index,
-    streamDuration,
-    currentDuration,
-    playingStartedAt,
     playingOffset,
-    isPlaying: isPlayingSelector(state)
+    playingStartedAt,
+    isPlaying: isPlayingSelector(state),
+    streamDuration: streamDuration(segments),
+    currentDuration: streamDuration(segments, index)
   }
 }
