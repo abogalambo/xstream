@@ -74,7 +74,6 @@ const PlainOverviewPanel = () => {
               {segments.map((segment, index) => (
                 <SegmentOverview
                   index={index}
-                  disabled={isPlaybackMode}
                   key={`overview_panel_${segment.timestamp}`}
                   segment={segment}
                   isSelected={index == currentIndex}
