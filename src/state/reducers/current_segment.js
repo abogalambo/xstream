@@ -142,6 +142,30 @@ const currentSegment = (state = null, action, currentStream) => {
       })
     }
 
+    case 'REORDER_SEGMENTS': {
+      const { oldIndex, newIndex } = payload
+      const { index } = state
+
+      let nextIndex = index
+
+      if(oldIndex == index) {
+        nextIndex = newIndex
+      }
+
+      if(oldIndex < index && newIndex >= index) {
+        nextIndex = index - 1
+      }
+
+      if(oldIndex > index && newIndex <= index) {
+        nextIndex = index + 1
+      }
+
+      return {
+        ...state,
+        index: nextIndex
+      }
+    }
+
     default:
       return state
   }

@@ -187,13 +187,14 @@ const currentStream = (state = null, action) => {
     }
 
     case 'REORDER_SEGMENTS': {
-      const { segments } = state
+      const { segments, currentSegment } = state
       const { oldIndex, newIndex } = payload
 
       if(segments[oldIndex] && segments[newIndex]) {
         return {
           ...state,
-          segments: reorder([...segments], oldIndex, newIndex)
+          segments: reorder([...segments], oldIndex, newIndex),
+          currentSegment: currentSegmentReducer(currentSegment, action)
         }
       }else{
         return state
