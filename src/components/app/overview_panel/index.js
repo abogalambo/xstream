@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import {SortableContainer, SortableElement} from 'react-sortable-hoc';
+import { useSelector, useDispatch } from 'react-redux'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -27,7 +27,27 @@ import CoverOverview from '../cover_overview'
 import classnames from 'classnames'
 import styles from './overview_panel.css'
 
+const SortableSegmentOverview = SortableElement(SegmentOverview)
+
 const OverviewPanel = () => {
+  const dispatch = useDispatch()
+
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    if(oldIndex === newIndex) return
+    dispatch(reorderSegments(oldIndex, newIndex))
+  }
+
+  return (
+    <SortableSegmentList
+      onSortEnd={onSortEnd}
+      helperClass={styles.draggedSegment}
+      distance={3}
+      lockAxis={'y'}
+    />
+  )
+}
+
+const SortableSegmentList = SortableContainer(() => {
   const [ isCollapsed, setisCollapsed] = useState(true)
 
   const segments = useSelector(segmentsSelector)
@@ -38,38 +58,6 @@ const OverviewPanel = () => {
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
-
-  const SortableSegment = SortableElement(({segment, sortIndex}) => (
-    <SegmentOverview
-      key={`overview_panel_${segment.timestamp}`}
-      disable={isPlaybackMode}
-      segment={segment}
-      isSelected={sortIndex == currentIndex}
-      onSegmentClick={() => dispatch(goToSegment(sortIndex))}
-      onRemoveSegmentClick={() => dispatch(removeSegment(sortIndex))}
-      isPlaybackMode={isPlaybackMode}
-   />
- ));
-
-  const SortableSegmentList = SortableContainer(({segments}) => {
-    return (
-      <div className={styles.sortableContainer}>
-        {segments.map((segment, index) => (
-          <SortableSegment
-            key={`overview_panel_${segment.timestamp}`}
-            index={index}
-            segment={segment}
-            sortIndex={index}
-          />
-        ))}
-      </div>
-    );
-  });
-
-  const onSortEnd = ({oldIndex, newIndex}) => {
-    if(oldIndex === newIndex) return
-    dispatch(reorderSegments(oldIndex, newIndex))
-  }
 
   useEffect(() => {
     if(isPlaybackMode) {
@@ -92,13 +80,19 @@ const OverviewPanel = () => {
                 isSelected={showCover}
                 onCoverClick={() => dispatch(goToSegment(-1))}
               />
-              <SortableSegmentList
-                helperClass={styles.draggedSegment}
-                segments={segments}
-                onSortEnd={onSortEnd}
-                distance={3}
-                lockAxis={'y'}
-              />
+              
+              {segments.map((segment, index) => (
+                <SortableSegmentOverview
+                  index={index}
+                  disabled={isPlaybackMode}
+                  key={`overview_panel_${segment.timestamp}`}
+                  segment={segment}
+                  isSelected={index == currentIndex}
+                  onSegmentClick={() => dispatch(goToSegment(index))}
+                  onRemoveSegmentClick={() => dispatch(removeSegment(index))}
+                  isPlaybackMode={isPlaybackMode}
+                />
+              ))}
             </div>
 
             <div className={styles.overviewPanel_divider}></div>
@@ -126,6 +120,6 @@ const OverviewPanel = () => {
       </button>
     </div>
   )
-}
+})
 
 export default OverviewPanel
