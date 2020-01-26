@@ -42,6 +42,7 @@ const OverviewPanel = () => {
   const SortableSegment = SortableElement(({segment, sortIndex}) => (
     <SegmentOverview
       key={`overview_panel_${segment.timestamp}`}
+      disable={isPlaybackMode}
       segment={segment}
       isSelected={sortIndex == currentIndex}
       onSegmentClick={() => dispatch(goToSegment(sortIndex))}
@@ -94,6 +95,7 @@ const OverviewPanel = () => {
               <SortableSegmentList
                 segments={segments}
                 onSortEnd={onSortEnd}
+                pressDelay={200}
               />
             </div>
 
