@@ -14,12 +14,7 @@ const SegmentOverview = ({
   isSelected,
   onSegmentClick,
   onRemoveSegmentClick,
-  isPlaybackMode,
-  dataId,
-  onDragOver,
-  onDragStart,
-  onDragEnd,
-  isDragging
+  isPlaybackMode
 }) => {
   const htmlRef = useRef(null)
 
@@ -33,17 +28,11 @@ const SegmentOverview = ({
     <div
       className={classnames(
         styles.segmentOverview,
-        { [styles.selected]: isSelected,
-          [styles.dragging]: isDragging
+        { [styles.selected]: isSelected
         }
       )}
       ref={htmlRef}
-      data-id={dataId}
       onClick={onSegmentClick}
-      draggable={!isPlaybackMode}
-      onDragOver={onDragOver}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
     >
       <p className={styles.segmentOverviewText}>{ segment.text }</p>
       { segment.image && (
@@ -69,12 +58,7 @@ SegmentOverview.propTypes = {
   onSegmentClick: PropTypes.func.isRequired,
   onRemoveSegmentClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,
-  isPlaybackMode: PropTypes.bool,
-  dataId: PropTypes.number,
-  onDragOver: PropTypes.func,
-  onDragStart: PropTypes.func,
-  onDragEnd: PropTypes.func,
-  isDragging: PropTypes.bool
+  isPlaybackMode: PropTypes.bool
 }
 
 export default SegmentOverview

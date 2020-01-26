@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -28,8 +29,6 @@ import styles from './overview_panel.css'
 
 const OverviewPanel = () => {
   const [ isCollapsed, setisCollapsed] = useState(true)
-  const [ draggedItem, setDraggedItem ] = useState()
-  const [ skippedOverItem, setSkippedOverItem ] = useState()
 
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
@@ -40,32 +39,33 @@ const OverviewPanel = () => {
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
 
-  const onDragStart = (e) => {
-    setDraggedItem(e.currentTarget)
-    e.dataTransfer.effectAllowed = 'move'
-    e.dataTransfer.setData("text/html", e.currentTarget)
-  }
+  const SortableSegment = SortableElement(({segment, sortIndex}) => (
+    <SegmentOverview
+      key={`overview_panel_${segment.timestamp}`}
+      segment={segment}
+      isSelected={sortIndex == currentIndex}
+      onSegmentClick={() => dispatch(goToSegment(sortIndex))}
+      onRemoveSegmentClick={() => dispatch(removeSegment(sortIndex))}
+      isPlaybackMode={isPlaybackMode}
+   />
+ ));
 
-  const onDragOver = (e) => {
-     e.preventDefault()
-     setSkippedOverItem(e.target)
-  }
+  const SortableSegmentList = SortableContainer(({segments}) => {
+    return (
+      <div>
+        {segments.map((segment, index) => (
+          <SortableSegment
+            key={`overview_panel_${segment.timestamp}`}
+            index={index}
+            segment={segment}
+            sortIndex={index}
+          />
+        ))}
+      </div>
+    );
+  });
 
-  const onDragEnd = () => {
-    const skippedOverIndex = Number(skippedOverItem.dataset.id)
-    const draggedIndex = Number(draggedItem.dataset.id)
-    dispatch(reorderSegments(skippedOverIndex, draggedIndex))
-    setDraggedItem(null)
-    setSkippedOverItem(null)
-  }
-
-  const isDragging = (index) => {
-    if(draggedItem) {
-      return index == Number(draggedItem.dataset.id) ? true : false
-    } else {
-      return false
-    }
-  }
+  const onSortEnd = () => dispatch(reorderSegments())
 
   useEffect(() => {
     if(isPlaybackMode) {
@@ -88,21 +88,10 @@ const OverviewPanel = () => {
                 isSelected={showCover}
                 onCoverClick={() => dispatch(goToSegment(-1))}
               />
-              {segments.map((segment, index) => (
-                <SegmentOverview
-                  key={`overview_panel_${segment.timestamp}`}
-                  dataId={index}
-                  segment={segment}
-                  isSelected={index == currentIndex}
-                  onSegmentClick={() => dispatch(goToSegment(index))}
-                  onRemoveSegmentClick={() => dispatch(removeSegment(index))}
-                  isPlaybackMode={isPlaybackMode}
-                  onDragOver={onDragOver}
-                  onDragStart={onDragStart}
-                  onDragEnd={onDragEnd}
-                  isDragging={isDragging(index)}
-                />
-              ))}
+              <SortableSegmentList
+                segments={segments}
+                onSortEnd={onSortEnd}
+              />
             </div>
 
             <div className={styles.overviewPanel_divider}></div>
