@@ -66,6 +66,7 @@ const OverviewPanel = () => {
   });
 
   const onSortEnd = ({oldIndex, newIndex}) => {
+    if(oldIndex === newIndex) return
     dispatch(reorderSegments(oldIndex, newIndex))
   }
 
