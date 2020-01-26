@@ -18,7 +18,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
   }, [isEditing])
 
   const handleOnFocus = (e) => {
-    setIsEditing(true)
+    setIsEditing(!readOnly)
     onFocus && onFocus(e)
   }
 
@@ -28,13 +28,13 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
   }
 
   const handleOnClick = () => {
-    setIsEditing(true)
+    setIsEditing(!readOnly)
   }
 
   const hideTextArea = !isEditing && value
 
   return (
-    <>
+    <div className={styles.wrapper}>
       {(readOnly || hideTextArea) && (
         <div
           className={styles.textDisplay}
@@ -46,33 +46,32 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
       )}
 
       {!readOnly && (
-        <div>
-          <textarea
-            className={classnames(
-              styles.textDisplay,
-              styles.textInput,
-              {
-                [styles.editing]: value && isEditing,
-                [styles.hidden]: hideTextArea
-              }
-            )}
-            ref={textAreaRef}
-            value={value}
-            disabled={readOnly}
-            wrap="hard"
-            style={fontStyle(value, minSize, maxSize, maxChars)}
-            onFocus={handleOnFocus}
-            onBlur={handleOnBlur}
-            maxLength={maxChars}
-            placeholder={prompt}
-            onChange={onChange}
-          />
-          {isEditing && (
-            <span>{maxChars - (value || "").length}</span>
+        <textarea
+          className={classnames(
+            styles.textDisplay,
+            styles.textInput,
+            {
+              [styles.editing]: value && isEditing,
+              [styles.hidden]: hideTextArea
+            }
           )}
-        </div>
+          ref={textAreaRef}
+          value={value}
+          disabled={readOnly}
+          wrap="hard"
+          style={fontStyle(value, minSize, maxSize, maxChars)}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
+          maxLength={maxChars}
+          placeholder={prompt}
+          onChange={onChange}
+        />
       )}
-    </>
+
+      {isEditing && (
+        <span>{maxChars - (value || "").length}</span>
+      )}
+    </div>
   )
 }
 
