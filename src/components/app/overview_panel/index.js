@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPlus,
@@ -10,8 +11,8 @@ import {
   addSegment,
   removeSegment,
   goToSegment,
+  reorderSegments
 } from '../../../state/actions/stream'
-
 import {
   segmentsSelector,
   indexSelector,
@@ -19,14 +20,25 @@ import {
   coverDataSelector,
   showCoverSelector
 } from '../../../state/selectors/current_stream'
-
-import SegmentOverview from '../segment_overview'
+import PlainSegmentOverview from '../segment_overview'
 import CoverOverview from '../cover_overview'
-import classnames from 'classnames'
 import styles from './overview_panel.css'
 
-const OverviewPanel = () => {
-  const [ isCollapsed, setisCollapsed] = useState(true)
+const SortableSegmentOverview = SortableElement(PlainSegmentOverview)
+
+const SegmentOverview = (props) => {
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const { index, ...plainProps } = props
+
+  return isPlaybackMode ? (
+    <PlainSegmentOverview {...plainProps} />
+  ) : (
+    <SortableSegmentOverview {...props} />
+  )
+}
+
+const PlainOverviewPanel = () => {
+  const [ isCollapsed, setisCollapsed ] = useState(true)
 
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
@@ -58,8 +70,10 @@ const OverviewPanel = () => {
                 isSelected={showCover}
                 onCoverClick={() => dispatch(goToSegment(-1))}
               />
+              
               {segments.map((segment, index) => (
                 <SegmentOverview
+                  index={index}
                   key={`overview_panel_${segment.timestamp}`}
                   segment={segment}
                   isSelected={index == currentIndex}
@@ -94,6 +108,28 @@ const OverviewPanel = () => {
           icon={faChevronLeft} />
       </button>
     </div>
+  )
+}
+
+const SortableOverviewPanel = SortableContainer(PlainOverviewPanel)
+
+const OverviewPanel = () => {
+  const dispatch = useDispatch()
+  const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    if(oldIndex === newIndex) return
+    dispatch(reorderSegments(oldIndex, newIndex))
+  }
+
+  return isPlaybackMode ? (
+    <PlainOverviewPanel />
+  ) : (
+    <SortableOverviewPanel
+      onSortEnd={onSortEnd}
+      helperClass={styles.draggedSegment}
+      distance={3}
+      lockAxis={'y'}
+    />
   )
 }
 

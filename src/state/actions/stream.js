@@ -58,6 +58,15 @@ export const removeSegment = (index) => ({
   }
 })
 
+export const reorderSegments = (oldIndex, newIndex) => ({
+  type: 'REORDER_SEGMENTS',
+  payload: {
+    oldIndex,
+    newIndex,
+    timestamp: (new Date).getTime()
+  }
+})
+
 export const segmentEnded = () => ({
   type: 'SEGMENT_ENDED',
   payload: {

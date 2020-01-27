@@ -61,6 +61,11 @@
   max-height: calc(95% - 36px - 19.55px); /*divider + addBtn*/
 }
 
+.draggedSegment {
+  pointer-events: auto !important;
+  cursor: grabbing;
+}
+
 .overviewPanel_divider {
   background: #5f5f5f;
   height: 1px;
@@ -68,7 +73,7 @@
   margin: 20px auto 15px auto;
 }
 
-.overviewPanel_addBtn  {
+.overviewPanel_addBtn {
   display: block;
   padding: 3px 8px;
   margin: 0 auto;
