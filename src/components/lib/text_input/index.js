@@ -18,7 +18,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
   }, [isEditing])
 
   const handleOnFocus = (e) => {
-    setIsEditing(true)
+    setIsEditing(!readOnly)
     onFocus && onFocus(e)
   }
 
@@ -28,13 +28,13 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
   }
 
   const handleOnClick = () => {
-    setIsEditing(true)
+    setIsEditing(!readOnly)
   }
 
   const hideTextArea = !isEditing && value
 
   return (
-    <>
+    <div className={styles.wrapper}>
       {(readOnly || hideTextArea) && (
         <div
           className={styles.textDisplay}
@@ -67,7 +67,11 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
           onChange={onChange}
         />
       )}
-    </>
+
+      {isEditing && (
+        <span>{maxChars - (value || "").length}</span>
+      )}
+    </div>
   )
 }
 
