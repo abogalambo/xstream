@@ -97,3 +97,9 @@ button:enabled:hover .skipIcon,
   font-size: 1em;
   color: var(--onBgColor);
 }
+
+.remainingTime {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: 80px;
+}
