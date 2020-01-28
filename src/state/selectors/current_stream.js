@@ -1,4 +1,10 @@
-import { streamDuration, segmentDuration, remainingTime } from '../../lib/stream_duration'
+import {
+  streamDuration,
+  segmentDuration,
+  remainingTime,
+  remainingTimeWithoutIndex,
+  remainingCharCountWithoutIndex
+} from '../../lib/stream_duration'
 
 export const currentStreamSelector = (state) => state.currentStream
 
@@ -124,7 +130,6 @@ export const mediaKeysSelector = (state) => {
 
 export const streamProgressSelector = (state) => {
   const index = indexSelector(state)
-
   const segments = segmentsSelector(state)
 
   const { playingStartedAt, playingOffset } = currentSegmentSelector(state)
@@ -140,3 +145,15 @@ export const streamProgressSelector = (state) => {
 }
 
 export const remainingTimeSelector = (state) => remainingTime(segmentsSelector(state))
+
+export const remainingAudioTimeSelector = (state) => {
+  const index = indexSelector(state)
+  const segments = segmentsSelector(state)
+  return remainingTimeWithoutIndex(segments, index)
+}
+
+export const remainingCharCountSelector = (state) => {
+  const index = indexSelector(state)
+  const segments = segmentsSelector(state)
+  return remainingCharCountWithoutIndex(segments, index)
+}

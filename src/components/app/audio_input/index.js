@@ -12,7 +12,8 @@ import {
 } from '../../../state/actions/recorder'
 import {
   currentSegmentSelector,
-  segmentAudioUploadKeySelector
+  segmentAudioUploadKeySelector,
+  remainingAudioTimeSelector,
 } from '../../../state/selectors/current_stream'
 import styles from './audio_input.css'
 import RecordingService from '../../../lib/recorder'
@@ -22,7 +23,9 @@ import config from '../../../../config'
 const AudioInput = () => {
   const { recording, recordingStartedAt } = useSelector(currentSegmentSelector)
   const audioUploadKey = useSelector(segmentAudioUploadKeySelector)
+  const remainingAudioTime = useSelector(remainingAudioTimeSelector)
   const { maxDuration } = config.stream.audio
+  const durationLimit = Math.min(maxDuration, remainingAudioTime)
 
   const dispatch = useDispatch();
   const [recorder] = useState(new RecordingService({
@@ -33,7 +36,7 @@ const AudioInput = () => {
         recorder.blob,
         recorder.duration
     )),
-    maxDuration
+    maxDuration: durationLimit
   }))
 
   const onClick = recording ? (()=>recorder.stopRecording()) : (()=>recorder.startRecording())
@@ -45,7 +48,7 @@ const AudioInput = () => {
           startedAt={recordingStartedAt}
           isInProgress={recording}
           offset={0}
-          duration={maxDuration}
+          duration={durationLimit}
         />
         <FontAwesomeIcon
           className={classnames(
