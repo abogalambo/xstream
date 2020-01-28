@@ -5,6 +5,7 @@
 
 .remainingTime > span {
   color: var(--onBgColor);
+  width: 70px;
 }
 
 .remainingTime > svg {
