@@ -7,18 +7,35 @@ import {
 import config from '../../../../config'
 
 const RemainingTime = () => {
+  const radius = 8;
+  const circumference = 2 * Math.PI * radius
   const remainingTime = useSelector(remainingTimeSelector)
   const maxDuration = config.stream.maxDuration
 
   const streamDuration = maxDuration - remainingTime
-  const percent = 100 * streamDuration / maxDuration
+  const ratio = streamDuration / maxDuration
+  const progress = Math.min(1, ratio) * circumference / 2
 
-  const readableStreamDuration = stringFormat(streamDuration)
-  const readableMaxDuration = stringFormat(maxDuration)
-
+  const readableRemainingTime = stringFormat(remainingTime)
+  
   return (
     <div className={styles.remainingTime}>
-      <span>{`${readableStreamDuration} / ${readableMaxDuration}`}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <circle className={styles.outer}
+          cx={"50%"}
+          cy={"50%"}
+          r={radius}
+          fill="transparent"
+        />
+        <circle className={styles.inner}
+          cx={"50%"}
+          cy={"50%"}
+          r={radius / 2}
+          strokeDasharray={`${progress} ${circumference}`}
+          transform="rotate(-90) translate(-20)"
+        />
+      </svg>
+      <span>{`${readableRemainingTime} left`}</span>
     </div>
   )
 }

@@ -1,3 +1,28 @@
 .remainingTime {
-  
+  display: flex;
+  align-items: center;
+}
+
+.remainingTime > span {
+  color: var(--onBgColor);
+}
+
+.remainingTime > svg {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.remainingTime circle {
+  stroke: var(--primaryColor);
+}
+
+.outer {
+  fill: transparent;
+  stroke-width: 2;
+}
+
+.inner {
+  fill: transparent;fill: transparent;
+  stroke-width: 8;
 }
