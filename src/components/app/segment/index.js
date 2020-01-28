@@ -9,6 +9,7 @@ import {
   indexSelector,
   isPlaybackModeSelector,
   currentSegmentDataSelector,
+  remainingCharCountSelector
 } from '../../../state/selectors/current_stream'
 import { setSegmentText } from '../../../state/actions/segment'
 import {
@@ -24,6 +25,7 @@ import config from '../../../../config'
 const Segment = () => {
   const { text, image } = useSelector(currentSegmentDataSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const remainingCharCount = useSelector(remainingCharCountSelector)
   const index = useSelector(indexSelector)
 
   const dispatch = useDispatch();
@@ -34,6 +36,8 @@ const Segment = () => {
 
   const textDisplayed = !image && (!isPlaybackMode || text)
   const imageDisplayed = !text && (!isPlaybackMode || image)
+
+  const maxChars = Math.min(config.stream.text.maxLength, remainingCharCount)
 
   return (
     <div className={classnames(
@@ -64,7 +68,7 @@ const Segment = () => {
             onChange={onTextChange}
             onFocus={startTyping}
             onBlur={stopTyping}
-            maxChars={config.stream.text.maxLength}
+            maxChars={maxChars}
             prompt="Write something..."
             readOnly={isPlaybackMode}
           />
