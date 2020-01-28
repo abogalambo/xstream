@@ -1,4 +1,4 @@
-import { streamDuration, segmentDuration } from '../../lib/stream_duration'
+import { streamDuration, segmentDuration, remainingTime } from '../../lib/stream_duration'
 
 export const currentStreamSelector = (state) => state.currentStream
 
@@ -138,3 +138,5 @@ export const streamProgressSelector = (state) => {
     currentDuration: streamDuration(segments, index)
   }
 }
+
+export const remainingTimeSelector = (state) => remainingTime(segmentsSelector(state))
