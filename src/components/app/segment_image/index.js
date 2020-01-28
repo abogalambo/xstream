@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,19 +38,27 @@ const SegmentImage = () => {
     dispatch(setImageStyleAction(newStyle))
   }
 
+  const [ isHovered, setIsHovered ] = useState(false);
+  const handleMouseEnter = () => setIsHovered(true)
+  const handleMouseLeave = () => setIsHovered(false)
+
   return (
       image ? (
         <div
           style={isCoverImageStyle ? {width: "100%"} : {}}
           className={classnames(styles.imageWrapper, { [styles.imageWrapper_border]: !isPlaybackMode})}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <ImageDisplay
             {...image}
             editable={!isPlaybackMode}
             onEdit={setImageCaption}
           />
-          { !isPlaybackMode && (
-            <div className={styles.imageControls}>
+          { !isPlaybackMode && isHovered && (
+            <div
+              className={styles.imageControls}
+            >
               <button>
                 <FontAwesomeIcon
                   onClick={removeImage}
