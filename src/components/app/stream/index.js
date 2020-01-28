@@ -29,6 +29,7 @@ import Navigation from '../navigation'
 import AspectRatioBox from '../aspect_ratio_box'
 import ToggleButton from '../../lib/toggle_button'
 import StreamProgress from '../stream_progress'
+import RemainingTime from '../remaining_time'
 import styles from './stream.css'
 
 const Stream = () => {
@@ -84,6 +85,11 @@ const Stream = () => {
 
         {segment && (
           <>
+            {!isPlaybackMode && (
+              <div className={styles.remainingTime}>
+                <RemainingTime />
+              </div>
+            )}
             { isPlaybackMode && <StreamProgress /> }
             <div className={
               classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>

@@ -82,3 +82,9 @@
   top: 20px;
   right: 20px;
 }
+
+.remainingTime {
+  position: absolute;
+  top: 20px;
+  right: 145px;
+}
