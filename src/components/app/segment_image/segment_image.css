@@ -11,18 +11,24 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 40px;
-  margin: 10px 10px;
-  border-radius: var(--roundCorner);
-  background-color: var(--onBgColor_light);
+  width: 30px;
 }
 
 .imageControls button{
-  width: 40px;
-  height: 40px;
-  color: var(--onBgColor_dark);
+  color: rgba(255, 255, 255, 0.67);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.77);
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
 }
 
-.imageControls button:active, .imageControls button:hover{
-  color: var(--onPrimary);
+.imageControls button:last-child {
+  border-bottom-left-radius: var(--roundCorner);
+}
+
+.imageControls button:hover,
+.imageControls button:active {
+  color: white;
 }

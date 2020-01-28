@@ -63,7 +63,6 @@ const SegmentImage = () => {
                 <FontAwesomeIcon
                   onClick={removeImage}
                   icon={faTimes}
-                  size="2x"
                 />
               </button>
 
@@ -71,7 +70,6 @@ const SegmentImage = () => {
                 <FontAwesomeIcon
                   onClick={setImageStyle}
                   icon={isCoverImageStyle ? faCompressAlt : faExpandAlt}
-                  size="2x"
                 />
               </button>
             </div>
