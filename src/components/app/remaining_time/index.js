@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import classnames from 'classnames'
 import styles from './remaining_time.css'
 import {
   remainingTimeSelector
@@ -13,13 +14,19 @@ const RemainingTime = () => {
   const maxDuration = config.stream.maxDuration
 
   const streamDuration = maxDuration - remainingTime
-  const ratio = streamDuration / maxDuration
-  const progress = Math.min(1, ratio) * circumference / 2
+  const ratio = Math.min(1, streamDuration / maxDuration)
+  const progress = ratio * circumference / 2
 
   const readableRemainingTime = stringFormat(remainingTime)
   
   return (
-    <div className={styles.remainingTime}>
+    <div className={classnames(
+      styles.remainingTime, {
+        [styles.green]: remainingTime >= 60000,
+        [styles.yellow]: remainingTime < 60000 && remainingTime >= 1000,
+        [styles.red]: remainingTime < 1000
+      }
+    )}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
         <circle className={styles.outer}
           cx={"50%"}
