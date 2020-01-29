@@ -62,16 +62,24 @@
 
 /*Remove Segment Btn*/
 .removeSegmentBtn {
-  position: absolute;
   width: 40px;
   height: 40px;
   background-color: var(--onBgColor_light);
-  border-radius: 40px;
-  top: -20px;
-  left: -20px;
+  border-bottom-right-radius: var(--roundCorner);
+  border-top-left-radius: 2px;
+  position: absolute;
+  left: 0;
   z-index: 1;
+  transition: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.removeSegmentBtn:hover .removeSegmentBtn_icon {
+  color: var(--onPrimary);
 }
 
 .removeSegmentBtn_icon {
   font-size: 1.3em;
+  color: var(--onBgColor_dark);
 }
