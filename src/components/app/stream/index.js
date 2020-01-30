@@ -26,6 +26,7 @@ import MediaCleaner from '../media_cleaner'
 import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Navigation from '../navigation'
+import AspectRatioBox from '../aspect_ratio_box'
 import ToggleButton from '../../lib/toggle_button'
 import StreamProgress from '../stream_progress'
 import styles from './stream.css'
@@ -86,12 +87,14 @@ const Stream = () => {
             { isPlaybackMode && <StreamProgress /> }
             <div className={
               classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
-              <Segment
-                index={index}
-                key={`segment_${segment.timestamp}`}
-                {...segment}
-                isPlaybackMode={isPlaybackMode}
-              />
+              <AspectRatioBox>
+                <Segment
+                  index={index}
+                  key={`segment_${segment.timestamp}`}
+                  {...segment}
+                  isPlaybackMode={isPlaybackMode}
+                />
+              </AspectRatioBox>
             </div>
             <div className={styles.footerContainer}>
               <Navigation />
