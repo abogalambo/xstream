@@ -14,6 +14,7 @@ import {
   currentSegmentSelector,
   segmentAudioUploadKeySelector,
   remainingAudioTimeSelector,
+  canRecordAudioSelector
 } from '../../../state/selectors/current_stream'
 import styles from './audio_input.css'
 import RecordingService from '../../../lib/recorder'
@@ -24,6 +25,7 @@ const AudioInput = () => {
   const { recording, recordingStartedAt } = useSelector(currentSegmentSelector)
   const audioUploadKey = useSelector(segmentAudioUploadKeySelector)
   const remainingAudioTime = useSelector(remainingAudioTimeSelector)
+  const canRecordAudio = useSelector(canRecordAudioSelector)
   const { maxDuration } = config.stream.audio
   const durationLimit = Math.min(maxDuration, remainingAudioTime)
 
@@ -39,10 +41,14 @@ const AudioInput = () => {
     maxDuration: durationLimit
   }))
 
-  const onClick = recording ? (()=>recorder.stopRecording()) : (()=>recorder.startRecording())
+  const onClick = recording ? () => recorder.stopRecording() : () => recorder.startRecording()
   const icon = recording ? faSquare : faMicrophone
   return (
-    <button onClick={onClick} className={styles.playerMain}>
+    <button
+      onClick={onClick}
+      className={styles.playerMain}
+      disabled={!canRecordAudio}
+    >
       <div className={styles.circleShadow}>
         <CircleMeter
           startedAt={recordingStartedAt}

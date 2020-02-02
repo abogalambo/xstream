@@ -59,8 +59,6 @@ export const canNextSelector = (state) => (
 
 export const audioDataSelector = (state) => currentSegmentDataSelector(state).audio
 
-export const canRecordSelector = (state) => !audioDataSelector(state)
-
 export const segmentDurationSelector = (state) => segmentDuration(currentSegmentDataSelector(state))
 
 const mediaResourceForServer = (media) => {
@@ -166,3 +164,9 @@ export const canAddImageSelector = (state) => {
 }
 
 export const canAddSegmentSelector = (state) => canAddContent(segmentsSelector(state))
+
+export const canRecordAudioSelector = (state) => {
+  const index = indexSelector(state)
+  const segments = segmentsSelector(state)
+  return canAddContent(segments, index, {audio: {duration: 1000}})
+}

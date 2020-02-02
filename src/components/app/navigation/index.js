@@ -18,7 +18,7 @@ import {
   indexSelector,
   currentSegmentDataSelector,
   segmentsSelector,
-  canRecordSelector,
+  audioDataSelector,
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
 import AudioInput from '../audio_input'
@@ -32,7 +32,7 @@ const Navigation = () => {
   const index = useSelector(indexSelector)
   const segment = useSelector(currentSegmentDataSelector)
   const segments = useSelector(segmentsSelector)
-  const canRecord = useSelector(canRecordSelector)
+  const audioData = useSelector(audioDataSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
   const dispatch = useDispatch();
@@ -57,11 +57,11 @@ const Navigation = () => {
         <div className={classnames(
           styles.playerContainer,
           {
-            [styles.playerContainer_entrance]: !canRecord && !isPlaybackMode,
-            [styles.playerContainer_departure]: canRecord && !isPlaybackMode && hadRecording
+            [styles.playerContainer_entrance]: audioData && !isPlaybackMode,
+            [styles.playerContainer_departure]: !audioData && !isPlaybackMode && hadRecording
           }
         )}>
-          {canRecord && !isPlaybackMode ? (
+          {!audioData && !isPlaybackMode ? (
             <AudioInput key={`recorder_${segment.timestamp}`} />
           ) : (
             <>
