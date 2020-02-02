@@ -73,6 +73,14 @@
   border-color: black;
 }
 
+.addSegmentBtn.disabled,
+.addSegmentBtn.disabled .addSegmentBtn_icon,
+.addSegmentBtn.disabled:hover,
+.addSegmentBtn.disabled:active {
+  color: var(--onBgColor_light);
+  border-color: var(--onBgColor_light);
+}
+
 /*Toggle Btn Container*/
 .toggleBtnContainer {
   position: absolute;

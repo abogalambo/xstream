@@ -18,7 +18,8 @@ import {
   isPlaybackModeSelector,
   canToggleModeSelector,
   indexSelector,
-  pageSelector
+  pageSelector,
+  canAddSegmentSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Autosave from '../autosave'
@@ -38,6 +39,7 @@ const Stream = () => {
   const canToggleMode = useSelector(canToggleModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
   const page = useSelector(pageSelector)
+  const canAddSegment = useSelector(canAddSegmentSelector)
   
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
@@ -106,8 +108,13 @@ const Stream = () => {
               <Navigation />
               {!isPlaybackMode && (
                 <button
-                  className={styles.addSegmentBtn}
-                  onClick={onAddSegmentClick}>
+                  className={classnames(
+                    styles.addSegmentBtn,
+                    {[styles.disabled]: !canAddSegment}
+                  )}
+                  disabled={!canAddSegment}
+                  onClick={onAddSegmentClick}
+                >
                   <FontAwesomeIcon
                     className={styles.addSegmentBtn_icon}
                     icon={faPlus} />
