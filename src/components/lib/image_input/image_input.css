@@ -48,3 +48,12 @@
   vertical-align: 3px;
   color: var(--onBgColor);
 }
+
+.disabled span,
+.disabled .imageInputIcon,
+.disabled:hover span,
+.disabled:hover .imageInputIcon
+{
+  color: var(--onBgColor_light);
+  cursor: default;
+}

@@ -10,7 +10,7 @@ import config from '../../../../config'
 const RemainingTime = () => {
   const radius = 8;
   const circumference = 2 * Math.PI * radius
-  const remainingTime = useSelector(remainingTimeSelector)
+  const remainingTime = Math.max(useSelector(remainingTimeSelector), 0)
   const maxDuration = config.stream.maxDuration
 
   const streamDuration = maxDuration - remainingTime

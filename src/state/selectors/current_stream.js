@@ -2,6 +2,7 @@ import {
   streamDuration,
   segmentDuration,
   remainingTime,
+  canAddContent,
   remainingTimeWithoutIndex,
   remainingCharCountWithoutIndex
 } from '../../lib/stream_duration'
@@ -157,3 +158,11 @@ export const remainingCharCountSelector = (state) => {
   const segments = segmentsSelector(state)
   return remainingCharCountWithoutIndex(segments, index)
 }
+
+export const canAddImageSelector = (state) => {
+  const index = indexSelector(state)
+  const segments = segmentsSelector(state)
+  return canAddContent(segments, index, {image: {caption: ''}})
+}
+
+export const canAddSegmentSelector = (state) => canAddContent(segmentsSelector(state))

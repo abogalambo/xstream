@@ -10,7 +10,8 @@ import {
 import {
   segmentImageUploadKeySelector,
   currentSegmentDataSelector,
-  isPlaybackModeSelector
+  isPlaybackModeSelector,
+  canAddImageSelector
 } from '../../../state/selectors/current_stream'
 import {
   addImage as addImageAction,
@@ -26,6 +27,7 @@ const SegmentImage = () => {
   const imageUploadKey = useSelector(segmentImageUploadKeySelector)
   const { image } = useSelector(currentSegmentDataSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
+  const canAddImage = useSelector(canAddImageSelector)
   const isCoverImageStyle = image && (image.style == 'COVER')
 
   const dispatch = useDispatch();
@@ -71,9 +73,11 @@ const SegmentImage = () => {
         </div>
       ) : (
         <ImageInput
-        onChange={addImage}
-        text='Add Image'
-        className={'standard'} />
+          onChange={addImage}
+          text='Add Image'
+          disabled={!canAddImage}
+          className={'standard'}
+        />
       )
   )
 }

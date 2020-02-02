@@ -10,17 +10,21 @@ export const streamDuration = (segments, until) => {
 }
 
 const maxDuration = config.stream.maxDuration
-export const remainingTime = (segments) => Math.max(maxDuration - streamDuration(segments), 0)
+export const remainingTime = (segments) => maxDuration - streamDuration(segments)
 
 export const canAddContent = (segments, index, content) => {
   if(segments[index]) {
+    const oldRemainingTime = remainingTime(segments)
+
     const newSegments = [
       ...segments.slice(0, index),
       { ...segments[index], ...content },
       ...segments.slice(index + 1, segments.length)
     ]
 
-    return remainingTime(newSegments) > 0
+    const newRemainingTime = remainingTime(newSegments)
+
+    return newRemainingTime > 0 || newRemainingTime == oldRemainingTime
   }
 
   return remainingTime(segments) >= 1000
