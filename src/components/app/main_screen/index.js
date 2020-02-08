@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import StreamLoader from '../stream_loader'
+import StreamListLoader from '../stream_list_loader'
 import ConfirmationDialog from '../confirmation_dialog'
 
 const MainScreen = () => {
@@ -17,6 +18,9 @@ const MainScreen = () => {
         <Switch>
           <Route exact path="/">
             <Link to="/streams/new"> Add New Stream </Link>
+          </Route>
+          <Route exact path="/streams">
+            <StreamListLoader />
           </Route>
           <Route path="/streams/new">
             <StreamLoader page="new" />

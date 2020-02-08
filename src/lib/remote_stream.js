@@ -31,26 +31,35 @@ class RemoteStream {
     })
   }
 
+  get mediaManager() {
+    this._mediaManager = this._mediaManager || new MediaManager()
+
+    return this._mediaManager
+  }
+
+  get coverPromise() {
+    const { cover } = this.stream
+
+    return this.mediaManager.read(cover.mediaKey).then(coverUrl => {
+      cover.src = coverUrl
+      cover.isPersisted = true
+    })
+  }
+
   get mediaUrlsPromise() {
     if(!this._mediaUrlsPromise){
-      const mediaManager = new MediaManager()
       const { cover, segments } = this.stream
       const promises = []
 
       if(cover) {
-        const coverPromise = mediaManager.read(cover.mediaKey).then(coverUrl => {
-          cover.src = coverUrl
-          cover.isPersisted = true
-        })
-
-        promises.push(coverPromise)
+        promises.push(this.coverPromise)
       }
 
       segments.forEach(segment => {
         const { image, audio } = segment
 
         if(image) {
-          const imagePromise = mediaManager.read(image.mediaKey).then(imageUrl => {
+          const imagePromise = this.mediaManager.read(image.mediaKey).then(imageUrl => {
             image.src = imageUrl
             image.isPersisted = true
           })
@@ -59,7 +68,7 @@ class RemoteStream {
         }
 
         if(audio) {
-          const audioPromise = mediaManager.read(audio.mediaKey).then(audioUrl => {
+          const audioPromise = this.mediaManager.read(audio.mediaKey).then(audioUrl => {
             audio.url = audioUrl
             audio.isPersisted = true
           })

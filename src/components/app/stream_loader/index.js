@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
 import { newStream, fetchStream } from '../../../state/actions/stream'
 import Stream from '../stream'
+import Spinner from '../../lib/spinner'
 
 const StreamLoader = ({ page }) => {
   const currentStream = useSelector(state => state.currentStream)
@@ -31,7 +32,7 @@ const StreamLoader = ({ page }) => {
   return currentStream ? (
     <Stream />
   ) : (
-    <div> Loading Stream </div>
+    <Spinner />
   )
 }
 
