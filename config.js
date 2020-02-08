@@ -12,7 +12,8 @@ const config = {
       maxLength: 200
     },
     autosaveInterval: 5000,
-    snackbarDuration: 3000
+    snackbarDuration: 3000,
+    maxDuration: 300000
   }
 }
 

@@ -4,7 +4,7 @@ import styles from './circle_meter.css';
 
 const CircleMeter = ({startedAt, isInProgress, offset, duration}) => {
   const elapsedTime = isInProgress ? (new Date().getTime() - startedAt) : offset
-  const percentage = Math.ceil(100 * elapsedTime / duration)
+  const percentage = Math.min(100, Math.ceil(100 * elapsedTime / duration))
 
   const radius = 9.5;
   const circumference = 2 * Math.PI * radius ;

@@ -18,7 +18,8 @@ import {
   isPlaybackModeSelector,
   canToggleModeSelector,
   indexSelector,
-  pageSelector
+  pageSelector,
+  canAddSegmentSelector
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Autosave from '../autosave'
@@ -29,6 +30,7 @@ import Navigation from '../navigation'
 import AspectRatioBox from '../aspect_ratio_box'
 import ToggleButton from '../../lib/toggle_button'
 import StreamProgress from '../stream_progress'
+import RemainingTime from '../remaining_time'
 import styles from './stream.css'
 
 const Stream = () => {
@@ -37,6 +39,7 @@ const Stream = () => {
   const canToggleMode = useSelector(canToggleModeSelector)
   const segment = useSelector(currentSegmentDataSelector)
   const page = useSelector(pageSelector)
+  const canAddSegment = useSelector(canAddSegmentSelector)
   
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
@@ -84,6 +87,11 @@ const Stream = () => {
 
         {segment && (
           <>
+            {!isPlaybackMode && (
+              <div className={styles.remainingTime}>
+                <RemainingTime />
+              </div>
+            )}
             { isPlaybackMode && <StreamProgress /> }
             <div className={
               classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
@@ -100,8 +108,13 @@ const Stream = () => {
               <Navigation />
               {!isPlaybackMode && (
                 <button
-                  className={styles.addSegmentBtn}
-                  onClick={onAddSegmentClick}>
+                  className={classnames(
+                    styles.addSegmentBtn,
+                    {[styles.disabled]: !canAddSegment}
+                  )}
+                  disabled={!canAddSegment}
+                  onClick={onAddSegmentClick}
+                >
                   <FontAwesomeIcon
                     className={styles.addSegmentBtn_icon}
                     icon={faPlus} />

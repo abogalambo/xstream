@@ -1,0 +1,41 @@
+.remainingTime {
+  display: flex;
+  align-items: center;
+}
+
+.remainingTime > span {
+  color: var(--onBgColor);
+  width: 80px;
+}
+
+.remainingTime > svg {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+.outer {
+  fill: transparent;
+  stroke-width: 2;
+}
+
+.inner {
+  fill: transparent;fill: transparent;
+  stroke-width: 8;
+}
+
+.green circle {
+  stroke: #32807f;
+}
+
+.yellow circle {
+  stroke: #f2a304;
+}
+
+.red circle {
+  stroke: #ed2803;
+}
+
+.red span {
+  color: #ed2803;
+}

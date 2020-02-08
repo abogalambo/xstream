@@ -16,7 +16,8 @@ import {
   indexSelector,
   isPlaybackModeSelector,
   coverDataSelector,
-  showCoverSelector
+  showCoverSelector,
+  canAddSegmentSelector
 } from '../../../state/selectors/current_stream'
 import CoverOverview from '../cover_overview'
 import SegmentOverview from './segment_overview'
@@ -30,6 +31,7 @@ const PlainOverviewPanel = () => {
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
   const coverData = useSelector(coverDataSelector)
   const showCover = useSelector(showCoverSelector)
+  const canAddSegment = useSelector(canAddSegmentSelector)
 
   const dispatch = useDispatch();
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -71,14 +73,16 @@ const PlainOverviewPanel = () => {
 
             <div className={styles.overviewPanel_divider}></div>
 
-            {!isPlaybackMode && (<button
-              onClick={onAddSegmentClick}
-              className={styles.overviewPanel_addBtn}
-            >
-              <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
-                icon={faPlus}
-              />
-            </button>)}
+            {!isPlaybackMode && canAddSegment && (
+              <button
+                onClick={onAddSegmentClick}
+                className={styles.overviewPanel_addBtn}
+              >
+                <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
+                  icon={faPlus}
+                />
+              </button>
+            )}
           </div>
       </div>
       <button
