@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchStreamList } from '../../../state/actions/stream_list'
+import StreamList from '../stream_list'
 
 const StreamListLoader = () => {
   const currentStreamList = useSelector(state => state.currentStreamList)
@@ -13,7 +14,7 @@ const StreamListLoader = () => {
   }, [])
 
   return currentStreamList ? (
-    <div> Stream List loaded </div>
+    <StreamList />
   ) : (
     <div> Loading Stream List </div>
   )

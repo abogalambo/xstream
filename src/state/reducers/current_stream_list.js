@@ -1,6 +1,4 @@
-const initialState = {
-  streams: null
-}
+const initialState = null
 
 const currentStreamList = (state = initialState, action) => {
   const { type, payload } = action
