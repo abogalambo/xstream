@@ -13,16 +13,16 @@ const StreamCard = ({ id, cover, title }) => {
           className={styles.streamCard_thumbnail}
           src={cover && cover.src ? cover.src : defaultCoverImage} />
         <div className={styles.streamCard_textWrapper}>
-          <h4 className={styles.streamCard_headerText}>{title || "Untitled Stream"}</h4>
+          <h4 className={styles.streamCard_headerText}>{title || "Untitled"}</h4>
         </div>
-        <a
-          className={styles.streamCard_icon}
-          href={`/streams/${id}/edit`}>
-            <FontAwesomeIcon
-              icon={faPen}
-            />
-            <span>Edit</span>
-        </a>
+      </a>
+      <a
+        className={styles.streamCard_icon}
+        href={`/streams/${id}/edit`}>
+          <FontAwesomeIcon
+            icon={faPen}
+          />
+          <span>Edit</span>
       </a>
     </div>
   )
