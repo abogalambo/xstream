@@ -1,5 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import {
   streamsSelector
 } from '../../../state/selectors/current_stream_list'
@@ -23,6 +25,15 @@ const StreamList = () => {
          />
        )
       })}
+      <a
+        className={styles.addStreamLink}
+        href="/streams/new"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+        />
+        <span>Create</span>
+      </a>
     </div>
   )
 }
