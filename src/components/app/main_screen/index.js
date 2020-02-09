@@ -9,6 +9,7 @@ import {
 import StreamLoader from '../stream_loader'
 import StreamListLoader from '../stream_list_loader'
 import ConfirmationDialog from '../confirmation_dialog'
+import TopBar from '../top_bar'
 
 const MainScreen = () => {
   return (
@@ -17,6 +18,7 @@ const MainScreen = () => {
       <Router>
         <Switch>
           <Route exact path="/">
+            <TopBar />
             <StreamListLoader />
           </Route>
           <Route path="/streams/new">
