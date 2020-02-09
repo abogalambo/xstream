@@ -17,9 +17,6 @@ const MainScreen = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Link to="/streams/new"> Add New Stream </Link>
-          </Route>
-          <Route exact path="/streams">
             <StreamListLoader />
           </Route>
           <Route path="/streams/new">

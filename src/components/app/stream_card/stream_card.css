@@ -1,0 +1,53 @@
+.streamCard{
+  background-color: white;
+  border-radius: var(--roundCorner);
+  width: 200px;
+  margin: 5px;
+  box-shadow: var(--oneDp);
+}
+a {
+  text-decoration: none;
+}
+.streamCard_thumbnail{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: var(--roundCorner);
+  border-top-right-radius: var(--roundCorner);
+}
+.streamCard_textWrapper{
+  height: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.streamCard_headerText{
+  display: -webkit-inline-box;
+  width: 100%;
+  height: 100%;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: capitalize;
+  text-align: center;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.streamCard_icon{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  color: var(--primaryColor);
+  text-transform: uppercase;
+  font-size: 0.7em;
+  padding-bottom: 20px;
+  transition-property: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+.streamCard_icon span{
+  margin-left: 5px;
+}
