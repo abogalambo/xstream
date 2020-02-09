@@ -25,15 +25,6 @@ const StreamList = () => {
          />
        )
       })}
-      <a
-        className={styles.addStreamLink}
-        href="/streams/new"
-      >
-        <FontAwesomeIcon
-          icon={faPlus}
-        />
-        <span>Create</span>
-      </a>
     </div>
   )
 }
