@@ -1,12 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
 import {
   streamsSelector
 } from '../../../state/selectors/current_stream_list'
-import ImageDisplay from '../../lib/image_display'
-import defaultCoverImage from '../../../img/default_cover.jpg'
+import StreamCard from '../stream_card'
 import styles from './stream_list.css'
 
 const StreamList = () => {
@@ -18,25 +15,13 @@ const StreamList = () => {
         const { id, cover, title } = stream
 
         return (
-          <a
-            href={`/streams/${id}`}
-            className={styles.listItem}
+          <StreamCard
             key={`stream_thumbnail_${id}`}
-          >
-            <a
-              className={styles.editLink}
-              href={`/streams/${id}/edit`}
-            >
-              <FontAwesomeIcon icon={faPen}/>
-            </a>
-            <ImageDisplay
-              src={cover && cover.src ? cover.src : defaultCoverImage}
-              caption={title || "Untitled Stream"}
-              style="COVER"
-              editable={false}
-            />
-          </a>
-        )
+            id={id}
+            cover={cover}
+            title={title}
+         />
+       )
       })}
     </div>
   )
