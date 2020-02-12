@@ -3,7 +3,7 @@
 import * as firebase from "firebase/app"
 
 // Add the Firebase services that you want to use
-// import "firebase/auth";
+import "firebase/auth"
 import "firebase/firestore"
 import "firebase/storage"
 
@@ -21,5 +21,6 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
+export const auth = firebase.auth
 export const db = firebase.firestore()
 export const mediaStore = firebase.storage().ref()
