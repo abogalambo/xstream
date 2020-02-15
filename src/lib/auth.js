@@ -49,6 +49,10 @@ class Auth {
     this._handleError = callback
   }
 
+  isPendingRedirect() {
+    return this._ui.isPendingRedirect()
+  }
+
   triggerLogin(selector) {
     this._ui.start(selector, uiConfig)
   }

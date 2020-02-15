@@ -32,6 +32,10 @@ const UserInfo = () => {
     auth.onLogout(() => {
       dispatch(userLoggedOut())
     })
+
+    if (auth.isPendingRedirect()) {
+      auth.triggerLogin('#firebaseui-auth-container')
+    }
   }, [])
 
   return (
