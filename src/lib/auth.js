@@ -2,11 +2,11 @@ import * as firebaseui from 'firebaseui'
 import { auth } from './firebase'
 
 const uiConfig = {
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
   signInSuccessUrl: '/',
   signInOptions: [
     auth.EmailAuthProvider.PROVIDER_ID
   ],
-  // tosUrl and privacyPolicyUrl accept either url string or a callback
   tosUrl: 'http://google.com',
   privacyPolicyUrl: 'http://google.com'
 }
