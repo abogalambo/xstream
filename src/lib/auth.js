@@ -52,6 +52,10 @@ class Auth {
   triggerLogin(selector) {
     this._ui.start(selector, uiConfig)
   }
+
+  triggerLogout() {
+    auth().signOut()
+  }
 }
 
 export default Auth
