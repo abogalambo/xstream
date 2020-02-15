@@ -4,32 +4,54 @@ import { auth } from './firebase'
 const uiConfig = {
   signInSuccessUrl: '/',
   signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
     auth.EmailAuthProvider.PROVIDER_ID
   ],
   // tosUrl and privacyPolicyUrl accept either url string or a callback
-  // function.
-  // Terms of service url/callback.
   tosUrl: 'http://google.com',
-  // Privacy policy url/callback.
   privacyPolicyUrl: 'http://google.com'
 }
 
-const ui = new firebaseui.auth.AuthUI(auth())
+let instance = null
 
-auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    console.log(user)
-  } else {
-    // User is signed out.
-    console.log('logged out')
+class Auth {
+  constructor() {
+    if(instance){
+      return instance
+    }
+
+    instance = this
+
+    this._ui = new firebaseui.auth.AuthUI(auth())
+    this._handleLogin = () => {}
+    this._handleLogout = () => {}
+    this._handleError = (error) => console.log(error)
+
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        this._handleLogin(user)
+      } else {
+        this._handleLogout(user)
+      }
+    }, function(error) {
+      this._handleError(error)
+    });
   }
-}, function(error) {
-  console.log(error);
-});
 
-// for testing only
-const triggerLogin = () => {
-  ui.start('#firebaseui-auth-container', uiConfig)
+  onLogin(callback) {
+    this._handleLogin = callback
+  }
+
+  onLogout(callback) {
+    this._handleLogout = callback
+  }
+
+  onError(callback) {
+    this._handleError = callback
+  }
+
+  triggerLogin(selector) {
+    this._ui.start(selector, uiConfig)
+  }
 }
+
+export default Auth
