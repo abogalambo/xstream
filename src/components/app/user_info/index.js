@@ -15,7 +15,8 @@ const UserInfo = () => {
 
   useEffect(() => {
     auth.onLogin((user) => {
-      dispatch(userLoggedIn(user))
+      const { uid, displayName } = user
+      dispatch(userLoggedIn({ uid, displayName }))
     })
   }, [])
 
