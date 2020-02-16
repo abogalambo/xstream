@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Auth from '../../../lib/auth'
 import {
@@ -11,22 +11,12 @@ import {
 import styles from './user_info.css'
 
 const UserInfo = () => {
-  const dispatch = useDispatch()
   const auth = new Auth()
+  const dispatch = useDispatch()
   const currentUser = useSelector(currentUserSelector)
-  const [showLoginUi, setShowLoginUi] = useState(false)
-
-  const triggerLoginUI = () => {
-    setShowLoginUi(true)
-    auth.triggerLogin('#firebaseui-auth-container')
-  }
 
   const triggerLogout = () => { 
     auth.triggerLogout()
-  }
-
-  const handleCancel = () => {
-    setShowLoginUi(false)
   }
 
   useEffect(() => {
@@ -38,34 +28,16 @@ const UserInfo = () => {
     auth.onLogout(() => {
       dispatch(userLoggedOut())
     })
-
-    if (auth.isPendingRedirect()) {
-      triggerLoginUI()
-    }
   }, [])
 
   return (
-    <>
-      <a
-        className={styles.header_navLink}
-        onClick={currentUser ? triggerLogout : triggerLoginUI}
-        href="#"
-      >
-        { currentUser ? 'Logout' : 'Login' }
-      </a>
-
-      <div className={showLoginUi ? '' : styles.hidden}>
-        <div 
-          className={styles.scrim}
-          onClick={handleCancel}
-        ></div>
-        <div
-          className={styles.container}
-          id="firebaseui-auth-container"
-        >
-        </div>
-      </div>
-    </>
+    <a
+      className={styles.header_navLink}
+      onClick={currentUser ? triggerLogout : null}
+      href={currentUser ? '/' : '/login'}
+    >
+      { currentUser ? 'Logout' : 'Login' }
+    </a>
   )
 }
 

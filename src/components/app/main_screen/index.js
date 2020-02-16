@@ -7,6 +7,7 @@ import {
 
 import StreamLoader from '../stream_loader'
 import StreamListLoader from '../stream_list_loader'
+import LoginForm from '../login_form'
 import ConfirmationDialog from '../confirmation_dialog'
 import TopBar from '../top_bar'
 
@@ -28,6 +29,9 @@ const MainScreen = () => {
           </Route>
           <Route path="/streams/:id">
             <StreamLoader page="view" />
+          </Route>
+          <Route path="/login">
+            <LoginForm />
           </Route>
         </Switch>
       </Router>

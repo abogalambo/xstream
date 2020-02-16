@@ -2,7 +2,6 @@ import * as firebaseui from 'firebaseui'
 import { auth } from './firebase'
 
 const uiConfig = {
-  credentialHelper: firebaseui.auth.CredentialHelper.NONE,
   signInSuccessUrl: '/',
   signInOptions: [
     auth.EmailAuthProvider.PROVIDER_ID
