@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import Auth from '../../../lib/auth'
-import {
-  userLoggedIn,
-  userLoggedOut
-} from '../../../state/actions/auth'
 import {
   currentUserSelector
 } from '../../../state/selectors/current_user'
@@ -12,23 +8,11 @@ import styles from './user_info.css'
 
 const UserInfo = () => {
   const auth = new Auth()
-  const dispatch = useDispatch()
   const currentUser = useSelector(currentUserSelector)
 
   const triggerLogout = () => { 
     auth.triggerLogout()
   }
-
-  useEffect(() => {
-    auth.onLogin((user) => {
-      const { uid, displayName } = user
-      dispatch(userLoggedIn({ uid, displayName }))
-    })
-
-    auth.onLogout(() => {
-      dispatch(userLoggedOut())
-    })
-  }, [])
 
   return (
     <a

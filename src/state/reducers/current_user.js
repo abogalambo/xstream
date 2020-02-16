@@ -1,4 +1,7 @@
-const initialState = null
+const initialState = {
+  loginStatus: 'pending',
+  user: null
+}
 
 const currentUser = (state = initialState, action) => {
   const { type, payload } = action
@@ -6,11 +9,17 @@ const currentUser = (state = initialState, action) => {
 
     case 'USER_LOGGED_IN': {
       const { user } = payload
-      return user
+      return {
+        loginStatus: 'logged_in',
+        user
+      }
     }
 
     case 'USER_LOGGED_OUT': {
-      return initialState
+      return {
+        loginStatus: 'logged_out',
+        user: null
+      }
     }
 
     default:
