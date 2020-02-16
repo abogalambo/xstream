@@ -72,8 +72,11 @@ const currentStream = (state = null, action) => {
 
     case 'NEW_STREAM': {
       if(state == null){
+        const { uid } = payload
+
         return {
           ...initialState,
+          authorId: uid,
           currentSegment: currentSegmentReducer(null, action)
         }
       }else{
