@@ -9,9 +9,10 @@ export const fetchStream = (id, page) => ({
   }))
 })
 
-export const newStream = () => ({
+export const newStream = ({uid}) => ({
   type: 'NEW_STREAM',
   payload: {
+    uid,
     timestamp: (new Date).getTime()
   }
 })

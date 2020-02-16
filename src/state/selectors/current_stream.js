@@ -7,6 +7,14 @@ import {
   remainingCharCountWithoutIndex
 } from '../../lib/stream_duration'
 
+import {
+  canEditStream
+} from '../../lib/stream_permissions'
+
+import {
+  currentUserSelector
+} from './current_user'
+
 export const currentStreamSelector = (state) => state.currentStream
 
 export const currentSegmentSelector = (state) => (currentStreamSelector(state) || {}).currentSegment
@@ -67,7 +75,7 @@ const mediaResourceForServer = (media) => {
 }
 
 export const autosaveParamsSelector = (state) => {
-  const { id, title, cover, segments } = currentStreamSelector(state)
+  const { id, authorId, title, cover, segments } = currentStreamSelector(state)
   const remoteCover = (cover && cover.isPersisted) ? mediaResourceForServer(cover) : null
 
   const remoteSegments = segments.map((segment) => {
@@ -85,7 +93,7 @@ export const autosaveParamsSelector = (state) => {
     return remoteSegment
   })
 
-  return { id, title, cover: remoteCover, segments: remoteSegments }
+  return { id, authorId, title, cover: remoteCover, segments: remoteSegments }
 }
 
 export const segmentImageUploadKeySelector = (state) => {
@@ -169,4 +177,12 @@ export const canRecordAudioSelector = (state) => {
   const index = indexSelector(state)
   const segments = segmentsSelector(state)
   return canAddContent(segments, index, {audio: {duration: 1000}})
+}
+
+export const canEditCurrentStreamSelector = (state) => {
+  const stream = currentStreamSelector(state)
+  if(!stream) return false
+
+  const uid = currentUserSelector(state).uid
+  return canEditStream(stream, uid)
 }

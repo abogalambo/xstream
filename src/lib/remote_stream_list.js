@@ -8,8 +8,8 @@ class RemoteStreamList {
 
       this.streamList = snapshot.docs.map(doc => {
         const { id } = doc
-        const { cover, title } = doc.data()
-        const stream = { id, cover, title }
+        const { cover, title, authorId } = doc.data()
+        const stream = { id, authorId, cover, title }
 
         if(cover) coverPromises.push(new RemoteStream(stream).coverPromise)
 
