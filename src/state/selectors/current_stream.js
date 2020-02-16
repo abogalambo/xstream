@@ -7,6 +7,14 @@ import {
   remainingCharCountWithoutIndex
 } from '../../lib/stream_duration'
 
+import {
+  canEditStream
+} from '../../lib/stream_permissions'
+
+import {
+  currentUserSelector
+} from './current_user'
+
 export const currentStreamSelector = (state) => state.currentStream
 
 export const currentSegmentSelector = (state) => (currentStreamSelector(state) || {}).currentSegment
@@ -169,4 +177,12 @@ export const canRecordAudioSelector = (state) => {
   const index = indexSelector(state)
   const segments = segmentsSelector(state)
   return canAddContent(segments, index, {audio: {duration: 1000}})
+}
+
+export const canEditCurrentStreamSelector = (state) => {
+  const stream = currentStreamSelector(state)
+  if(!stream) return false
+
+  const uid = currentUserSelector(state).uid
+  return canEditStream(stream, uid)
 }
