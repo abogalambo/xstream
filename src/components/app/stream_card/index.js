@@ -5,7 +5,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import defaultCoverImage from '../../../img/default_cover.jpg'
 import styles from './stream_card.css'
 
-const StreamCard = ({ id, cover, title }) => {
+const StreamCard = ({ id, cover, title, editable }) => {
   return (
     <div className={styles.streamCard}>
       <a href={`/streams/${id}`}>
@@ -16,14 +16,16 @@ const StreamCard = ({ id, cover, title }) => {
           <h4 className={styles.streamCard_headerText}>{title || "Untitled"}</h4>
         </div>
       </a>
-      <a
-        className={styles.streamCard_icon}
-        href={`/streams/${id}/edit`}>
-          <FontAwesomeIcon
-            icon={faPen}
-          />
-          <span>Edit</span>
-      </a>
+      {editable && (
+        <a
+          className={styles.streamCard_icon}
+          href={`/streams/${id}/edit`}>
+            <FontAwesomeIcon
+              icon={faPen}
+            />
+            <span>Edit</span>
+        </a>
+      )}
     </div>
   )
 }
@@ -31,7 +33,8 @@ const StreamCard = ({ id, cover, title }) => {
 StreamCard.propTypes = {
   id: PropTypes.string.isRequired,
   cover: PropTypes.object,
-  title: PropTypes.string
+  title: PropTypes.string,
+  editable: PropTypes.bool
 }
 
 export default StreamCard
