@@ -11,9 +11,10 @@ export const fetchStream = (id, page) => ({
 
 export const deleteStream = (id) => ({
   type: 'DELETE_STREAM',
-  payload: new RemoteStream({id}).delete().then(() => ({
-    streamId: id
-  }))
+  payload: {
+    promise: new RemoteStream({id}).delete().then(() => ({ streamId: id })),
+    isConfirmationNeeded: true
+  }
 })
 
 export const newStream = ({uid}) => ({
