@@ -52,8 +52,11 @@ class Auth {
     return this._ui.isPendingRedirect()
   }
 
-  triggerLogin(selector) {
-    this._ui.start(selector, uiConfig)
+  triggerLogin(selector, signInSuccessUrl) {
+    this._ui.start(selector, {
+      ...uiConfig,
+      signInSuccessUrl: signInSuccessUrl || '/'
+    })
   }
 
   triggerLogout() {

@@ -33,7 +33,7 @@ const PrivateRoute = ({ children, ...rest }) => {
           {isUserLoggedOut && (
             <Redirect
               to={{
-                pathname: "/login",
+                pathname: `/login/?signInSuccessUrl=${location.pathname}`,
                 state: { from: location }
               }}
             />
