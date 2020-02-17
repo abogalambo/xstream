@@ -181,9 +181,7 @@ export const canRecordAudioSelector = (state) => {
 
 export const canEditCurrentStreamSelector = (state) => {
   const stream = currentStreamSelector(state)
-  if(!stream) return false
-  if(currentUserSelector(state) == null) return false
+  const currentUser = currentUserSelector(state)
 
-  const uid = currentUserSelector(state).uid
-  return canEditStream(stream, uid)
+  return (stream && currentUser) ? canEditStream(stream, currentUser.uid) : false
 }
