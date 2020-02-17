@@ -12,6 +12,20 @@ const currentStreamList = (state = initialState, action) => {
       }
     }
 
+    case 'DELETE_STREAM_FULFILLED': {
+      const { streamId } = payload
+      const { streams } = state
+      return {
+        ...state,
+        streams: streams.reduce((result, stream) => {
+          if(streamId !== stream.id) {
+            result.push(stream)
+          }
+          return result
+        },[])
+      }
+    }
+
     default:
       return state
   }

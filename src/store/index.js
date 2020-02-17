@@ -11,8 +11,8 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(
       thunk,
-      promise,
-      confirmation
+      confirmation,
+      promise
     )
   )
 )

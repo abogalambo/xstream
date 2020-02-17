@@ -11,6 +11,10 @@ const textResources = {
   REMOVE_RECORDING: {
     prompt: "Delete recording?",
     confirmText: "Delete"
+  },
+  DELETE_STREAM: {
+    prompt: "Delete stream?",
+    confirmText: "Delete"
   }
 }
 

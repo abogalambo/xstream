@@ -20,6 +20,10 @@ class RemoteStream {
     )
   }
 
+  delete() {
+    return this.docRef.delete().then(() => this)
+  }
+
   fetch() {
     return this.docRef.get().then((doc) => {
       if (doc.exists) {
