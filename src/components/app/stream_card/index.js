@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPen,
   faTrash
- } from '@fortawesome/free-solid-svg-icons'
+} from '@fortawesome/free-solid-svg-icons'
 import defaultCoverImage from '../../../img/default_cover.jpg'
 import styles from './stream_card.css'
 
