@@ -97,20 +97,23 @@ export const autosaveParamsSelector = (state) => {
 }
 
 export const segmentImageUploadKeySelector = (state) => {
+  const userId = currentUserSelector(state).uid
   const streamId = state.currentStream.id
   const segmentId = currentSegmentDataSelector(state).timestamp
-  return `stream_${streamId}/segment_${segmentId}/image`
+  return `user_${userId}/stream_${streamId}/segment_${segmentId}/image`
 }
 
 export const segmentAudioUploadKeySelector = (state) => {
+  const userId = currentUserSelector(state).uid
   const streamId = state.currentStream.id
   const segmentId = currentSegmentDataSelector(state).timestamp
-  return `stream_${streamId}/segment_${segmentId}/audio`
+  return `user_${userId}/stream_${streamId}/segment_${segmentId}/audio`
 }
 
 export const coverImageUploadKeySelector = (state) => {
+  const userId = currentUserSelector(state).uid
   const streamId = state.currentStream.id
-  return `stream_${streamId}/cover_image`
+  return `user_${userId}/stream_${streamId}/cover_image`
 }
 
 export const mediaKeysSelector = (state) => {
