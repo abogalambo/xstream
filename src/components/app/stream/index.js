@@ -23,7 +23,6 @@ import {
 } from '../../../state/selectors/current_stream'
 import Cover from '../cover'
 import Autosave from '../autosave'
-import MediaCleaner from '../media_cleaner'
 import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Navigation from '../navigation'
@@ -40,7 +39,7 @@ const Stream = () => {
   const segment = useSelector(currentSegmentDataSelector)
   const page = useSelector(pageSelector)
   const canAddSegment = useSelector(canAddSegmentSelector)
-  
+
   const dispatch = useDispatch()
   const toggleMode = () => dispatch(toggleModeAction())
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -76,10 +75,8 @@ const Stream = () => {
 
   return (
     <div className={styles.stream}>
-      <MediaCleaner />
-
       <OverviewPanel />
-    
+
       <div className={styles.mainSection}>
         <Autosave />
 
