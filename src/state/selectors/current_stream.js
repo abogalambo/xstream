@@ -116,28 +116,6 @@ export const coverImageUploadKeySelector = (state) => {
   return `user_${userId}/stream_${streamId}/cover_image`
 }
 
-export const mediaKeysSelector = (state) => {
-  const currentStream = currentStreamSelector(state)
-  const segments = segmentsSelector(state)
-
-  const mediaKeys = []
-  if(currentStream && currentStream.cover && currentStream.cover.mediaKey) {
-    mediaKeys.push(currentStream.cover.mediaKey)
-  }
-
-  segments.forEach(segment => {
-    if(segment.audio && segment.audio && segment.audio.mediaKey) {
-      mediaKeys.push(segment.audio.mediaKey)
-    }
-
-    if(segment.image && segment.image && segment.image.mediaKey) {
-      mediaKeys.push(segment.image.mediaKey)
-    }
-  })
-
-  return mediaKeys
-}
-
 export const streamProgressSelector = (state) => {
   const index = indexSelector(state)
   const segments = segmentsSelector(state)
