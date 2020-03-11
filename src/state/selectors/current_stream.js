@@ -12,7 +12,7 @@ import {
 } from '../../lib/stream_permissions'
 
 import {
-  currentUserSelector
+  currentUserIdSelector
 } from './current_user'
 
 export const currentStreamSelector = (state) => state.currentStream
@@ -97,21 +97,21 @@ export const autosaveParamsSelector = (state) => {
 }
 
 export const segmentImageUploadKeySelector = (state) => {
-  const userId = currentUserSelector(state).uid
+  const userId = currentUserIdSelector(state)
   const streamId = state.currentStream.id
   const segmentId = currentSegmentDataSelector(state).timestamp
   return `user_${userId}/stream_${streamId}/segment_${segmentId}/image`
 }
 
 export const segmentAudioUploadKeySelector = (state) => {
-  const userId = currentUserSelector(state).uid
+  const userId = currentUserIdSelector(state)
   const streamId = state.currentStream.id
   const segmentId = currentSegmentDataSelector(state).timestamp
   return `user_${userId}/stream_${streamId}/segment_${segmentId}/audio`
 }
 
 export const coverImageUploadKeySelector = (state) => {
-  const userId = currentUserSelector(state).uid
+  const userId = currentUserIdSelector(state)
   const streamId = state.currentStream.id
   return `user_${userId}/stream_${streamId}/cover_image`
 }
@@ -162,7 +162,7 @@ export const canRecordAudioSelector = (state) => {
 
 export const canEditCurrentStreamSelector = (state) => {
   const stream = currentStreamSelector(state)
-  const currentUser = currentUserSelector(state)
+  const currentUserId = currentUserIdSelector(state)
 
-  return (stream && currentUser) ? canEditStream(stream, currentUser.uid) : false
+  return (stream && currentUserId) ? canEditStream(stream, currentUserId) : false
 }
