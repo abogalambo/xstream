@@ -97,17 +97,16 @@
   .overviewPanel_segements {
     flex-direction: column;
     overflow-y: scroll;
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
   }
 
   .overviewPanel_divider {
     min-height: 1px;
     width: 80px;
-    margin: 15px auto;
   }
 
   .overviewPanel_addBtn {
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
 }
 
@@ -150,15 +149,15 @@
 
   .overviewPanel_segements {
     overflow-x: scroll;
+    margin: 0 20px 0 20px;
   }
 
   .overviewPanel_divider {
     min-width: 1px;
     height: 80px;
-    margin: auto 15px;
   }
 
   .overviewPanel_addBtn {
-    margin-right: 20px;
+    margin: 0 20px;
   }
 }

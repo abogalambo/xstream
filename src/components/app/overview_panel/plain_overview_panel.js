@@ -71,17 +71,18 @@ const PlainOverviewPanel = () => {
               ))}
             </div>
 
-            <div className={styles.overviewPanel_divider}></div>
-
             {!isPlaybackMode && canAddSegment && (
-              <button
-                onClick={onAddSegmentClick}
-                className={styles.overviewPanel_addBtn}
-              >
-                <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
-                  icon={faPlus}
-                />
-              </button>
+              <>
+                <div className={styles.overviewPanel_divider}></div>
+                <button
+                  onClick={onAddSegmentClick}
+                  className={styles.overviewPanel_addBtn}
+                >
+                  <FontAwesomeIcon className={styles.overviewPanel_addBtnIcon}
+                    icon={faPlus}
+                  />
+                </button>
+              </>
             )}
           </div>
       </div>

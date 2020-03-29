@@ -14,7 +14,7 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
 
   useEffect(() => {
     if(isSelected){
-      htmlRef.current.scrollIntoView({behavior: "smooth", block: "center"})
+      htmlRef.current.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
     }
   }, [isSelected])
 
