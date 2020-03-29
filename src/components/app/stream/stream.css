@@ -4,6 +4,12 @@
   display: flex;
 }
 
+@media (orientation: portrait) {
+  .stream {
+    flex-direction: column;
+  }
+}
+
 .mainSection {
   position: relative;
   width: 100%;

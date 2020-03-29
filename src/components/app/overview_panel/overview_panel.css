@@ -1,28 +1,14 @@
 /*OverviewPanel Section */
 .overviewPanelContainer {
-  transition: width;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
-  width: 200px;
-  height: 100%;
   position: relative;
-}
-
-.overviewPanelContainer_collapsed {
-  width: 0px;
 }
 
 .overviewPanel_collapseBtn {
   background: var(--secondaryColor_light);
-  width: calc(40px / 2);
-  height: 40px;
-  border-bottom-right-radius: 40px;
-  border-top-right-radius: 40px;
   position: absolute;
-  top: calc(50% - (40px / 2));
-  right: calc((40px / 2) * -1 + 3px);
   z-index: 999;
-  box-shadow: 6px 1px 9px 1px rgba(0, 0, 0, 0.1);
 }
 
 .collapseIcon {
@@ -33,32 +19,25 @@
   transition-timing-function: ease-in-out;
 }
 
-.collapseIcon_collapsed {
-  transform: rotate(180deg);
-}
-
 .overviewPanel {
-  box-sizing: border-box;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding-top: 40px;
   background-color: var(--secondaryColor_light);
-  box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px 0 rgba(0,0,0,.2);
 }
 
 .overviewPanel_wrapper {
-  height: 95%;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 /*container*/
 .overviewPanel_segements {
-  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
-  max-height: calc(95% - 36px - 19.55px); /*divider + addBtn*/
 }
 
 .draggedSegment {
@@ -68,15 +47,10 @@
 
 .overviewPanel_divider {
   background: #5f5f5f;
-  height: 1px;
-  width: 80px;
-  margin: 20px auto 15px auto;
 }
 
 .overviewPanel_addBtn {
-  display: block;
   padding: 3px 8px;
-  margin: 0 auto;
   background-color: var(--onSecondary);
   border-radius: var(--roundCorner);
   box-shadow: var(--oneDp);
@@ -86,5 +60,105 @@
 .overviewPanel_addBtnIcon {
   color: black;
   font-size: 1.2em;
-  display: inline-block;
+}
+
+@media (orientation: landscape) {
+  .overviewPanelContainer {
+    transition-property: width;
+    width: 150px;
+    height: 100%;
+  }
+
+  .overviewPanelContainer_collapsed {
+    width: 0;
+  }
+
+  .overviewPanel_collapseBtn {
+    width: calc(40px / 2);
+    height: 40px;
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+    top: calc(50% - (40px / 2));
+    right: calc((40px / 2) * -1);
+  }
+
+  .collapseIcon_collapsed {
+    transform: rotate(180deg);
+  }
+
+  .overviewPanel {
+    box-shadow: 6px 0px 10px rgba(0,0,0,.2);
+  }
+
+  .overviewPanel_wrapper {
+    flex-direction: column;
+  }
+
+  .overviewPanel_segements {
+    flex-direction: column;
+    overflow-y: scroll;
+    margin-top: 20px;
+  }
+
+  .overviewPanel_divider {
+    min-height: 1px;
+    width: 80px;
+    margin: 15px auto;
+  }
+
+  .overviewPanel_addBtn {
+    margin-bottom: 20px;
+  }
+}
+
+@media (orientation: portrait) {
+  .overviewPanelContainer {
+    transition-property: height;
+    height: 120px;
+    width: 100%;
+    order: 2;
+  }
+
+  .overviewPanelContainer_collapsed {
+    height: 0;
+  }
+
+  .overviewPanel_collapseBtn {
+    width: 40px;
+    height: calc(40px / 2);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    left: calc(50% - (40px / 2));
+    top: calc((40px / 2) * -1);
+  }
+
+  .collapseIcon {
+    transform: rotate(-90deg);
+  }
+
+  .collapseIcon_collapsed {
+    transform: rotate(90deg);
+  }
+
+  .overviewPanel {
+    box-shadow: 0px -6px 10px rgba(0,0,0,.2);
+  }
+
+  .overviewPanel_wrapper {
+    flex-direction: row;
+  }
+
+  .overviewPanel_segements {
+    overflow-x: scroll;
+  }
+
+  .overviewPanel_divider {
+    min-width: 1px;
+    height: 80px;
+    margin: auto 15px;
+  }
+
+  .overviewPanel_addBtn {
+    margin-right: 20px;
+  }
 }
