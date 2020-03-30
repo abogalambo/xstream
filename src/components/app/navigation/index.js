@@ -17,7 +17,6 @@ import {
   canNextSelector,
   indexSelector,
   currentSegmentDataSelector,
-  segmentsSelector,
   audioDataSelector,
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
