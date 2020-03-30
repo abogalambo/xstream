@@ -128,7 +128,7 @@ const Stream = () => {
                   <FontAwesomeIcon
                     className={styles.addSegmentBtn_icon}
                     icon={faPlus} />
-                  Add Segment
+                  <span>Add Segment</span>
                 </button>
               )}
             </div>

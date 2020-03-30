@@ -74,7 +74,7 @@
   user-select: none;
   position: absolute;
   top: calc(50% - 18px);
-  right: 20px;
+  right: 15px;
 }
 
 .addSegmentBtn,
@@ -109,4 +109,14 @@
 .addSegmentBtn.disabled:active {
   color: var(--onBgColor_light);
   border-color: var(--onBgColor_light);
+}
+
+@media (max-width: 700px) {
+  .addSegmentBtn > span {
+    display: none;
+  }
+
+  .addSegmentBtn_icon {
+    margin-right: 0;
+  }
 }
