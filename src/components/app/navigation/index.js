@@ -31,7 +31,6 @@ const Navigation = () => {
   const canNext = useSelector(canNextSelector)
   const index = useSelector(indexSelector)
   const segment = useSelector(currentSegmentDataSelector)
-  const segments = useSelector(segmentsSelector)
   const audioData = useSelector(audioDataSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
