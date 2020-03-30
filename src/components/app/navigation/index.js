@@ -82,12 +82,6 @@ const Navigation = () => {
             icon={faStepForward}/>
         </button>
       </div>
-
-      <div className={styles.index}>
-        <span>
-          {`${index + 1} / ${segments.length}`}
-        </span>
-      </div>
     </>
   )
 }

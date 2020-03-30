@@ -84,16 +84,3 @@ button:enabled:hover .skipIcon,
 .removeButton_icon  {
   color: var(--onBgColor_dark);
 }
-
-/* Index */
-.index {
-  position: absolute;
-  top: calc(50% - 8px);
-  left: 30px;
-}
-
-.index span {
-  user-select: none;
-  font-size: 1em;
-  color: var(--onBgColor);
-}
