@@ -78,20 +78,32 @@ const Stream = () => {
       <OverviewPanel />
 
       <div className={styles.mainSection}>
-        <Autosave />
+        { segment && isPlaybackMode && <StreamProgress /> }
 
-        {showCover && <Cover /> }
+        { showCover && <Cover /> }
 
         {segment && (
           <>
-            {!isPlaybackMode && (
-              <div className={styles.remainingTime}>
-                <RemainingTime />
-              </div>
-            )}
-            { isPlaybackMode && <StreamProgress /> }
-            <div className={
-              classnames( styles.segmentContainer, { [styles.segmentContainer_playback]: isPlaybackMode })}>
+            <div className={styles.topBar}>
+              { !isPlaybackMode && (
+                <div className={styles.remainingTimeContainer}>
+                  <RemainingTime />
+                </div>
+              )}
+
+              {(page != 'view') && (
+                <div className={styles.toggleBtnContainer}>
+                  <ToggleButton
+                    contents={contents}
+                    onToggle={toggleMode}
+                    checkedValue={isPlaybackMode ? 'playback' : 'compose'}
+                    disabled={!canToggleMode}
+                  />
+                </div>
+              )}
+            </div>
+            
+            <div className={styles.segmentContainer}>
               <AspectRatioBox>
                 <Segment
                   index={index}
@@ -101,6 +113,7 @@ const Stream = () => {
                 />
               </AspectRatioBox>
             </div>
+
             <div className={styles.footerContainer}>
               <Navigation />
               {!isPlaybackMode && (
@@ -121,18 +134,9 @@ const Stream = () => {
             </div>
           </>
         )}
-      </div>
 
-      {(page != 'view') && (
-        <div className={styles.toggleBtnContainer}>
-          <ToggleButton
-            contents={contents}
-            onToggle={toggleMode}
-            checkedValue={isPlaybackMode ? 'playback' : 'compose'}
-            disabled={!canToggleMode}
-          />
-        </div>
-      )}
+        <Autosave />
+      </div>
     </div>
   )
 }

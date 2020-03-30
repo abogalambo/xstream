@@ -11,29 +11,50 @@
 }
 
 .mainSection {
-  position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+@media (min-width: 1278px) {
+  .topBar, .segmentContainer, .footerContainer {
+    max-width: 1278px;
+  }
+}
+
+.topBar {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.remainingTimeContainer {
+  height: 100%;
+  margin-left: 10px;
+}
+
+.toggleBtnContainer {
+  display: flex;
+  width: 95px;
+  height: 40px;
+  margin-left: auto;
 }
 
 /* Segment Section */
 .segmentContainer {
   width: 100%;
+  height: 100%;
   transition: var(--transition);
-  height: calc(100% - var(--navigationHeight) - 80px);
-  margin: 80px auto 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.segmentContainer_playback {
-  height: calc(100% - var(--navigationHeight) - 80px - var(--progressBarHeight));
-}
-
 /*Footer Section */
 .footerContainer {
-  box-sizing: border-box;
   position: relative;
   text-align: center;
   width: 100%;
@@ -85,20 +106,4 @@
 .addSegmentBtn.disabled:active {
   color: var(--onBgColor_light);
   border-color: var(--onBgColor_light);
-}
-
-/*Toggle Btn Container*/
-.toggleBtnContainer {
-  position: absolute;
-  display: flex;
-  width: 95px;
-  height: 40px;
-  top: 20px;
-  right: 20px;
-}
-
-.remainingTime {
-  position: absolute;
-  top: 23px;
-  right: 130px;
 }
