@@ -19,12 +19,6 @@
   align-items: center;
 }
 
-@media (min-width: 1278px) {
-  .topBar, .segmentContainer, .footerContainer {
-    max-width: 1278px;
-  }
-}
-
 .topBar {
   width: 100%;
   display: flex;
@@ -51,6 +45,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 1278px) {
+  .topBar, .segmentContainer, .footerContainer {
+    max-width: 1278px;
+  }
+}
+
+@media (min-height: 1197px) {
+  .segmentContainer {
+    height: 900px;
+  }
+
+  .topBar {
+    margin-top: auto;
+  }
+
+  .footerContainer {
+    margin-bottom: auto;
+  }
 }
 
 /*Footer Section */
