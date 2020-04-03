@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -21,7 +22,7 @@ import AudioPlayer from '../../../lib/audio_player'
 import VisualPlayer from '../../../lib/visual_player'
 import styles from './playback_player.css'
 
-const PlaybackPlayer = () => {
+const PlaybackPlayer = ({ children }) => {
   const isStreamPlaying = useSelector(isStreamPlayingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const segmentDuration = useSelector(segmentDurationSelector)
@@ -60,7 +61,12 @@ const PlaybackPlayer = () => {
   }, [])
 
   return (
-    <>
+    <div
+      className={styles.container}
+      onClick={togglePlaying}
+    >
+      { children }
+
       {audioUrl && (
         <audio src={audioUrl}></audio>
       )}
@@ -76,7 +82,7 @@ const PlaybackPlayer = () => {
           <FontAwesomeIcon icon={faPause} />
         </div>
       )}
-    </>
+    </div>
   )
 }
 
@@ -88,6 +94,10 @@ const getPlayer = (dispatch, audioUrl, duration) => {
     onEnd: () => dispatch(segmentEnded()),
     duration
   })
+}
+
+PlaybackPlayer.propTypes = {
+  children: PropTypes.element
 }
 
 export default PlaybackPlayer
