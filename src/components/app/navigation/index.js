@@ -17,7 +17,6 @@ import {
   canNextSelector,
   indexSelector,
   currentSegmentDataSelector,
-  segmentsSelector,
   audioDataSelector,
   isPlaybackModeSelector
 } from '../../../state/selectors/current_stream'
@@ -31,7 +30,6 @@ const Navigation = () => {
   const canNext = useSelector(canNextSelector)
   const index = useSelector(indexSelector)
   const segment = useSelector(currentSegmentDataSelector)
-  const segments = useSelector(segmentsSelector)
   const audioData = useSelector(audioDataSelector)
   const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
@@ -81,12 +79,6 @@ const Navigation = () => {
             size={'2x'}
             icon={faStepForward}/>
         </button>
-      </div>
-
-      <div className={styles.index}>
-        <span>
-          {`${index + 1} / ${segments.length}`}
-        </span>
       </div>
     </>
   )

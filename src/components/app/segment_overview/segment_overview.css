@@ -1,7 +1,5 @@
 .segmentOverview {
-  box-sizing: border-box;
   margin: 20px;
-  margin-bottom: 0px;
   background-color: var(--bgColor);
   width: 100px;
   height: 75px;
@@ -19,8 +17,16 @@
   padding: 8px 15px;
 }
 
-.segmentOverview:first-child {
-  margin-top: 0;
+@media (orientation: landscape) {
+  .segmentOverview {
+    margin-top: 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .segmentOverview {
+    margin-left: 0;
+  }
 }
 
 .segmentOverview:hover,

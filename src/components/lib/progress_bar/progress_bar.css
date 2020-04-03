@@ -1,4 +1,5 @@
 .progressBar_track {
+  min-height: var(--progressBarHeight);
   height: var(--progressBarHeight);
   width: 100%;
   position: relative;

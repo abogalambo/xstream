@@ -1,6 +1,5 @@
-/*Stream Nav*/
 .streamNav {
-  width: 300px;
+  width: 220px;
   height: 100%;
   display: inline-flex;
   align-items: center;
@@ -8,8 +7,7 @@
 }
 
 .playerContainer {
-  position: relative;
-  height: 90px;
+  height: 65px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -17,40 +15,39 @@
 
 .playerContainer_entrance{
   border: 1.5px solid #bfbfbf;
-  width: 150px;
+  width: 108px;
   border-radius: 80px;
   animation: enterance 0.3s cubic-bezier(.4,0,.2,1);
 }
 
 @keyframes enterance {
   0% {
-    width: 100px;
+    width: 72px;
     border: 1.5px solid rgba(191, 191, 191, 0);
   }
   100% {
-    width: 150px;
+    width: 108px;
     border: 1.5px solid rgba(191, 191, 191, 1);
   }
 }
 
 .playerContainer_departure{
   border-radius: 80px;
-  width: 70px;
+  width: 50px;
   animation: departure 0.5s cubic-bezier(.4,0,.2,1);
 }
 
 @keyframes departure {
   0% {
-    width: 150px;
+    width: 108px;
     border: 1.5px solid rgba(191, 191, 191, 1);
   }
   100% {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border: 1.5px solid rgba(191, 191, 191, 0);
   }
 }
-
 
 /*Audio Input*/
 .square, .dot {
@@ -83,17 +80,4 @@ button:enabled:hover .skipIcon,
 .skipIcon,
 .removeButton_icon  {
   color: var(--onBgColor_dark);
-}
-
-/* Index */
-.index {
-  position: absolute;
-  top: calc(50% - 8px);
-  left: 30px;
-}
-
-.index span {
-  user-select: none;
-  font-size: 1em;
-  color: var(--onBgColor);
 }

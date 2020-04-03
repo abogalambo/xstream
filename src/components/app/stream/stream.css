@@ -4,35 +4,65 @@
   display: flex;
 }
 
+@media (orientation: portrait) {
+  .stream {
+    flex-direction: column;
+  }
+}
+
 .mainSection {
-  position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+.topBar {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: auto;
+}
+
+.remainingTimeContainer {
+  height: 100%;
+  margin-left: 10px;
+}
+
+.toggleBtnContainer {
+  display: flex;
+  width: 95px;
+  height: 40px;
+  margin-left: auto;
 }
 
 /* Segment Section */
 .segmentContainer {
   width: 100%;
+  height: 100%;
+  max-height: 900px;
   transition: var(--transition);
-  height: calc(100% - var(--navigationHeight) - 80px);
-  margin: 80px auto 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.segmentContainer_playback {
-  height: calc(100% - var(--navigationHeight) - 80px - var(--progressBarHeight));
+@media (min-width: 1278px) {
+  .topBar, .segmentContainer, .footerContainer {
+    max-width: 1278px;
+  }
 }
 
 /*Footer Section */
 .footerContainer {
-  box-sizing: border-box;
   position: relative;
   text-align: center;
   width: 100%;
-  height: var(--navigationHeight);
+  height: 70px;
   color: var(--onPrimary);
+  margin-bottom: auto;
 }
 
 .addSegmentBtn {
@@ -44,7 +74,7 @@
   user-select: none;
   position: absolute;
   top: calc(50% - 18px);
-  right: 20px;
+  right: 15px;
 }
 
 .addSegmentBtn,
@@ -81,18 +111,12 @@
   border-color: var(--onBgColor_light);
 }
 
-/*Toggle Btn Container*/
-.toggleBtnContainer {
-  position: absolute;
-  display: flex;
-  width: 95px;
-  height: 40px;
-  top: 20px;
-  right: 20px;
-}
+@media (max-width: 700px) {
+  .addSegmentBtn > span {
+    display: none;
+  }
 
-.remainingTime {
-  position: absolute;
-  top: 23px;
-  right: 130px;
+  .addSegmentBtn_icon {
+    margin-right: 0;
+  }
 }

@@ -1,7 +1,5 @@
 .coverOverview {
-  box-sizing: border-box;
   margin: 20px;
-  margin-bottom: 0px;
   background-color: var(--bgColor);
   width: 100px;
   height: 75px;
@@ -21,8 +19,16 @@
   background-repeat: no-repeat;
 }
 
-.coverOverview:first-child {
-  margin-top: 0;
+@media (orientation: landscape) {
+  .coverOverview {
+    margin-top: 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .coverOverview {
+    margin-left: 0;
+  }
 }
 
 .selected {

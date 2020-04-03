@@ -21,7 +21,7 @@ const OverviewPanel = () => {
       onSortEnd={onSortEnd}
       helperClass={styles.draggedSegment}
       distance={3}
-      lockAxis={'y'}
+      axis={"xy"}
     />
   )
 }
