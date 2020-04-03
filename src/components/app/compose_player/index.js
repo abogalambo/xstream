@@ -7,31 +7,24 @@ import {
   faPlay
 } from '@fortawesome/free-solid-svg-icons'
 import {
-  startPlaying as startPlayingAction,
-  stopPlaying as stopPlayingAction
-} from '../../../state/actions/recorder'
+  segmentStarted,
+  segmentPaused,
+  segmentEnded
+} from '../../../state/actions/playback'
 import {
-  segmentEnded as segmentEndedAction
-} from '../../../state/actions/stream'
-import {
-  isPlayingSelector,
+  isSegmentStartedSelector,
   isTypingSelector,
   audioDataSelector,
-  segmentDurationSelector,
-  isPlaybackModeSelector,
-  isStreamPlayingSelector
+  segmentDurationSelector
 } from '../../../state/selectors/current_stream'
-import styles from './player.css'
+import styles from './compose_player.css'
 import AudioPlayer from '../../../lib/audio_player'
-import VisualPlayer from '../../../lib/visual_player'
 import CircleMeter from '../../lib/circle_meter'
 
-const Player = () => {
-  const isPlaying = useSelector(isPlayingSelector)
-  const isStreamPlaying = useSelector(isStreamPlayingSelector)
+const ComposePlayer = () => {
+  const isSegmentStarted = useSelector(isSegmentStartedSelector)
   const isTyping = useSelector(isTypingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
-  const isPlaybackMode = useSelector(isPlaybackModeSelector)
   const segmentDuration = useSelector(segmentDurationSelector)
 
   const isTypingRef = useRef(null)
@@ -48,7 +41,6 @@ const Player = () => {
   }
 
   useEffect(() => {
-    isPlaybackMode && isStreamPlaying && player.startPlaying()
     return () => player.cleanup();
   }, []);
 
@@ -69,11 +61,11 @@ const Player = () => {
           className={classnames(
             styles.playerMain_operator,
               {
-                [styles.square]: isPlaying,
-                [styles.play]: !isPlaying
+                [styles.square]: isSegmentStarted,
+                [styles.play]: !isSegmentStarted
               }
             )}
-          icon={getIcon(isPlaying)} />
+          icon={getIcon(isSegmentStarted)} />
         {audioUrl && (
           <audio src={audioUrl}></audio>
         )}
@@ -83,15 +75,14 @@ const Player = () => {
 }
 
 const getPlayer = (dispatch, audioUrl, duration) => {
-  const playerType = audioUrl ? AudioPlayer : VisualPlayer
-  return new playerType({
-    onStart: () => dispatch(startPlayingAction()),
-    onStop: () => dispatch(stopPlayingAction()),
-    onEnd: () => dispatch(segmentEndedAction()),
+  return new AudioPlayer({
+    onStart: () => dispatch(segmentStarted()),
+    onStop: () => dispatch(segmentPaused()),
+    onEnd: () => dispatch(segmentEnded()),
     duration
   })
 }
 
-const getIcon = (isPlaying) => isPlaying ? faPause : faPlay
+const getIcon = (isSegmentStarted) => isSegmentStarted ? faPause : faPlay
 
-export default Player
+export default ComposePlayer

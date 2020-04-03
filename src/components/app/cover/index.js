@@ -11,9 +11,11 @@ import {
   addCoverImage as addCoverImageAction,
   removeCoverImage as removeCoverImageAction,
   startTyping as startTypingAction,
-  stopTyping as stopTypingAction,
-  playStream
+  stopTyping as stopTypingAction
 } from '../../../state/actions/stream'
+import {
+  playStream
+} from '../../../state/actions/playback'
 import { setStreamTitle } from '../../../state/actions/stream'
 import {
   segmentsSelector,

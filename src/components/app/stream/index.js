@@ -90,9 +90,9 @@ const Stream = () => {
               </AspectRatioBox>
             </div>
 
-            <div className={styles.footerContainer}>
-              <Navigation />
-              {!isPlaybackMode && (
+            {!isPlaybackMode && (
+              <div className={styles.footerContainer}>
+                <Navigation />
                 <button
                   className={classnames(
                     styles.addSegmentBtn,
@@ -106,8 +106,8 @@ const Stream = () => {
                     icon={faPlus} />
                   <span>Add Segment</span>
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </>
         )}
 

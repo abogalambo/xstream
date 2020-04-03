@@ -27,7 +27,7 @@ export const showCoverSelector = (state) => (indexSelector(state) === -1)
 
 export const isRecordingSelector = (state) => currentSegmentSelector(state).recording
 
-export const isPlayingSelector = (state) => currentSegmentSelector(state).playing
+export const isSegmentStartedSelector = (state) => currentSegmentSelector(state).isStarted
 
 export const isStreamPlayingSelector = (state) => currentStreamSelector(state).isStreamPlaying
 
@@ -120,13 +120,13 @@ export const streamProgressSelector = (state) => {
   const index = indexSelector(state)
   const segments = segmentsSelector(state)
 
-  const { playingStartedAt, playingOffset } = currentSegmentSelector(state)
+  const { startedAt, startOffset } = currentSegmentSelector(state)
 
   return {
     index,
-    playingOffset,
-    playingStartedAt,
-    isPlaying: isPlayingSelector(state),
+    startOffset,
+    startedAt,
+    isStarted: isSegmentStartedSelector(state),
     streamDuration: streamDuration(segments),
     currentDuration: streamDuration(segments, index)
   }

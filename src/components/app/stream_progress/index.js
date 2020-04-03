@@ -25,15 +25,15 @@ const streamProgress = ({
   index,
   streamDuration,
   currentDuration,
-  isPlaying,
-  playingStartedAt,
-  playingOffset
+  isStarted,
+  startedAt,
+  startOffset
 }) => {
   if(index == -1) {
     return 0
   }
 
-  const segmentOffset = isPlaying ? ((new Date().getTime()) - playingStartedAt) : playingOffset
+  const segmentOffset = isStarted ? ((new Date().getTime()) - startedAt) : startOffset
   return 100 * (currentDuration + segmentOffset) / streamDuration
 }
 

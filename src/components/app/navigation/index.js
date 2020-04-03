@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faStepForward,
-  faStepBackward,
+  faAngleRight,
+  faAngleLeft,
   faTrash
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -17,11 +17,10 @@ import {
   canNextSelector,
   indexSelector,
   currentSegmentDataSelector,
-  audioDataSelector,
-  isPlaybackModeSelector
+  audioDataSelector
 } from '../../../state/selectors/current_stream'
 import AudioInput from '../audio_input'
-import Player from '../player'
+import ComposePlayer from '../compose_player'
 import classnames from 'classnames'
 import styles from './navigation.css'
 
@@ -31,7 +30,6 @@ const Navigation = () => {
   const index = useSelector(indexSelector)
   const segment = useSelector(currentSegmentDataSelector)
   const audioData = useSelector(audioDataSelector)
-  const isPlaybackMode = useSelector(isPlaybackModeSelector)
 
   const dispatch = useDispatch();
   const onNextSegmentClick = () => dispatch(goToSegment(index + 1))
@@ -49,35 +47,33 @@ const Navigation = () => {
         <button onClick={onPreviousSegmentClick} disabled={!canPrevious}>
           <FontAwesomeIcon className={styles.skipIcon}
             size={'2x'}
-            icon={faStepBackward}/>
+            icon={faAngleLeft}/>
         </button>
 
         <div className={classnames(
           styles.playerContainer,
           {
-            [styles.playerContainer_entrance]: audioData && !isPlaybackMode,
-            [styles.playerContainer_departure]: !audioData && !isPlaybackMode && hadRecording
+            [styles.playerContainer_entrance]: audioData,
+            [styles.playerContainer_departure]: !audioData && hadRecording
           }
         )}>
-          {!audioData && !isPlaybackMode ? (
-            <AudioInput key={`recorder_${segment.timestamp}`} />
-          ) : (
+          {audioData ? (
             <>
-              <Player key={`player_${segment.timestamp}`} />
-              {!isPlaybackMode && (
-                <button className={styles.removeButton} onClick={onRemoveRecordingClick}>
-                  <FontAwesomeIcon className={styles.removeButton_icon}
-                    icon={faTrash} />
-                </button>
-              )}
+              <ComposePlayer key={`player_${segment.timestamp}`} />
+              <button className={styles.removeButton} onClick={onRemoveRecordingClick}>
+                <FontAwesomeIcon className={styles.removeButton_icon}
+                  icon={faTrash} />
+              </button>
             </>
+          ) : (
+            <AudioInput key={`recorder_${segment.timestamp}`} />
           )}
         </div>
 
         <button disabled={!canNext} onClick={onNextSegmentClick}>
           <FontAwesomeIcon className={styles.skipIcon}
             size={'2x'}
-            icon={faStepForward}/>
+            icon={faAngleRight}/>
         </button>
       </div>
     </>
