@@ -11,17 +11,27 @@
   transform: translate(-50%, -50%);
   opacity: 0;
   animation: fade 0.8s cubic-bezier(.4,0,.2,1);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes fade {
   0% {
     opacity: 1;
     font-size: 1em;
+    width: 30px;
+    height: 30px;
   }
   100% {
     opacity: 0;
     display: none;
-    font-size: 10em;
+    font-size: 3em;
+    width: 90px;
+    height: 90px;
   }
 }
 
