@@ -6,9 +6,9 @@ const initialState = {
   recording: false,
   recordingStartedAt: null,
   // playing data
-  playing: false,
-  playingStartedAt: null,
-  playingOffset: 0
+  isStarted: false,
+  startedAt: null,
+  startOffset: 0
 }
 
 const canNavigate = (state) => (!state.recording && !state.typing)
@@ -25,10 +25,11 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'PLAY_STREAM': {
-      return {
-        ...state,
-        index: indexWithinBounds(0, currentStream.segments) ? 0 : state.index
-      }
+      const { index } = state
+
+      return (index == -1 && indexWithinBounds(0, currentStream.segments)) ? {
+        ...initialState, index: 0
+      } : state
     }
 
     case 'GO_TO_SEGMENT': {
@@ -38,25 +39,6 @@ const currentSegment = (state = null, action, currentStream) => {
         })
       }else{
         return state
-      }
-    }
-
-    case 'SEGMENT_ENDED': {
-      const { mode, segments } = currentStream
-      const { index, playingStartedAt } = state
-      const shouldGoToNextSegment = (mode == 'playback' && indexWithinBounds(index + 1, segments))
-
-      if(shouldGoToNextSegment) {
-        return updateObject(initialState, {
-          index: index + 1
-        })
-      } else {
-        const playingOffset = mode == 'playback' ? payload.timestamp - playingStartedAt : 0
-        return updateObject(state, {
-          playing: false,
-          playingStartedAt: null,
-          playingOffset
-        })
       }
     }
 
@@ -93,34 +75,57 @@ const currentSegment = (state = null, action, currentStream) => {
       })
     }
 
-    case 'START_PLAYING': {
-      const { playingOffset, playing } = state
-      const playingStartedAt = payload.timestamp - playingOffset
+    case 'SEGMENT_STARTED': {
+      const { startOffset, isStarted } = state
+      const startedAt = payload.timestamp - startOffset
 
-      if(playing) {
+      if(isStarted) {
         return state
       }
 
-      return updateObject(state, {
-        playing: true,
-        playingStartedAt,
-        playingOffset: 0
-      })
+      return {
+        ...state,
+        isStarted: true,
+        startedAt,
+        startOffset: 0
+      }
     }
 
-    case 'STOP_PLAYING': {
-      const { playingStartedAt, playing } = state
-      const playingOffset = payload.timestamp - playingStartedAt
+    case 'SEGMENT_PAUSED': {
+      const { startedAt, isStarted } = state
+      const startOffset = payload.timestamp - startedAt
 
-      if(!playing) {
+      if(!isStarted) {
         return state
       }
 
-      return updateObject(state, {
-        playing: false,
-        playingStartedAt: null,
-        playingOffset
-      })
+      return {
+        ...state,
+        isStarted: false,
+        startedAt: null,
+        startOffset
+      }
+    }
+
+    case 'SEGMENT_ENDED': {
+      const { mode, segments } = currentStream
+      const { index, startedAt } = state
+      const shouldGoToNextSegment = (mode == 'playback' && indexWithinBounds(index + 1, segments))
+
+      if(shouldGoToNextSegment) {
+        return {
+          ...initialState,
+          index: index + 1
+        }
+      } else {
+        const startOffset = mode == 'playback' ? payload.timestamp - startedAt : 0
+        return {
+          ...state,
+          isStarted: false,
+          startedAt: null,
+          startOffset
+        }
+      }
     }
 
     case 'START_TYPING': {
