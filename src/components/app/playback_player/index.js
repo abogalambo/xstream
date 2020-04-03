@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPause,
-  faPlay
+  faPlay,
+  faAngleLeft,
+  faAngleRight
 } from '@fortawesome/free-solid-svg-icons'
 import {
   segmentStarted,
@@ -36,8 +39,21 @@ const PlaybackPlayer = ({ children }) => {
   isStreamPlayingRef.current = isStreamPlaying
 
   const dispatch = useDispatch();
+
+  const nextSegment = (e) => {
+    e && e.stopPropagation()
+    dispatch(goToSegment(index + 1))
+  }
+
+  const previousSegment = (e) => {
+    e && e.stopPropagation()
+    dispatch(goToSegment(index - 1))
+  }
+
   const [player] = useState(getPlayer(dispatch, audioUrl, segmentDuration))
   const [isNew, setIsNew] = useState(true)
+
+  const canHover = window.matchMedia('(hover: hover)').matches
 
   const togglePlaying = () => {
     setIsNew(false)
@@ -49,6 +65,11 @@ const PlaybackPlayer = ({ children }) => {
   }
 
   const clickHandler = (e) => {
+    if(canHover) {
+      togglePlaying()
+      return
+    }
+
     const clickX = e.clientX
     const { x, width } = e.target.getBoundingClientRect()
     const offset = clickX - x
@@ -56,9 +77,9 @@ const PlaybackPlayer = ({ children }) => {
     const isLastQuarter = (offset / width) > 0.75
 
     if(isFirstQuarter) {
-      dispatch(goToSegment(index - 1))
+      previousSegment()
     }else if(isLastQuarter) {
-      dispatch(goToSegment(index + 1))
+      nextSegment()
     }else {
       togglePlaying()
     }
@@ -86,6 +107,24 @@ const PlaybackPlayer = ({ children }) => {
       className={styles.container}
       onClick={clickHandler}
     >
+      { canHover && (
+        <button
+          onClick={previousSegment}
+          className={classnames(styles.navBtn, styles.previousBtn)}
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </button>
+      )}
+
+      { canHover && (
+        <button
+          onClick={nextSegment}
+          className={classnames(styles.navBtn, styles.nextBtn)}
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </button>
+      )}      
+
       { children }
 
       {audioUrl && (
