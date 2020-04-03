@@ -14,9 +14,13 @@ import {
   pauseStream
 } from '../../../state/actions/playback'
 import {
+  goToSegment
+} from '../../../state/actions/stream'
+import {
   audioDataSelector,
   segmentDurationSelector,
-  isStreamPlayingSelector
+  isStreamPlayingSelector,
+  indexSelector
 } from '../../../state/selectors/current_stream'
 import AudioPlayer from '../../../lib/audio_player'
 import VisualPlayer from '../../../lib/visual_player'
@@ -26,6 +30,7 @@ const PlaybackPlayer = ({ children }) => {
   const isStreamPlaying = useSelector(isStreamPlayingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const segmentDuration = useSelector(segmentDurationSelector)
+  const index = useSelector(indexSelector)
 
   const isStreamPlayingRef = useRef(null)
   isStreamPlayingRef.current = isStreamPlaying
@@ -40,6 +45,22 @@ const PlaybackPlayer = ({ children }) => {
       dispatch(pauseStream())
     } else {
       dispatch(playStream())
+    }
+  }
+
+  const clickHandler = (e) => {
+    const clickX = e.clientX
+    const { x, width } = e.target.getBoundingClientRect()
+    const offset = clickX - x
+    const isFirstQuarter = (offset / width) < 0.25
+    const isLastQuarter = (offset / width) > 0.75
+
+    if(isFirstQuarter) {
+      dispatch(goToSegment(index - 1))
+    }else if(isLastQuarter) {
+      dispatch(goToSegment(index + 1))
+    }else {
+      togglePlaying()
     }
   }
 
@@ -63,7 +84,7 @@ const PlaybackPlayer = ({ children }) => {
   return (
     <div
       className={styles.container}
-      onClick={togglePlaying}
+      onClick={clickHandler}
     >
       { children }
 
