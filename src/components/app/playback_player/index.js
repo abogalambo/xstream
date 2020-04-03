@@ -31,10 +31,10 @@ const PlaybackPlayer = () => {
 
   const dispatch = useDispatch();
   const [player] = useState(getPlayer(dispatch, audioUrl, segmentDuration))
-  const [fresh, setFresh] = useState(true)
+  const [isNew, setIsNew] = useState(true)
 
   const togglePlaying = () => {
-    setFresh(false)
+    setIsNew(false)
     if(isStreamPlayingRef.current) {
       dispatch(pauseStream())
     } else {
@@ -65,13 +65,13 @@ const PlaybackPlayer = () => {
         <audio src={audioUrl}></audio>
       )}
 
-      {!fresh && isStreamPlaying && (
+      {!isNew && isStreamPlaying && (
         <div className={styles.playbackPlayer}>
           <FontAwesomeIcon icon={faPlay} />
         </div>
       )}
 
-      {!fresh && !isStreamPlaying && (
+      {!isNew && !isStreamPlaying && (
         <div className={styles.playbackPlayer}>
           <FontAwesomeIcon icon={faPause} />
         </div>
