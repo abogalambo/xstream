@@ -19,6 +19,7 @@ import {
 } from '../../../state/actions/stream'
 import TextInput from '../../lib/text_input'
 import SegmentImage from '../segment_image'
+import PlaybackPlayer from '../playback_player'
 import styles from './segment.css'
 import config from '../../../../config'
 
@@ -89,6 +90,7 @@ const Segment = () => {
           <SegmentImage />
         )} 
       </div>
+      {isPlaybackMode && (<PlaybackPlayer />)}
     </div>
   )
 }

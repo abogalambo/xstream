@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPause,
@@ -14,18 +13,15 @@ import {
   pauseStream
 } from '../../../state/actions/playback'
 import {
-  isSegmentStartedSelector,
   audioDataSelector,
   segmentDurationSelector,
   isStreamPlayingSelector
 } from '../../../state/selectors/current_stream'
-import styles from './player.css'
 import AudioPlayer from '../../../lib/audio_player'
 import VisualPlayer from '../../../lib/visual_player'
-import CircleMeter from '../../lib/circle_meter'
+import styles from './playback_player.css'
 
 const PlaybackPlayer = () => {
-  const isSegmentStarted = useSelector(isSegmentStartedSelector)
   const isStreamPlaying = useSelector(isStreamPlayingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const segmentDuration = useSelector(segmentDurationSelector)
@@ -35,8 +31,10 @@ const PlaybackPlayer = () => {
 
   const dispatch = useDispatch();
   const [player] = useState(getPlayer(dispatch, audioUrl, segmentDuration))
+  const [fresh, setFresh] = useState(true)
 
   const togglePlaying = () => {
+    setFresh(false)
     if(isStreamPlayingRef.current) {
       dispatch(pauseStream())
     } else {
@@ -54,35 +52,31 @@ const PlaybackPlayer = () => {
     isStreamPlaying && player.startPlaying()
     !isStreamPlaying && player.stopPlaying()
     return () => player.cleanup();
-  }, [isStreamPlaying]);
+  }, [isStreamPlaying])
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, []);
+  }, [])
 
   return (
-    <button
-      onFocus={e => e.target.blur()}
-      onClick={togglePlaying}
-      className={styles.playerMain}
-    >
-      <div className={styles.circleShadow}>
-        <CircleMeter { ...player.status } />
-        <FontAwesomeIcon
-          className={classnames(
-            styles.playerMain_operator,
-              {
-                [styles.square]: isSegmentStarted,
-                [styles.play]: !isSegmentStarted
-              }
-            )}
-          icon={getIcon(isSegmentStarted)} />
-        {audioUrl && (
-          <audio src={audioUrl}></audio>
-        )}
-      </div>
-    </button>
+    <>
+      {audioUrl && (
+        <audio src={audioUrl}></audio>
+      )}
+
+      {!fresh && isStreamPlaying && (
+        <div className={styles.playbackPlayer}>
+          <FontAwesomeIcon icon={faPlay} />
+        </div>
+      )}
+
+      {!fresh && !isStreamPlaying && (
+        <div className={styles.playbackPlayer}>
+          <FontAwesomeIcon icon={faPause} />
+        </div>
+      )}
+    </>
   )
 }
 
@@ -95,7 +89,5 @@ const getPlayer = (dispatch, audioUrl, duration) => {
     duration
   })
 }
-
-const getIcon = (isSegmentStarted) => isSegmentStarted ? faPause : faPlay
 
 export default PlaybackPlayer
