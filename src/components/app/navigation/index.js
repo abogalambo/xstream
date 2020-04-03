@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faStepForward,
-  faStepBackward,
+  faAngleRight,
+  faAngleLeft,
   faTrash
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -47,7 +47,7 @@ const Navigation = () => {
         <button onClick={onPreviousSegmentClick} disabled={!canPrevious}>
           <FontAwesomeIcon className={styles.skipIcon}
             size={'2x'}
-            icon={faStepBackward}/>
+            icon={faAngleLeft}/>
         </button>
 
         <div className={classnames(
@@ -73,7 +73,7 @@ const Navigation = () => {
         <button disabled={!canNext} onClick={onNextSegmentClick}>
           <FontAwesomeIcon className={styles.skipIcon}
             size={'2x'}
-            icon={faStepForward}/>
+            icon={faAngleRight}/>
         </button>
       </div>
     </>
