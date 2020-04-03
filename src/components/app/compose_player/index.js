@@ -17,11 +17,11 @@ import {
   audioDataSelector,
   segmentDurationSelector
 } from '../../../state/selectors/current_stream'
-import styles from './player.css'
+import styles from './compose_player.css'
 import AudioPlayer from '../../../lib/audio_player'
 import CircleMeter from '../../lib/circle_meter'
 
-const Player = () => {
+const ComposePlayer = () => {
   const isSegmentStarted = useSelector(isSegmentStartedSelector)
   const isTyping = useSelector(isTypingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
@@ -85,4 +85,4 @@ const getPlayer = (dispatch, audioUrl, duration) => {
 
 const getIcon = (isSegmentStarted) => isSegmentStarted ? faPause : faPlay
 
-export default Player
+export default ComposePlayer
