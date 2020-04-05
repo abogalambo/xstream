@@ -1,4 +1,5 @@
 import RemoteProfile from '../../lib/remote_profile'
+import { addImageActionCreator } from './utils'
 
 export const fetchProfile = (uid) => ({
   type: 'FETCH_PROFILE',
@@ -13,3 +14,5 @@ export const saveProfile = (profileData) => ({
     profile: remoteProfile.profile
   }))
 })
+
+export const addAvatar = addImageActionCreator('ADD_AVATAR', 'PROFILE_ASSET_UPLOADED')

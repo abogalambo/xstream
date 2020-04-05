@@ -10,10 +10,21 @@ const profile = (state = initialState, action) => {
       }
     }
 
-    case 'FETCH_PROFILE_FULFILLED':
-    case 'SAVE_PROFILE_FULFILLED': {
+    case 'FETCH_PROFILE_FULFILLED': {
       const { id, ...rest } = payload.profile
       return rest
+    }
+
+    case 'SAVE_PROFILE_FULFILLED': {
+      const { id, avatar, ...rest } = payload.profile
+      return {
+        ...state,
+        ...rest,
+        avatar: {
+          ...state.avatar,
+          ...avatar
+        }
+      }
     }
 
     case 'FETCH_PROFILE_REJECTED': {
@@ -22,6 +33,29 @@ const profile = (state = initialState, action) => {
 
     case 'USER_LOGGED_OUT': {
       return initialState
+    }
+
+    case 'ADD_AVATAR': {
+      const { src, mediaKey } = payload
+      return {
+        avatar: {
+          mediaKey,
+          src,
+          isPersisted: false
+        }
+      }
+    }
+
+    case 'PROFILE_ASSET_UPLOADED': {
+      const { assetUrl } = payload
+      const { avatar } = state || {}
+      return {
+        avatar: {
+          ...avatar,
+          src: assetUrl,
+          isPersisted: true
+        }
+      } 
     }
 
     default:

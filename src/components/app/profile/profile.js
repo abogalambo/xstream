@@ -1,48 +1,56 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './profile.css'
 import {
-  profileSelector
+  profileSelector,
+  avatarUploadKeySelector,
+  profileForServerSelector
 } from '../../../state/selectors/profile'
 import {
-  currentUserIdSelector
-} from '../../../state/selectors/current_user'
-import {
-  saveProfile as saveProfileAction
+  saveProfile as saveProfileAction,
+  addAvatar as addAvatarAction
 } from '../../../state/actions/profile'
+import ImageInput from '../../lib/image_input'
 
 const Profile = () => {
   const dispatch = useDispatch()
   const profile = useSelector(profileSelector)
+  const avatarUploadKey = useSelector(avatarUploadKeySelector)
+  const profileForServer = useSelector(profileForServerSelector)
 
-  const currentUserId = useSelector(currentUserIdSelector)
-  const [localProfile, setLocalProfile] = useState(profile)
+  const { handle, avatar } = profile
 
-  useEffect(() => {
-    setLocalProfile(profile)
-  }, [profile])
-
-  const { handle, avatar } = localProfile
-  const onHandleChange = (e) => {
-    setLocalProfile({
-      ...localProfile,
-      handle: e.target.value
-    })
-  }
+  const addAvatar = (e) => dispatch(addAvatarAction(e, avatarUploadKey))
 
   const saveProfile = () => {
-    dispatch(saveProfileAction({
-      id: currentUserId,
-      ...localProfile
-    }))
+    dispatch(saveProfileAction(profileForServer))
   }
+
+  const [oldAvatar, setOldAvatar] = useState(avatar)
+
+  useEffect(() => {
+    const { mediaKey, isPersisted } = avatar || {}
+    const { mediaKey: oldMediaKey } = oldAvatar || {}
+
+    if(isPersisted && mediaKey != oldMediaKey) {
+      saveProfile()
+      setOldAvatar(avatar)
+    }
+  }, [avatar])
 
   return (
     <div className={styles.profile}>
+      {avatar && avatar.src && (
+        <img src={avatar.src} />
+      )}
+      <ImageInput
+        onChange={addAvatar}
+        buttonDisplay
+        text={''}
+      />
       <input
         type="text"
-        value={handle}
-        onChange={onHandleChange}
+        defaultValue={handle}
       />
       <button onClick={saveProfile}>
         Save
