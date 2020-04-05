@@ -16,3 +16,7 @@ export const saveProfile = (profileData) => ({
 })
 
 export const addAvatar = addImageActionCreator('ADD_AVATAR', 'PROFILE_ASSET_UPLOADED')
+
+export const removeAvatar = () => ({
+  type: 'REMOVE_AVATAR'
+})

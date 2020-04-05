@@ -8,7 +8,8 @@ import {
 } from '../../../state/selectors/profile'
 import {
   saveProfile as saveProfileAction,
-  addAvatar as addAvatarAction
+  addAvatar as addAvatarAction,
+  removeAvatar as removeAvatarAction
 } from '../../../state/actions/profile'
 import ImageInput from '../../lib/image_input'
 
@@ -21,6 +22,7 @@ const Profile = () => {
   const { handle, avatar } = profile
 
   const addAvatar = (e) => dispatch(addAvatarAction(e, avatarUploadKey))
+  const removeAvatar = () => dispatch(removeAvatarAction())
 
   const saveProfile = () => {
     dispatch(saveProfileAction(profileForServer))
@@ -32,7 +34,7 @@ const Profile = () => {
     const { mediaKey, isPersisted } = avatar || {}
     const { mediaKey: oldMediaKey } = oldAvatar || {}
 
-    if(isPersisted && mediaKey != oldMediaKey) {
+    if(mediaKey != oldMediaKey && (isPersisted || !mediaKey)) {
       saveProfile()
       setOldAvatar(avatar)
     }
@@ -48,6 +50,9 @@ const Profile = () => {
         buttonDisplay
         text={''}
       />
+      <button onClick={removeAvatar}>
+        Remove Avatar
+      </button>
       <input
         type="text"
         defaultValue={handle}

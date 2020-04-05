@@ -38,12 +38,18 @@ const profile = (state = initialState, action) => {
     case 'ADD_AVATAR': {
       const { src, mediaKey } = payload
       return {
+        ...state,
         avatar: {
           mediaKey,
           src,
           isPersisted: false
         }
       }
+    }
+
+    case 'REMOVE_AVATAR': {
+      const { avatar, ...rest } = state
+      return rest
     }
 
     case 'PROFILE_ASSET_UPLOADED': {
