@@ -157,7 +157,7 @@ const getPlayer = (dispatch, audioUrl, duration) => {
 }
 
 PlaybackPlayer.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.node
 }
 
 export default PlaybackPlayer
