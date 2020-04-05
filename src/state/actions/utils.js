@@ -1,6 +1,6 @@
 import MediaManager from '../../lib/media_manager'
 
-export const addImageActionCreator = (type) => (
+export const addImageActionCreator = (type, assetUploadedType) => (
   (event, uploadKey) => {
     return dispatch => {
       const file = event.target.files[0]
@@ -19,7 +19,7 @@ export const addImageActionCreator = (type) => (
       if (file) {
         (new MediaManager()).write(uploadKey, file).then(imageUrl => {
           dispatch({
-            type: 'ASSET_UPLOADED',
+            type: assetUploadedType,
             payload: {
               uploadKey,
               assetUrl: imageUrl,

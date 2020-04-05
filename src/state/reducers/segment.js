@@ -74,7 +74,7 @@ const segmentReducer = (state, action) => {
       return newState
     }
 
-    case 'ASSET_UPLOADED': {
+    case 'STREAM_ASSET_UPLOADED': {
       const { uploadKey } = payload
       const {audio, image} = state
       if(audio && audio.mediaKey == uploadKey) {

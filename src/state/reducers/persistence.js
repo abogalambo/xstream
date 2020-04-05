@@ -20,7 +20,7 @@ const persistenceReducer = (state = initialState, action) => {
     case 'REMOVE_RECORDING':
     case 'NEW_STREAM':
     case 'SET_STREAM_TITLE':
-    case 'ASSET_UPLOADED':
+    case 'STREAM_ASSET_UPLOADED':
     case 'REMOVE_COVER_IMAGE': {
       return updateObject(state, {lastUpdateAt: payload.timestamp})
     }

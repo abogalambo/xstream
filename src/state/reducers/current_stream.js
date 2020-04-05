@@ -188,7 +188,7 @@ const currentStream = (state = null, action) => {
       }
     }
 
-    case 'ASSET_UPLOADED': {
+    case 'STREAM_ASSET_UPLOADED': {
       const { uploadKey } = payload
       const { segments, cover } = state
       if(cover && uploadKey == cover.mediaKey) {
