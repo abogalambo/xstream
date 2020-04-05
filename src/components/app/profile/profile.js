@@ -24,11 +24,26 @@ const Profile = () => {
   const addAvatar = (e) => dispatch(addAvatarAction(e, avatarUploadKey))
   const removeAvatar = () => dispatch(removeAvatarAction())
 
-  const saveProfile = () => {
-    dispatch(saveProfileAction(profileForServer))
+  const saveProfile = (updates) => {
+    dispatch(saveProfileAction({
+      ...profileForServer,
+      ...updates
+    }))
   }
 
   const [oldAvatar, setOldAvatar] = useState(avatar)
+  const [formData, setFormData] = useState({ handle })
+  const handleSubmit = (e) => {
+    saveProfile(formData)
+    e.preventDefault()
+  }
+
+  const onHandleChange = (e) => {
+    setFormData({
+      ...formData,
+      handle: e.target.value
+    })
+  }
 
   useEffect(() => {
     const { mediaKey, isPersisted } = avatar || {}
@@ -53,13 +68,14 @@ const Profile = () => {
       <button onClick={removeAvatar}>
         Remove Avatar
       </button>
-      <input
-        type="text"
-        defaultValue={handle}
-      />
-      <button onClick={saveProfile}>
-        Save
-      </button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={(formData || {}).handle}
+          onChange={onHandleChange}
+        />
+        <input type="submit" value="Save" />
+      </form>
     </div>
   )
 }
