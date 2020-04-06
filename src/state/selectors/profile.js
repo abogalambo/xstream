@@ -10,7 +10,7 @@ export const avatarUploadKeySelector = (state) => {
 export const profileSelector = (state) => state.profile
 
 export const profileForServerSelector = (state) => {
-  const { avatar, handle } = state.profile
+  const { avatar, name } = state.profile
 
   const { mediaKey, isPersisted } = (avatar || {})
 
@@ -19,7 +19,7 @@ export const profileForServerSelector = (state) => {
   const result = {
     id: currentUserIdSelector(state),
     avatar: avatarForServer,
-    handle
+    name
   }
 
   Object.keys(result).forEach(key => result[key] === undefined && delete result[key])

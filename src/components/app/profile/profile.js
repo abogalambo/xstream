@@ -20,7 +20,7 @@ const Profile = () => {
   const avatarUploadKey = useSelector(avatarUploadKeySelector)
   const profileForServer = useSelector(profileForServerSelector)
 
-  const { handle, avatar } = profile
+  const { name, avatar } = profile
 
   const addAvatar = (e) => dispatch(addAvatarAction(e, avatarUploadKey))
   const removeAvatar = () => dispatch(removeAvatarAction())
@@ -33,16 +33,16 @@ const Profile = () => {
   }
 
   const [oldAvatar, setOldAvatar] = useState(avatar)
-  const [formData, setFormData] = useState({ handle })
+  const [formData, setFormData] = useState({ name })
   const handleSubmit = (e) => {
     saveProfile(formData)
     e.preventDefault()
   }
 
-  const onHandleChange = (e) => {
+  const onNameChange = (e) => {
     setFormData({
       ...formData,
-      handle: e.target.value
+      name: e.target.value
     })
   }
 
@@ -51,7 +51,7 @@ const Profile = () => {
     const { mediaKey: oldMediaKey } = oldAvatar || {}
 
     if(mediaKey != oldMediaKey && (isPersisted || !mediaKey)) {
-      saveProfile()
+      saveProfile(formData)
       setOldAvatar(avatar)
     }
   }, [avatar])
@@ -78,8 +78,8 @@ const Profile = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={(formData || {}).handle}
-          onChange={onHandleChange}
+          value={(formData || {}).name}
+          onChange={onNameChange}
         />
         <input type="submit" value="Save" />
       </form>
