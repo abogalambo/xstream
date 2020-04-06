@@ -12,6 +12,7 @@ import {
   removeAvatar as removeAvatarAction
 } from '../../../state/actions/profile'
 import ImageInput from '../../lib/image_input'
+import defaultAvatar from '../../../img/default_avatar.png'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -57,17 +58,23 @@ const Profile = () => {
 
   return (
     <div className={styles.profile}>
-      {avatar && avatar.src && (
-        <img src={avatar.src} />
-      )}
+      
+      <figure className={styles.avatar}>
+        <img src={avatar && avatar.src ? avatar.src : defaultAvatar} />
+      </figure>
+      
       <ImageInput
         onChange={addAvatar}
         buttonDisplay
         text={''}
       />
-      <button onClick={removeAvatar}>
-        Remove Avatar
-      </button>
+
+      { avatar && avatar.src && (
+        <button onClick={removeAvatar}>
+          X Remove
+        </button>
+      )}
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
