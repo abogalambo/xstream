@@ -3,9 +3,16 @@ import { addImageActionCreator } from './utils'
 
 export const fetchProfile = (uid) => ({
   type: 'FETCH_PROFILE',
-  payload: new RemoteProfile({id: uid}).fetch().then(remoteProfile => ({
-    profile: remoteProfile.profile
-  }))
+  payload: new RemoteProfile({id: uid})
+    .fetch()
+    .then(remoteProfile => ({
+      profile: remoteProfile.profile
+    }))
+    .catch((e) => {
+      if(e.exists === false){
+        return { profile: {} }
+      }
+    })
 })
 
 export const saveProfile = (profileData) => ({
