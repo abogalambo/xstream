@@ -26,3 +26,9 @@ export const profileForServerSelector = (state) => {
 
   return result
 }
+
+export const hasUnsavedChangesSelector = (state) => {
+  const { lastModifiedAt = 0, lastSavedAt = 0 } = state.profile || {}
+
+  return lastModifiedAt > lastSavedAt
+}

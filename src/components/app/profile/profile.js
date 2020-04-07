@@ -4,7 +4,8 @@ import styles from './profile.css'
 import {
   profileSelector,
   avatarUploadKeySelector,
-  profileForServerSelector
+  profileForServerSelector,
+  hasUnsavedChangesSelector
 } from '../../../state/selectors/profile'
 import {
   saveProfile as saveProfileAction,
@@ -48,7 +49,7 @@ const Profile = () => {
       saveProfile()
       setOldAvatar(avatar)
     }
-  }, [avatar])
+  }, [hasUnsavedChangesSelector])
 
   return (
     <div className={styles.profile}>

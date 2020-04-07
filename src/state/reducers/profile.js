@@ -16,10 +16,12 @@ const profile = (state = initialState, action) => {
     }
 
     case 'SAVE_PROFILE_FULFILLED': {
-      const { id, avatar, ...rest } = payload.profile
+      const { timestamp, profile } = payload
+      const { id, avatar, ...rest } = profile
       return {
         ...state,
         ...rest,
+        lastSavedAt: timestamp,
         avatar: {
           ...state.avatar,
           ...avatar
@@ -53,9 +55,10 @@ const profile = (state = initialState, action) => {
     }
 
     case 'PROFILE_ASSET_UPLOADED': {
-      const { assetUrl } = payload
+      const { assetUrl, timestamp } = payload
       const { avatar } = state || {}
       return {
+        lastModifiedAt: timestamp,
         avatar: {
           ...avatar,
           src: assetUrl,
@@ -65,12 +68,14 @@ const profile = (state = initialState, action) => {
     }
 
     case 'SET_PROFILE_NAME': {
-      const { name } = payload
+      const { name, timestamp } = payload
       const { name: currentName, ...rest } = state
       return name == '' ? {
-        ...rest
+        ...rest,
+        lastModifiedAt: timestamp
       } : {
         ...state,
+        lastModifiedAt: timestamp,
         name
       }
     }
