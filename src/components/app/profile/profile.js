@@ -21,6 +21,7 @@ const Profile = () => {
   const profile = useSelector(profileSelector)
   const avatarUploadKey = useSelector(avatarUploadKeySelector)
   const profileForServer = useSelector(profileForServerSelector)
+  const hasUnsavedChanges = useSelector(hasUnsavedChangesSelector)
 
   const { name, avatar } = profile
 
@@ -49,7 +50,7 @@ const Profile = () => {
       saveProfile()
       setOldAvatar(avatar)
     }
-  }, [hasUnsavedChangesSelector])
+  }, [hasUnsavedChanges])
 
   return (
     <div className={styles.profile}>
@@ -87,7 +88,10 @@ const Profile = () => {
           />
         </label>
          <input className={styles.form_submitBtn}
-          type="submit" value="Save" />
+          disabled={!hasUnsavedChanges}
+          type="submit"
+          value="Save"
+        />
       </form>
     </div>
   )

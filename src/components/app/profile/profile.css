@@ -173,6 +173,11 @@
   cursor: pointer;
 }
 
+.form_submitBtn:disabled {
+  background: var(--onBgColor_light);
+  color: var(--onBgColor_medium);
+}
+
 .form_submitBtn:active {
   background: var(--primaryColor_dark);
 }
