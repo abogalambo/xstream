@@ -9,7 +9,8 @@ import {
 import {
   saveProfile as saveProfileAction,
   addAvatar as addAvatarAction,
-  removeAvatar as removeAvatarAction
+  removeAvatar as removeAvatarAction,
+  setProfileName as setProfileNameAction
 } from '../../../state/actions/profile'
 import ImageInput from '../../lib/image_input'
 import defaultAvatar from '../../../img/default_avatar.png'
@@ -35,8 +36,8 @@ const Profile = () => {
     e.preventDefault()
   }
 
-  const onNameChange = (e) => {
-    //
+  const setProfileName = (e) => {
+    dispatch(setProfileNameAction(e.target.value))
   }
 
   useEffect(() => {
@@ -80,7 +81,7 @@ const Profile = () => {
             spellCheck="true"
             type="text"
             value={name}
-            onChange={onNameChange}
+            onChange={setProfileName}
           />
         </label>
          <input type="submit" value="Save" />

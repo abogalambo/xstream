@@ -61,7 +61,18 @@ const profile = (state = initialState, action) => {
           src: assetUrl,
           isPersisted: true
         }
-      } 
+      }
+    }
+
+    case 'SET_PROFILE_NAME': {
+      const { name } = payload
+      const { name: currentName, ...rest } = state
+      return name == '' ? {
+        ...rest
+      } : {
+        ...state,
+        name
+      }
     }
 
     default:

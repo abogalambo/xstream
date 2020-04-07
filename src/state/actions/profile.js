@@ -27,3 +27,10 @@ export const addAvatar = addImageActionCreator('ADD_AVATAR', 'PROFILE_ASSET_UPLO
 export const removeAvatar = () => ({
   type: 'REMOVE_AVATAR'
 })
+
+export const setProfileName = (name) => ({
+  type: 'SET_PROFILE_NAME',
+  payload: {
+    name
+  }
+})
