@@ -68,13 +68,14 @@ const Profile = () => {
 
         { avatar && avatar.src && (
           <button className={styles.avatar_RemoveBtn}
-           onClick={removeAvatar}>
+           onClick={removeAvatar}>Remove
           </button>
         )}
       </div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='displayName'>Name
-          <input
+        <label className={styles.form_label}
+          htmlFor='displayName'>Name
+          <input className={styles.form_input}
             id="displayName"
             autoComplete="on"
             autoCorrect="on"
@@ -85,7 +86,8 @@ const Profile = () => {
             onChange={setProfileName}
           />
         </label>
-         <input type="submit" value="Save" />
+         <input className={styles.form_submitBtn}
+          type="submit" value="Save" />
       </form>
     </div>
   )

@@ -1,3 +1,22 @@
+.profile {
+  max-width: 600px;
+  width: 100%;
+  padding: 50px 50px 20px 50px;
+  margin: 20px auto;
+  background: white;
+  border-radius: var(--roundCorner);
+  box-shadow: var(--oneDp);
+}
+
+.profile h1 {
+  margin: 10px 0 20px 0;
+  font-weight: 700;
+  color: var(--secondaryColor);
+  font-size: 1.3em;
+
+}
+
+/*AVATAR*/
 .avatarWrapper {
   position: relative;
   border-radius: 50%;
@@ -6,6 +25,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  cursor: pointer;
 }
 
 .avatar {
@@ -22,31 +44,139 @@
 }
 
 .imageInputWrapper {
-  display: none;
   position: absolute;
-  top: var(--avatarBorder);
   width: calc(100% - (var(--avatarBorder) * 2));
   height: calc(100% - (var(--avatarBorder) * 2));
   z-index: 1;
   border-radius: 50%;
 }
 
-.avatarWrapper:hover .imageInputWrapper {
+.imageInputWrapper {
+  justify-content: center;
+}
+
+/*DESKTOP PROFILE AVATAR*/
+@media (hover: hover) {
+  .imageInputWrapper {
+    display: none;
+    top: var(--avatarBorder);
+    align-items: center;
+  }
+
+  .avatarWrapper:hover .imageInputWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.3);
+    background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
+    background: -moz-linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
+    background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
+  }
+
+  .avatar_RemoveBtn {
+    display:none;
+    color: white;
+    position: absolute;
+    bottom: 65px;
+    width: 65px;
+    height: 20px;
+  }
+
+  .avatarWrapper:hover .avatar_RemoveBtn {
+    display: block;
+    z-index: 1;
+  }
+}
+
+/*TOUCH DEVICE PROFILE AVATAR*/
+@media (hover: none ) {
+  .imageInputWrapper {
+    display: flex;
+    bottom: 0px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background: grey;
+  }
+
+  .avatar_RemoveBtn {
+    color: var(--secondaryColor);
+    bottom: -25px;
+    position: absolute;
+    text-decoration: underline;
+  }
+
+  .avatar_RemoveBtn:active,
+  .avatar_RemoveBtn:focus {
+    color: var(--primaryColor);
+  }
+}
+
+/*PROFILE FORM*/
+.profile form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_label {
+  display: block;
+  outline-style: none;
+  width: 100%;
+  padding: 5px 9px 0 9px;
+  border-radius: var(--roundCorner);
+  background-color: rgb(250, 245, 247);
+  border-bottom: 2px solid var(--onBgColor_light);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.form_input {
+  display: block;
+  -webkit-appearance: none;
+  outline-style: none;
+  text-shadow: none;
+  font-size: 18px;
+  padding: 2px 0 5px 0;
+  color: black;
+  border: 0;
+  background: none;
+  width: 100%;
+}
+
+.form_label:focus-within{
+  outline-style: none;
+  color: var(--primaryColor);
+  border-bottom-color: var(--primaryColor);
+}
+
+.form_submitBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.3);
-  background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
-  background: -moz-linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
-  background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
+  align-self: flex-end;
+  padding: 0 1em 0 1em;
+  font-size: 14px;
+  border: 0;
+  background: var(--primaryColor);
+  width: 60px;
+  height: 28px;
+  color: white;
+  font-weight: 700;
+  border-radius: calc(28px/2);
+  margin-top: 20px;
+  cursor: pointer;
 }
 
-.avatar_RemoveBtn {
-  position: absolute;
-  top: calc(50% - 12px);
-  width: 100%;
-  height: 100%;
+.form_submitBtn:active {
+  background: var(--primaryColor_dark);
 }
-  width: 100%;
+
+.form_submitBtn:focus {
+  outline: none;
 }
