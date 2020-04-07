@@ -25,25 +25,18 @@ const Profile = () => {
   const addAvatar = (e) => dispatch(addAvatarAction(e, avatarUploadKey))
   const removeAvatar = () => dispatch(removeAvatarAction())
 
-  const saveProfile = (updates) => {
-    dispatch(saveProfileAction({
-      ...profileForServer,
-      ...updates
-    }))
+  const saveProfile = () => {
+    dispatch(saveProfileAction(profileForServer))
   }
 
   const [oldAvatar, setOldAvatar] = useState(avatar)
-  const [formData, setFormData] = useState({ name })
   const handleSubmit = (e) => {
-    saveProfile(formData)
+    saveProfile()
     e.preventDefault()
   }
 
   const onNameChange = (e) => {
-    setFormData({
-      ...formData,
-      name: e.target.value
-    })
+    //
   }
 
   useEffect(() => {
@@ -51,37 +44,46 @@ const Profile = () => {
     const { mediaKey: oldMediaKey } = oldAvatar || {}
 
     if(mediaKey != oldMediaKey && (isPersisted || !mediaKey)) {
-      saveProfile(formData)
+      saveProfile()
       setOldAvatar(avatar)
     }
   }, [avatar])
 
   return (
     <div className={styles.profile}>
-      
-      <figure className={styles.avatar}>
-        <img src={avatar && avatar.src ? avatar.src : defaultAvatar} />
-      </figure>
-      
-      <ImageInput
-        onChange={addAvatar}
-        buttonDisplay
-        text={''}
-      />
+      <div className={styles.avatarWrapper}>
+        <figure className={styles.avatar}>
+          <img src={avatar && avatar.src ? avatar.src : defaultAvatar} />
+        </figure>
+        <div className={styles.imageInputWrapper}>
+          <ImageInput
+            onChange={addAvatar}
+            buttonDisplay
+            text={''}
+            isLightIcon={true}
+          />
+         </div>
 
-      { avatar && avatar.src && (
-        <button onClick={removeAvatar}>
-          X Remove
-        </button>
-      )}
-
+        { avatar && avatar.src && (
+          <button className={styles.avatar_RemoveBtn}
+           onClick={removeAvatar}>
+          </button>
+        )}
+      </div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={(formData || {}).name}
-          onChange={onNameChange}
-        />
-        <input type="submit" value="Save" />
+        <label htmlFor='displayName'>Name
+          <input
+            id="displayName"
+            autoComplete="on"
+            autoCorrect="on"
+            placeholder="Add your name"
+            spellCheck="true"
+            type="text"
+            value={name}
+            onChange={onNameChange}
+          />
+        </label>
+         <input type="submit" value="Save" />
       </form>
     </div>
   )

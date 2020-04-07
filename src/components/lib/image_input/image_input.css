@@ -1,5 +1,16 @@
 .imageInput {
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageInput.imageInput_avatar {
+  position: absolute;
+  border-radius: 50%;
+  top: var(--avatarBorder);
+  width: calc(100% - (var(--avatarBorder) * 2));
+  height: calc(100% - (var(--avatarBorder) * 2));
 }
 
 .imageInput input{
@@ -24,16 +35,20 @@
   cursor: pointer;
 }
 
-.imageInputIcon {
+.imageInputIcon_dark {
   color: var(--onBgColor);
   transition-property: color;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
 }
 
-.imageInput:hover .imageInputIcon,
+.imageInput:hover .imageInputIcon_dark,
 .imageInput:hover span{
   color: black;
+}
+
+.imageInputIcon.imageInputIcon_light {
+  color: white;
 }
 
 /* Standard */
