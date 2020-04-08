@@ -50,7 +50,7 @@ const Profile = () => {
       saveProfile()
       setOldAvatar(avatar)
     }
-  }, [hasUnsavedChanges])
+  }, [avatar])
 
   return (
     <div className={styles.profile}>
@@ -77,6 +77,9 @@ const Profile = () => {
         <label className={styles.form_label}
           htmlFor='displayName'>Name
           <input className={styles.form_input}
+            pattern ={"^[a-zA-Z][^#&<>\"~;$^%{}?]{1,30}$"}
+            title="Name can only contain alphanumeric characters and spaces"
+            maxLength="30"
             id="displayName"
             autoComplete="on"
             autoCorrect="on"
