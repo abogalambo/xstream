@@ -23,7 +23,7 @@ const StreamList = () => {
   return (
     <div className={styles.streamList}>
       { streams.map((stream) => {
-        const { id, cover, title } = stream
+        const { id, cover, title, profile } = stream
 
         return (
           <StreamCard

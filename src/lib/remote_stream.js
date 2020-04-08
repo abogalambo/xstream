@@ -44,14 +44,14 @@ class RemoteStream {
 
   get fullPromise() {
     return Promise.all([
-      this.profilePromise,
+      this.authorPromise,
       this.mediaUrlsPromise
     ]).then(() => this)
   }
 
   get compactPromise() {
     return Promise.all([
-      this.profilePromise,
+      this.authorPromise,
       this.coverPromise
     ]).then(() => this)
   }
@@ -69,7 +69,7 @@ class RemoteStream {
     })
   }
 
-  get profilePromise() {
+  get authorPromise() {
     const { authorId } = this.stream
 
     return new RemoteProfile({id: authorId})
@@ -77,7 +77,7 @@ class RemoteStream {
       .then((remoteProfile) => {
         const { name, avatar } = remoteProfile.profile
         const { src } = avatar || {}
-        this.stream.profile = { name, avatar: { src } }
+        this.stream.author = { name, avatar: { src } }
 
         return this
       })
