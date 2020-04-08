@@ -5,8 +5,8 @@
 
 .avatar > img {
   object-fit: cover;
-  height: var(--avatarSize_big);
-  width: var(--avatarSize_big);
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
   border: var(--avatarBorder) solid white;
 }

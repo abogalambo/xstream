@@ -2,3 +2,15 @@
 .header_navLink:active {
   color: black;
 }
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
