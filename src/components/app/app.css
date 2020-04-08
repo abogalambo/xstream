@@ -83,6 +83,10 @@
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 button:focus{
   outline: none;
 }
