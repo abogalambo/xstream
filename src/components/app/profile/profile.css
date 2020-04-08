@@ -30,19 +30,6 @@
   cursor: pointer;
 }
 
-.avatar {
-  height: 100%;
-  width: 100%;
-}
-
-.avatar > img {
-  object-fit: cover;
-  height: var(--avatarSize_big);
-  width: var(--avatarSize_big);
-  border-radius: 50%;
-  border: var(--avatarBorder) solid white;
-}
-
 .imageInputWrapper {
   position: absolute;
   width: calc(100% - (var(--avatarBorder) * 2));

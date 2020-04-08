@@ -14,7 +14,7 @@ import {
   setProfileName as setProfileNameAction
 } from '../../../state/actions/profile'
 import ImageInput from '../../lib/image_input'
-import defaultAvatar from '../../../img/default_avatar.png'
+import Avatar from '../../lib/avatar'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -55,9 +55,7 @@ const Profile = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.avatarWrapper}>
-        <figure className={styles.avatar}>
-          <img src={avatar && avatar.src ? avatar.src : defaultAvatar} />
-        </figure>
+        <Avatar src={(avatar || {}).src} />
         <div className={styles.imageInputWrapper}>
           <ImageInput
             onChange={addAvatar}
