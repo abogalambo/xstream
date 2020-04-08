@@ -58,6 +58,7 @@ const profile = (state = initialState, action) => {
       const { assetUrl, timestamp } = payload
       const { avatar } = state || {}
       return {
+        ...state,
         lastModifiedAt: timestamp,
         avatar: {
           ...avatar,
