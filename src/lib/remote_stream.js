@@ -49,8 +49,19 @@ class RemoteStream {
     ]).then(() => this)
   }
 
+  get compactPromise() {
+    return Promise.all([
+      this.profilePromise,
+      this.coverPromise
+    ]).then(() => this)
+  }
+
   get coverPromise() {
     const { cover } = this.stream
+
+    if(!cover || !cover.mediaKey) {
+      return Promise.resolve()
+    }
 
     return this.mediaManager.read(cover.mediaKey).then(coverUrl => {
       cover.src = coverUrl
@@ -61,15 +72,12 @@ class RemoteStream {
   get profilePromise() {
     const { authorId } = this.stream
 
-    const remoteProfile = new RemoteProfile({id: authorId})
+    return new RemoteProfile({id: authorId})
       .fetch()
       .then((remoteProfile) => {
         const { name, avatar } = remoteProfile.profile
         const { src } = avatar || {}
-        this.stream = {
-          ...this.stream,
-          profile: { name, avatar: { src } }
-        }
+        this.stream.profile = { name, avatar: { src } }
 
         return this
       })
