@@ -1,6 +1,7 @@
 import React from 'react'
+import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faHome } from '@fortawesome/free-solid-svg-icons'
 import UserInfo from '../user_info'
 import styles from './top_bar.css'
 
@@ -8,13 +9,23 @@ const TopBar = () => (
   <header className={styles.header}>
     <nav className={styles.header_nav}>
       <a
-        className={styles.header_navButton}
+        className={classnames(styles.navItem, styles.homeBtn)}
+        href="/"
+      >
+        <FontAwesomeIcon icon={faHome} />
+      </a>
+
+      <a
+        className={classnames(styles.navItem, styles.createBtn)}
         href="/streams/new"
       >
         <FontAwesomeIcon icon={faPlus} />
         <span>Create</span>
       </a>
-      <UserInfo />
+
+      <div className={classnames(styles.navItem, styles.userInfo)}>
+        <UserInfo />
+      </div>
     </nav>
   </header>
 )
