@@ -1,5 +1,6 @@
 import { db } from './firebase'
 import MediaManager from './media_manager'
+import RemoteProfile from './remote_profile'
 
 class RemoteStream {
   constructor(stream) {
@@ -28,7 +29,7 @@ class RemoteStream {
     return this.docRef.get().then((doc) => {
       if (doc.exists) {
         this.stream = { ...this.stream, ...doc.data() }
-        return this.mediaUrlsPromise
+        return this.fullPromise
       } else {
         return Promise.reject(doc)
       }
@@ -41,6 +42,13 @@ class RemoteStream {
     return this._mediaManager
   }
 
+  get fullPromise() {
+    return Promise.all([
+      this.profilePromise,
+      this.mediaUrlsPromise
+    ]).then(() => this)
+  }
+
   get coverPromise() {
     const { cover } = this.stream
 
@@ -48,6 +56,24 @@ class RemoteStream {
       cover.src = coverUrl
       cover.isPersisted = true
     })
+  }
+
+  get profilePromise() {
+    const { authorId } = this.stream
+
+    const remoteProfile = new RemoteProfile({id: authorId})
+      .fetch()
+      .then((remoteProfile) => {
+        const { name, avatar } = remoteProfile.profile
+        const { src } = avatar || {}
+        this.stream = {
+          ...this.stream,
+          profile: { name, avatar: { src } }
+        }
+
+        return this
+      })
+      .catch(() => this)
   }
 
   get mediaUrlsPromise() {
