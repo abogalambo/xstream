@@ -1,6 +1,6 @@
 import { addImageActionCreator } from './utils'
 
-export const addImage = addImageActionCreator('ADD_IMAGE')
+export const addImage = addImageActionCreator('ADD_IMAGE', 'STREAM_ASSET_UPLOADED')
 
 export const removeImage = () => ({
   type: 'REMOVE_IMAGE',

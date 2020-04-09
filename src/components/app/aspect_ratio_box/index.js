@@ -11,7 +11,7 @@ const AspectRatioBox = ({children}) => {
 }
 
 AspectRatioBox.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.node
 }
 
 export default AspectRatioBox

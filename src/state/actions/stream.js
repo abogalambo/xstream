@@ -33,7 +33,7 @@ export const setStreamTitle = (title) => ({
   }
 })
 
-export const addCoverImage = addImageActionCreator('ADD_COVER_IMAGE')
+export const addCoverImage = addImageActionCreator('ADD_COVER_IMAGE', 'STREAM_ASSET_UPLOADED')
 
 export const removeCoverImage = () => ({
   type: 'REMOVE_COVER_IMAGE',

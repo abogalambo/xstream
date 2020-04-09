@@ -11,7 +11,7 @@ export const stopRecording = (audioUrl, uploadKey, blob, duration) => {
   return (dispatch) => {
     (new MediaManager).write(uploadKey, blob).then(audioUrl => {
       dispatch({
-        type: 'ASSET_UPLOADED',
+        type: 'STREAM_ASSET_UPLOADED',
         payload: {
           uploadKey,
           assetUrl: audioUrl,

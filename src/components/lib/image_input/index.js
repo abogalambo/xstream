@@ -5,7 +5,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import styles from './image_input.css'
 import classnames from 'classnames'
 
-const ImageInput = ({onChange, buttonDisplay, text, className, disabled}) => {
+const ImageInput = ({onChange, buttonDisplay, text, className, disabled, isLightIcon}) => {
   const randomId = new Date().getTime()
 
   return (
@@ -18,7 +18,11 @@ const ImageInput = ({onChange, buttonDisplay, text, className, disabled}) => {
         <FontAwesomeIcon
           className={classnames(
             styles.imageInputIcon,
-            { [styles.imageInputIcon_button]: buttonDisplay }
+            {
+              [styles.imageInputIcon_button]: buttonDisplay,
+              [styles.imageInputIcon_light]: isLightIcon,
+              [styles.imageInputIcon_dark]: !isLightIcon
+            }
           )}
           icon={faCamera} />
         {text && (
@@ -44,6 +48,7 @@ ImageInput.propTypes = {
   disabled: PropTypes.bool,
   text: PropTypes.string,
   className: PropTypes.string,
+  isLightIcon: PropTypes.bool
 }
 
 export default ImageInput

@@ -9,8 +9,10 @@ import PrivateRoute from '../../lib/private_route'
 import StreamLoader from '../stream_loader'
 import StreamListLoader from '../stream_list_loader'
 import LoginForm from '../login_form'
+import Profile from '../profile'
 import ConfirmationDialog from '../confirmation_dialog'
 import UserLoader from '../user_loader'
+import ProfileLoader from '../profile_loader'
 import TopBar from '../top_bar'
 
 const MainScreen = () => {
@@ -18,6 +20,7 @@ const MainScreen = () => {
     <>
       <ConfirmationDialog />
       <UserLoader />
+      <ProfileLoader />
       <Router>
         <Switch>
           <Route exact path="/">
@@ -36,6 +39,10 @@ const MainScreen = () => {
           <Route path="/login">
             <LoginForm />
           </Route>
+          <PrivateRoute path="/profile">
+            <TopBar />
+            <Profile />
+          </PrivateRoute>
         </Switch>
       </Router>
     </>
