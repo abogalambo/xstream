@@ -56,7 +56,7 @@ const ComposePlayer = () => {
       className={styles.playerMain}
     >
       <div className={styles.circleShadow}>
-        <CircleMeter { ...player.status } />
+        <CircleMeter mode="compose" { ...player.status } />
         <FontAwesomeIcon
           className={classnames(
             styles.playerMain_operator,

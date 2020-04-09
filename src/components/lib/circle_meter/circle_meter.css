@@ -12,21 +12,33 @@
   left: 0;
 }
 
+.circleMeter_compose .background {
+  stroke: var(--primaryColor);
+  fill: var(--primaryColor);
+}
+
+.circleMeter_compose .meter {
+  stroke: var(--primaryColor_dark);
+  stroke-linecap: round;
+}
+
+.circleMeter_playback .background {
+  fill: none;
+}
+
+.circleMeter_playback .meter {
+  fill: transparent;
+  stroke: white;
+}
+
 circle {
-  stroke-width: 1;
+  stroke-width: 1.5px;
 }
 
 circle:not(:root) {
   transform-origin: 0px 0px;
 }
 
-.background {
-  stroke: var(--primaryColor);
-  fill: var(--primaryColor);
-}
-
 .meter {
   fill: transparent;
-  stroke: var(--primaryColor_dark);
-  stroke-linecap: round;
 }

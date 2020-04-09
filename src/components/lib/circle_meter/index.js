@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import classnames from 'classnames'
 import PropTypes from 'prop-types';
 import styles from './circle_meter.css';
 
-const CircleMeter = ({startedAt, isInProgress, offset, duration}) => {
+const CircleMeter = ({startedAt, isInProgress, offset, duration, mode}) => {
   const elapsedTime = isInProgress ? (new Date().getTime() - startedAt) : offset
   const percentage = Math.min(100, Math.ceil(100 * elapsedTime / duration))
 
@@ -21,7 +22,10 @@ const CircleMeter = ({startedAt, isInProgress, offset, duration}) => {
   }, [isInProgress]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={classnames(
+      styles.wrapper,
+      styles[`circleMeter_${mode}`]
+    )}>
       <svg xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20">
         <circle className={styles.background}
@@ -43,7 +47,8 @@ CircleMeter.propTypes = {
   startedAt: PropTypes.number,
   isInProgress: PropTypes.bool,
   offset: PropTypes.number,
-  duration: PropTypes.number
+  duration: PropTypes.number,
+  mode: PropTypes.oneOf(['playback', 'compose'])
 }
 
 export default CircleMeter;
