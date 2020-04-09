@@ -56,6 +56,7 @@
   --avatarSize_large: 200px;
   --avatarSize_small: 50px;
   --avatarSize_tiny: 33px;
+  --avatarSize_tiny_smallscreen: 25px;
 }
 
 ::selection {

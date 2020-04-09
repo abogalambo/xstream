@@ -166,3 +166,5 @@ export const canEditCurrentStreamSelector = (state) => {
 
   return (stream && currentUserId) ? canEditStream(stream, currentUserId) : false
 }
+
+export const streamAuthorSelector = (state) => currentStreamSelector(state).author

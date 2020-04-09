@@ -23,8 +23,11 @@ import {
   audioDataSelector,
   segmentDurationSelector,
   isStreamPlayingSelector,
+  streamAuthorSelector,
   indexSelector
 } from '../../../state/selectors/current_stream'
+import Avatar from '../../lib/avatar'
+import CircleMeter from '../../lib/circle_meter'
 import AudioPlayer from '../../../lib/audio_player'
 import VisualPlayer from '../../../lib/visual_player'
 import styles from './playback_player.css'
@@ -33,6 +36,7 @@ const PlaybackPlayer = ({ children }) => {
   const isStreamPlaying = useSelector(isStreamPlayingSelector)
   const audioUrl = (useSelector(audioDataSelector) || {}).url
   const segmentDuration = useSelector(segmentDurationSelector)
+  const author = useSelector(streamAuthorSelector)
   const index = useSelector(indexSelector)
 
   const isStreamPlayingRef = useRef(null)
@@ -54,6 +58,9 @@ const PlaybackPlayer = ({ children }) => {
   const [isNew, setIsNew] = useState(true)
 
   const canHover = window.matchMedia('(hover: hover)').matches
+
+  const { avatar, name } = author || {}
+  const { src } = avatar || {}
 
   const togglePlaying = () => {
     setIsNew(false)
@@ -107,6 +114,16 @@ const PlaybackPlayer = ({ children }) => {
       className={styles.container}
       onClick={clickHandler}
     >
+      <div className={styles.authorInfo}>
+        <div className={styles.avatarContainer}>
+          <CircleMeter mode="playback" { ...player.status } />
+          <div className={styles.avatar}>
+            <Avatar src={src} size="tiny" />
+          </div>
+        </div>
+        <span className={styles.authorName}>{ name }</span>
+      </div>
+
       { canHover && (
         <button
           onClick={previousSegment}

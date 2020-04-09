@@ -19,20 +19,20 @@
 
 .circleMeter_compose .meter {
   stroke: var(--primaryColor_dark);
-  stroke-linecap: round;
 }
 
 .circleMeter_playback .background {
-  fill: none;
+  fill: transparent;
+  stroke: var(--primaryColor_dark);
 }
 
 .circleMeter_playback .meter {
-  fill: transparent;
   stroke: white;
+  stroke-width: 1.5px;
 }
 
 circle {
-  stroke-width: 1.5px;
+  stroke-width: 1px;
 }
 
 circle:not(:root) {
@@ -41,4 +41,5 @@ circle:not(:root) {
 
 .meter {
   fill: transparent;
+  stroke-linecap: round;
 }

@@ -24,3 +24,10 @@
   height: var(--avatarSize_large);
   width: var(--avatarSize_large);
 }
+
+@media (max-width: 700px) {
+  .avatar_tiny {
+    height: var(--avatarSize_tiny_smallscreen);
+    width: var(--avatarSize_tiny_smallscreen);
+  }
+}
