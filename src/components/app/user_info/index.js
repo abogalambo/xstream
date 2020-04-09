@@ -26,7 +26,7 @@ const UserInfo = () => {
         className={styles.avatar}
         href="/profile"
       >
-        <Avatar src={src} />
+        <Avatar src={src} size="small" />
       </a>
       <a
         className={styles.header_navLink}

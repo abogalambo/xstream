@@ -1,12 +1,17 @@
-.avatar {
-  height: 100%;
-  width: 100%;
-}
-
 .avatar > img {
   object-fit: cover;
   height: 100%;
   width: 100%;
   border-radius: 50%;
-  border: var(--avatarBorder) solid white;
+  border: 3px solid white;
+}
+
+.avatar_small {
+  height: var(--avatarSize_small);
+  width: var(--avatarSize_small);
+}
+
+.avatar_large {
+  height: var(--avatarSize_large);
+  width: var(--avatarSize_large);
 }

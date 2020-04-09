@@ -55,7 +55,7 @@ const Profile = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.avatarWrapper}>
-        <Avatar src={(avatar || {}).src} />
+        <Avatar src={(avatar || {}).src} size="large" />
         <div className={styles.imageInputWrapper}>
           <ImageInput
             onChange={addAvatar}

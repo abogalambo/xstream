@@ -13,15 +13,14 @@
   font-weight: 700;
   color: var(--secondaryColor);
   font-size: 1.3em;
-
 }
 
 /*AVATAR*/
 .avatarWrapper {
   position: relative;
   border-radius: 50%;
-  height: var(--avatarSize_big);
-  width: var(--avatarSize_big);
+  height: var(--avatarSize_large);
+  width: var(--avatarSize_large);
   display: flex;
   justify-content: center;
   align-items: center;

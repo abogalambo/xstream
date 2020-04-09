@@ -22,7 +22,7 @@ const StreamCard = ({ id, cover, title, author, editable, onDeleteClick }) => {
         />
         <div className={styles.streamCard_textWrapper}>
           <div className={styles.avatarWrapper}>
-            <Avatar src={avatarSrc} />
+            <Avatar src={avatarSrc} size="small" />
           </div>
 
           <span className={styles.authorName}>
