@@ -4,6 +4,39 @@
   position: relative;
 }
 
+.authorInfo {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 20%;
+  padding: 1%;
+  z-index: 1;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}
+
+.authorName {
+  margin-left: 8px;
+  margin-top: 15px;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: white;
+  filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+}
+
+.avatarContainer {
+  width: calc(var(--avatarSize_tiny) + 6px);
+  height: calc(var(--avatarSize_tiny) + 6px);
+  position: relative;
+}
+
+.avatar {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
 .playbackPlayer {
   position: absolute;
   left: 50%;
@@ -63,4 +96,19 @@
 
 .nextBtn {
   right: 2%;
+}
+
+@media (max-width: 700px) {
+  .authorName {
+    margin-left: 4px;
+    margin-top: 10px;
+    font-size: 0.7em;
+    font-weight: 700;
+  }
+
+  .avatarContainer {
+    width: calc(var(--avatarSize_tiny_smallscreen) + 6px);
+    height: calc(var(--avatarSize_tiny_smallscreen) + 6px);
+    position: relative;
+  }
 }

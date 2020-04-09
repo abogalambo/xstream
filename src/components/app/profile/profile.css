@@ -13,34 +13,20 @@
   font-weight: 700;
   color: var(--secondaryColor);
   font-size: 1.3em;
-
 }
 
 /*AVATAR*/
 .avatarWrapper {
   position: relative;
   border-radius: 50%;
-  height: var(--avatarSize_big);
-  width: var(--avatarSize_big);
+  height: var(--avatarSize_large);
+  width: var(--avatarSize_large);
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   margin-bottom: 50px;
   cursor: pointer;
-}
-
-.avatar {
-  height: 100%;
-  width: 100%;
-}
-
-.avatar > img {
-  object-fit: cover;
-  height: var(--avatarSize_big);
-  width: var(--avatarSize_big);
-  border-radius: 50%;
-  border: var(--avatarBorder) solid white;
 }
 
 .imageInputWrapper {
@@ -71,7 +57,6 @@
     background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
     background: -webkit-linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
     background: -moz-linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
-    background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
   }
 
   .avatar_RemoveBtn {

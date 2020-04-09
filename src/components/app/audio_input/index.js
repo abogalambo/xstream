@@ -55,6 +55,7 @@ const AudioInput = () => {
           isInProgress={recording}
           offset={0}
           duration={durationLimit}
+          mode="compose"
         />
         <FontAwesomeIcon
           className={classnames(

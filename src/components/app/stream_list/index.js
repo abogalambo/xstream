@@ -23,7 +23,7 @@ const StreamList = () => {
   return (
     <div className={styles.streamList}>
       { streams.map((stream) => {
-        const { id, cover, title } = stream
+        const { id, cover, title, author } = stream
 
         return (
           <StreamCard
@@ -31,6 +31,7 @@ const StreamList = () => {
             id={id}
             cover={cover}
             title={title}
+            author={author}
             onDeleteClick={deleteStream}
             editable={canEditStream(stream, uid)}
          />
