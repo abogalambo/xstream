@@ -15,6 +15,10 @@ import {
   currentUserIdSelector
 } from './current_user'
 
+import {
+  profileSelector
+} from './profile'
+
 export const currentStreamSelector = (state) => state.currentStream
 
 export const currentSegmentSelector = (state) => (currentStreamSelector(state) || {}).currentSegment
@@ -167,4 +171,14 @@ export const canEditCurrentStreamSelector = (state) => {
   return (stream && currentUserId) ? canEditStream(stream, currentUserId) : false
 }
 
-export const streamAuthorSelector = (state) => currentStreamSelector(state).author
+export const streamAuthorSelector = (state) => {
+  const currentUserId = currentUserIdSelector(state)
+  const currentStream = currentStreamSelector(state)
+  const { authorId } = currentStream
+
+  if(currentUserId == authorId) {
+    return profileSelector(state)
+  } else {
+    return currentStreamSelector(state).author
+  }
+}
