@@ -15,7 +15,7 @@ const Avatar = ({src, size}) => (
 
 Avatar.propTypes = {
   src: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'large']).isRequired
+  size: PropTypes.oneOf(['tiny', 'small', 'large']).isRequired
 }
 
 export default Avatar

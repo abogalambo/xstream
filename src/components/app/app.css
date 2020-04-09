@@ -55,6 +55,7 @@
 
   --avatarSize_large: 200px;
   --avatarSize_small: 50px;
+  --avatarSize_tiny: 33px;
 }
 
 ::selection {
