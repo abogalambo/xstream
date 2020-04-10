@@ -2,26 +2,27 @@ import React from 'react'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faHome } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 import UserInfo from '../user_info'
 import styles from './top_bar.css'
 
 const TopBar = () => (
   <header className={styles.header}>
     <nav className={styles.header_nav}>
-      <a
+      <Link
         className={classnames(styles.navItem, styles.homeBtn)}
-        href="/"
+        to="/"
       >
         <FontAwesomeIcon icon={faHome} />
-      </a>
+      </Link>
 
-      <a
+      <Link
         className={classnames(styles.navItem, styles.createBtn)}
-        href="/streams/new"
+        to="/streams/new"
       >
         <FontAwesomeIcon icon={faPlus} />
         <span>Create</span>
-      </a>
+      </Link>
 
       <div className={classnames(styles.navItem, styles.userInfo)}>
         <UserInfo />
