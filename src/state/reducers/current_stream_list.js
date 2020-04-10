@@ -4,6 +4,10 @@ const currentStreamList = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
 
+    case 'EXIT_STREAM_LIST': {
+      return initialState
+    }
+
     case 'FETCH_STREAM_LIST_FULFILLED': {
       const { streams } = payload
       return {
