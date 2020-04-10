@@ -30,7 +30,7 @@ const StreamLoader = ({ page }) => {
 
   useEffect(() => {
     if(currentStream && currentStream.id && !id){
-      history.push(`/streams/${currentStream.id}/edit`)  
+      history.replace(`/streams/${currentStream.id}/edit`)  
     }
   }, [(currentStream || {}).id])
 
