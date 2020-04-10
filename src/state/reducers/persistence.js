@@ -25,6 +25,10 @@ const persistenceReducer = (state = initialState, action) => {
       return updateObject(state, {lastUpdateAt: payload.timestamp})
     }
 
+    case 'EXIT_STREAM': {
+      return initialState
+    }
+
     case 'SAVE_STREAM_PENDING': {
       return updateObject(state, {
         lastRequestTriggeredAt: payload.timestamp,

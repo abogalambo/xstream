@@ -25,6 +25,10 @@ export const newStream = ({uid}) => ({
   }
 })
 
+export const exitStream = () => ({
+  type: 'EXIT_STREAM'
+})
+
 export const setStreamTitle = (title) => ({
   type: 'SET_STREAM_TITLE',
   payload: {

@@ -61,6 +61,10 @@ const currentStream = (state = null, action) => {
       }
     }
 
+    case 'EXIT_STREAM': {
+      return null
+    }
+
     case 'FETCH_STREAM_FULFILLED': {
       const {streamData, page} = payload
       return {
