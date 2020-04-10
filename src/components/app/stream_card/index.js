@@ -5,6 +5,7 @@ import {
   faPen,
   faTrash
 } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom"
 import defaultCoverImage from '../../../img/default_cover.jpg'
 import Avatar from '../../lib/avatar'
 import styles from './stream_card.css'
@@ -15,7 +16,7 @@ const StreamCard = ({ id, cover, title, author, editable, onDeleteClick }) => {
 
   return (
     <div className={styles.streamCard}>
-      <a href={`/streams/${id}`}>
+      <Link to={`/streams/${id}`}>
         <img
           className={styles.streamCard_thumbnail}
           src={cover && cover.src ? cover.src : defaultCoverImage}
@@ -31,17 +32,17 @@ const StreamCard = ({ id, cover, title, author, editable, onDeleteClick }) => {
 
           <h4 className={styles.streamCard_headerText}>{title || "Untitled"}</h4>
         </div>
-      </a>
+      </Link>
       <div className={styles.streamCard_iconWrapper}>
         {editable && (
           <>
-            <a
+            <Link
               className={styles.streamCard_icon}
-              href={`/streams/${id}/edit`}>
+              to={`/streams/${id}/edit`}>
                 <FontAwesomeIcon
                   icon={faPen}
                 />
-            </a>
+            </Link>
             <button
               className={styles.streamCard_icon}
               onClick={() => onDeleteClick(id)}

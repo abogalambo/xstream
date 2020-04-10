@@ -6,3 +6,7 @@ export const fetchStreamList = () => ({
     streams: remoteStreamList.streamList
   }))
 })
+
+export const exitStreamList = () => ({
+  type: 'EXIT_STREAM_LIST'
+})

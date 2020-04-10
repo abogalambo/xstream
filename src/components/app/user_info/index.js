@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from "react-router-dom"
 import Auth from '../../../lib/auth'
 import {
   currentUserSelector
@@ -22,19 +23,19 @@ const UserInfo = () => {
 
   return (
     <div className={styles.userInfo}>
-      <a
+      <Link
         className={styles.avatar}
-        href="/profile"
+        to="/profile"
       >
         <Avatar src={src} size="small" />
-      </a>
-      <a
+      </Link>
+      <Link
         className={styles.header_navLink}
         onClick={currentUser ? triggerLogout : null}
-        href={currentUser ? '/' : '/login'}
+        to={currentUser ? '/' : '/login'}
       >
         { currentUser ? 'Logout' : 'Login' }
-      </a>
+      </Link>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   streamsSelector
@@ -10,6 +10,9 @@ import { canEditStream } from '../../../lib/stream_permissions'
 import {
   deleteStream as deleteStreamAction
 } from '../../../state/actions/stream'
+import {
+  exitStreamList
+} from '../../../state/actions/stream_list'
 import StreamCard from '../stream_card'
 import styles from './stream_list.css'
 
@@ -19,6 +22,10 @@ const StreamList = () => {
 
   const dispatch = useDispatch()
   const deleteStream = (id) => dispatch(deleteStreamAction(id))
+
+  useEffect(() => {
+    return () => dispatch(exitStreamList())
+  }, [])
 
   return (
     <div className={styles.streamList}>

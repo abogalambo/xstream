@@ -7,7 +7,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {
   goToSegment as goToSegmentAction,
-  addSegment
+  addSegment,
+  exitStream
 } from '../../../state/actions/stream'
 import {
   showCoverSelector,
@@ -49,9 +50,13 @@ const Stream = () => {
     }
   }
 
-  useEffect( () => {
+  useEffect(() => {
     document.addEventListener('keydown', goToSegment)
     return () => document.removeEventListener('keydown', goToSegment)
+  }, [])
+
+  useEffect(() => {
+    return () => { dispatch(exitStream()) }
   }, [])
 
   return (
