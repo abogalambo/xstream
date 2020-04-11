@@ -23,7 +23,7 @@ const MainScreen = () => {
       <ProfileLoader />
       <Router>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={"/:filter(featured|recent)?"}>
             <TopBar />
             <StreamListLoader />
           </Route>

@@ -1,23 +1,36 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchStreamList } from '../../../state/actions/stream_list'
+import {
+  streamsSelector,
+  streamListFiltersSelector,
+  selectedFilterSelector
+} from '../../../state/selectors/current_stream_list'
 import StreamList from '../stream_list'
+import StreamListFilters from '../stream_list_filters'
 import Spinner from '../../lib/spinner'
 
 const StreamListLoader = () => {
-  const currentStreamList = useSelector(state => state.currentStreamList)
+  const streams = useSelector(streamsSelector)
+  const streamListFilters = useSelector(streamListFiltersSelector)
+  const selectedFilter = useSelector(selectedFilterSelector)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(currentStreamList == null){
-      dispatch(fetchStreamList())
+    if(streams == null){
+      dispatch(fetchStreamList(streamListFilters))
     }
-  }, [])
+  }, [selectedFilter])
 
-  return currentStreamList ? (
-    <StreamList />
-  ) : (
-    <Spinner />
+  return (
+    <>
+      <StreamListFilters />
+      { streams ? (
+        <StreamList />
+      ) : (
+        <Spinner />
+      )}
+    </>
   )
 }
 
