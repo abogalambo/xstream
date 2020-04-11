@@ -22,17 +22,17 @@
 }
 
 .navItem:first-child {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .navItem:last-child {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .homeBtn {
   font-size: 1.8em;
   color: var(--primaryColor);
-  margin-right: 30px;
+  margin-right: 10px;
 }
 
 .createBtn {
