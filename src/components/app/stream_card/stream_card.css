@@ -3,7 +3,7 @@
   border-radius: var(--roundCorner);
   width: 200px;
   height: 363px;
-  margin: 5px;
+  margin: 5px 5px 5px 0;
   box-shadow: var(--oneDp);
   display: flex;
   flex-direction: column;
