@@ -49,11 +49,12 @@ const currentStream = (state = null, action) => {
 
     case 'NEW_STREAM': {
       if(state == null){
-        const { uid } = payload
+        const { uid, timestamp } = payload
 
         return {
           ...initialState,
           authorId: uid,
+          createdAt: timestamp,
           currentSegment: currentSegmentReducer(null, action)
         }
       }else{

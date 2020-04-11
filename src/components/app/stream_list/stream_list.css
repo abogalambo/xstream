@@ -1,9 +1,11 @@
 .streamList {
+  width: 100%;
+  max-width: 1278px;
   display: flex;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  margin: 40px auto;
+  margin: 20px auto;
   position: relative;
 }
 .addStreamLink{
