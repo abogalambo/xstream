@@ -1,17 +1,31 @@
-const initialState = null
+const initialState = {
+  streams: null
+}
 
 const currentStreamList = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
 
+    case 'SET_SELECTED_FILTER': {
+      const { selectedFilter } = payload
+      return {
+        ...state,
+        selectedFilter,
+        streams: null
+      }
+    }
+
     case 'EXIT_STREAM_LIST': {
-      return initialState
+      return {
+        ...state,
+        streams: null
+      }
     }
 
     case 'FETCH_STREAM_LIST_FULFILLED': {
       const { streams } = payload
       return {
-        ...initialState,
+        ...state,
         streams
       }
     }
