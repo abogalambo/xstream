@@ -1,0 +1,35 @@
+.streamListFilters {
+  width: 100%;
+  max-width: 1278px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.filter {
+  height: 30px;
+  border-radius: 15px;
+  background-color: var(--onBgColor_light);
+  color: white;
+  font-size: 0.8em;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  transition-property: background;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.streamListFilters > .filterActive {
+  background-color: var(--onBgColor);
+  color: white;
+}
+
+.filter:hover {
+  background: #a5a3a3;
+}
+
+.streamListFilters .filterActive:hover {
+  background: #7b7979;
+}

@@ -7,6 +7,7 @@ import {
 import {
   setSelectedFilter
 } from '../../../state/actions/stream_list'
+import classnames from 'classnames'
 import styles from './stream_list_filters.css'
 
 const StreamListFilters = () => {
@@ -25,8 +26,24 @@ const StreamListFilters = () => {
 
   return (
     <div className={styles.streamListFilters}>
-      <Link to="/featured"> Featured</Link>
-      <Link to="/recent"> Recent</Link>
+      <Link
+        className={classnames(
+          styles.filter,
+          { [styles.filterActive]: urlFilter == 'featured' }
+        )}
+        to="/featured"
+       >
+        Featured
+      </Link>
+      <Link
+        className={classnames(
+          styles.filter,
+          { [styles.filterActive]: urlFilter == 'recent' }
+        )}
+        to="/recent"
+       >
+        Recent
+      </Link>
     </div>
   )
 }
