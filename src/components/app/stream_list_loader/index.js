@@ -17,7 +17,7 @@ const StreamListLoader = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(streams == null){
+    if(streams == null && selectedFilter){
       dispatch(fetchStreamList(streamListFilters))
     }
   }, [selectedFilter])

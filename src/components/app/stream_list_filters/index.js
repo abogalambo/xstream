@@ -44,6 +44,24 @@ const StreamListFilters = () => {
        >
         Recent
       </Link>
+      <Link
+        className={classnames(
+          styles.filter,
+          { [styles.filterActive]: urlFilter == 'published' }
+        )}
+        to="/published"
+       >
+        Published
+      </Link>
+      <Link
+        className={classnames(
+          styles.filter,
+          { [styles.filterActive]: urlFilter == 'drafts' }
+        )}
+        to="/drafts"
+       >
+        Drafts
+      </Link>
     </div>
   )
 }

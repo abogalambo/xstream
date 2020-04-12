@@ -1,3 +1,7 @@
+import {
+  currentUserIdSelector
+} from './current_user'
+
 export const streamsSelector = (state) => state.currentStreamList.streams
 
 export const selectedFilterSelector = (state) => {
@@ -8,6 +12,33 @@ export const selectedFilterSelector = (state) => {
 export const streamListFiltersSelector = (state) => {
   const selectedFilter = selectedFilterSelector(state)
 
-  if(selectedFilter == 'featured') return { isFeatured: true }
-  return {}
+  switch (selectedFilter) {
+    case 'featured':
+      return {
+        isFeatured: true
+      }
+
+    case 'recent':
+      return {
+        isPublished: true,
+        orderBy: 'publishedAt'
+      }
+
+    case 'published':
+      return {
+        authorId: currentUserIdSelector(state),
+        isPublished: true,
+        orderBy: 'publishedAt'
+      }
+
+    case 'drafts':
+      return {
+        authorId: currentUserIdSelector(state),
+        isDraft: true,
+        orderBy: 'createdAt'
+      }
+
+    default:
+      return {}
+  }
 }
