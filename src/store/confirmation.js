@@ -1,7 +1,7 @@
 const confirmation = () => next => action => {
   let result;
 
-  const { isConfirmationNeeded, ...restOfPayload } = (action.payload || {})
+  const { isConfirmationNeeded, promiseFunction, ...restOfPayload } = (action.payload || {})
 
   if(isConfirmationNeeded) {
     const newAction = {
@@ -9,13 +9,26 @@ const confirmation = () => next => action => {
       payload: {
         action: {
           ...action,
-          payload: restOfPayload
+          payload: {
+            ...restOfPayload,
+            promiseFunction
+          }
         }
       }
     }
 
     result = next(newAction)
 
+  } else if(promiseFunction) {
+    const newAction = {
+      ...action,
+      payload: {
+        restOfPayload,
+        promise: promiseFunction()
+      }
+    }
+
+    result = next(newAction)
   } else {
     result = next(action)
   }
