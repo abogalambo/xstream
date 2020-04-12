@@ -182,3 +182,14 @@ export const streamAuthorSelector = (state) => {
     return currentStreamSelector(state).author
   }
 }
+
+export const canPublishStreamSelector = (state) => {
+  const currentStream = currentStreamSelector(state)
+  const { id, publishedAt, isPublishPending } = currentStream
+  return id && !publishedAt && !isPublishPending
+}
+
+export const streamPublishedAtSelector = (state) => {
+  const { publishedAt } = currentStreamSelector(state) || {}
+  return publishedAt
+}
