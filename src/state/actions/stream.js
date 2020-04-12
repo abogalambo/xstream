@@ -36,8 +36,13 @@ export const exitStream = () => ({
 export const publishStream = (id) => ({
   type: 'PUBLISH_STREAM',
   payload: {
-    promise: (new RemoteStream({id})).publish()
-      .then((remoteStream) => ({ timestamp: remoteStream.stream.publishedAt })),
+    promiseFunction: () => {
+      return (new RemoteStream({id}))
+        .publish()
+        .then((remoteStream) => ({
+          timestamp: remoteStream.stream.publishedAt 
+        }))
+    },
     isConfirmationNeeded: true
   }
 })

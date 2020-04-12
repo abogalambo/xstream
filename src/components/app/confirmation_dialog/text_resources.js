@@ -15,6 +15,10 @@ const textResources = {
   DELETE_STREAM: {
     prompt: "Delete stream?",
     confirmText: "Delete"
+  },
+  PUBLISH_STREAM: {
+    prompt: "Publish stream? It will be publicly listed and you can still make changes",
+    confirmText: "Publish"
   }
 }
 
