@@ -55,6 +55,8 @@
   --avatarSize_small: 50px;
   --avatarSize_tiny: 33px;
   --avatarSize_tiny_smallscreen: 25px;
+
+  --composeBarHeight: 40px;
 }
 
 ::selection {

@@ -4,6 +4,10 @@
   display: flex;
 }
 
+.stream_editable {
+  height: calc(100% - var(--composeBarHeight));
+}
+
 @media (orientation: portrait) {
   .stream {
     flex-direction: column;
@@ -19,25 +23,6 @@
   align-items: center;
 }
 
-.topBar {
-  width: 100%;
-  display: flex;
-  margin-bottom: 10px;
-  margin-top: auto;
-}
-
-.remainingTimeContainer {
-  height: 100%;
-  margin-left: 10px;
-}
-
-.toggleBtnContainer {
-  display: flex;
-  width: 95px;
-  height: 40px;
-  margin-left: auto;
-}
-
 /* Segment Section */
 .segmentContainer {
   width: 100%;
@@ -47,12 +32,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@media (min-width: 1278px) {
-  .topBar, .segmentContainer, .footerContainer {
-    max-width: 1278px;
-  }
 }
 
 /*Footer Section */

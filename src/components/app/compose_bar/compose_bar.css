@@ -1,0 +1,30 @@
+.header{
+  background-color: white;
+  width: 100%;
+  height: var(--composeBarHeight);
+  border-bottom: 1px solid rgb(242, 242, 242);
+}
+
+.topBar {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1440px;
+  display: flex;
+  align-items: center;
+}
+
+.remainingTimeContainer {
+  height: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.toggleBtnContainer {
+  display: flex;
+  width: 95px;
+  height: 100%;
+  margin-left: auto;
+}
