@@ -16,8 +16,6 @@
 
 .remainingTimeContainer {
   height: 100%;
-  margin-left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
 }
@@ -26,5 +24,34 @@
   display: flex;
   width: 95px;
   height: 100%;
-  margin-left: auto;
+}
+
+.publishBtn {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  background-color: var(--primaryColor);
+  color: white;
+  border: 1.5px solid var(--primaryColor);
+  margin-right: auto;
+  padding: 5px 7px 4px 7px;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  transition-property: background-color, color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+.publishBtn span{
+  margin-left: 5px;
+}
+.publishBtn svg{
+  font-size: 1.3em;
+}
+.publishBtn:hover,
+.publishBtn:active,
+.publishBtn:disabled {
+  background-color: transparent;
+  color: var(--primaryColor);
 }

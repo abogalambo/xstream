@@ -1,5 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPaperPlane,
+  faGlobeAmericas
+} from '@fortawesome/free-solid-svg-icons'
 import { publishStream as publishStreamAction } from '../../../state/actions/stream'
 import {
   currentStreamSelector,
@@ -21,10 +26,12 @@ const ComposeBar = () => {
     <header className={styles.header}>
       <div className={styles.topBar}>
         <button
+          className={styles.publishBtn}
           onClick={publishStream}
           disabled={!canPublishStream}
         >
-          {streamPublishedAt ? 'Published!' : 'Publish'}
+          <FontAwesomeIcon icon={streamPublishedAt ? faGlobeAmericas : faPaperPlane} />
+          <span>{streamPublishedAt ? 'Published!' : 'Publish'}</span>
         </button>
         <div className={styles.remainingTimeContainer}>
           <RemainingTime />
