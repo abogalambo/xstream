@@ -22,7 +22,7 @@ const EmptyStreamList = () => {
 
       {selectedFilter == 'published' && (
         <p>
-          You havent published any stories yet. <br/>
+          You haven't published any stories yet. <br/>
 
           <Link
             className={styles.createBtn}
@@ -43,7 +43,7 @@ const EmptyStreamList = () => {
 
       {selectedFilter == 'drafts' && (
         <p>
-          You dont have any drafts. <br />
+          You don't have any drafts. <br />
           <Link
             className={styles.createBtn}
             to="/streams/new"
