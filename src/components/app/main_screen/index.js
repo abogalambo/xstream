@@ -27,6 +27,10 @@ const MainScreen = () => {
             <TopBar />
             <StreamListLoader />
           </Route>
+          <PrivateRoute exact path={"/:filter(published|drafts)"}>
+            <TopBar />
+            <StreamListLoader />
+          </PrivateRoute>
           <PrivateRoute path="/streams/new">
             <StreamLoader page="new" />
           </PrivateRoute>

@@ -277,6 +277,22 @@ const currentStream = (state = null, action) => {
       }
     }
 
+    case 'PUBLISH_STREAM_PENDING': {
+      return {
+        ...state,
+        isPublishPending: true
+      }
+    }
+
+    case 'PUBLISH_STREAM_FULFILLED': {
+      const { timestamp } = payload
+      return {
+        ...state,
+        publishedAt: timestamp,
+        isPublishPending: false
+      }
+    }
+
     default:
       return state
   }

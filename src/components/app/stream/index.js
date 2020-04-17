@@ -24,9 +24,8 @@ import OverviewPanel from '../overview_panel'
 import Segment from '../segment'
 import Navigation from '../navigation'
 import AspectRatioBox from '../aspect_ratio_box'
-import ModeToggle from '../mode_toggle'
+import ComposeBar from '../compose_bar'
 import StreamProgress from '../stream_progress'
-import RemainingTime from '../remaining_time'
 import styles from './stream.css'
 
 const Stream = () => {
@@ -35,6 +34,7 @@ const Stream = () => {
   const segment = useSelector(currentSegmentDataSelector)
   const page = useSelector(pageSelector)
   const canAddSegment = useSelector(canAddSegmentSelector)
+  const editable = page != 'view'
 
   const dispatch = useDispatch()
   const onAddSegmentClick = () => dispatch(addSegment())
@@ -60,65 +60,54 @@ const Stream = () => {
   }, [])
 
   return (
-    <div className={styles.stream}>
-      <OverviewPanel />
+    <>
+      { editable && (<ComposeBar />) }
+      <div className={classnames(styles.stream, {[styles.stream_editable]: editable})}>
+        <OverviewPanel />
 
-      <div className={styles.mainSection}>
-        { segment && isPlaybackMode && <StreamProgress /> }
+        <div className={styles.mainSection}>
+          { segment && isPlaybackMode && <StreamProgress /> }
 
-        { showCover && <Cover /> }
+          { showCover && <Cover /> }
 
-        {segment && (
-          <>
-            <div className={styles.topBar}>
-              { !isPlaybackMode && (
-                <div className={styles.remainingTimeContainer}>
-                  <RemainingTime />
-                </div>
-              )}
-
-              {(page != 'view') && (
-                <div className={styles.toggleBtnContainer}>
-                  <ModeToggle />
-                </div>
-              )}
-            </div>
-            
-            <div className={styles.segmentContainer}>
-              <AspectRatioBox>
-                <Segment
-                  index={index}
-                  key={`segment_${segment.timestamp}`}
-                  {...segment}
-                  isPlaybackMode={isPlaybackMode}
-                />
-              </AspectRatioBox>
-            </div>
-
-            {!isPlaybackMode && (
-              <div className={styles.footerContainer}>
-                <Navigation />
-                <button
-                  className={classnames(
-                    styles.addSegmentBtn,
-                    {[styles.disabled]: !canAddSegment}
-                  )}
-                  disabled={!canAddSegment}
-                  onClick={onAddSegmentClick}
-                >
-                  <FontAwesomeIcon
-                    className={styles.addSegmentBtn_icon}
-                    icon={faPlus} />
-                  <span>Add Segment</span>
-                </button>
+          {segment && (
+            <>
+              <div className={styles.segmentContainer}>
+                <AspectRatioBox>
+                  <Segment
+                    index={index}
+                    key={`segment_${segment.timestamp}`}
+                    {...segment}
+                    isPlaybackMode={isPlaybackMode}
+                  />
+                </AspectRatioBox>
               </div>
-            )}
-          </>
-        )}
 
-        <Autosave />
+              {!isPlaybackMode && (
+                <div className={styles.footerContainer}>
+                  <Navigation />
+                  <button
+                    className={classnames(
+                      styles.addSegmentBtn,
+                      {[styles.disabled]: !canAddSegment}
+                    )}
+                    disabled={!canAddSegment}
+                    onClick={onAddSegmentClick}
+                  >
+                    <FontAwesomeIcon
+                      className={styles.addSegmentBtn_icon}
+                      icon={faPlus} />
+                    <span>Add Segment</span>
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          <Autosave />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -2,9 +2,12 @@ import { db } from './firebase'
 import RemoteStream from './remote_stream'
 
 class RemoteStreamList {
-  constructor({isFeatured, authorId}) {
-    this.isFeatured = isFeatured,
+  constructor({isFeatured, isDraft, isPublished, authorId, orderBy}) {
+    this.isFeatured = isFeatured
+    this.isDraft = isDraft
+    this.isPublished = isPublished
     this.authorId = authorId
+    this.orderBy = orderBy
   }
 
   fetch() {
@@ -26,7 +29,19 @@ class RemoteStreamList {
   }
 
   get collection() {
-    let collection = db.collection('streams').orderBy('createdAt', 'desc')
+    let collection = db.collection('streams')
+
+    if(this.orderBy) {
+      collection = collection.orderBy(this.orderBy, 'desc')
+    }
+
+    if(this.isDraft) {
+      collection = collection.where('publishedAt', '==', null)
+    }
+
+    if(this.isPublished) {
+      collection = collection.where('publishedAt', '<=', (new Date).getTime())
+    }
 
     if(this.isFeatured) {
       collection = collection.where('isFeatured', '==', true)
@@ -34,6 +49,10 @@ class RemoteStreamList {
 
     if(this.authorId) {
       collection = collection.where('authorId', '==', this.authorId)
+    }
+
+    if(this.isDraft) {
+      collection = collection.where('publishedAt', '==', null)
     }
 
     return collection

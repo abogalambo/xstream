@@ -23,7 +23,6 @@ import {
   isPlaybackModeSelector,
   coverImageUploadKeySelector
 } from '../../../state/selectors/current_stream'
-import ModeToggle from '../mode_toggle'
 import TextInput from '../../lib/text_input'
 import ImageInput from '../../lib/image_input'
 import classnames from 'classnames';
@@ -57,9 +56,6 @@ const Cover = () => {
       className={styles.cover}
       style={coverStyle}
     >
-      <div className={styles.modeToggleContainer}>
-        <ModeToggle />
-      </div>
       <div className={styles.titleConainer}>
         <TextInput
           readOnly={isPlaybackMode}

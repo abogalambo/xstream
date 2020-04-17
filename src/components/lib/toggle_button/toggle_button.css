@@ -20,7 +20,6 @@
   font-size: 1.3em;
   flex-grow: 1;
   cursor: pointer;
-  border-radius: var(--roundCorner);
   transition-property: background, color;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);

@@ -79,7 +79,7 @@ const mediaResourceForServer = (media) => {
 }
 
 export const autosaveParamsSelector = (state) => {
-  const { id, authorId, createdAt, title, cover, segments } = currentStreamSelector(state)
+  const { id, authorId, createdAt, publishedAt = null, title, cover, segments } = currentStreamSelector(state)
   const remoteCover = (cover && cover.isPersisted) ? mediaResourceForServer(cover) : null
 
   const remoteSegments = segments.map((segment) => {
@@ -97,7 +97,7 @@ export const autosaveParamsSelector = (state) => {
     return remoteSegment
   })
 
-  return { id, authorId, createdAt, title, cover: remoteCover, segments: remoteSegments }
+  return { id, authorId, createdAt, publishedAt, title, cover: remoteCover, segments: remoteSegments }
 }
 
 export const segmentImageUploadKeySelector = (state) => {
@@ -181,4 +181,15 @@ export const streamAuthorSelector = (state) => {
   } else {
     return currentStreamSelector(state).author
   }
+}
+
+export const canPublishStreamSelector = (state) => {
+  const currentStream = currentStreamSelector(state)
+  const { id, publishedAt, isPublishPending } = currentStream
+  return id && !publishedAt && !isPublishPending
+}
+
+export const streamPublishedAtSelector = (state) => {
+  const { publishedAt } = currentStreamSelector(state) || {}
+  return publishedAt
 }

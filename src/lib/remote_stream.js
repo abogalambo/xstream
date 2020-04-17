@@ -21,6 +21,22 @@ class RemoteStream {
     )
   }
 
+  publish() {
+    const update = { publishedAt: (new Date).getTime() }
+    return this.collection.doc(this.stream.id)
+      .set(update, {
+        merge: true
+      })
+      .then(() => {
+        this.stream = {
+          ...this.stream,
+          ...update
+        }
+
+        return this
+      })
+  }
+
   delete() {
     return this.docRef.delete().then(() => this)
   }
