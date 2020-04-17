@@ -14,6 +14,7 @@ import {
   exitStreamList
 } from '../../../state/actions/stream_list'
 import StreamCard from '../stream_card'
+import EmptyStreamList from '../empty_stream_list'
 import styles from './stream_list.css'
 
 const StreamList = () => {
@@ -29,6 +30,7 @@ const StreamList = () => {
 
   return (
     <div className={styles.streamList}>
+      { (streams.length == 0) && (<EmptyStreamList />)}
       { streams.map((stream) => {
         const { id, cover, title, author } = stream
 
