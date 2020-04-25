@@ -11,11 +11,10 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
 
   useEffect(() => {
     const el = textAreaRef.current
-    if(isEditing && el) {
-      el.focus()
-      el.setSelectionRange(el.value.length, el.value.length)
+    if(el && value != el.innerText) {
+      el.innerText = value
     }
-  }, [isEditing])
+  }, [value, textAreaRef.current])
 
   const handleOnFocus = (e) => {
     setIsEditing(!readOnly)
@@ -31,42 +30,32 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
     setIsEditing(!readOnly)
   }
 
-  const hideTextArea = !isEditing && value
+  const handleInput = (e) => {
+    onChange(e.target.innerText)
+  }
 
   return (
     <div className={styles.wrapper}>
-      {(readOnly || hideTextArea) && (
-        <div
-          className={styles.textDisplay}
-          style={fontStyle(value, minSize, maxSize, maxChars)}
-          onClick={handleOnClick}
-        >
-          {value}
-        </div>
-      )}
-
-      {!readOnly && (
-        <textarea
-          className={classnames(
-            styles.textDisplay,
-            styles.textInput,
-            {
-              [styles.editing]: value && isEditing,
-              [styles.hidden]: hideTextArea
-            }
-          )}
-          ref={textAreaRef}
-          value={value}
-          disabled={readOnly}
-          wrap="hard"
-          style={fontStyle(value, minSize, maxSize, maxChars)}
-          onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
-          maxLength={maxChars}
-          placeholder={prompt}
-          onChange={onChange}
-        />
-      )}
+      <div
+        className={classnames(
+          styles.textDisplay,
+          styles.textInput,
+          {
+            [styles.empty]: !value && isEditing            
+          }
+        )}
+        onClick={handleOnClick}
+        ref={textAreaRef}
+        contentEditable={!readOnly}
+        wrap="hard"
+        style={fontStyle(value, minSize, maxSize, maxChars)}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
+        maxLength={maxChars}
+        placeholder={prompt}
+        onInput={handleInput}
+      ></div>
+      
 
       {isEditing && (
         <span>{maxChars - (value || "").length}</span>

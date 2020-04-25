@@ -29,7 +29,7 @@ const Segment = () => {
   const index = useSelector(indexSelector)
 
   const dispatch = useDispatch();
-  const onTextChange = (event) => dispatch(setSegmentText(event.target.value))
+  const onTextChange = (newText) => dispatch(setSegmentText(newText))
   const startTyping = () => dispatch(startTypingAction())
   const stopTyping = () => dispatch(stopTypingAction())
   const removeSegment = () => dispatch(removeSegmentAction(index))
@@ -63,8 +63,8 @@ const Segment = () => {
         { textDisplayed && (
           <TextInput
             value={text || ''}
-            minSize={8}
-            maxSize={10}
+            minSize={5}
+            maxSize={5}
             onChange={onTextChange}
             onFocus={startTyping}
             onBlur={stopTyping}
