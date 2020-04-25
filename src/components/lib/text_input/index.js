@@ -47,15 +47,13 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
         onClick={handleOnClick}
         ref={textAreaRef}
         contentEditable={!readOnly}
-        wrap="hard"
         style={fontStyle(value, minSize, maxSize, maxChars)}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         maxLength={maxChars}
         placeholder={prompt}
         onInput={handleInput}
-      ></div>
-      
+      />
 
       {isEditing && (
         <span>{maxChars - (value || "").length}</span>
