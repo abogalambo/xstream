@@ -36,6 +36,10 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
 
   return (
     <div className={styles.wrapper}>
+      {!isEditing && !value && (
+        <div className={styles.prompt}>{prompt}</div>
+      )}
+
       <div
         className={classnames(
           styles.textDisplay,

@@ -1,4 +1,5 @@
-.textInput::placeholder {
+.prompt {
+  position: absolute;
   color: var(--onBgColor);
   opacity: 100%;
   font-size: 24px;
@@ -8,7 +9,7 @@
   transition-timing-function: var(--transition-timing-function);
 }
 
-.textInput:hover::placeholder {
+.wrapper:hover > .prompt {
   color: black;
 }
 
@@ -17,6 +18,7 @@
 }
 
 .textDisplay {
+  z-index: 1;
   height: 100%;
   width: 100%;
   display: flex;
