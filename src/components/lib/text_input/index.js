@@ -11,10 +11,10 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
 
   useEffect(() => {
     const el = textAreaRef.current
-    if(el && value != el.innerText) {
-      el.innerText = value
+    if(value != el.innerText) {
+      resetText()
     }
-  }, [value, textAreaRef.current])
+  }, [value])
 
   const handleOnFocus = (e) => {
     setIsEditing(!readOnly)
@@ -31,7 +31,26 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
   }
 
   const handleInput = (e) => {
-    onChange(e.target.innerText)
+    const el = e.target
+    const newValue = el.innerText
+
+    if(newValue.length > maxChars) {
+      resetText()
+    } else {
+      onChange(newValue)
+    }
+  }
+
+  const resetText = () => {
+    const el = textAreaRef.current
+    el.innerText = value
+
+    const range = document.createRange()
+    const sel = window.getSelection()
+    range.setStart(el, el.childNodes.length);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
   }
 
   return (
