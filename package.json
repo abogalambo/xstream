@@ -49,6 +49,7 @@
     "redux": "^4.0.1",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
-    "reset-css": "^4.0.1"
+    "reset-css": "^4.0.1",
+    "url-regex": "^5.0.0"
   }
 }
