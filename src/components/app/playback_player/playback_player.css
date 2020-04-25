@@ -84,6 +84,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border-radius: 50%;
+  z-index: 2;
 }
 
 .container:hover > .navBtn:hover {
