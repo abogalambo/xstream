@@ -36,7 +36,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
 
   const handleInput = (e) => {
     const el = e.target
-    const newValue = el.innerText
+    const newValue = el.innerText.trim()
 
     if(newValue.length > maxChars) {
       resetText()
