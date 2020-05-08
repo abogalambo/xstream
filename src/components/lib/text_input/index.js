@@ -4,6 +4,8 @@ import classnames from 'classnames'
 import urlRegex from 'url-regex'
 import styles from './text_input.css'
 
+window.urlRegex = urlRegex
+
 const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur, maxChars, prompt, readOnly }) => {
 
   const [isEditing, setIsEditing] = useState(false)
@@ -58,39 +60,64 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
   }
 
   const convertLinks = () => {
-    const words = value.split(' ')
+    const regex = urlRegex({strict: false})
 
+    let text = value
+    let done = false
     let nodes = []
-    let nonLinks = []
+    let index = 0
 
-    words.forEach((word, index) => {
-      if(urlRegex({strict: false}).test(word)) {
-        if(nonLinks.length > 0) {
-          nodes.push(nonLinks.join(" "))
-          nonLinks = []
+    while(!done) {
+      const matches = text.match(regex) || []
+
+      if(matches.length > 0) {
+        const match = matches[0]
+        const prefix = text.split(regex)[0]
+        if(prefix.length > 0) {
+          nodes.push(prefix)
         }
 
-        const url = word.toLowerCase().startsWith("http") ? word : `//${word}`
+        const url = match.toLowerCase().startsWith("http") ? match : `//${match}`
 
         nodes.push(
           <a href={url}
+            className={styles.inlineLink}
+            key={`link_${index}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            &nbsp;{word}&nbsp;
+            {match}
           </a>
         )
+        index++
+
+        const matchIndex = text.search(regex)
+        text = text.slice(matchIndex + match.length, text.length)
+
 
       } else {
-        nonLinks.push(word)
-        if(index == words.length - 1) {
-          nodes.push(nonLinks.join(" "))
-          nonLinks = []
-        }
+        nodes.push(text)
+        done = true
       }
-    })
+    }
 
-    return nodes
+    return nodes.reduce((acc, node) => {
+      if(typeof node == "string") {
+        node.split("\n").forEach((str, idx, arr) => {
+          if(str.length > 0) {
+            acc.push(str)
+          }
+          if(arr[idx + 1]) {
+            acc.push(<br key={`br_${index}`} />)
+          }
+          index++
+        })
+      }else {
+        acc.push(node)
+      }
+
+      return acc
+    }, [])
   }
 
   return (
@@ -107,7 +134,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
           className={classnames(styles.textDisplay)}
           style={fontStyle(value, minSize, maxSize, maxChars)}
         >
-          { convertLinks() }
+          { convertLinks(value) }
         </div>
       )}
 
