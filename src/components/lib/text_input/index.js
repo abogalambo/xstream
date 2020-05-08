@@ -1,9 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import urlRegex from 'url-regex'
 import styles from './text_input.css'
 
-const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur, maxChars, prompt, readOnly }) => {
+window.urlRegex = urlRegex
+
+const TextInput = ({
+  value,
+  minSize = 5,
+  maxSize = 10,
+  onChange,
+  onFocus,
+  onBlur,
+  onLinkClick,
+  maxChars,
+  prompt,
+  readOnly
+}) => {
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -11,11 +25,13 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
 
   useEffect(() => {
     const el = textAreaRef.current
-    if(isEditing && el) {
+    if(el) {
+      if(value != el.innerText) {
+        resetText()
+      }
       el.focus()
-      el.setSelectionRange(el.value.length, el.value.length)
     }
-  }, [isEditing])
+  }, [value, isEditing])
 
   const handleOnFocus = (e) => {
     setIsEditing(!readOnly)
@@ -31,40 +47,126 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
     setIsEditing(!readOnly)
   }
 
-  const hideTextArea = !isEditing && value
+  const handleInput = (e) => {
+    const el = e.target
+    const newValue = el.innerText.trim()
+
+    if(newValue.length > maxChars) {
+      resetText()
+    } else {
+      onChange(newValue)
+    }
+  }
+
+  const handleLinkClick = (e) => {
+    onLinkClick && onLinkClick()
+    e.stopPropagation()
+  }
+
+  const resetText = () => {
+    const el = textAreaRef.current
+    el.innerText = value
+
+    const range = document.createRange()
+    const sel = window.getSelection()
+    range.setStart(el, el.childNodes.length);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  const convertLinks = () => {
+    const regex = urlRegex({strict: false})
+
+    let text = value
+    let done = false
+    let nodes = []
+    let index = 0
+
+    while(!done) {
+      const matches = text.match(regex) || []
+
+      if(matches.length > 0) {
+        const match = matches[0]
+        const prefix = text.split(regex)[0]
+        if(prefix.length > 0) {
+          nodes.push(prefix)
+        }
+
+        const url = match.toLowerCase().startsWith("http") ? match : `//${match}`
+
+        nodes.push(
+          <a href={url}
+            className={styles.inlineLink}
+            onClick={handleLinkClick}
+            key={`link_${index}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {match}
+          </a>
+        )
+        index++
+
+        const matchIndex = text.search(regex)
+        text = text.slice(matchIndex + match.length, text.length)
+
+
+      } else {
+        nodes.push(text)
+        done = true
+      }
+    }
+
+    return nodes.reduce((acc, node) => {
+      if(typeof node == "string") {
+        node.split("\n").forEach((str, idx, arr) => {
+          if(str.length > 0) {
+            acc.push(str)
+          }
+          if(arr[idx + 1]) {
+            acc.push(<br key={`br_${index}`} />)
+          }
+          index++
+        })
+      }else {
+        acc.push(node)
+      }
+
+      return acc
+    }, [])
+  }
 
   return (
-    <div className={styles.wrapper}>
-      {(readOnly || hideTextArea) && (
+    <div
+      className={styles.wrapper}
+      onClick={handleOnClick}
+    >
+      {!isEditing && !value && (
+        <div className={styles.prompt}>{prompt}</div>
+      )}
+
+      {!isEditing && (
         <div
-          className={styles.textDisplay}
+          className={classnames(styles.textDisplay)}
           style={fontStyle(value, minSize, maxSize, maxChars)}
-          onClick={handleOnClick}
         >
-          {value}
+          { convertLinks(value) }
         </div>
       )}
 
-      {!readOnly && (
-        <textarea
+      {isEditing && (
+        <div
           className={classnames(
             styles.textDisplay,
-            styles.textInput,
-            {
-              [styles.editing]: value && isEditing,
-              [styles.hidden]: hideTextArea
-            }
+            styles.textInput
           )}
           ref={textAreaRef}
-          value={value}
-          disabled={readOnly}
-          wrap="hard"
+          contentEditable
           style={fontStyle(value, minSize, maxSize, maxChars)}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
-          maxLength={maxChars}
-          placeholder={prompt}
-          onChange={onChange}
+          onInput={handleInput}
         />
       )}
 
@@ -88,6 +190,7 @@ TextInput.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onLinkClick: PropTypes.func,
   maxChars: PropTypes.number,
   prompt: PropTypes.string,
   readOnly: PropTypes.bool

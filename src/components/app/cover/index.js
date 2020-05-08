@@ -36,7 +36,7 @@ const Cover = () => {
   const imageUploadKey = useSelector(coverImageUploadKeySelector)
 
   const dispatch = useDispatch()
-  const onTitleChange = (event) => dispatch(setStreamTitle(event.target.value))
+  const onTitleChange = (newTitle) => dispatch(setStreamTitle(newTitle))
   const startTyping = () => dispatch(startTypingAction())
   const stopTyping = () => dispatch(stopTypingAction())
   const addCoverImage = (e) => dispatch(addCoverImageAction(e, imageUploadKey))

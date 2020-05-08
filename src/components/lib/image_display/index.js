@@ -6,7 +6,7 @@ import config from '../../../../config'
 import TextInput from '../text_input'
 
 const ImageDisplay = ({ src, caption, style, editable, onEdit }) => {
-  const onCaptionChange = (event) => onEdit(event.target.value)
+  const onCaptionChange = (newCaption) => onEdit(newCaption)
   const { captionMaxLength } = config.stream.image
   const isCoverStyle = (style == 'COVER')
   const figureStyle = isCoverStyle ? {
