@@ -9,11 +9,11 @@ const config = {
       captionMaxLength: 100
     },
     text: {
-      maxLength: 200
+      maxLength: 500
     },
     autosaveInterval: 5000,
     snackbarDuration: 3000,
-    maxDuration: 300000
+    maxDuration: 420000
   }
 }
 
