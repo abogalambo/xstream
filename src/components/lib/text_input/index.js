@@ -6,7 +6,18 @@ import styles from './text_input.css'
 
 window.urlRegex = urlRegex
 
-const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur, maxChars, prompt, readOnly }) => {
+const TextInput = ({
+  value,
+  minSize = 5,
+  maxSize = 10,
+  onChange,
+  onFocus,
+  onBlur,
+  onLinkClick,
+  maxChars,
+  prompt,
+  readOnly
+}) => {
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -47,6 +58,11 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
     }
   }
 
+  const handleLinkClick = (e) => {
+    onLinkClick && onLinkClick()
+    e.stopPropagation()
+  }
+
   const resetText = () => {
     const el = textAreaRef.current
     el.innerText = value
@@ -82,6 +98,7 @@ const TextInput = ({ value, minSize = 5, maxSize = 10, onChange, onFocus, onBlur
         nodes.push(
           <a href={url}
             className={styles.inlineLink}
+            onClick={handleLinkClick}
             key={`link_${index}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -173,6 +190,7 @@ TextInput.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onLinkClick: PropTypes.func,
   maxChars: PropTypes.number,
   prompt: PropTypes.string,
   readOnly: PropTypes.bool

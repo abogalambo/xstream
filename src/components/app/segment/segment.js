@@ -17,6 +17,9 @@ import {
   stopTyping as stopTypingAction,
   removeSegment as removeSegmentAction
 } from '../../../state/actions/stream'
+import {
+  pauseStream
+} from '../../../state/actions/playback'
 import TextInput from '../../lib/text_input'
 import SegmentImage from '../segment_image'
 import styles from './segment.css'
@@ -38,6 +41,12 @@ const Segment = () => {
   const imageDisplayed = !text && (!isPlaybackMode || image)
 
   const maxChars = Math.min(config.stream.text.maxLength, remainingCharCount)
+
+  const onLinkClick = () => {
+    if(isPlaybackMode) {
+      dispatch(pauseStream())
+    }
+  }
 
   return (
     <div className={classnames(
@@ -68,6 +77,7 @@ const Segment = () => {
             onChange={onTextChange}
             onFocus={startTyping}
             onBlur={stopTyping}
+            onLinkClick={onLinkClick}
             maxChars={maxChars}
             prompt="Write something..."
             readOnly={isPlaybackMode}
