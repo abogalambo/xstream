@@ -4,12 +4,12 @@
   overflow-y: scroll;
 }
 
-.composeSegment {
-  min-height: 200px;
+.composeCover {
+  min-height: 100px;
   width: 100%;
   border-bottom: 1px solid;
 }
 
-.selectedSegment {
+.selectedCover {
   border: 2px solid red;
 }

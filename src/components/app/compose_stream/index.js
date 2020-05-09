@@ -1,18 +1,15 @@
 import React, { useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import classnames from 'classnames'
 import {
   segmentsSelector,
   indexSelector
 } from '../../../state/selectors/current_stream'
-import {
-  goToSegment,
-} from '../../../state/actions/stream'
 import Autosave from '../autosave'
+import ComposeSegment from '../compose_segment'
 import styles from './compose_stream.css'
 
 const ComposeStream = () => {
-  const dispatch = useDispatch()
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
 
@@ -31,30 +28,21 @@ const ComposeStream = () => {
         ref={htmlRef}
       >
         <div className={classnames(
-            styles.composeSegment,
+            styles.composeCover,
             {
-              [styles.selectedSegment]: currentIndex == -1
+              [styles.selectedCover]: currentIndex == -1
             }
           )}
           key="compose_cover"
         >
           <span>Cover</span>
         </div>
-        {segments.map((segment, index) => {
-          return (
-            <div className={classnames(
-                styles.composeSegment,
-                {
-                  [styles.selectedSegment]: index == currentIndex
-                }
-              )}
-              key={`compose_segment_${segment.timestamp}`}
-              onClick={() => { dispatch(goToSegment(index)) }}
-            >
-              <span>{segment.text}</span>
-            </div>
-          )
-        })}
+        {segments.map((segment, index) => (
+          <ComposeSegment
+            index={index}
+            key={`compose_segment_${segment.timestamp}`}
+          />
+        ))}
       </div>
       <Autosave />
     </>
