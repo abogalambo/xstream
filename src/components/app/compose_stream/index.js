@@ -16,10 +16,6 @@ const ComposeStream = () => {
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
 
-  window.jump = (index) => {
-    dispatch(goToSegment(index))
-  }
-
   const htmlRef = useRef(null)
   useEffect(() => {
     const currentChild = htmlRef.current.children[currentIndex + 1]
