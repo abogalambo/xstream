@@ -8,6 +8,7 @@ import {
   pageSelector,
 } from '../../../state/selectors/current_stream'
 import PlaybackStream from '../playback_stream'
+import ComposeStream from '../compose_stream'
 import ComposeBar from '../compose_bar'
 
 const Stream = () => {
@@ -27,7 +28,7 @@ const Stream = () => {
       { isPlaybackMode ? (
         <PlaybackStream />
       ) : (
-        <div> Edit me </div>
+        <ComposeStream />
       )}
     </>
   )

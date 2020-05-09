@@ -1,0 +1,15 @@
+.composeStream {
+  width: 100%;
+  height: calc(100% - var(--composeBarHeight));
+  overflow-y: scroll;
+}
+
+.composeSegment {
+  min-height: 200px;
+  width: 100%;
+  border-bottom: 1px solid;
+}
+
+.selectedSegment {
+  border: 2px solid red;
+}
