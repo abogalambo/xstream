@@ -114,8 +114,12 @@ export const segmentImageUploadKeySelector = (state) => {
 export const segmentAudioUploadKeySelector = (state) => {
   const userId = currentUserIdSelector(state)
   const streamId = state.currentStream.id
-  const segmentId = currentSegmentDataSelector(state).timestamp
-  return `user_${userId}/stream_${streamId}/segment_${segmentId}/audio`
+
+  return (segmentIndex) => {
+    const segment = segmentsSelector(state)[segmentIndex]
+    const segmentId = segment.timestamp
+    return `user_${userId}/stream_${streamId}/segment_${segmentId}/audio`
+  }
 }
 
 export const coverImageUploadKeySelector = (state) => {

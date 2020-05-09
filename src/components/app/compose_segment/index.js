@@ -19,6 +19,7 @@ import {
 import {
   isSegmentEmpty as isEmpty
 } from '../../../lib/stream'
+import AudioInput from '../audio_input'
 import TextInput from '../../lib/text_input'
 import styles from './compose_segment.css'
 
@@ -28,7 +29,7 @@ const ComposeSegment = ({index}) => {
   const segment = segments[index] || {}
   const nextSegment = segments[index + 1] || {}
 
-  const { text } = segment
+  const { text, audio } = segment
 
   const dispatch = useDispatch();
   const removeSegment = () => dispatch(removeSegmentAction(index))
@@ -72,6 +73,15 @@ const ComposeSegment = ({index}) => {
       )}
 
       <div className={styles.nonVisual}>
+        { !audio && (
+          <AudioInput index={index}/>
+        )}
+        { audio && (
+          <audio
+            controls
+            src={audio.url}
+          />
+        )}
       </div>
 
       <div className={styles.visual}>

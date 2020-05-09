@@ -1,6 +1,6 @@
 .playerMain {
-  width: 50px;
-  padding: 0;
+  width: 40px;
+  margin-left: 40px;
 }
 
 .circleShadow {
@@ -10,29 +10,11 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: var(--FAB);
-  transition: var(--FAB_transition);
 }
 
 .playerMain_operator {
   position: absolute;
   font-size: 2em;
-}
-
-.playerMain,
-.playerMain circle:first-child,
-.playerMain .playerMain_operator,
-.playerMain .playerMain_operator path {
-  transition: var(--transition);
-}
-
-.playerMain:focus .circleShadow,
-.playerMain:hover .circleShadow {
-  box-shadow: var(--FAB_hover);
-}
-
-.playerMain:active .circleShadow {
-  box-shadow: var(--twoDp);
 }
 
 .playerMain:active circle:first-child {
