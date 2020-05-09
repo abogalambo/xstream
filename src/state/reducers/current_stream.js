@@ -145,8 +145,9 @@ const currentStream = (state = null, action) => {
 
     case 'ADD_SEGMENT': {
       const { segments, currentSegment } = state
-      const { index, recording } = currentSegment
-      const targetIndex = index + 1
+      const { recording } = currentSegment
+      const { index } = payload
+      const targetIndex = index
       const { timestamp } = payload
 
       if(recording) return state;

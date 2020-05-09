@@ -34,7 +34,7 @@ const PlainOverviewPanel = () => {
   const canAddSegment = useSelector(canAddSegmentSelector)
 
   const dispatch = useDispatch();
-  const onAddSegmentClick = () => dispatch(addSegment())
+  const onAddSegmentClick = () => dispatch(addSegment(currentIndex + 1))
 
   useEffect(() => {
     if(isPlaybackMode) {

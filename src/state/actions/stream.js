@@ -69,9 +69,10 @@ export const goToSegment = (index) => ({
   payload: { index }
 })
 
-export const addSegment = () => ({
+export const addSegment = (index) => ({
   type: 'ADD_SEGMENT',
   payload: {
+    index,
     timestamp: (new Date).getTime()
   }
 })

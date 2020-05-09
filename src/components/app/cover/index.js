@@ -43,7 +43,7 @@ const Cover = () => {
   const removeCoverImage = () => dispatch(removeCoverImageAction())
 
   const icon = (hasSegments || isPlaybackMode) ? faPlay : faPlus
-  const action = (hasSegments || isPlaybackMode) ? playStream() : addSegment()
+  const action = (hasSegments || isPlaybackMode) ? playStream() : addSegment(0)
   const onClick = () => dispatch(action)
 
   const hasCoverImage = coverImage && coverImage.src
