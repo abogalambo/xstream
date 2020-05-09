@@ -265,18 +265,25 @@ const currentStream = (state = null, action) => {
     }
 
     case 'START_TYPING':
-    case 'STOP_TYPING':
+    case 'STOP_TYPING': {
+      const { currentSegment } = state
+
+      return {
+        ...state,
+        currentSegment: currentSegmentReducer(currentSegment, action)
+      }
+    }
+
     case 'START_RECORDING':
     case 'STOP_RECORDING':
     case 'REMOVE_RECORDING': {
       const { segments, currentSegment } = state
-      const currentIndex = currentSegment.index
-      const { timestamp } = payload
+      const { timestamp, index } = payload
 
       return {
         ...state,
         segments: ensureLastEmptySegment(
-          updateItemAtIndex(segments, currentIndex, (segment) => {
+          updateItemAtIndex(segments, index, (segment) => {
             return segmentReducer(segment, action)
           }),
           timestamp

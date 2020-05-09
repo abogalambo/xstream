@@ -42,12 +42,13 @@ const AudioInput = ({index}) => {
       recorderRef.current.stopRecording()
     } else {
       recorderRef.current = new RecordingService({
-        onStart: () => dispatch(startRecordingAction()),
+        onStart: () => dispatch(startRecordingAction(index)),
         onStop: () => dispatch(stopRecordingAction(
-            recorderRef.current.audioUrl,
-            audioUploadKey(index),
-            recorderRef.current.blob,
-            recorderRef.current.duration
+          recorderRef.current.audioUrl,
+          audioUploadKey(index),
+          recorderRef.current.blob,
+          recorderRef.current.duration,
+          index
         )),
         maxDuration: durationLimit
       })
@@ -77,10 +78,11 @@ const AudioInput = ({index}) => {
           className={classnames(
             styles.playerMain_operator,
               {
-                [styles.square]: recording,
-                [styles.mic]: !recording
+                [styles.square]: isActive && recording,
+                [styles.mic]: !isActive || !recording
               }
-            )}
+            )
+          }
           icon={icon}
         />
       </div>

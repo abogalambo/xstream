@@ -1,13 +1,14 @@
 import MediaManager from '../../lib/media_manager'
 
-export const startRecording = () => ({
+export const startRecording = (index) => ({
   type: 'START_RECORDING',
   payload: {
+    index,
     timestamp: (new Date).getTime()
   }
 })
 
-export const stopRecording = (audioUrl, uploadKey, blob, duration) => {
+export const stopRecording = (audioUrl, uploadKey, blob, duration, index) => {
   return (dispatch) => {
     (new MediaManager).write(uploadKey, blob).then(audioUrl => {
       dispatch({
@@ -25,15 +26,17 @@ export const stopRecording = (audioUrl, uploadKey, blob, duration) => {
       payload: {
         audioUrl,
         duration,
+        index,
         mediaKey: uploadKey
       }    
     })
   } 
 }
 
-export const removeRecording = () => ({
+export const removeRecording = (index) => ({
   type: 'REMOVE_RECORDING',
   payload: {
+    index,
     isConfirmationNeeded: true,
     timestamp: (new Date).getTime()
   }
