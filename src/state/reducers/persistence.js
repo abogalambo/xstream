@@ -10,7 +10,6 @@ const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newV
 const persistenceReducer = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
-    case 'ADD_SEGMENT':
     case 'REMOVE_SEGMENT':
     case 'REORDER_SEGMENTS':
     case 'REMOVE_IMAGE':

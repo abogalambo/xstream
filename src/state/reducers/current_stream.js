@@ -1,3 +1,6 @@
+import {
+  isSegmentEmpty
+} from '../../lib/stream'
 import segmentReducer from './segment'
 import currentSegmentReducer from './current_segment'
 
@@ -25,6 +28,26 @@ const updateSegmentWithMediaKey = (segments, mediaKey, updateSegmentCallback) =>
   })
 }
 
+const ensureLastEmptySegment = (segments, timestamp) => {
+  const lastSegment = segments[segments.length - 1]
+  if(!lastSegment || !isSegmentEmpty(lastSegment)) {
+    return [
+      ...segments,
+      {timestamp}
+    ]
+  } else {
+    let lastEmptyIndex = segments.length - 1
+    for (let i = lastEmptyIndex; i > 0; i--) {
+      if(segments[i - 1] && isSegmentEmpty(segments[i - 1])) {
+        lastEmptyIndex = i - 1
+      } else {
+        break
+      }
+    }
+    return (lastEmptyIndex == segments.length - 1) ? segments : segments.slice(0, lastEmptyIndex + 1)
+  }
+}
+
 const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 const canToggleMode = (state) => !state.currentSegment.recording && state.page != 'view'
 
@@ -50,12 +73,14 @@ const currentStream = (state = null, action) => {
     case 'NEW_STREAM': {
       if(state == null){
         const { uid, timestamp } = payload
+        const { segments } = initialState
 
         return {
           ...initialState,
           authorId: uid,
           createdAt: timestamp,
-          currentSegment: currentSegmentReducer(null, action)
+          currentSegment: currentSegmentReducer(null, action),
+          segments: ensureLastEmptySegment(segments, timestamp)
         }
       }else{
         return state
@@ -67,10 +92,12 @@ const currentStream = (state = null, action) => {
     }
 
     case 'FETCH_STREAM_FULFILLED': {
-      const {streamData, page} = payload
+      const {streamData, page, timestamp} = payload
+      const { segments } = streamData
       return {
         ...initialState,
         ...streamData,
+        segments: ensureLastEmptySegment(segments, timestamp),
         page,
         mode: (page == 'view') ? 'playback' : 'compose',
         currentSegment: currentSegmentReducer(null, action)
@@ -152,26 +179,27 @@ const currentStream = (state = null, action) => {
 
       if(recording) return state;
 
-      return updateObject(state, {
-        segments: [
+      return {
+        ...state,
+        segments: ensureLastEmptySegment([
           ...segments.slice(0, targetIndex),
           { timestamp },
           ...segments.slice(targetIndex),
-        ],
+        ], timestamp),
         currentSegment: currentSegmentReducer(currentSegment, action)
-      })
+      }
     }
 
     case 'REMOVE_SEGMENT': {
       const { segments, currentSegment } = state
-      const { index } = payload
+      const { index, timestamp } = payload
 
       if(segments[index]) {
         return updateObject(state, {
-          segments: [
+          segments: ensureLastEmptySegment([
             ...segments.slice(0, index),
             ...segments.slice(index + 1),
-          ],
+          ], timestamp),
           currentSegment: currentSegmentReducer(currentSegment, action, state)
         })
       }else{
@@ -181,12 +209,15 @@ const currentStream = (state = null, action) => {
 
     case 'REORDER_SEGMENTS': {
       const { segments, currentSegment } = state
-      const { oldIndex, newIndex } = payload
+      const { oldIndex, newIndex, timestamp } = payload
 
       if(segments[oldIndex] && segments[newIndex]) {
         return {
           ...state,
-          segments: reorder([...segments], oldIndex, newIndex),
+          segments: ensureLastEmptySegment(
+            reorder([...segments], oldIndex, newIndex),
+            timestamp
+          ),
           currentSegment: currentSegmentReducer(currentSegment, action)
         }
       }else{
@@ -222,11 +253,14 @@ const currentStream = (state = null, action) => {
     case 'SET_SEGMENT_TEXT': {
       const { segments, currentSegment } = state
       const currentIndex = currentSegment.index
+      const { timestamp } = payload
 
       return updateObject(state, {
-        segments: updateItemAtIndex(segments, currentIndex, (segment) => {
-          return segmentReducer(segment, action)
-        })
+        segments: ensureLastEmptySegment(
+          updateItemAtIndex(segments, currentIndex, (segment) => {
+            return segmentReducer(segment, action)
+          }, timestamp)
+        )
       })
     }
 
@@ -237,12 +271,16 @@ const currentStream = (state = null, action) => {
     case 'REMOVE_RECORDING': {
       const { segments, currentSegment } = state
       const currentIndex = currentSegment.index
+      const { timestamp } = payload
 
       return {
         ...state,
-        segments: updateItemAtIndex(segments, currentIndex, (segment) => {
-          return segmentReducer(segment, action)
-        }),
+        segments: ensureLastEmptySegment(
+          updateItemAtIndex(segments, currentIndex, (segment) => {
+            return segmentReducer(segment, action)
+          }),
+          timestamp
+        ),
         currentSegment: currentSegmentReducer(currentSegment, action)
       }
     }

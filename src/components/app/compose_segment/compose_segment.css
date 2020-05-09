@@ -1,11 +1,12 @@
 .composeSegment {
   width: 100%;
-  min-height: 100px;
+  min-height: 80px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   max-width: 1024px;
   margin: 0 auto;
+  border-bottom: 1px dashed gray;
 }
 
 .selectedSegment {

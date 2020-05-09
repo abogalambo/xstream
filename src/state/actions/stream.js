@@ -5,6 +5,7 @@ export const fetchStream = (id, page) => ({
   type: 'FETCH_STREAM',
   payload: new RemoteStream({id}).fetch().then(remoteStream => ({
     streamData: remoteStream.stream,
+    timestamp: (new Date).getTime(),
     page
   }))
 })

@@ -47,7 +47,7 @@ export const segmentDuration = ({ audio, text, image }) => {
     (audio && audio.duration) ||
     (text && timeForText(text, 1000)) ||
     (image && timeForImage(image)) ||
-    1000
+    0
   )
 }
 

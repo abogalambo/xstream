@@ -16,6 +16,9 @@ import {
   goToSegment as goToSegmentAction,
   addSegment as addSegmentAction
 } from '../../../state/actions/stream'
+import {
+  isSegmentEmpty as isEmpty
+} from '../../../lib/stream'
 import TextInput from '../../lib/text_input'
 import styles from './compose_segment.css'
 
@@ -38,6 +41,7 @@ const ComposeSegment = ({index}) => {
   const isSegmentEmpty = isEmpty(segment)
   const isNextSegmentEmpty = isEmpty(nextSegment)
   const canAppendSegment = !isSegmentEmpty && !isNextSegmentEmpty
+  const canDeleteSegment = !isSegmentEmpty || index != segments.length - 1
 
   return (
     <div className={classnames(
@@ -49,12 +53,14 @@ const ComposeSegment = ({index}) => {
       onClick={goToSegment}
     >
       
-      <button
-        className={styles.removeSegmentBtn}
-        onClick={removeSegment}
-      >
-        <FontAwesomeIcon className={styles.removeSegmentBtn_icon} icon={faTrash} />
-      </button>
+      {canDeleteSegment && (
+        <button
+          className={styles.removeSegmentBtn}
+          onClick={removeSegment}
+        >
+          <FontAwesomeIcon className={styles.removeSegmentBtn_icon} icon={faTrash} />
+        </button>
+      )}
 
       {canAppendSegment && (
         <button
@@ -80,11 +86,6 @@ const ComposeSegment = ({index}) => {
       </div>
     </div>
   )
-}
-
-const isEmpty = (segment) => {
-  const { text, image, audio } = segment
-  return !text && !image && !audio
 }
 
 ComposeSegment.propTypes = {

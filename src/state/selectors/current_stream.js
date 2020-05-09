@@ -8,6 +8,10 @@ import {
 } from '../../lib/stream_duration'
 
 import {
+  isSegmentEmpty
+} from '../../lib/stream'
+
+import {
   canEditStream
 } from '../../lib/stream_permissions'
 
@@ -95,7 +99,7 @@ export const autosaveParamsSelector = (state) => {
     }
 
     return remoteSegment
-  })
+  }).filter((segment) => !isSegmentEmpty(segment))
 
   return { id, authorId, createdAt, publishedAt, title, cover: remoteCover, segments: remoteSegments }
 }
