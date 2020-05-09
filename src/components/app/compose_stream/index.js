@@ -8,6 +8,7 @@ import {
 import {
   goToSegment,
 } from '../../../state/actions/stream'
+import Autosave from '../autosave'
 import styles from './compose_stream.css'
 
 const ComposeStream = () => {
@@ -28,36 +29,39 @@ const ComposeStream = () => {
   }, [currentIndex])
 
   return (
-    <div
-      className={styles.composeStream}
-      ref={htmlRef}
-    >
-      <div className={classnames(
-          styles.composeSegment,
-          {
-            [styles.selectedSegment]: currentIndex == -1
-          }
-        )}
-        key="compose_cover"
+    <>
+      <div
+        className={styles.composeStream}
+        ref={htmlRef}
       >
-        <span>Cover</span>
+        <div className={classnames(
+            styles.composeSegment,
+            {
+              [styles.selectedSegment]: currentIndex == -1
+            }
+          )}
+          key="compose_cover"
+        >
+          <span>Cover</span>
+        </div>
+        {segments.map((segment, index) => {
+          return (
+            <div className={classnames(
+                styles.composeSegment,
+                {
+                  [styles.selectedSegment]: index == currentIndex
+                }
+              )}
+              key={`compose_segment_${segment.timestamp}`}
+              onClick={() => { dispatch(goToSegment(index)) }}
+            >
+              <span>{segment.text}</span>
+            </div>
+          )
+        })}
       </div>
-      {segments.map((segment, index) => {
-        return (
-          <div className={classnames(
-              styles.composeSegment,
-              {
-                [styles.selectedSegment]: index == currentIndex
-              }
-            )}
-            key={`compose_segment_${segment.timestamp}`}
-            onClick={() => { dispatch(goToSegment(index)) }}
-          >
-            <span>{segment.text}</span>
-          </div>
-        )
-      })}
-    </div>
+      <Autosave />
+    </>
   )
 }
 
