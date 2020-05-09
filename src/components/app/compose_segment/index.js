@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faTrash
+  faTrash,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 import {
   indexSelector,
@@ -12,7 +13,8 @@ import {
 } from '../../../state/selectors/current_stream'
 import {
   removeSegment as removeSegmentAction,
-  goToSegment as goToSegmentAction
+  goToSegment as goToSegmentAction,
+  addSegment as addSegmentAction
 } from '../../../state/actions/stream'
 import TextInput from '../../lib/text_input'
 import styles from './compose_segment.css'
@@ -20,12 +22,22 @@ import styles from './compose_segment.css'
 const ComposeSegment = ({index}) => {
   const currentIndex = useSelector(indexSelector)
   const segments = useSelector(segmentsSelector)
+  const segment = segments[index] || {}
+  const nextSegment = segments[index + 1] || {}
 
-  const { text } = segments[index]
+  const { text } = segment
 
   const dispatch = useDispatch();
   const removeSegment = () => dispatch(removeSegmentAction(index))
+  const addSegment = (e) => {
+    dispatch(addSegmentAction(index + 1))
+    e.stopPropagation()
+  }
   const goToSegment = () => dispatch(goToSegmentAction(index))
+
+  const isSegmentEmpty = isEmpty(segment)
+  const isNextSegmentEmpty = isEmpty(nextSegment)
+  const canAppendSegment = !isSegmentEmpty && !isNextSegmentEmpty
 
   return (
     <div className={classnames(
@@ -44,6 +56,15 @@ const ComposeSegment = ({index}) => {
         <FontAwesomeIcon className={styles.removeSegmentBtn_icon} icon={faTrash} />
       </button>
 
+      {canAppendSegment && (
+        <button
+          className={styles.addSegmentBtn}
+          onClick={addSegment}
+        >
+          <FontAwesomeIcon className={styles.addSegmentBtn_icon} icon={faPlus} />
+        </button>
+      )}
+
       <div className={styles.nonVisual}>
       </div>
 
@@ -59,6 +80,11 @@ const ComposeSegment = ({index}) => {
       </div>
     </div>
   )
+}
+
+const isEmpty = (segment) => {
+  const { text, image, audio } = segment
+  return !text && !image && !audio
 }
 
 ComposeSegment.propTypes = {
