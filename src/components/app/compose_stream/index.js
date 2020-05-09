@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import {
   segmentsSelector,
   indexSelector
 } from '../../../state/selectors/current_stream'
+import {
+  goToSegment
+} from '../../../state/actions/stream'
 import Autosave from '../autosave'
 import ComposeSegment from '../compose_segment'
 import styles from './compose_stream.css'
@@ -13,6 +16,7 @@ const ComposeStream = () => {
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
 
+  // scrolling current segment into view
   const htmlRef = useRef(null)
   useEffect(() => {
     const currentChild = htmlRef.current.children[currentIndex + 1]
@@ -20,6 +24,24 @@ const ComposeStream = () => {
       currentChild.scrollIntoView({behavior: "smooth", block: "center"})
     }
   }, [currentIndex])
+
+  // keyboard navigation
+  const dispatch = useDispatch()
+  const indexRef = useRef()
+  indexRef.current = currentIndex
+
+  const handleKeydown = (e) => {
+    if(e.keyCode === 40) {
+      dispatch(goToSegment(indexRef.current + 1))
+    }else if(e.keyCode === 38) {
+      dispatch(goToSegment(indexRef.current - 1))
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeydown)
+    return () => document.removeEventListener('keydown', handleKeydown)
+  }, [])
 
   return (
     <>
