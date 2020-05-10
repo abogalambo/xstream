@@ -11,7 +11,7 @@ const initialState = {
   startOffset: 0
 }
 
-const canNavigate = (state) => (!state.recording && !state.typing)
+const canNavigate = (state) => (!state.typing)
 const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 
 const currentSegment = (state = null, action, currentStream) => {
@@ -69,10 +69,14 @@ const currentSegment = (state = null, action, currentStream) => {
     }
 
     case 'STOP_RECORDING': {
-      return updateObject(state, {
+      const { index } = payload
+      const { index: currentIndex } = state
+
+      return index == currentIndex ? {
+        ...state,
         recording: false,
         recordingStartedAt: null
-      })
+      } : state
     }
 
     case 'SEGMENT_STARTED': {

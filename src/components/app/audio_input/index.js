@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
@@ -29,6 +29,7 @@ const AudioInput = ({index}) => {
   const remainingAudioTime = useSelector(remainingAudioTimeSelector)
   const currentIndex = useSelector(indexSelector)
   const isActive = index == currentIndex
+  const isRecording = isActive && recording
 
   const canRecordAudio = useSelector(canRecordAudioSelector)
   const { maxDuration } = config.stream.audio
@@ -37,8 +38,14 @@ const AudioInput = ({index}) => {
   const dispatch = useDispatch();
   const recorderRef = useRef(null)
 
+  useEffect(() => {
+    if(!isActive && recorderRef.current) {
+      recorderRef.current.stopRecording()
+    }
+  }, [isActive])
+
   const onClick = () => {
-    if(recording) {
+    if(isRecording) {
       recorderRef.current.stopRecording()
     } else {
       recorderRef.current = new RecordingService({
@@ -57,7 +64,7 @@ const AudioInput = ({index}) => {
     }
   }
 
-  const icon = recording && isActive ? faSquare : faMicrophone
+  const icon = isRecording ? faSquare : faMicrophone
   return (
     <button
       onClick={onClick}
@@ -65,7 +72,7 @@ const AudioInput = ({index}) => {
       disabled={!canRecordAudio}
     >
       <div className={styles.circleShadow}>
-        {isActive && (
+        {isRecording && (
           <CircleMeter
             startedAt={recordingStartedAt}
             isInProgress={recording}
@@ -78,8 +85,8 @@ const AudioInput = ({index}) => {
           className={classnames(
             styles.playerMain_operator,
               {
-                [styles.square]: isActive && recording,
-                [styles.mic]: !isActive || !recording
+                [styles.square]: isRecording,
+                [styles.mic]: !isRecording
               }
             )
           }

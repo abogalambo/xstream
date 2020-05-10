@@ -27,7 +27,8 @@ export const stopRecording = (audioUrl, uploadKey, blob, duration, index) => {
         audioUrl,
         duration,
         index,
-        mediaKey: uploadKey
+        mediaKey: uploadKey,
+        timestamp: (new Date).getTime()
       }    
     })
   } 
