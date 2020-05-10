@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
@@ -61,10 +61,18 @@ const ComposeSegment = ({index}) => {
 
   const handleKeyDown = (e) => {
     if(e.keyCode == 13) {
-      dispatch(newScript(index + 1))
       e.preventDefault()
+      dispatch(newScript(index + 1))
     }
   }
+
+  const scriptRef = useRef(null)
+
+  useEffect(() => {
+    if(index == currentIndex) {
+      scriptRef.current.focus()
+    }
+  }, [index == currentIndex])
 
   return (
     <div className={classnames(
@@ -113,6 +121,7 @@ const ComposeSegment = ({index}) => {
           value={script}
           onChange={setSegmentScript}
           onKeyDown={handleKeyDown}
+          ref={scriptRef}
         />
       </div>
 
