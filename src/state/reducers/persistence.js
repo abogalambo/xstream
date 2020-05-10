@@ -16,6 +16,7 @@ const persistenceReducer = (state = initialState, action) => {
     case 'SET_IMAGE_CAPTION':
     case 'SET_IMAGE_STYLE':
     case 'SET_SEGMENT_TEXT':
+    case 'SET_SEGMENT_SCRIPT':
     case 'REMOVE_RECORDING':
     case 'NEW_STREAM':
     case 'SET_STREAM_TITLE':

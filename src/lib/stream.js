@@ -1,4 +1,4 @@
 export const isSegmentEmpty = (segment) => {
-  const { text, image, audio } = segment
-  return !text && !image && !audio
+  const { text, image, audio, script } = segment
+  return !text && !image && !audio && !script
 }

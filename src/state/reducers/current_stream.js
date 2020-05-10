@@ -259,7 +259,22 @@ const currentStream = (state = null, action) => {
         segments: ensureLastEmptySegment(
           updateItemAtIndex(segments, currentIndex, (segment) => {
             return segmentReducer(segment, action)
-          }, timestamp)
+          }),
+          timestamp
+        )
+      })
+    }
+
+    case 'SET_SEGMENT_SCRIPT': {
+      const { segments } = state
+      const { timestamp, index } = payload
+
+      return updateObject(state, {
+        segments: ensureLastEmptySegment(
+          updateItemAtIndex(segments, index, (segment) => {
+            return segmentReducer(segment, action)
+          }),
+          timestamp
         )
       })
     }

@@ -57,6 +57,12 @@ const segmentReducer = (state, action) => {
       })
     }
 
+    case 'SET_SEGMENT_SCRIPT': {
+      return updateObject(state, {
+        script: payload.script
+      })
+    }
+
     case 'STOP_RECORDING': {
       const { audioUrl, mediaKey, duration } = payload
       return updateObject(state, {
