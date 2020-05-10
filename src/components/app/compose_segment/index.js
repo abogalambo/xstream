@@ -17,6 +17,9 @@ import {
   addSegment as addSegmentAction
 } from '../../../state/actions/stream'
 import {
+  setSegmentScript as setSegmentScriptAction
+} from '../../../state/actions/segment'
+import {
   removeRecording as removeRecordingAction
 } from '../../../state/actions/recorder'
 import {
@@ -32,7 +35,7 @@ const ComposeSegment = ({index}) => {
   const segment = segments[index] || {}
   const nextSegment = segments[index + 1] || {}
 
-  const { text, audio } = segment
+  const { text, audio, script } = segment
 
   const dispatch = useDispatch();
   const removeSegment = () => dispatch(removeSegmentAction(index))
@@ -49,6 +52,10 @@ const ComposeSegment = ({index}) => {
 
   const removeRecording = () => {
     dispatch(removeRecordingAction(index))
+  }
+
+  const setSegmentScript = (e) => {
+    dispatch(setSegmentScriptAction(e.target.value, index))
   }
 
   return (
@@ -79,7 +86,7 @@ const ComposeSegment = ({index}) => {
         </button>
       )}
 
-      <div className={styles.nonVisual}>
+      <div className={styles.script}>
         { !audio && (
           <AudioInput index={index}/>
         )}
@@ -94,6 +101,10 @@ const ComposeSegment = ({index}) => {
             </button>
           </>
         )}
+        <textarea
+          value={script}
+          onChange={setSegmentScript}
+        />
       </div>
 
       <div className={styles.visual}>
