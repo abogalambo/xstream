@@ -17,6 +17,9 @@ import {
   addSegment as addSegmentAction
 } from '../../../state/actions/stream'
 import {
+  removeRecording as removeRecordingAction
+} from '../../../state/actions/recorder'
+import {
   isSegmentEmpty as isEmpty
 } from '../../../lib/stream'
 import AudioInput from '../audio_input'
@@ -43,6 +46,10 @@ const ComposeSegment = ({index}) => {
   const isNextSegmentEmpty = isEmpty(nextSegment)
   const canAppendSegment = !isSegmentEmpty && !isNextSegmentEmpty
   const canDeleteSegment = !isSegmentEmpty || index != segments.length - 1
+
+  const removeRecording = () => {
+    dispatch(removeRecordingAction(index))
+  }
 
   return (
     <div className={classnames(
@@ -77,10 +84,15 @@ const ComposeSegment = ({index}) => {
           <AudioInput index={index}/>
         )}
         { audio && (
-          <audio
-            controls
-            src={audio.url}
-          />
+          <>
+            <audio
+              controls
+              src={audio.url}
+            />
+            <button onClick={removeRecording}>
+              Clear
+            </button>
+          </>
         )}
       </div>
 
