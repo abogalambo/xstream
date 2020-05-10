@@ -170,12 +170,33 @@ const currentStream = (state = null, action) => {
       }
     }
 
+    case 'NEW_SCRIPT': {
+      const { segments, currentSegment } = state
+      const { index, timestamp } = payload
+
+      const targetSegment = segments[index]
+      const isTargetSegmentEmpty = isSegmentEmpty(targetSegment)
+      const newSegments = isTargetSegmentEmpty ?
+        segments : (
+          ensureLastEmptySegment([
+            ...segments.slice(0, index),
+            { timestamp },
+            ...segments.slice(index),
+          ], timestamp)
+        )
+
+      return {
+        ...state,
+        segments: newSegments,
+        currentSegment: currentSegmentReducer(currentSegment, action)
+      }
+    }
+
     case 'ADD_SEGMENT': {
       const { segments, currentSegment } = state
       const { recording } = currentSegment
-      const { index } = payload
+      const { index, timestamp } = payload
       const targetIndex = index
-      const { timestamp } = payload
 
       if(recording) return state;
 

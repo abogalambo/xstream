@@ -48,6 +48,13 @@ const currentSegment = (state = null, action, currentStream) => {
       })
     }
 
+    case 'NEW_SCRIPT': {
+      return {
+        ...initialState,
+        index: payload.index
+      } 
+    }
+
     case 'REMOVE_SEGMENT': {
       const { index } = payload
 

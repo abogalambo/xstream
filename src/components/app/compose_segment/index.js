@@ -17,7 +17,8 @@ import {
   addSegment as addSegmentAction
 } from '../../../state/actions/stream'
 import {
-  setSegmentScript as setSegmentScriptAction
+  setSegmentScript as setSegmentScriptAction,
+  newScript
 } from '../../../state/actions/segment'
 import {
   removeRecording as removeRecordingAction
@@ -56,6 +57,13 @@ const ComposeSegment = ({index}) => {
 
   const setSegmentScript = (e) => {
     dispatch(setSegmentScriptAction(e.target.value, index))
+  }
+
+  const handleKeyDown = (e) => {
+    if(e.keyCode == 13) {
+      dispatch(newScript(index + 1))
+      e.preventDefault()
+    }
   }
 
   return (
@@ -104,6 +112,7 @@ const ComposeSegment = ({index}) => {
         <textarea
           value={script}
           onChange={setSegmentScript}
+          onKeyDown={handleKeyDown}
         />
       </div>
 

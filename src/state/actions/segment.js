@@ -14,3 +14,11 @@ export const setSegmentScript = (script, index) => ({
     timestamp: new Date().getTime()
   }
 })
+
+export const newScript = (index) => ({
+  type: 'NEW_SCRIPT',
+  payload: {
+    index,
+    timestamp: new Date().getTime()
+  }
+})
