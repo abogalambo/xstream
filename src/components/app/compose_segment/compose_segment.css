@@ -1,6 +1,5 @@
 .composeSegment {
   width: 100%;
-  min-height: 80px;
   display: flex;
   flex-wrap: wrap;
   max-width: 1024px;
@@ -27,7 +26,6 @@
   width: 50%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   position: relative;
   border-right: 1px dashed;
 }
@@ -41,6 +39,7 @@
   padding: 15px 10px;
   overflow: hidden;
   outline: none;
+  height: 100%;
 }
 
 .audioPlayer {
