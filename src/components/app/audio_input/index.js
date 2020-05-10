@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import classnames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faSquare,
+  faStop,
   faMicrophone
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -64,14 +64,14 @@ const AudioInput = ({index}) => {
     }
   }
 
-  const icon = isRecording ? faSquare : faMicrophone
+  const icon = isRecording ? faStop : faMicrophone
   return (
     <button
       onClick={onClick}
       className={styles.playerMain}
       disabled={!canRecordAudio}
     >
-      <div className={styles.circleShadow}>
+      
         {isRecording && (
           <CircleMeter
             startedAt={recordingStartedAt}
@@ -92,7 +92,7 @@ const AudioInput = ({index}) => {
           }
           icon={icon}
         />
-      </div>
+      
     </button>
   )
 }

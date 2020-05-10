@@ -9,6 +9,9 @@ const config = {
       captionMaxLength: 100
     },
     text: {
+      maxLength: 200
+    },
+    script: {
       maxLength: 500
     },
     autosaveInterval: 5000,

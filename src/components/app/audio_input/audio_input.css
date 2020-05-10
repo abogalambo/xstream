@@ -1,15 +1,13 @@
 .playerMain {
   width: 40px;
-  margin-left: 40px;
-}
-
-.circleShadow {
-  width: inherit;
-  border-radius: 70px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 0;
 }
 
 .playerMain_operator {

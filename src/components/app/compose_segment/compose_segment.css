@@ -1,20 +1,52 @@
 .composeSegment {
   width: 100%;
   min-height: 80px;
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   max-width: 1024px;
   margin: 0 auto;
-  border-bottom: 1px dashed gray;
+  border-bottom: 1px solid var(--onSecondary__active);
 }
 
 .selectedSegment {
   background: white;
 }
 
+.controls {
+  width: 40px;
+}
+
+.content {
+  width: calc(100% - 40px);
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
 .script {
   width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  border-right: 1px dashed;
+}
+
+.scriptInput {
+  width: calc(100% - 50px);
+  resize: none;
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  padding: 15px 10px;
+  overflow: hidden;
+  outline: none;
+}
+
+.audioPlayer {
+  margin: 10px;
+  height: 30px;
+  outline: none;
 }
 
 .visual {
@@ -24,9 +56,13 @@
 @media (orientation: portrait) {
   .visual {
     width: 100%;
+    order: 1;
   }
-  .nonVisual {
+
+  .script {
     width: 100%;
+    order: 2;
+    border-right: none;
   }
 }
 
@@ -37,8 +73,6 @@
   background-color: var(--onBgColor_light);
   border-bottom-right-radius: var(--roundCorner);
   border-top-left-radius: 2px;
-  position: absolute;
-  left: 0;
   z-index: 1;
   transition: color;
   transition-duration: var(--transition-duration);
@@ -55,8 +89,8 @@
 }
 
 .addSegmentBtn {
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   background-color: var(--onBgColor_light);
   border-radius: 50%;
   position: absolute;
@@ -67,7 +101,6 @@
 }
 
 .addSegmentBtn_icon {
-  font-size: 1.3em;
   color: var(--onBgColor_dark);
 }
 
@@ -76,7 +109,7 @@
     display: none;
   }
 
-  .composeSegment:hover > .addSegmentBtn {
+  .content:hover > .addSegmentBtn {
     display: block;
   }
 }
@@ -86,7 +119,7 @@
     display: none;
   }
 
-  .composeSegment.selectedSegment > .addSegmentBtn {
+  .composeSegment.selectedSegment .addSegmentBtn {
     display: block;
   }
 }
