@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
@@ -24,10 +24,11 @@ import {
   removeRecording as removeRecordingAction
 } from '../../../state/actions/recorder'
 import {
-  isSegmentEmpty as isEmpty
+  isSegmentEmpty as isEmpty,
+  segmentHasVisual as hasVisual
 } from '../../../lib/stream'
 import AudioInput from '../audio_input'
-import TextInput from '../../lib/text_input'
+import AspectRatioBox from '../../lib/aspect_ratio_box'
 import config from '../../../../config'
 import styles from './compose_segment.css'
 
@@ -37,7 +38,7 @@ const ComposeSegment = ({index}) => {
   const segment = segments[index] || {}
   const nextSegment = segments[index + 1] || {}
 
-  const { text, audio, script } = segment
+  const { audio, script } = segment
 
   const dispatch = useDispatch();
   const removeSegment = () => dispatch(removeSegmentAction(index))
@@ -48,9 +49,11 @@ const ComposeSegment = ({index}) => {
   const goToSegment = () => dispatch(goToSegmentAction(index))
 
   const isSegmentEmpty = isEmpty(segment)
+  const segmentHasVisual = hasVisual(segment)
   const isNextSegmentEmpty = isEmpty(nextSegment)
   const canAppendSegment = !isSegmentEmpty && !isNextSegmentEmpty
   const canDeleteSegment = !isSegmentEmpty || index != segments.length - 1
+  const isCurrent = index == currentIndex
 
   const removeRecording = () => {
     dispatch(removeRecordingAction(index))
@@ -70,31 +73,55 @@ const ComposeSegment = ({index}) => {
   const scriptRef = useRef(null)
 
   useEffect(() => {
-    if(index == currentIndex) {
+    if(isCurrent && !isVisualMode) {
       scriptRef.current.focus()
     }
-  }, [index == currentIndex])
+  }, [isCurrent])
 
   // autoresize textarea
   const autoResize = () => {
     if(scriptRef.current) {
       const textarea = scriptRef.current
-      textarea.style.height = "5px"
+      textarea.style.height = "1px"
       textarea.style.height = `${textarea.scrollHeight}px`
     }
   }
 
   useEffect(() => {
     autoResize()
-  }, [scriptRef.current])
+  }, [scriptRef.current, isVisualMode])
+
+  // toggle visual mode
+  const [isVisualMode, setIsVisualMode] = useState(false)
+
+  const toggleVisualMode = () => {
+    setIsVisualMode(!isVisualMode)
+  }
+
+  useEffect(() => {
+    if(!isCurrent) {
+      setIsVisualMode(false)
+    }
+  }, [isCurrent])
+
+  // scrolling current segment into view
+  const htmlRef = useRef(null)
+  useEffect(() => {
+    if(isCurrent){
+      setTimeout(() => {
+        htmlRef.current.scrollIntoView({behavior: "smooth", block: "center"})
+      }, 100)
+    }
+  }, [currentIndex])
 
   return (
     <div className={classnames(
         styles.composeSegment,
         {
-          [styles.selectedSegment]: index == currentIndex
+          [styles.selectedSegment]: isCurrent
         }
       )}
+      ref={htmlRef}
       onClick={goToSegment}
     >
 
@@ -109,7 +136,12 @@ const ComposeSegment = ({index}) => {
         )}
       </div>
 
-      <div className={styles.content}>
+      <div className={classnames(
+        styles.content,
+        {
+          [styles.visualMode]: isVisualMode
+        }
+      )}>
         {canAppendSegment && (
           <button
             className={styles.addSegmentBtn}
@@ -150,13 +182,11 @@ const ComposeSegment = ({index}) => {
         </div>
 
         <div className={styles.visual}>
-          {text && (
-            <TextInput
-              value={text || ''}
-              minSize={5}
-              maxSize={5}
-              readOnly
-            />
+          { (segmentHasVisual || isVisualMode) && (
+            <AspectRatioBox className={styles.arBox}>
+              <div className={styles.visualContent} onClick={toggleVisualMode}>
+              </div>
+            </AspectRatioBox>
           )}
         </div>
       </div>

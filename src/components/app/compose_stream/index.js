@@ -16,15 +16,6 @@ const ComposeStream = () => {
   const segments = useSelector(segmentsSelector)
   const currentIndex = useSelector(indexSelector)
 
-  // scrolling current segment into view
-  const htmlRef = useRef(null)
-  useEffect(() => {
-    const currentChild = htmlRef.current.children[currentIndex + 1]
-    if(currentChild){
-      currentChild.scrollIntoView({behavior: "smooth", block: "center"})
-    }
-  }, [currentIndex])
-
   // keyboard navigation
   const dispatch = useDispatch()
   const indexRef = useRef()
@@ -47,7 +38,6 @@ const ComposeStream = () => {
     <>
       <div
         className={styles.composeStream}
-        ref={htmlRef}
       >
         <div className={classnames(
             styles.composeCover,
