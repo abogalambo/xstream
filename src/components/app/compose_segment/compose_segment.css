@@ -26,7 +26,7 @@
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  border-right: 1px dashed;
+  border-right: 1px solid var(--onSecondary__active);
 }
 
 .scriptInput {
