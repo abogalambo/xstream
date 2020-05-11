@@ -4,8 +4,12 @@ import styles from './aspect_ratio_box.css'
 
 const AspectRatioBox = ({children}) => {
   return (
-    <div className={styles.aspectRatioBox}>
-      { children }
+    <div className={styles.aspectRatioBoxContainer}>
+      <div className={styles.aspectRatioBox}>
+        <div className={styles.aspectRatioInnerBox}>
+          { children }
+        </div>
+      </div>
     </div>
   )
 }

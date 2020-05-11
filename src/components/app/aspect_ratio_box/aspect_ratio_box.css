@@ -1,21 +1,24 @@
+.aspectRatioBoxContainer {
+  width: 100%;
+  max-width: 1290px
+}
+
 .aspectRatioBox {
-  width: calc(100vw - 150px);
-  height: calc(56vw - 84px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 0;
+  padding-top: 56.25%;
+  position: relative;
 }
 
-@media (orientation: portrait) {
-  .aspectRatioBox {
-    width: 100vw;
-    height: 56vw;
-  }
+.aspectRatioInnerBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-@media (orientation: landscape) {
-  .aspectRatioBox {
-    max-height: min(75vh, 718px);
-    max-width: min(133vh, 1278px);
+@media (min-aspect-ratio: 16/9) {
+  .aspectRatioBoxContainer {
+    width: calc(100vw - 150px);
   }
 }
