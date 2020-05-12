@@ -104,18 +104,26 @@ export const autosaveParamsSelector = (state) => {
   return { id, authorId, createdAt, publishedAt, title, cover: remoteCover, segments: remoteSegments }
 }
 
-export const segmentImageUploadKeySelector = (state) => {
-  const userId = currentUserIdSelector(state)
-  const streamId = state.currentStream.id
-  const segmentId = currentSegmentDataSelector(state).timestamp
-  return `user_${userId}/stream_${streamId}/segment_${segmentId}/image`
+// starting from here: obsolete. To be removed as part of cleanup
+export const segmentImageUploadKeySelector = (state) => segmentImageUploadKeySelectorFactory(indexSelector(state))(state)
+
+export const segmentAudioUploadKeySelector = (state) => segmentAudioUploadKeySelectorFactory(indexSelector(state))(state)
+// until here: obsolete. To be removed as part of cleanup
+
+export const segmentImageUploadKeySelectorFactory = (segmentIndex) => {
+  return (state) => {
+    const userId = currentUserIdSelector(state)
+    const streamId = state.currentStream.id
+    const segment = segmentsSelector(state)[segmentIndex]
+    const segmentId = segment.timestamp
+    return `user_${userId}/stream_${streamId}/segment_${segmentId}/image`
+  }
 }
 
-export const segmentAudioUploadKeySelector = (state) => {
-  const userId = currentUserIdSelector(state)
-  const streamId = state.currentStream.id
-
-  return (segmentIndex) => {
+export const segmentAudioUploadKeySelectorFactory = (segmentIndex) => {
+  return (state) => {
+    const userId = currentUserIdSelector(state)
+    const streamId = state.currentStream.id
     const segment = segmentsSelector(state)[segmentIndex]
     const segmentId = segment.timestamp
     return `user_${userId}/stream_${streamId}/segment_${segmentId}/audio`

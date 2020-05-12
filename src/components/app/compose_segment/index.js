@@ -9,13 +9,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import {
   indexSelector,
-  segmentsSelector
+  segmentsSelector,
+  segmentImageUploadKeySelectorFactory
 } from '../../../state/selectors/current_stream'
 import {
   removeSegment as removeSegmentAction,
   goToSegment as goToSegmentAction,
   addSegment as addSegmentAction
 } from '../../../state/actions/stream'
+import {
+  addImage as addImageAction,
+} from '../../../state/actions/image'
 import {
   setSegmentScript as setSegmentScriptAction,
   newScript
@@ -28,6 +32,7 @@ import {
   segmentHasVisual as hasVisual
 } from '../../../lib/stream'
 import AudioInput from '../audio_input'
+import ImageInput from '../../lib/image_input'
 import AspectRatioBox from '../../lib/aspect_ratio_box'
 import config from '../../../../config'
 import styles from './compose_segment.css'
@@ -114,6 +119,13 @@ const ComposeSegment = ({index}) => {
     }
   }, [currentIndex])
 
+  // adding image
+  const imageUploadKey = useSelector(segmentImageUploadKeySelectorFactory(index))
+  const addImage = (e) => {
+    dispatch(addImageAction(e, imageUploadKey))
+    setIsVisualMode(true)
+  }
+
   return (
     <div className={classnames(
         styles.composeSegment,
@@ -187,6 +199,13 @@ const ComposeSegment = ({index}) => {
               <div className={styles.visualContent} onClick={toggleVisualMode}>
               </div>
             </AspectRatioBox>
+          )}
+
+          { (!segmentHasVisual && !isVisualMode) && (
+            <ImageInput
+              onChange={addImage}
+              buttonDisplay
+            />
           )}
         </div>
       </div>

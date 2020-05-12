@@ -13,7 +13,7 @@ import {
 } from '../../../state/actions/recorder'
 import {
   currentSegmentSelector,
-  segmentAudioUploadKeySelector,
+  segmentAudioUploadKeySelectorFactory,
   remainingAudioTimeSelector,
   canRecordAudioSelector,
   indexSelector
@@ -25,7 +25,7 @@ import config from '../../../../config'
 
 const AudioInput = ({index}) => {
   const { recording, recordingStartedAt } = useSelector(currentSegmentSelector)
-  const audioUploadKey = useSelector(segmentAudioUploadKeySelector)
+  const audioUploadKey = useSelector(segmentAudioUploadKeySelectorFactory(index))
   const remainingAudioTime = useSelector(remainingAudioTimeSelector)
   const currentIndex = useSelector(indexSelector)
   const isActive = index == currentIndex
@@ -52,7 +52,7 @@ const AudioInput = ({index}) => {
         onStart: () => dispatch(startRecordingAction(index)),
         onStop: () => dispatch(stopRecordingAction(
           recorderRef.current.audioUrl,
-          audioUploadKey(index),
+          audioUploadKey,
           recorderRef.current.blob,
           recorderRef.current.duration,
           index
