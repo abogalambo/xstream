@@ -22,6 +22,7 @@ import {
 } from '../../../state/actions/playback'
 import TextInput from '../../lib/text_input'
 import SegmentImage from '../segment_image'
+import ClosedCaption from '../closed_caption'
 import styles from './segment.css'
 import config from '../../../../config'
 
@@ -99,6 +100,7 @@ const Segment = () => {
           <SegmentImage image={image} />
         )} 
       </div>
+      <ClosedCaption />
     </div>
   )
 }
