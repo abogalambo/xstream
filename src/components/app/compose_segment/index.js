@@ -121,17 +121,17 @@ const ComposeSegment = ({index}) => {
   // adding image
   const imageUploadKey = useSelector(segmentImageUploadKeySelectorFactory(index))
   const addImage = (e) => {
-    dispatch(addImageAction(e, imageUploadKey))
+    dispatch(addImageAction(e, imageUploadKey, {index: index}))
     switchOnVisualMode()
   }
 
   // clearing image / text
   const clearVisual = () => {
     if(image) {
-      dispatch(removeImage())
+      dispatch(removeImage(index))
     }
     if(text) {
-      dispatch(setSegmentText(''))
+      dispatch(setSegmentText("", index))
     }
     switchOffVisualMode()
   }

@@ -1,6 +1,7 @@
-export const setSegmentText = (text) => ({
+export const setSegmentText = (text, index) => ({
   type: 'SET_SEGMENT_TEXT',
   payload: {
+    index,
     text,
     timestamp: new Date().getTime()
   }

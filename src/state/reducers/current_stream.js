@@ -269,9 +269,23 @@ const currentStream = (state = null, action) => {
 
     case 'ADD_IMAGE':
     case 'REMOVE_IMAGE':
-    case 'SET_IMAGE_CAPTION':
-    case 'SET_IMAGE_STYLE':
     case 'SET_SEGMENT_TEXT': {
+      const { segments } = state
+      const { timestamp, index } = payload
+
+      return {
+        ...state,
+        segments: ensureLastEmptySegment(
+          updateItemAtIndex(segments, index, (segment) => {
+            return segmentReducer(segment, action)
+          }),
+          timestamp
+        )
+      }
+    }
+
+    case 'SET_IMAGE_CAPTION':
+    case 'SET_IMAGE_STYLE': {
       const { segments, currentSegment } = state
       const currentIndex = currentSegment.index
       const { timestamp } = payload

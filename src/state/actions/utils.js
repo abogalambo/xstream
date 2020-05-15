@@ -1,7 +1,7 @@
 import MediaManager from '../../lib/media_manager'
 
 export const addImageActionCreator = (type, assetUploadedType) => (
-  (event, uploadKey) => {
+  (event, uploadKey, other) => {
     return dispatch => {
       const file = event.target.files[0]
       const reader = new FileReader()
@@ -11,7 +11,8 @@ export const addImageActionCreator = (type, assetUploadedType) => (
           type,
           payload: {
             src: reader.result,
-            mediaKey: uploadKey
+            mediaKey: uploadKey,
+            ...other
           }
         })
       }, false);

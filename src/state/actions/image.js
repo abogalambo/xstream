@@ -2,9 +2,10 @@ import { addImageActionCreator } from './utils'
 
 export const addImage = addImageActionCreator('ADD_IMAGE', 'STREAM_ASSET_UPLOADED')
 
-export const removeImage = () => ({
+export const removeImage = (index) => ({
   type: 'REMOVE_IMAGE',
   payload: {
+    index,
     timestamp: (new Date).getTime()
   }
 })
