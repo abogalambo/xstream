@@ -49,7 +49,7 @@ const ComposeSegment = ({index}) => {
   const { audio, script, image, text } = segment
 
   const dispatch = useDispatch();
-  const removeSegment = () => dispatch(removeSegmentAction(index))
+  const removeSegment = () => dispatch(removeSegmentAction(index, !isSegmentEmpty))
   const addSegment = (e) => {
     dispatch(addSegmentAction(index + 1))
     e.stopPropagation()
