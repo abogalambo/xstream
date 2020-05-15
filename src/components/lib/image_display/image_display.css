@@ -12,16 +12,19 @@
 }
 
 .imageDisplay > img {
-  display: block;
-  max-height: calc(100% - 100px);
+  max-height: 100%;
   max-width: 100%;
   border-radius: var(--roundCorner);
   box-shadow: var(--twoDp);
 }
 
+.imageDisplay.small > img {
+  max-height: 100%;
+}
+
 .caption {
   width: 100%;
-  height: var(--captionHeight);
+  max-height: 25%;
   color: var(--onBackground);
 }
 

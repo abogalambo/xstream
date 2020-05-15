@@ -5,7 +5,7 @@ import styles from './image_display.css'
 import config from '../../../../config'
 import TextInput from '../text_input'
 
-const ImageDisplay = ({ src, caption, style, editable, onEdit }) => {
+const ImageDisplay = ({ src, caption, style, editable, onEdit, isSmall }) => {
   const onCaptionChange = (newCaption) => onEdit(newCaption)
   const { captionMaxLength } = config.stream.image
   const isCoverStyle = (style == 'COVER')
@@ -17,24 +17,26 @@ const ImageDisplay = ({ src, caption, style, editable, onEdit }) => {
 
   return (
     <figure
-      className={styles.imageDisplay}
+      className={classnames(styles.imageDisplay, {
+        [styles.small]: isSmall
+      })}
       style={figureStyle}
     >
       {!isCoverStyle && (
         <img src={src} />
       )}
 
-      { (editable || caption) && (
+      { (editable || caption && !isSmall) && (
         <figcaption 
           className={classnames(styles.caption, {
-            [styles.caption_cover]: isCoverStyle
+            [styles.caption_cover]: true
           })}
         >
           <TextInput
             readOnly={!editable}
             value={caption || ''}
-            minSize={3}
-            maxSize={3}
+            minSize={2}
+            maxSize={2}
             onChange={onCaptionChange}
             maxChars={captionMaxLength}
             prompt="Add a caption"
@@ -50,6 +52,7 @@ ImageDisplay.propTypes = {
   caption: PropTypes.string,
   style: PropTypes.string,
   editable: PropTypes.bool,
+  isSmall: PropTypes.bool,
   onEdit: PropTypes.func
 }
 

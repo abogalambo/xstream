@@ -19,9 +19,11 @@ import {
 } from '../../../state/actions/stream'
 import {
   addImage as addImageAction,
+  removeImage,
 } from '../../../state/actions/image'
 import {
   setSegmentScript as setSegmentScriptAction,
+  setSegmentText,
   newScript
 } from '../../../state/actions/segment'
 import {
@@ -32,6 +34,7 @@ import {
   segmentHasVisual as hasVisual
 } from '../../../lib/stream'
 import AudioInput from '../audio_input'
+import SegmentImage from '../segment_image'
 import ImageInput from '../../lib/image_input'
 import AspectRatioBox from '../../lib/aspect_ratio_box'
 import config from '../../../../config'
@@ -43,7 +46,7 @@ const ComposeSegment = ({index}) => {
   const segment = segments[index] || {}
   const nextSegment = segments[index + 1] || {}
 
-  const { audio, script } = segment
+  const { audio, script, image, text } = segment
 
   const dispatch = useDispatch();
   const removeSegment = () => dispatch(removeSegmentAction(index))
@@ -99,10 +102,6 @@ const ComposeSegment = ({index}) => {
   // toggle visual mode
   const [isVisualMode, setIsVisualMode] = useState(false)
 
-  const toggleVisualMode = () => {
-    setIsVisualMode(!isVisualMode)
-  }
-
   useEffect(() => {
     if(!isCurrent) {
       setIsVisualMode(false)
@@ -123,7 +122,27 @@ const ComposeSegment = ({index}) => {
   const imageUploadKey = useSelector(segmentImageUploadKeySelectorFactory(index))
   const addImage = (e) => {
     dispatch(addImageAction(e, imageUploadKey))
-    setIsVisualMode(true)
+    switchOnVisualMode()
+  }
+
+  // clearing image / text
+  const clearVisual = () => {
+    if(image) {
+      dispatch(removeImage())
+    }
+    if(text) {
+      dispatch(setSegmentText(''))
+    }
+    switchOffVisualMode()
+  }
+
+  // switch to visual mode
+  const switchOnVisualMode = () => {
+    !isVisualMode && setIsVisualMode(true)
+  }
+
+  const switchOffVisualMode = () => {
+    isVisualMode && setIsVisualMode(false)
   }
 
   return (
@@ -195,10 +214,31 @@ const ComposeSegment = ({index}) => {
 
         <div className={styles.visual}>
           { (segmentHasVisual || isVisualMode) && (
-            <AspectRatioBox className={styles.arBox}>
-              <div className={styles.visualContent} onClick={toggleVisualMode}>
-              </div>
-            </AspectRatioBox>
+            <>
+              <AspectRatioBox className={styles.arBox}>
+                <div className={styles.visualContent}
+                  onClick={switchOnVisualMode}
+                >
+                  { image && (
+                    <SegmentImage
+                      image={image}
+                      editable={isVisualMode}
+                      isSmall={!isVisualMode}
+                    />
+                  )}
+                </div>
+                <div className={styles.visualActions}>
+                  {isVisualMode && (
+                    <button onClick={switchOffVisualMode}>
+                      Shrink
+                    </button>
+                  )}
+                  <button onClick={clearVisual}>
+                    Clear
+                  </button>
+                </div>
+              </AspectRatioBox>
+            </>
           )}
 
           { (!segmentHasVisual && !isVisualMode) && (

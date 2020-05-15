@@ -96,7 +96,7 @@ const Segment = () => {
         )}
       >
         {imageDisplayed && (
-          <SegmentImage />
+          <SegmentImage image={image} />
         )} 
       </div>
     </div>

@@ -50,6 +50,9 @@
 .visual {
   padding: 15px;
   width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .arBox {
@@ -80,6 +83,16 @@
 .visualContent {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visualActions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
 }
 
 @media (orientation: portrait) {
@@ -152,5 +165,3 @@
     display: block;
   }
 }
-
-

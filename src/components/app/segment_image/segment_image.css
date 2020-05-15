@@ -3,10 +3,6 @@
   position: relative;
 }
 
-.imageWrapper_border {
-  border: 1px dotted var(--primaryColor);
-}
-
 .imageControls {
   position: absolute;
   top: 0;
