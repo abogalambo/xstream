@@ -36,6 +36,7 @@ import {
 import AudioInput from '../audio_input'
 import SegmentImage from '../segment_image'
 import ImageInput from '../../lib/image_input'
+import TextInput from '../../lib/text_input'
 import AspectRatioBox from '../../lib/aspect_ratio_box'
 import config from '../../../../config'
 import styles from './compose_segment.css'
@@ -136,9 +137,16 @@ const ComposeSegment = ({index}) => {
     switchOffVisualMode()
   }
 
+  // adding text
+  const addText = () => {
+    switchOnVisualMode('text')
+  }
+
+  const handleTextChange = (newText) => dispatch(setSegmentText(newText, index))
+
   // switch to visual mode
-  const switchOnVisualMode = () => {
-    !isVisualMode && setIsVisualMode(true)
+  const switchOnVisualMode = (contentType) => {
+    !isVisualMode && setIsVisualMode(contentType || true)
   }
 
   const switchOffVisualMode = () => {
@@ -214,38 +222,56 @@ const ComposeSegment = ({index}) => {
 
         <div className={styles.visual}>
           { (segmentHasVisual || isVisualMode) && (
-            <>
-              <AspectRatioBox className={styles.arBox}>
-                <div className={styles.visualContent}
-                  onClick={switchOnVisualMode}
-                >
-                  { image && (
-                    <SegmentImage
-                      image={image}
-                      editable={isVisualMode}
-                      isSmall={!isVisualMode}
-                    />
-                  )}
-                </div>
-                <div className={styles.visualActions}>
-                  {isVisualMode && (
-                    <button onClick={switchOffVisualMode}>
-                      Shrink
-                    </button>
-                  )}
-                  <button onClick={clearVisual}>
-                    Clear
+            <AspectRatioBox className={styles.arBox}>
+              <div className={styles.visualContent}
+                onClick={() => switchOnVisualMode()}
+              >
+                { image && (
+                  <SegmentImage
+                    image={image}
+                    editable={isVisualMode}
+                    isSmall={!isVisualMode}
+                  />
+                )}
+
+                { (text || isVisualMode == 'text') && (
+                  <TextInput
+                    value={text || ''}
+                    minSize={isVisualMode ? 5 : 1}
+                    maxSize={isVisualMode ? 5 : 1}
+                    onChange={handleTextChange}
+                    maxChars={200}
+                    prompt="Write something..."
+                  />
+                )}
+              </div>
+              <div className={styles.visualActions}>
+                {isVisualMode && (
+                  <button onClick={switchOffVisualMode}>
+                    Shrink
                   </button>
-                </div>
-              </AspectRatioBox>
-            </>
+                )}
+                <button onClick={clearVisual}>
+                  Clear
+                </button>
+              </div>
+            </AspectRatioBox>
           )}
 
           { (!segmentHasVisual && !isVisualMode) && (
-            <ImageInput
-              onChange={addImage}
-              buttonDisplay
-            />
+            <div className={styles.visualOptions}>
+              <ImageInput
+                onChange={addImage}
+                buttonDisplay
+              />
+
+              <button
+                className={styles.addText}
+                onClick={addText}
+              >
+                T
+              </button>
+            </div>
           )}
         </div>
       </div>

@@ -87,7 +87,7 @@
     display: none;
   }
 
-  .composeSegment.selectedSegment .addSegmentBtn {
+  .composeCover.selected .addSegmentBtn {
     display: block;
   }
 }

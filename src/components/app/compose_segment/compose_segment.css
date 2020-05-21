@@ -107,6 +107,29 @@
   }
 }
 
+.visualOptions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.visualOptions > * {
+  margin-left: 20px;
+}
+
+.addText {
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Times New Roman";
+  color: var(--onBgColor);
+  padding: 0;
+  line-height: 1em;
+}
+
+.addText:hover {
+  color: black;
+}
+
 /*Remove Segment Btn*/
 .removeSegmentBtn {
   width: 40px;
