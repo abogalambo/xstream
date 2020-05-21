@@ -58,7 +58,6 @@ const PlaybackStream = () => {
                   index={index}
                   key={`segment_${segment.timestamp}`}
                   {...segment}
-                  isPlaybackMode
                 />
               </AspectRatioBox>
             </div>

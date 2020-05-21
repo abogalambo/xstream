@@ -46,52 +46,16 @@
   background: var(--primaryColor_light);
 }
 
-.addRemoveImage {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-
-/*from here: copied from stream.css modeSwitch with modifications
-TODO: extract to a button component (without position related rules)*/
-
-.removeImage {
-  background: rgba(0, 0, 0, 0.2);
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  cursor: pointer;
-  border-radius: var(--roundCorner);
-}
-
-.removeImage_icon {
-  color: var(--primaryColor);
-  transition-property: color;
-  transition-duration: var(--transition-duration);
-  transition-timing-function: var(--transition-timing-function);
-}
-
-.removeImage:active .removeImage_icon {
-  color: var(--primaryColor_light);
-}
-
-/*Until here: copied from stream.css modeSwitch*/
-
-.FAB_iconPlay {
-  transform: translate(3.1px, 0.5px);;
-}
-
 .FAB_icon {
   color: black;
+  transform: translate(3.1px, 0.5px);
 }
 
 @keyframes fadein {
   from {
-      opacity: 0;
+    opacity: 0;
   }
   to {
-      opacity: default;
+    opacity: default;
   }
 }
