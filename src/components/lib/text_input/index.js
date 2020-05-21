@@ -17,7 +17,8 @@ const TextInput = ({
   maxChars,
   prompt,
   readOnly,
-  shouldFocus
+  shouldFocus,
+  withStroke
 }) => {
 
   const [isEditing, setIsEditing] = useState(false)
@@ -146,16 +147,22 @@ const TextInput = ({
 
   return (
     <div
-      className={styles.wrapper}
+      className={classnames(styles.wrapper, {
+            [styles.withStroke]: withStroke
+          })}
       onClick={handleOnClick}
     >
       {!readOnly && !isEditing && !value && (
-        <div className={styles.prompt}>{prompt}</div>
+        <div className={styles.prompt}
+          style={fontStyle(value, minSize, maxSize, maxChars)}
+        >
+          {prompt}
+        </div>
       )}
 
       {!isEditing && (
         <div
-          className={classnames(styles.textDisplay)}
+          className={styles.textDisplay}
           style={fontStyle(value, minSize, maxSize, maxChars)}
         >
           { convertLinks(value) }
@@ -201,7 +208,8 @@ TextInput.propTypes = {
   maxChars: PropTypes.number,
   prompt: PropTypes.string,
   readOnly: PropTypes.bool,
-  shouldFocus: PropTypes.bool
+  shouldFocus: PropTypes.bool,
+  withStroke: PropTypes.bool
 }
 
 export default TextInput

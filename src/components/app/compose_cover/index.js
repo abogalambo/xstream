@@ -103,12 +103,13 @@ const ComposeCover = () => {
       <div className={styles.content} style={coverStyle}>
         <TextInput
           value={title}
-          minSize={3}
-          maxSize={3}
+          minSize={4}
+          maxSize={4}
           onChange={handleTitleChange}
           maxChars={config.stream.titleMaxLength}
           prompt="Add a title"
           shouldFocus={isCurrent}
+          withStroke
         />
         {canAppendSegment && (
           <button

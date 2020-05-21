@@ -60,13 +60,14 @@ const Cover = () => {
         <TextInput
           readOnly={isPlaybackMode}
           value={title}
+          maxSize={15}
           minSize={5}
-          maxSize={5}
           onChange={onTitleChange}
           onFocus={startTyping}
           onBlur={stopTyping}
           maxChars={config.stream.titleMaxLength}
           prompt="Add Title..."
+          withStroke
         />
       </div>
 
