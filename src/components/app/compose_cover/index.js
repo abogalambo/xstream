@@ -2,18 +2,28 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTimes,
+  faPlus
+} from '@fortawesome/free-solid-svg-icons'
 import {
   coverImageUploadKeySelector,
   coverDataSelector,
+  segmentsSelector,
   indexSelector
 } from '../../../state/selectors/current_stream'
 import {
   setStreamTitle,
+  addSegment as addSegmentAction,
   goToSegment as goToSegmentAction,
   addCoverImage as addCoverImageAction,
   removeCoverImage as removeCoverImageAction,
 } from '../../../state/actions/stream'
+
+import {
+  isSegmentEmpty as isEmpty
+} from '../../../lib/stream'
+
 import ImageInput from '../../lib/image_input'
 import TextInput from '../../lib/text_input'
 import config from '../../../../config'
@@ -30,9 +40,16 @@ const ComposeCover = () => {
   const dispatch = useDispatch()
 
   const handleTitleChange = (newTitle) => dispatch(setStreamTitle(newTitle))
+  
+  const addSegment = (e) => {
+    dispatch(addSegmentAction(index + 1))
+    e.stopPropagation()
+  }
+  const segments = useSelector(segmentsSelector)
+  const nextSegment = segments[index + 1] || {}
+  const canAppendSegment = !isEmpty(nextSegment)
 
   const goToCover = () => dispatch(goToSegmentAction(index))
-
   const currentIndex = useSelector(indexSelector)
   const isCurrent = index == currentIndex
 
@@ -93,6 +110,14 @@ const ComposeCover = () => {
           prompt="Add a title"
           shouldFocus={isCurrent}
         />
+        {canAppendSegment && (
+          <button
+            className={styles.addSegmentBtn}
+            onClick={addSegment}
+          >
+            <FontAwesomeIcon className={styles.addSegmentBtn_icon} icon={faPlus} />
+          </button>
+        )}
       </div>
     </div>
   )

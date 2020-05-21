@@ -5,7 +5,6 @@
   max-width: 1024px;
   margin: 0 auto;
   border-bottom: 1px solid var(--onSecondary__active);
-
   transition-property: min-height;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
@@ -51,10 +50,44 @@
   justify-content: center;
   align-items: center;
   width: calc(100% - 40px);
-
+  position: relative;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
+.addSegmentBtn {
+  width: 25px;
+  height: 25px;
+  background-color: var(--onBgColor_light);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  z-index: 1;
+}
 
+.addSegmentBtn_icon {
+  color: var(--onBgColor_dark);
+}
+
+@media (hover: hover) {
+  .addSegmentBtn {
+    display: none;
+  }
+
+  .content:hover > .addSegmentBtn {
+    display: block;
+  }
+}
+
+@media (hover: none) {
+  .addSegmentBtn {
+    display: none;
+  }
+
+  .composeSegment.selectedSegment .addSegmentBtn {
+    display: block;
+  }
+}
