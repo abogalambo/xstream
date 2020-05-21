@@ -16,7 +16,8 @@ const TextInput = ({
   onLinkClick,
   maxChars,
   prompt,
-  readOnly
+  readOnly,
+  shouldFocus
 }) => {
 
   const [isEditing, setIsEditing] = useState(false)
@@ -32,6 +33,12 @@ const TextInput = ({
       el.focus()
     }
   }, [value, isEditing])
+
+  useEffect(() => {
+    if(shouldFocus) {
+      setIsEditing(true)
+    }
+  }, [shouldFocus])
 
   const handleOnFocus = (e) => {
     setIsEditing(!readOnly)
@@ -142,7 +149,7 @@ const TextInput = ({
       className={styles.wrapper}
       onClick={handleOnClick}
     >
-      {!isEditing && !value && (
+      {!readOnly && !isEditing && !value && (
         <div className={styles.prompt}>{prompt}</div>
       )}
 
@@ -193,7 +200,8 @@ TextInput.propTypes = {
   onLinkClick: PropTypes.func,
   maxChars: PropTypes.number,
   prompt: PropTypes.string,
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+  shouldFocus: PropTypes.bool
 }
 
 export default TextInput

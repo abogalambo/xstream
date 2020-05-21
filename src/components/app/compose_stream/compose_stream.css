@@ -3,13 +3,3 @@
   height: calc(100% - var(--composeBarHeight));
   overflow-y: scroll;
 }
-
-.composeCover {
-  min-height: 100px;
-  width: 100%;
-  border-bottom: 1px solid;
-}
-
-.selectedCover {
-  border: 2px solid red;
-}

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import classnames from 'classnames'
 import {
   segmentsSelector,
   indexSelector
@@ -9,6 +8,7 @@ import {
   goToSegment
 } from '../../../state/actions/stream'
 import Autosave from '../autosave'
+import ComposeCover from '../compose_cover'
 import ComposeSegment from '../compose_segment'
 import styles from './compose_stream.css'
 
@@ -39,16 +39,7 @@ const ComposeStream = () => {
       <div
         className={styles.composeStream}
       >
-        <div className={classnames(
-            styles.composeCover,
-            {
-              [styles.selectedCover]: currentIndex == -1
-            }
-          )}
-          key="compose_cover"
-        >
-          <span>Cover</span>
-        </div>
+        <ComposeCover />
         {segments.map((segment, index) => (
           <ComposeSegment
             index={index}

@@ -1,11 +1,10 @@
 .prompt {
-  position: absolute;
   color: var(--onBgColor);
-  opacity: 100%;
   font-family: var(--fontFamily);
   transition-property: color;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
+  font-size: 1.1em;
 }
 
 .wrapper:hover > .prompt {
@@ -18,9 +17,8 @@
 
 .textDisplay {
   z-index: 1;
-  min-height: 34px;
   max-height: 100%;
-  width: 100%;
+  min-width: 20px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -35,6 +33,7 @@
 
 .wrapper {
   width: 100%;
+  height: 100%;
   min-height: 34px;
   position: relative;
   display: flex;

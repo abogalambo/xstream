@@ -35,14 +35,13 @@
   background: transparent;
   border: none;
   font-size: 1em;
-  padding: 15px 10px;
+  padding: 10px 10px;
   overflow: hidden;
   outline: none;
-  height: 100%;
 }
 
 .audioPlayer {
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   height: 30px;
   outline: none;
 }

@@ -19,7 +19,13 @@ const currentSegment = (state = null, action, currentStream) => {
 
   switch (type) {
 
-    case 'NEW_STREAM':
+    case 'NEW_STREAM': {
+      return {
+        ...initialState,
+        index: 0
+      }
+    }
+
     case 'FETCH_STREAM_FULFILLED': {
       return initialState
     }

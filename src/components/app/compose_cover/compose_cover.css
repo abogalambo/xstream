@@ -1,0 +1,60 @@
+.composeCover {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  max-width: 1024px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--onSecondary__active);
+
+  transition-property: min-height;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.withImage {
+  min-height: 200px;
+}
+
+.selected {
+  background: white;
+}
+
+.controls {
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.removeImage {
+  width: 40px;
+  height: 40px;
+  background-color: var(--onBgColor_light);
+  border-bottom-right-radius: var(--roundCorner);
+  border-top-left-radius: 2px;
+  z-index: 1;
+  transition: color;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing-function);
+  margin-bottom: 5px;
+}
+.removeImage:hover .removeImage_icon {
+  color: var(--onPrimary);
+}
+.removeImage_icon {
+  font-size: 2em;
+  color: var(--onBgColor_dark);
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 40px);
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
