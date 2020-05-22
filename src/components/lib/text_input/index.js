@@ -185,7 +185,9 @@ const TextInput = ({
       )}
 
       {isEditing && (
-        <span>{maxChars - (value || "").length}</span>
+        <span className={styles.charCount}>
+          {maxChars - (value || "").length}
+        </span>
       )}
     </div>
   )
