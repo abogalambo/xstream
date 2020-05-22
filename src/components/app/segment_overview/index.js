@@ -4,12 +4,11 @@ import classnames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faTimes,
   faVolumeUp
 } from '@fortawesome/free-solid-svg-icons'
 import styles from './segment_overview.css'
 
-const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentClick, isPlaybackMode}) => {
+const SegmentOverview = ({segment, isSelected, onSegmentClick}) => {
   const htmlRef = useRef(null)
 
   useEffect(() => {
@@ -37,11 +36,6 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
           icon={faVolumeUp}
         />
       )}
-      {!isPlaybackMode && (<FontAwesomeIcon
-        className={styles.removeSegmentIcon}
-        onClick={onRemoveSegmentClick}
-        icon={faTimes}
-      />)}
     </div>
   )
 }
@@ -49,9 +43,7 @@ const SegmentOverview = ({segment, isSelected, onSegmentClick, onRemoveSegmentCl
 SegmentOverview.propTypes = {
   segment: PropTypes.object.isRequired,
   onSegmentClick: PropTypes.func.isRequired,
-  onRemoveSegmentClick: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool,
-  isPlaybackMode: PropTypes.bool
+  isSelected: PropTypes.bool
 }
 
 export default SegmentOverview

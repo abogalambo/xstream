@@ -79,17 +79,3 @@
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
 }
-
-.removeSegmentIcon {
-  position: absolute;
-  top: 5px;
-  left: 6px;
-  font-size: 1em;
-  color: var(--onBgColor_medium);
-  cursor: pointer;
-}
-
-.removeSegmentIcon:hover,
-.removeSegmentIcon:active {
-  color: black;
-}
