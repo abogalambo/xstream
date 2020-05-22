@@ -1,28 +1,71 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { SortableContainer } from 'react-sortable-hoc'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import classnames from 'classnames'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  reorderSegments
+  faChevronLeft
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  goToSegment,
 } from '../../../state/actions/stream'
-import PlainOverviewPanel from './plain_overview_panel'
+import {
+  segmentsSelector,
+  indexSelector,
+  coverDataSelector,
+  showCoverSelector
+} from '../../../state/selectors/current_stream'
+import CoverOverview from '../cover_overview'
+import SegmentOverview from '../segment_overview'
 import styles from './overview_panel.css'
 
-const SortableOverviewPanel = SortableContainer(PlainOverviewPanel)
-
 const OverviewPanel = () => {
-  const dispatch = useDispatch()
-  const onSortEnd = ({oldIndex, newIndex}) => {
-    if(oldIndex === newIndex) return
-    dispatch(reorderSegments(oldIndex, newIndex))
-  }
+  const [ isCollapsed, setisCollapsed ] = useState(true)
+
+  const segments = useSelector(segmentsSelector)
+  const currentIndex = useSelector(indexSelector)
+  const coverData = useSelector(coverDataSelector)
+  const showCover = useSelector(showCoverSelector)
+
+  const dispatch = useDispatch();
 
   return (
-    <SortableOverviewPanel
-      onSortEnd={onSortEnd}
-      helperClass={styles.draggedSegment}
-      distance={3}
-      axis={"xy"}
-    />
+    <div className={classnames(
+      styles.overviewPanelContainer,
+      { [styles.overviewPanelContainer_collapsed]: isCollapsed}
+    )}>
+      <div className={styles.overviewPanel}>
+          <div className={styles.overviewPanel_wrapper}>
+            <div className={styles.overviewPanel_segements}>
+              <CoverOverview
+                coverData={coverData}
+                isSelected={showCover}
+                onCoverClick={() => dispatch(goToSegment(-1))}
+              />
+              
+              {segments.map((segment, index) => (
+                <SegmentOverview
+                  index={index}
+                  key={`overview_panel_${segment.timestamp}`}
+                  segment={segment}
+                  isSelected={index == currentIndex}
+                  onSegmentClick={() => dispatch(goToSegment(index))}
+                />
+              ))}
+            </div>
+          </div>
+      </div>
+      <button
+        className={styles.overviewPanel_collapseBtn}
+        onClick={() => setisCollapsed(!isCollapsed)}
+      >
+        <FontAwesomeIcon
+          className={classnames(
+            styles.collapseIcon,
+            { [styles.collapseIcon_collapsed] : isCollapsed }
+          )}
+          icon={faChevronLeft} />
+      </button>
+    </div>
   )
 }
 
