@@ -87,20 +87,24 @@ const ComposeCover = () => {
           >
             <FontAwesomeIcon
               className={styles.removeImage_icon}
-              size={'2x'}
               icon={faTimes}
             />
           </button>
         )}
-
-        <ImageInput
-          onChange={addCoverImage}
-          buttonDisplay
-          className={'cover'}
-        />
       </div>
 
       <div className={styles.content} style={coverStyle}>
+        { isCurrent && !hasImage && (
+          <div className={styles.imageInput}>
+            <ImageInput
+              onChange={addCoverImage}
+              buttonDisplay
+              className={'cover'}
+              text={'Cover Image'}
+            />
+          </div>
+        )}
+
         <TextInput
           value={title}
           minSize={4}
@@ -109,7 +113,7 @@ const ComposeCover = () => {
           maxChars={config.stream.titleMaxLength}
           prompt="Add a title"
           shouldFocus={isCurrent}
-          withStroke
+          withStroke={hasImage}
         />
         {canAppendSegment && (
           <button

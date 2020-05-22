@@ -5,14 +5,6 @@
   align-items: center;
 }
 
-.imageInput.imageInput_avatar {
-  position: absolute;
-  border-radius: 50%;
-  top: var(--avatarBorder);
-  width: calc(100% - (var(--avatarBorder) * 2));
-  height: calc(100% - (var(--avatarBorder) * 2));
-}
-
 .imageInput input{
   width: 0.1px;
   height: 0.1px;
@@ -23,7 +15,7 @@
 }
 
 .imageInput span {
-  padding-left: 10px;
+  margin-left: 10px;
   cursor: pointer;
   transition-property: color;
   transition-duration: var(--transition-duration);
@@ -51,16 +43,9 @@
   color: white;
 }
 
-/* Standard */
-.standard span {
-  font-size: 24px;
-  color: var(--onBgColor);
-}
-
 /* cover */
 .cover span {
-  font-size: 20px;
-  vertical-align: 3px;
+  vertical-align: 5px;
   color: var(--onBgColor);
 }
 

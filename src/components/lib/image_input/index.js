@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons'
+import { faImage } from '@fortawesome/free-solid-svg-icons'
 import styles from './image_input.css'
 import classnames from 'classnames'
 
@@ -24,7 +24,8 @@ const ImageInput = ({onChange, buttonDisplay, text, className, disabled, isLight
               [styles.imageInputIcon_dark]: !isLightIcon
             }
           )}
-          icon={faCamera} />
+          icon={faImage}
+        />
         {text && (
           <span>{text}</span>
         )}

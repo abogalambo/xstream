@@ -16,6 +16,6 @@
 @media (orientation: landscape) {
   .aspectRatioBox {
     max-height: min(75vh, 718px);
-    max-width: min(133vh, 1278px);
+    max-width: min(133vh, var(--maxWidth));
   }
 }

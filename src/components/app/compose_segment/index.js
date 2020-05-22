@@ -111,7 +111,7 @@ const ComposeSegment = SortableElement(({locIndex}) => {
 
   useEffect(() => {
     if(!isCurrent) {
-      setIsVisualMode(false)
+      switchOffVisualMode()
     }
   }, [isCurrent])
 
@@ -123,7 +123,7 @@ const ComposeSegment = SortableElement(({locIndex}) => {
         htmlRef.current.scrollIntoView({behavior: "smooth", block: "center"})
       }, 100)
     }
-  }, [currentIndex])
+  }, [isCurrent])
 
   // adding image
   const imageUploadKey = useSelector(segmentImageUploadKeySelectorFactory(index))
@@ -232,7 +232,10 @@ const ComposeSegment = SortableElement(({locIndex}) => {
                 controls
                 src={audio.url}
               />
-              <button onClick={removeRecording}>
+              <button
+                className={styles.removeRecordingBtn}
+                onClick={removeRecording}
+              >
                 Clear
               </button>
             </>

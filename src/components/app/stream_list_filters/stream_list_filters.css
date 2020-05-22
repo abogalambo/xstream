@@ -1,6 +1,6 @@
 .streamListFilters {
   width: 100%;
-  max-width: 1278px;
+  max-width: var(--maxWidth);
   margin: 20px auto 0 auto;
   display: flex;
   justify-content: center;

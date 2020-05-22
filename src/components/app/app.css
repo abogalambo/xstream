@@ -10,7 +10,7 @@
   --onPrimary: #000000;
   --onSecondary: #9f9f9f;
   --onSecondary__active: #dfdfdf;
-  --bgColor: #fafafc;
+  --bgColor: #fff1f9;
   --onBgColor: #5f5f5f;
   --onBgColor_light: #bfbfbf;
   --onBgColor_medium: #7f7f7f;
@@ -55,7 +55,8 @@
   --avatarSize_tiny: 33px;
   --avatarSize_tiny_smallscreen: 25px;
 
-  --composeBarHeight: 40px;
+  --composeBarHeight: 60px;
+  --maxWidth: 1220px;
 }
 
 ::selection {

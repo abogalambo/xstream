@@ -1,6 +1,6 @@
 .streamList {
   width: 100%;
-  max-width: 1278px;
+  max-width: var(--maxWidth);
   display: flex;
   justify-content: center;
   align-content: center;

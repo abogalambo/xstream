@@ -1,11 +1,16 @@
 .composeSegment {
   width: 100%;
   display: flex;
-  border-bottom: 1px solid var(--onSecondary__active);
+  margin-top: 20px;
+  border-right: 3px solid white;
+  border-top-right-radius: var(--roundCorner);
+  border-bottom-right-radius: var(--roundCorner);
 }
 
 .selectedSegment {
-  background: white;
+  border-right: 3px solid var(--primaryColor);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .controls {
@@ -17,18 +22,19 @@
 }
 
 .content {
+  border-bottom-left-radius: var(--roundCorner);
   width: calc(100% - 40px);
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  background: white;
 }
 
 .script {
+  padding: 30px;
   width: 50%;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
-  border-right: 1px solid var(--onSecondary__active);
 }
 
 .scriptInput {
@@ -37,19 +43,21 @@
   background: transparent;
   border: none;
   font-size: 1em;
-  padding: 10px 10px;
   overflow: hidden;
   outline: none;
 }
 
 .audioPlayer {
-  margin: 0 10px 10px 10px;
   height: 30px;
   outline: none;
 }
 
+.removeRecordingBtn {
+  height: 30px;
+}
+
 .visual {
-  padding: 15px;
+  padding: 30px;
   width: 50%;
   display: flex;
   justify-content: center;
@@ -58,7 +66,7 @@
 
 .arBox {
   border: 1px solid var(--onSecondary__active);
-  width: 40%;
+  width: 50%;
   margin: auto;
 
   transition-property: width;
@@ -70,10 +78,15 @@
   width: 100%;
 }
 
+@media (orientation: portrait) {
+  .visualMode .arBox {
+    width: 100%;
+  }
+}
+
 .visualMode > .script {
   width: 100%;
   order: 2;
-  border-right: none;
 }
 
 .visualMode > .visual {
@@ -105,7 +118,6 @@
   .script {
     width: 100%;
     order: 2;
-    border-right: none;
   }
 }
 

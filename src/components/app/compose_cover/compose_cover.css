@@ -2,20 +2,15 @@
   width: 100%;
   min-height: 58px;
   display: flex;
-  max-width: 1024px;
+  max-width: var(--maxWidth);
   margin: 0 auto;
-  border-bottom: 1px solid var(--onSecondary__active);
   transition-property: min-height;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing-function);
 }
 
-.withImage {
-  min-height: 200px;
-}
-
 .selected {
-  background: white;
+  min-height: 200px;
 }
 
 .controls {
@@ -39,7 +34,7 @@
   color: var(--onPrimary);
 }
 .removeImage_icon {
-  font-size: 2em;
+  font-size: 1.5em;
   color: var(--onBgColor_dark);
 }
 
@@ -49,9 +44,20 @@
   align-items: center;
   width: calc(100% - 40px);
   position: relative;
+  background-color: white;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  border-bottom-right-radius: var(--roundCorner);
+  border-bottom-left-radius: var(--roundCorner);
+}
+
+.imageInput {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+  z-index: 1;
 }
 
 .addSegmentBtn {
