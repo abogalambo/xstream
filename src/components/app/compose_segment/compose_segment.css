@@ -1,8 +1,6 @@
 .composeSegment {
   width: 100%;
   display: flex;
-  max-width: 1024px;
-  margin: 0 auto;
   border-bottom: 1px solid var(--onSecondary__active);
 }
 
@@ -12,6 +10,10 @@
 
 .controls {
   width: 40px;
+}
+
+.dragHandle {
+  cursor: row-resize;
 }
 
 .content {
@@ -135,8 +137,6 @@
   width: 40px;
   height: 40px;
   background-color: var(--onBgColor_light);
-  border-bottom-right-radius: var(--roundCorner);
-  border-top-left-radius: 2px;
   z-index: 1;
   transition: color;
   transition-duration: var(--transition-duration);

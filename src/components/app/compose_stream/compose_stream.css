@@ -1,5 +1,7 @@
 .composeStream {
   width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
   height: calc(100% - var(--composeBarHeight));
   overflow-y: scroll;
 }

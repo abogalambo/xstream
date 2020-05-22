@@ -5,8 +5,13 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faTrash,
-  faPlus
+  faPlus,
+  faArrowsAlt
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  SortableElement,
+  SortableHandle
+} from 'react-sortable-hoc'
 import {
   indexSelector,
   segmentsSelector,
@@ -41,7 +46,8 @@ import AspectRatioBox from '../../lib/aspect_ratio_box'
 import config from '../../../../config'
 import styles from './compose_segment.css'
 
-const ComposeSegment = ({index}) => {
+const ComposeSegment = SortableElement(({locIndex}) => {
+  const index = locIndex
   const currentIndex = useSelector(indexSelector)
   const segments = useSelector(segmentsSelector)
   const segment = segments[index] || {}
@@ -153,6 +159,18 @@ const ComposeSegment = ({index}) => {
     isVisualMode && setIsVisualMode(false)
   }
 
+  const DragHandle = SortableHandle(() => (
+    <button
+      className={classnames(
+        styles.removeSegmentBtn,
+        styles.dragHandle
+      )}
+      onClick={(e) => {e.stopPropagation()}}
+    >
+      <FontAwesomeIcon className={styles.removeSegmentBtn_icon} icon={faArrowsAlt} />
+    </button>
+  ))
+
   return (
     <div className={classnames(
         styles.composeSegment,
@@ -165,6 +183,7 @@ const ComposeSegment = ({index}) => {
     >
 
       <div className={styles.controls}>
+        <DragHandle />
         {canDeleteSegment && (
           <button
             className={styles.removeSegmentBtn}
@@ -277,10 +296,10 @@ const ComposeSegment = ({index}) => {
       </div>
     </div>
   )
-}
+})
 
 ComposeSegment.propTypes = {
-  index: PropTypes.number.isRequired
+  locIndex: PropTypes.number.isRequired
 }
 
 export default ComposeSegment
