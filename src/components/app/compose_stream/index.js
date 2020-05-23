@@ -37,7 +37,7 @@ const SortableComposeStream = SortableContainer(() => {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <div
         className={styles.composeStream}
       >
@@ -51,7 +51,7 @@ const SortableComposeStream = SortableContainer(() => {
         ))}
       </div>
       <Autosave />
-    </div>
+    </>
   )
 })
 

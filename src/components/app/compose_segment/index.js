@@ -52,6 +52,7 @@ const ComposeSegment = SortableElement(({locIndex}) => {
   const segments = useSelector(segmentsSelector)
   const segment = segments[index] || {}
   const nextSegment = segments[index + 1] || {}
+  const isLastSegment = index == segments.length - 1
 
   const { audio, script, image, text } = segment
 
@@ -124,6 +125,17 @@ const ComposeSegment = SortableElement(({locIndex}) => {
       }, 100)
     }
   }, [isCurrent])
+
+  useEffect(() => {
+    if(!isLastSegment && isCurrent) {
+      const el = htmlRef.current.parentElement
+      el.scrollTo({
+        top: el.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
+  }, [isLastSegment])
 
   // adding image
   const imageUploadKey = useSelector(segmentImageUploadKeySelectorFactory(index))
@@ -264,6 +276,7 @@ const ComposeSegment = SortableElement(({locIndex}) => {
                     onChange={handleTextChange}
                     maxChars={200}
                     prompt="Write something..."
+                    shouldFocus
                   />
                 )}
               </div>

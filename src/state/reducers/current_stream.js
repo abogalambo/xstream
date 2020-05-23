@@ -174,7 +174,7 @@ const currentStream = (state = null, action) => {
       const { segments, currentSegment } = state
       const { index, timestamp } = payload
 
-      const targetSegment = segments[index]
+      const targetSegment = segments[index] || {}
       const isTargetSegmentEmpty = isSegmentEmpty(targetSegment)
       const newSegments = isTargetSegmentEmpty ?
         segments : (

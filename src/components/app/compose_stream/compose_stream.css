@@ -1,11 +1,12 @@
 .composeStream {
   width: 100%;
-  max-width: var(--maxWidth);
-  margin: 0 auto;
+  height: calc(100% - var(--composeBarHeight));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
 }
 
-.wrapper {
-  width: 100%;
-  height: calc(100% - var(--composeBarHeight));
-  overflow-y: scroll;
+.composeStream > * {
+  max-width: var(--maxWidth);
 }
