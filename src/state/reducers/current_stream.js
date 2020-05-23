@@ -174,14 +174,19 @@ const currentStream = (state = null, action) => {
       const { segments, currentSegment } = state
       const { index, timestamp } = payload
 
-      const targetSegment = segments[index] || {}
-      const isTargetSegmentEmpty = isSegmentEmpty(targetSegment)
-      const newSegments = isTargetSegmentEmpty ?
+      const currentSegmentData = segments[index]
+      if(isSegmentEmpty(currentSegmentData)) {
+        return state
+      }
+
+      const targetIndex = index + 1
+      const targetSegment = segments[targetIndex]
+      const newSegments = isSegmentEmpty(targetSegment) ?
         segments : (
           ensureLastEmptySegment([
-            ...segments.slice(0, index),
+            ...segments.slice(0, targetIndex),
             { timestamp },
-            ...segments.slice(index),
+            ...segments.slice(targetIndex),
           ], timestamp)
         )
 

@@ -82,7 +82,7 @@ const ComposeSegment = SortableElement(({locIndex}) => {
   const handleKeyDown = (e) => {
     if(e.keyCode == 13) {
       e.preventDefault()
-      dispatch(newScript(index + 1))
+      dispatch(newScript(index))
     }
   }
 

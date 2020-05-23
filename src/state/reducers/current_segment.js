@@ -57,7 +57,7 @@ const currentSegment = (state = null, action, currentStream) => {
     case 'NEW_SCRIPT': {
       return {
         ...initialState,
-        index: payload.index
+        index: payload.index + 1
       } 
     }
 
