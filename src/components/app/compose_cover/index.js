@@ -113,7 +113,7 @@ const ComposeCover = () => {
           maxChars={config.stream.titleMaxLength}
           prompt="Add a title"
           shouldFocus={isCurrent}
-          withStroke={hasImage}
+          withStroke={!!hasImage}
         />
         {canAppendSegment && (
           <button
