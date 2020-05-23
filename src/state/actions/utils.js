@@ -12,6 +12,7 @@ export const addImageActionCreator = (type, assetUploadedType) => (
           payload: {
             src: reader.result,
             mediaKey: uploadKey,
+            timestamp: (new Date).getTime(),
             ...other
           }
         })
