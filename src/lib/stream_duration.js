@@ -42,11 +42,12 @@ export const remainingCharCountWithoutIndex = (segments, index) => {
   return textForTime(time)
 }
 
-export const segmentDuration = ({ audio, text, image }) => {
+export const segmentDuration = ({ audio, text, image, script }) => {
   return (
     (audio && audio.duration) ||
     (text && timeForText(text, 1000)) ||
     (image && timeForImage(image)) ||
+    (script && timeForText(script, 1000)) ||
     0
   )
 }
