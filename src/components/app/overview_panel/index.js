@@ -6,6 +6,9 @@ import {
   faChevronLeft
 } from '@fortawesome/free-solid-svg-icons'
 import {
+  isSegmentEmpty
+} from '../../../lib/stream'
+import {
   goToSegment,
 } from '../../../state/actions/stream'
 import {
@@ -43,13 +46,15 @@ const OverviewPanel = () => {
               />
               
               {segments.map((segment, index) => (
-                <SegmentOverview
-                  index={index}
-                  key={`overview_panel_${segment.timestamp}`}
-                  segment={segment}
-                  isSelected={index == currentIndex}
-                  onSegmentClick={() => dispatch(goToSegment(index))}
-                />
+                !isSegmentEmpty(segment) && (
+                  <SegmentOverview
+                    index={index}
+                    key={`overview_panel_${segment.timestamp}`}
+                    segment={segment}
+                    isSelected={index == currentIndex}
+                    onSegmentClick={() => dispatch(goToSegment(index))}
+                  />
+                )
               ))}
             </div>
           </div>
