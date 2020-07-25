@@ -1,5 +1,7 @@
 import {
-  isSegmentEmpty
+  isSegmentEmpty,
+  ensureLastEmptySegment,
+  newIndex
 } from '../../lib/stream'
 import segmentReducer from './segment'
 import currentSegmentReducer from './current_segment'
@@ -28,27 +30,6 @@ const updateSegmentWithMediaKey = (segments, mediaKey, updateSegmentCallback) =>
   })
 }
 
-const ensureLastEmptySegment = (segments, timestamp) => {
-  const lastSegment = segments[segments.length - 1]
-  if(!lastSegment || !isSegmentEmpty(lastSegment)) {
-    return [
-      ...segments,
-      {timestamp}
-    ]
-  } else {
-    let lastEmptyIndex = segments.length - 1
-    for (let i = lastEmptyIndex; i > 0; i--) {
-      if(segments[i - 1] && isSegmentEmpty(segments[i - 1])) {
-        lastEmptyIndex = i - 1
-      } else {
-        break
-      }
-    }
-    return (lastEmptyIndex == segments.length - 1) ? segments : segments.slice(0, lastEmptyIndex + 1)
-  }
-}
-
-const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 const canToggleMode = (state) => !state.currentSegment.recording && state.page != 'view'
 
 const initialState = {
@@ -145,28 +126,26 @@ const currentStream = (state = null, action) => {
 
     case 'TOGGLE_MODE': {
       if(canToggleMode(state)){
-        const { mode } = state
+        const { mode, currentSegment } = state
         const newMode = (mode == "compose") ? "playback" : "compose"
-        return updateObject(state, {
+        return {
+          ...state,
           mode: newMode,
+          currentSegment: currentSegmentReducer(currentSegment, action, state),
           isStreamPlaying: false
-        })
+        }
       }else{
         return state
       }
     }
 
     case 'GO_TO_SEGMENT': {
-      const { segments, currentSegment } = state
-      const targetIndex = payload.index
+      const { currentSegment } = state
 
-      if(indexWithinBounds(targetIndex, segments)){
-        return updateObject(state, {
-          currentSegment: currentSegmentReducer(currentSegment, action),
-          isStreamPlaying: false
-        })
-      }else{
-        return state
+      return {
+        ...state,
+        currentSegment: currentSegmentReducer(currentSegment, action, state),
+        isStreamPlaying: false
       }
     }
 
@@ -358,15 +337,15 @@ const currentStream = (state = null, action) => {
     }
 
     case 'SEGMENT_ENDED': {
-      const { segments, currentSegment } = state
+      const { segments, currentSegment, mode } = state
       const { index } = currentSegment
 
-      const isLastSegment = index == segments.length - 1
+      const nextSegmentIndex = newIndex(index + 1, segments, mode == 'playback')
       
       return { 
         ...state,
         currentSegment: currentSegmentReducer(currentSegment, action, state),
-        isStreamPlaying: !isLastSegment
+        isStreamPlaying: nextSegmentIndex != index
       }
     }
 

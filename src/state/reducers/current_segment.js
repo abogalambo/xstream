@@ -1,3 +1,7 @@
+import {
+  newIndex
+} from '../../lib/stream'
+
 const updateObject = (oldObject, newValues) => Object.assign({}, oldObject, newValues)
 const initialState = {
   index: -1, // displaying cover
@@ -12,7 +16,6 @@ const initialState = {
 }
 
 const canNavigate = (state) => (!state.typing)
-const indexWithinBounds = (targetIndex, segments) =>  segments.length > targetIndex && targetIndex >= -1
 
 const currentSegment = (state = null, action, currentStream) => {
   const { type, payload } = action
@@ -33,18 +36,31 @@ const currentSegment = (state = null, action, currentStream) => {
     case 'PLAY_STREAM': {
       const { index } = state
 
-      return (index == -1 && indexWithinBounds(0, currentStream.segments)) ? {
-        ...initialState, index: 0
+      return (index == -1) ? {
+        ...initialState,
+        index: newIndex(-1, 0, currentStream.segments, true)
       } : state
     }
 
     case 'GO_TO_SEGMENT': {
+      const { mode, segments } = currentStream
+      const { index } = state
       if(canNavigate(state)) {
-        return updateObject(initialState, {
-          index: payload.index
-        })
+        return {
+          ...initialState,
+          index: newIndex(index, payload.index, segments, mode == 'playback')
+        }
       }else{
         return state
+      }
+    }
+
+    case 'TOGGLE_MODE': {
+      const { mode, segments } = currentStream
+      const { index } = state
+      return {
+        ...initialState,
+        index: newIndex(index, index, segments, mode == 'compose')
       }
     }
 
@@ -127,12 +143,13 @@ const currentSegment = (state = null, action, currentStream) => {
     case 'SEGMENT_ENDED': {
       const { mode, segments } = currentStream
       const { index, startedAt } = state
-      const shouldGoToNextSegment = (mode == 'playback' && indexWithinBounds(index + 1, segments))
+      const nextSegmentIndex = newIndex(index, index + 1, segments, mode == 'playback')
+      const shouldGoToNextSegment = (mode == 'playback' && nextSegmentIndex != index)
 
       if(shouldGoToNextSegment) {
         return {
           ...initialState,
-          index: index + 1
+          index: nextSegmentIndex
         }
       } else {
         const startOffset = mode == 'playback' ? payload.timestamp - startedAt : 0
